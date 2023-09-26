@@ -1,0 +1,3 @@
+[submodule "VHDLComponents"]
+	path = VHDLComponents
+	url = git@github.com:Lord448/VHDLComponents.git

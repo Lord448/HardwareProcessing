@@ -1,0 +1,156 @@
+m255
+K4
+z2
+!s11e vcom 2021.2 2021.04, Apr 14 2021
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/lord448/altera/ALU4Bits/simulation/questa
+Ealu4bits
+Z1 w1695342232
+Z2 DPx4 ieee 16 vital_primitives 0 22 G>kiXP8Q9dRClKfK1Zn7j1
+Z3 DPx10 cycloneive 20 cycloneive_atom_pack 0 22 I=he6>LOClIEY=Wi_;aT11
+Z4 DPx4 ieee 12 vital_timing 0 22 J>EBealN09f8GzldA[z2>3
+Z5 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z6 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+Z7 DPx10 cycloneive 21 cycloneive_components 0 22 zb:LUV7fa?T?QSmndl5]T1
+!i122 0
+R0
+Z8 8ALU4Bits.vho
+Z9 FALU4Bits.vho
+l0
+L77 1
+V1`RfliZni;[kOo6<ziOc]1
+!s100 ?nc^3_^6GEYOzf8O4ao6D0
+Z10 OL;C;2021.2;73
+31
+Z11 !s110 1695357390
+!i10b 1
+Z12 !s108 1695357390.000000
+Z13 !s90 -reportprogress|300|-93|-work|work|ALU4Bits.vho|
+Z14 !s107 ALU4Bits.vho|
+!i113 0
+Z15 o-93 -work work
+Z16 tExplicit 1 CvgOpt 0
+Astructure
+R2
+R3
+R4
+R5
+R6
+R7
+DEx4 work 8 alu4bits 0 22 1`RfliZni;[kOo6<ziOc]1
+!i122 0
+l166
+L103 579
+V?CJK0ngKMAOA2>7_a5McB1
+!s100 [6AD<;aP[:fM5=WenmdOD2
+R10
+31
+R11
+!i10b 1
+R12
+R13
+R14
+!i113 0
+R15
+R16
+Ehard_block
+R1
+R2
+R3
+R4
+R5
+R6
+R7
+!i122 0
+R0
+R8
+R9
+l0
+L35 1
+Vi9a_SfXm?YhLI2dhm1j^51
+!s100 >mXi5[`cD`bFC`UBKA<om3
+R10
+31
+R11
+!i10b 1
+R12
+R13
+R14
+!i113 0
+R15
+R16
+Astructure
+R2
+R3
+R4
+R5
+R6
+R7
+DEx4 work 10 hard_block 0 22 i9a_SfXm?YhLI2dhm1j^51
+!i122 0
+l64
+L50 20
+VZ2P8e]:^NT<7Y7=;nM1Vi3
+!s100 2S?JL;LJ@<3:BHXTNcXS]3
+R10
+31
+R11
+!i10b 1
+R12
+R13
+R14
+!i113 0
+R15
+R16
+Etb_alu4bits
+Z17 w1695345994
+Z18 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z19 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z20 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+R5
+R6
+!i122 1
+R0
+Z21 8/home/lord448/altera/ALU4Bits/tb_ALU4Bits.vhd
+Z22 F/home/lord448/altera/ALU4Bits/tb_ALU4Bits.vhd
+l0
+L7 1
+V3M]dA6kcVe?lQ`R47VECL3
+!s100 _2jzD9^EE`5:V1MPhHFTG2
+R10
+31
+R11
+!i10b 1
+R12
+Z23 !s90 -reportprogress|300|-93|-work|work|/home/lord448/altera/ALU4Bits/tb_ALU4Bits.vhd|
+!s107 /home/lord448/altera/ALU4Bits/tb_ALU4Bits.vhd|
+!i113 0
+R15
+R16
+Artl
+R18
+R19
+R20
+R5
+R6
+DEx4 work 11 tb_alu4bits 0 22 3M]dA6kcVe?lQ`R47VECL3
+!i122 1
+l25
+L10 43
+VL9@G4VnGAjT[XFzm:`XT<0
+!s100 jP6aXeF1KCWjoci:<:TdY0
+R10
+31
+R11
+!i10b 1
+R12
+R23
+Z24 !s107 /home/lord448/altera/ALU4Bits/tb_ALU4Bits.vhd|
+!i113 0
+R15
+R16

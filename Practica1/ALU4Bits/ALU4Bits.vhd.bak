@@ -1,0 +1,22 @@
+Library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+entity ALU4Bits is
+    port (
+        INA : in std_logic_vector(3 downto 0);
+        INB : in std_logic_vector(3 downto 0);
+        SEL : in std_logic_vector(1 downto 0);
+        RES : out std_logic_vector(3 downto 0)
+    );
+end entity ALU4Bits;
+
+architecture rtl of ALU4Bits is
+
+begin
+    with SEL select
+        RES <= INA+INB                     when "00",
+               INA-INB                     when "01",
+               INA(0 to 2) * INB (0 to 2)  when "10",
+               INA or INB                  when others;
+end architecture;

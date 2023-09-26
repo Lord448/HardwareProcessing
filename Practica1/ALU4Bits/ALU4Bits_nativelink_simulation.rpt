@@ -1,0 +1,23 @@
+Info: Start Nativelink Simulation process
+
+========= EDA Simulation Settings =====================
+
+Sim Mode              :  Gate
+Family                :  cycloneive
+Quartus root          :  /opt/intelFPGA_lite/22.1.2/quartus/linux64/
+Quartus sim root      :  /opt/intelFPGA_lite/22.1.2/quartus/eda/sim_lib
+Simulation Tool       :  questasim
+Simulation Language   :  vhdl
+Version               :  93
+Simulation Mode       :  GUI
+Sim Output File       :  ALU4Bits.vho
+Sim SDF file          :  ALU4Bits__vhdl.sdo
+Sim dir               :  simulation/questa
+
+=======================================================
+
+Info: Starting NativeLink simulation with Questasim software
+Sourced NativeLink script /opt/intelFPGA_lite/22.1.2/quartus/common/tcl/internal/nativelink/modelsim.tcl
+Warning: File ALU4Bits_run_msim_gate_vhdl.do already exists - backing up current file as ALU4Bits_run_msim_gate_vhdl.do.bak11
+Info: Spawning QuestaSim Simulation software 
+Info: NativeLink simulation flow was successful

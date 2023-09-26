@@ -1,0 +1,51 @@
+Library IEEE;
+use IEEE.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+use IEEE.numeric_std.all;
+
+entity tb_ALU4Bits is
+end entity tb_ALU4Bits;
+
+architecture rtl of tb_ALU4Bits is
+    constant PERIOD : time := 10 ns;
+    signal INA, INB, RES : std_logic_vector(3 downto 0) := '0';
+    signal SEL : std_logic_vector(1 downto 0) := '0';
+
+    component ALU4Bits is
+        port (
+            INA : in std_logic_vector(3 downto 0);
+            INB : in std_logic_vector(3 downto 0);
+            SEL : in std_logic_vector(1 downto 0);
+            RES : out std_logic_vector(3 downto 0)
+        );
+    end component ALU4Bits;
+
+begin
+    
+    --Instatiation
+    U1 : ALU4Bits port map(
+        INA <= INA,
+        INB <= INB,
+        SEL <= SEL,
+        RES <= SEL
+    );
+    
+    stim_proc: process
+    begin
+        INA <= "0000"; INB <= "0000"; SEL <= "00"; wait for PERIOD;
+        INA <= "0001"; INB <= "0000"; SEL <= "00"; wait for PERIOD;
+        INA <= "1010"; INB <= "0000"; SEL <= "00"; wait for PERIOD;
+        INA <= "1010"; INB <= "0010"; SEL <= "00"; wait for PERIOD;
+
+        INA <= "0010"; INB <= "0010"; SEL <= "01"; wait for PERIOD;
+        INA <= "0011"; INB <= "0010"; SEL <= "01"; wait for PERIOD;
+        INA <= "0101"; INB <= "0001"; SEL <= "01"; wait for PERIOD;
+
+        INA <= "0001"; INB <= "0001"; SEL <= "10"; wait for PERIOD;
+        INA <= "0010"; INB <= "0001"; SEL <= "10"; wait for PERIOD;
+        INA <= "0010"; INB <= "0010"; SEL <= "10"; wait for PERIOD;
+        INA <= "0011"; INB <= "0011"; SEL <= "10"; wait for PERIOD;
+        wait;
+    end process;
+
+end architecture rtl;
