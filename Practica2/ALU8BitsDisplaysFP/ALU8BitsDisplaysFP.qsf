@@ -1,0 +1,116 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 2023  Intel Corporation. All rights reserved.
+# Your use of Intel Corporation's design tools, logic functions 
+# and other software and tools, and any partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Intel Program License 
+# Subscription Agreement, the Intel Quartus Prime License Agreement,
+# the Intel FPGA IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Intel and sold by Intel or its authorized distributors.  Please
+# refer to the applicable agreement for further details, at
+# https://fpgasoftware.intel.com/eula.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus Prime
+# Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
+# Date created = 17:45:39  September 27, 2023
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		ALU8BitsDisplaysFP_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Intel recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus Prime software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+set_global_assignment -name FAMILY "Cyclone IV E"
+set_global_assignment -name DEVICE EP4CE6E22C8
+set_global_assignment -name TOP_LEVEL_ENTITY ALU8BitsDisplaysFP
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 22.1STD.2
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:45:39  SEPTEMBER 27, 2023"
+set_global_assignment -name LAST_QUARTUS_VERSION "22.1std.2 Lite Edition"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
+set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.2V
+set_global_assignment -name EDA_SIMULATION_TOOL "Questa Intel FPGA (VHDL)"
+set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_timing
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_symbol
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_signal_integrity
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_boundary_scan
+set_global_assignment -name VHDL_FILE ALU8BitsDisplaysFP.vhd
+set_global_assignment -name VHDL_FILE BCDto7Segs.vhd
+set_global_assignment -name VHDL_FILE DisplayDriverALU4_4FP.vhd
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_location_assignment PIN_33 -to i_CLK
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to i_NumA[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to i_NumA[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to i_NumA[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to i_NumA[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to i_NumA[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to i_NumA[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to i_NumA[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to i_NumA[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to i_NumA
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to i_NumB[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to i_NumB[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to i_NumB[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to i_NumB[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to i_NumB[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to i_NumB[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to i_NumB[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to i_NumB[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to i_NumB
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to i_OpSel[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to i_OpSel[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to i_OpSel
+set_location_assignment PIN_137 -to o_Displays[3]
+set_location_assignment PIN_136 -to o_Displays[2]
+set_location_assignment PIN_135 -to o_Displays[1]
+set_location_assignment PIN_133 -to o_Displays[0]
+set_location_assignment PIN_127 -to o_DispPoint
+set_location_assignment PIN_124 -to o_Segments[6]
+set_location_assignment PIN_126 -to o_Segments[5]
+set_location_assignment PIN_132 -to o_Segments[4]
+set_location_assignment PIN_129 -to o_Segments[3]
+set_location_assignment PIN_125 -to o_Segments[2]
+set_location_assignment PIN_121 -to o_Segments[1]
+set_location_assignment PIN_128 -to o_Segments[0]
+set_location_assignment PIN_83 -to i_NumA[7]
+set_location_assignment PIN_80 -to i_NumA[6]
+set_location_assignment PIN_77 -to i_NumA[5]
+set_location_assignment PIN_76 -to i_NumA[4]
+set_location_assignment PIN_75 -to i_NumA[3]
+set_location_assignment PIN_74 -to i_NumA[2]
+set_location_assignment PIN_73 -to i_NumA[1]
+set_location_assignment PIN_72 -to i_NumA[0]
+set_location_assignment PIN_88 -to i_OpSel[1]
+set_location_assignment PIN_89 -to i_OpSel[0]
+set_location_assignment PIN_42 -to i_NumB[0]
+set_location_assignment PIN_43 -to i_NumB[1]
+set_location_assignment PIN_44 -to i_NumB[2]
+set_location_assignment PIN_46 -to i_NumB[3]
+set_location_assignment PIN_49 -to i_NumB[4]
+set_location_assignment PIN_50 -to i_NumB[5]
+set_location_assignment PIN_51 -to i_NumB[6]
+set_location_assignment PIN_52 -to i_NumB[7]
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
