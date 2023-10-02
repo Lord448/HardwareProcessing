@@ -1,5 +1,5 @@
 Analysis & Synthesis report for ALU8BitsDisplaysFP
-Wed Sep 27 18:21:08 2023
+Mon Oct  2 00:43:40 2023
 Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 
 
@@ -13,15 +13,18 @@ Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. General Register Statistics
-  9. Multiplexer Restructuring Statistics (Restructuring Performed)
- 10. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult0
- 11. lpm_mult Parameter Settings by Entity Instance
- 12. Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder2"
- 13. Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder1"
- 14. Post-Synthesis Netlist Statistics for Top Partition
- 15. Elapsed Time Per Partition
- 16. Analysis & Synthesis Messages
+  8. Analysis & Synthesis DSP Block Usage Summary
+  9. General Register Statistics
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 11. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult0
+ 12. lpm_mult Parameter Settings by Entity Instance
+ 13. Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder4"
+ 14. Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder3"
+ 15. Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder2"
+ 16. Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder1"
+ 17. Post-Synthesis Netlist Statistics for Top Partition
+ 18. Elapsed Time Per Partition
+ 19. Analysis & Synthesis Messages
 
 
 
@@ -48,19 +51,19 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                        ;
 +------------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Sep 27 18:21:08 2023          ;
+; Analysis & Synthesis Status        ; Successful - Mon Oct  2 00:43:40 2023          ;
 ; Quartus Prime Version              ; 22.1std.2 Build 922 07/20/2023 SC Lite Edition ;
 ; Revision Name                      ; ALU8BitsDisplaysFP                             ;
 ; Top-level Entity Name              ; ALU8BitsDisplaysFP                             ;
 ; Family                             ; Cyclone IV E                                   ;
-; Total logic elements               ; 122                                            ;
-;     Total combinational functions  ; 122                                            ;
+; Total logic elements               ; 130                                            ;
+;     Total combinational functions  ; 130                                            ;
 ;     Dedicated logic registers      ; 19                                             ;
 ; Total registers                    ; 19                                             ;
-; Total pins                         ; 31                                             ;
+; Total pins                         ; 32                                             ;
 ; Total virtual pins                 ; 0                                              ;
 ; Total memory bits                  ; 0                                              ;
-; Embedded Multiplier 9-bit elements ; 0                                              ;
+; Embedded Multiplier 9-bit elements ; 1                                              ;
 ; Total PLLs                         ; 0                                              ;
 +------------------------------------+------------------------------------------------+
 
@@ -73,6 +76,7 @@ https://fpgasoftware.intel.com/eula.
 ; Device                                                           ; EP4CE6E22C8        ;                    ;
 ; Top-level entity name                                            ; ALU8BitsDisplaysFP ; ALU8BitsDisplaysFP ;
 ; Family name                                                      ; Cyclone IV E       ; Cyclone V          ;
+; Maximum processors allowed for parallel compilation              ; 16                 ;                    ;
 ; Use smart compilation                                            ; Off                ; Off                ;
 ; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
 ; Enable compact report table                                      ; Off                ; Off                ;
@@ -182,40 +186,40 @@ https://fpgasoftware.intel.com/eula.
 ; multcore.inc                     ; yes             ; Megafunction                 ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/multcore.inc                               ;         ;
 ; bypassff.inc                     ; yes             ; Megafunction                 ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/bypassff.inc                               ;         ;
 ; altshift.inc                     ; yes             ; Megafunction                 ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/altshift.inc                               ;         ;
-; db/mult_j8t.tdf                  ; yes             ; Auto-Generated Megafunction  ; /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/db/mult_j8t.tdf           ;         ;
+; db/mult_aat.tdf                  ; yes             ; Auto-Generated Megafunction  ; /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/db/mult_aat.tdf           ;         ;
 +----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------------------------------+---------+
 
 
-+-----------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary               ;
-+---------------------------------------------+-------------+
-; Resource                                    ; Usage       ;
-+---------------------------------------------+-------------+
-; Estimated Total logic elements              ; 122         ;
-;                                             ;             ;
-; Total combinational functions               ; 122         ;
-; Logic element usage by number of LUT inputs ;             ;
-;     -- 4 input functions                    ; 39          ;
-;     -- 3 input functions                    ; 37          ;
-;     -- <=2 input functions                  ; 46          ;
-;                                             ;             ;
-; Logic elements by mode                      ;             ;
-;     -- normal mode                          ; 79          ;
-;     -- arithmetic mode                      ; 43          ;
-;                                             ;             ;
-; Total registers                             ; 19          ;
-;     -- Dedicated logic registers            ; 19          ;
-;     -- I/O registers                        ; 0           ;
-;                                             ;             ;
-; I/O pins                                    ; 31          ;
-;                                             ;             ;
-; Embedded Multiplier 9-bit elements          ; 0           ;
-;                                             ;             ;
-; Maximum fan-out node                        ; i_CLK~input ;
-; Maximum fan-out                             ; 19          ;
-; Total fan-out                               ; 454         ;
-; Average fan-out                             ; 2.24        ;
-+---------------------------------------------+-------------+
++-----------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                                                   ;
++---------------------------------------------+-------------------------------------------------+
+; Resource                                    ; Usage                                           ;
++---------------------------------------------+-------------------------------------------------+
+; Estimated Total logic elements              ; 130                                             ;
+;                                             ;                                                 ;
+; Total combinational functions               ; 130                                             ;
+; Logic element usage by number of LUT inputs ;                                                 ;
+;     -- 4 input functions                    ; 54                                              ;
+;     -- 3 input functions                    ; 32                                              ;
+;     -- <=2 input functions                  ; 44                                              ;
+;                                             ;                                                 ;
+; Logic elements by mode                      ;                                                 ;
+;     -- normal mode                          ; 91                                              ;
+;     -- arithmetic mode                      ; 39                                              ;
+;                                             ;                                                 ;
+; Total registers                             ; 19                                              ;
+;     -- Dedicated logic registers            ; 19                                              ;
+;     -- I/O registers                        ; 0                                               ;
+;                                             ;                                                 ;
+; I/O pins                                    ; 32                                              ;
+;                                             ;                                                 ;
+; Embedded Multiplier 9-bit elements          ; 1                                               ;
+;                                             ;                                                 ;
+; Maximum fan-out node                        ; lpm_mult:Mult0|mult_aat:auto_generated|mac_out2 ;
+; Maximum fan-out                             ; 25                                              ;
+; Total fan-out                               ; 516                                             ;
+; Average fan-out                             ; 2.40                                            ;
++---------------------------------------------+-------------------------------------------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -223,14 +227,34 @@ https://fpgasoftware.intel.com/eula.
 +------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------+-----------------------+--------------+
 ; Compilation Hierarchy Node               ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                ; Entity Name           ; Library Name ;
 +------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------+-----------------------+--------------+
-; |ALU8BitsDisplaysFP                      ; 122 (25)            ; 19 (0)                    ; 0           ; 0            ; 0       ; 0         ; 31   ; 0            ; |ALU8BitsDisplaysFP                                                                ; ALU8BitsDisplaysFP    ; work         ;
-;    |DisplayDriverALU4_4FP:DisplayDriver| ; 66 (52)             ; 19 (19)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU8BitsDisplaysFP|DisplayDriverALU4_4FP:DisplayDriver                            ; DisplayDriverALU4_4FP ; work         ;
+; |ALU8BitsDisplaysFP                      ; 130 (25)            ; 19 (0)                    ; 0           ; 1            ; 1       ; 0         ; 32   ; 0            ; |ALU8BitsDisplaysFP                                                                ; ALU8BitsDisplaysFP    ; work         ;
+;    |DisplayDriverALU4_4FP:DisplayDriver| ; 105 (77)            ; 19 (19)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU8BitsDisplaysFP|DisplayDriverALU4_4FP:DisplayDriver                            ; DisplayDriverALU4_4FP ; work         ;
 ;       |BCDto7Segs:DisplayDecoder1|       ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU8BitsDisplaysFP|DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder1 ; BCDto7Segs            ; work         ;
 ;       |BCDto7Segs:DisplayDecoder2|       ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU8BitsDisplaysFP|DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder2 ; BCDto7Segs            ; work         ;
-;    |lpm_mult:Mult0|                      ; 31 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU8BitsDisplaysFP|lpm_mult:Mult0                                                 ; lpm_mult              ; work         ;
-;       |mult_j8t:auto_generated|          ; 31 (31)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU8BitsDisplaysFP|lpm_mult:Mult0|mult_j8t:auto_generated                         ; mult_j8t              ; work         ;
+;       |BCDto7Segs:DisplayDecoder3|       ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU8BitsDisplaysFP|DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder3 ; BCDto7Segs            ; work         ;
+;       |BCDto7Segs:DisplayDecoder4|       ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU8BitsDisplaysFP|DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder4 ; BCDto7Segs            ; work         ;
+;    |lpm_mult:Mult0|                      ; 0 (0)               ; 0 (0)                     ; 0           ; 1            ; 1       ; 0         ; 0    ; 0            ; |ALU8BitsDisplaysFP|lpm_mult:Mult0                                                 ; lpm_mult              ; work         ;
+;       |mult_aat:auto_generated|          ; 0 (0)               ; 0 (0)                     ; 0           ; 1            ; 1       ; 0         ; 0    ; 0            ; |ALU8BitsDisplaysFP|lpm_mult:Mult0|mult_aat:auto_generated                         ; mult_aat              ; work         ;
 +------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------+-----------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis DSP Block Usage Summary        ;
++---------------------------------------+-------------+
+; Statistic                             ; Number Used ;
++---------------------------------------+-------------+
+; Simple Multipliers (9-bit)            ; 1           ;
+; Simple Multipliers (18-bit)           ; 0           ;
+; Embedded Multiplier Blocks            ; --          ;
+; Embedded Multiplier 9-bit elements    ; 1           ;
+; Signed Embedded Multipliers           ; 0           ;
+; Unsigned Embedded Multipliers         ; 1           ;
+; Mixed Sign Embedded Multipliers       ; 0           ;
+; Variable Sign Embedded Multipliers    ; 0           ;
+; Dedicated Input Shift Register Chains ; 0           ;
++---------------------------------------+-------------+
+Note: number of Embedded Multiplier Blocks used is only available after a successful fit.
 
 
 +------------------------------------------------------+
@@ -248,13 +272,13 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                              ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                    ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------+
-; 16:1               ; 6 bits    ; 60 LEs        ; 12 LEs               ; 48 LEs                 ; No         ; |ALU8BitsDisplaysFP|DisplayDriverALU4_4FP:DisplayDriver|Mux10 ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                   ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------+
+; 16:1               ; 7 bits    ; 70 LEs        ; 14 LEs               ; 56 LEs                 ; No         ; |ALU8BitsDisplaysFP|DisplayDriverALU4_4FP:DisplayDriver|Mux4 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------+
 
 
 +-------------------------------------------------------------------------------------+
@@ -266,10 +290,10 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
 ; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
 ; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
-; LPM_WIDTHA                                     ; 4            ; Untyped             ;
-; LPM_WIDTHB                                     ; 4            ; Untyped             ;
-; LPM_WIDTHP                                     ; 8            ; Untyped             ;
-; LPM_WIDTHR                                     ; 8            ; Untyped             ;
+; LPM_WIDTHA                                     ; 8            ; Untyped             ;
+; LPM_WIDTHB                                     ; 8            ; Untyped             ;
+; LPM_WIDTHP                                     ; 16           ; Untyped             ;
+; LPM_WIDTHR                                     ; 16           ; Untyped             ;
 ; LPM_WIDTHS                                     ; 1            ; Untyped             ;
 ; LPM_REPRESENTATION                             ; UNSIGNED     ; Untyped             ;
 ; LPM_PIPELINE                                   ; 0            ; Untyped             ;
@@ -284,7 +308,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
 ; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
 ; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
-; CBXI_PARAMETER                                 ; mult_j8t     ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_aat     ; Untyped             ;
 ; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
 ; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
 ; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
@@ -299,9 +323,9 @@ Note: In order to hide this table in the UI and the text report file, please set
 +---------------------------------------+----------------+
 ; Number of entity instances            ; 1              ;
 ; Entity Instance                       ; lpm_mult:Mult0 ;
-;     -- LPM_WIDTHA                     ; 4              ;
-;     -- LPM_WIDTHB                     ; 4              ;
-;     -- LPM_WIDTHP                     ; 8              ;
+;     -- LPM_WIDTHA                     ; 8              ;
+;     -- LPM_WIDTHB                     ; 8              ;
+;     -- LPM_WIDTHP                     ; 16             ;
 ;     -- LPM_REPRESENTATION             ; UNSIGNED       ;
 ;     -- INPUT_A_IS_CONSTANT            ; NO             ;
 ;     -- INPUT_B_IS_CONSTANT            ; NO             ;
@@ -310,6 +334,30 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     -- INPUT_A_FIXED_VALUE            ; Bx             ;
 ;     -- INPUT_B_FIXED_VALUE            ; Bx             ;
 +---------------------------------------+----------------+
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder4"                             ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port         ; Type   ; Severity ; Details                                                                             ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; i_disppoint  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; i_chipen     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; o_dispenable ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; o_disppoint  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder3"                             ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port         ; Type   ; Severity ; Details                                                                             ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; i_disppoint  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; i_chipen     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; o_dispenable ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; o_disppoint  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +------------------------------------------------------------------------------------------------------------------------+
@@ -341,22 +389,24 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; boundary_port         ; 31                          ;
+; boundary_port         ; 32                          ;
 ; cycloneiii_ff         ; 19                          ;
 ;     SCLR              ; 17                          ;
 ;     plain             ; 2                           ;
-; cycloneiii_lcell_comb ; 122                         ;
-;     arith             ; 43                          ;
-;         2 data inputs ; 26                          ;
-;         3 data inputs ; 17                          ;
-;     normal            ; 79                          ;
+; cycloneiii_lcell_comb ; 132                         ;
+;     arith             ; 39                          ;
+;         2 data inputs ; 25                          ;
+;         3 data inputs ; 14                          ;
+;     normal            ; 93                          ;
 ;         1 data inputs ; 3                           ;
-;         2 data inputs ; 17                          ;
-;         3 data inputs ; 20                          ;
-;         4 data inputs ; 39                          ;
+;         2 data inputs ; 18                          ;
+;         3 data inputs ; 18                          ;
+;         4 data inputs ; 54                          ;
+; cycloneiii_mac_mult   ; 1                           ;
+; cycloneiii_mac_out    ; 1                           ;
 ;                       ;                             ;
-; Max LUT depth         ; 10.30                       ;
-; Average LUT depth     ; 7.05                        ;
+; Max LUT depth         ; 9.50                        ;
+; Average LUT depth     ; 6.33                        ;
 +-----------------------+-----------------------------+
 
 
@@ -375,62 +425,58 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
-    Info: Processing started: Wed Sep 27 18:21:03 2023
+    Info: Processing started: Mon Oct  2 00:43:34 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ALU8BitsDisplaysFP -c ALU8BitsDisplaysFP
-Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
+Info (20032): Parallel compilation is enabled and will use up to 16 processors
 Info (12021): Found 2 design units, including 1 entities, in source file ALU8BitsDisplaysFP.vhd
-    Info (12022): Found design unit 1: ALU8BitsDisplaysFP-rtl File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 18
+    Info (12022): Found design unit 1: ALU8BitsDisplaysFP-rtl File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 19
     Info (12023): Found entity 1: ALU8BitsDisplaysFP File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 6
 Info (12021): Found 2 design units, including 1 entities, in source file BCDto7Segs.vhd
     Info (12022): Found design unit 1: BCDto7Segs-rtl File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/BCDto7Segs.vhd Line: 16
     Info (12023): Found entity 1: BCDto7Segs File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/BCDto7Segs.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file DisplayDriverALU4_4FP.vhd
-    Info (12022): Found design unit 1: DisplayDriverALU4_4FP-rtl File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 16
+    Info (12022): Found design unit 1: DisplayDriverALU4_4FP-rtl File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 18
     Info (12023): Found entity 1: DisplayDriverALU4_4FP File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 6
 Info (12127): Elaborating entity "ALU8BitsDisplaysFP" for the top level hierarchy
-Info (12128): Elaborating entity "DisplayDriverALU4_4FP" for hierarchy "DisplayDriverALU4_4FP:DisplayDriver" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 34
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(71): signal "r_SegsConn1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 71
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(72): signal "r_SegsConn2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 72
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(86): signal "r_Show" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 86
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(88): signal "r_Segs2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 88
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(91): signal "r_Segs1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 91
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(95): signal "r_NumberSign" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 95
-Info (12128): Elaborating entity "BCDto7Segs" for hierarchy "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder1" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 43
+Info (12128): Elaborating entity "DisplayDriverALU4_4FP" for hierarchy "DisplayDriverALU4_4FP:DisplayDriver" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 41
+Warning (10036): Verilog HDL or VHDL warning at DisplayDriverALU4_4FP.vhd(37): object "r_Number8" assigned a value but never read File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 37
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(93): signal "r_SegsConn1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 93
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(94): signal "r_SegsConn2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 94
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(95): signal "r_SegsConn3" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 95
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(96): signal "r_SegsConn4" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 96
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(111): signal "r_Show" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 111
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(113): signal "r_Segs1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 113
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(116): signal "r_Segs2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 116
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(119): signal "r_Segs3" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 119
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(122): signal "r_Segs4" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 122
+Info (12128): Elaborating entity "BCDto7Segs" for hierarchy "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder1" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 51
 Info (278001): Inferred 1 megafunctions from design logic
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult0" File: /opt/intelFPGA_lite/22.1.2/quartus/libraries/vhdl/synopsys/ieee/syn_arit.vhd Line: 687
 Info (12130): Elaborated megafunction instantiation "lpm_mult:Mult0" File: /opt/intelFPGA_lite/22.1.2/quartus/libraries/vhdl/synopsys/ieee/syn_arit.vhd Line: 687
 Info (12133): Instantiated megafunction "lpm_mult:Mult0" with the following parameter: File: /opt/intelFPGA_lite/22.1.2/quartus/libraries/vhdl/synopsys/ieee/syn_arit.vhd Line: 687
-    Info (12134): Parameter "LPM_WIDTHA" = "4"
-    Info (12134): Parameter "LPM_WIDTHB" = "4"
-    Info (12134): Parameter "LPM_WIDTHP" = "8"
-    Info (12134): Parameter "LPM_WIDTHR" = "8"
+    Info (12134): Parameter "LPM_WIDTHA" = "8"
+    Info (12134): Parameter "LPM_WIDTHB" = "8"
+    Info (12134): Parameter "LPM_WIDTHP" = "16"
+    Info (12134): Parameter "LPM_WIDTHR" = "16"
     Info (12134): Parameter "LPM_WIDTHS" = "1"
     Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
     Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
     Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
     Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
-Info (12021): Found 1 design units, including 1 entities, in source file db/mult_j8t.tdf
-    Info (12023): Found entity 1: mult_j8t File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/db/mult_j8t.tdf Line: 29
-Warning (14284): Synthesized away the following node(s):
-    Warning (14285): Synthesized away the following LCELL buffer node(s):
-        Warning (14320): Synthesized away node "lpm_mult:Mult0|mult_j8t:auto_generated|le5a[4]" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/db/mult_j8t.tdf Line: 43
-Info (13014): Ignored 48 buffer(s)
-    Info (13016): Ignored 4 CARRY_SUM buffer(s)
-    Info (13019): Ignored 44 SOFT buffer(s)
+Info (12021): Found 1 design units, including 1 entities, in source file db/mult_aat.tdf
+    Info (12023): Found entity 1: mult_aat File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/db/mult_aat.tdf Line: 29
 Info (286030): Timing-Driven Synthesis is running
-Info (17016): Found the following redundant logic cells in design
-    Info (17048): Logic cell "lpm_mult:Mult0|mult_j8t:auto_generated|le3a[5]" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/db/mult_j8t.tdf Line: 41
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 153 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 163 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 19 input pins
-    Info (21059): Implemented 12 output pins
-    Info (21061): Implemented 122 logic cells
+    Info (21059): Implemented 13 output pins
+    Info (21061): Implemented 130 logic cells
+    Info (21062): Implemented 1 DSP elements
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 10 warnings
-    Info: Peak virtual memory: 529 megabytes
-    Info: Processing ended: Wed Sep 27 18:21:08 2023
-    Info: Elapsed time: 00:00:05
+    Info: Peak virtual memory: 542 megabytes
+    Info: Processing ended: Mon Oct  2 00:43:40 2023
+    Info: Elapsed time: 00:00:06
     Info: Total CPU time (on all processors): 00:00:19
 
 
