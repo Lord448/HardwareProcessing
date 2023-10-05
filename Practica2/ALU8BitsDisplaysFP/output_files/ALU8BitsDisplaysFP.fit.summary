@@ -1,12 +1,12 @@
-Fitter Status : Successful - Mon Oct  2 00:43:44 2023
+Fitter Status : Successful - Mon Oct  2 12:35:33 2023
 Quartus Prime Version : 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 Revision Name : ALU8BitsDisplaysFP
 Top-level Entity Name : ALU8BitsDisplaysFP
 Family : Cyclone IV E
 Device : EP4CE6E22C8
 Timing Models : Final
-Total logic elements : 132 / 6,272 ( 2 % )
-    Total combinational functions : 130 / 6,272 ( 2 % )
+Total logic elements : 145 / 6,272 ( 2 % )
+    Total combinational functions : 145 / 6,272 ( 2 % )
     Dedicated logic registers : 19 / 6,272 ( < 1 % )
 Total registers : 19
 Total pins : 32 / 92 ( 35 % )

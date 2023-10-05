@@ -31,10 +31,11 @@ architecture rtl of ALU8BitsDisplaysFP is
     end component DisplayDriverALU4_4FP;
 
     signal r_Result     : std_logic_vector(15 downto 0);
-    signal r_MultResult : std_logic_vector(15 downto 0);
-    signal r_NumA       : std_logic_vector(7 downto 0);
-    signal r_NumB       : std_logic_vector(7 downto 0);
-    signal r_MultOp     : std_logic;
+    signal r_Mult : std_logic_vector(15 downto 0);
+    signal r_Sume       : std_logic_vector(11 downto 0);
+    signal r_Subs       : std_logic_vector(11 downto 0);
+    signal r_AdtA       : std_logic_vector(11 downto 0) := (others => '0');
+    signal r_AdtB       : std_logic_vector(11 downto 0) := (others => '0');
 
 begin
 
@@ -47,17 +48,33 @@ begin
         o_DispPoint => o_DispPoint,
         o_NumSign   => o_NumSign
     );
+	
+    r_AdtA(7 downto 0) <= i_NumA;
+
+    r_AdtB(7 downto 0) <= i_NumB;
+
+    r_Sume <= r_AdtA + r_AdtB;
+
+    r_Subs <= r_AdtA - r_AdtB;
+
+    r_Mult <= i_NumA * i_NumB;
 	 
-    r_MultResult <= i_NumA * i_NumB;
-	 
-    --Considering 8 bit register when not multiplication
-    with i_OpSel select r_Result(7 downto 0) <=
-        i_NumA + i_NumB when "00",
-        i_NumA - i_NumB when "01",
-        r_MultResult(7 downto 0) when others;
-    with i_OpSel select r_Result(15 downto 8) <=
-        r_MultResult(15 downto 8) when "10",
-        r_MultResult(15 downto 8) when "11",
-        (others => '0') when others;
-    
+    with i_OpSel select r_Result(15 downto 12) <=
+        r_Sume(11 downto 8) when "00",    --Sume
+        r_Subs(11 downto 8) when "01",    --Substraction
+        r_Mult(15 downto 12) when others; --Multiplication
+    with i_OpSel select r_Result(11 downto 8) <=
+        r_Sume(7 downto 4) when "00",     --Sume
+        r_Subs(7 downto 4) when "01",     --Substraction
+        r_Mult(11 downto 8) when others;  --Multiplication
+    with i_OpSel select r_Result(7 downto 4) <=
+        r_Sume(3 downto 0) when "00",     --Sume
+        r_Subs(3 downto 0) when "01",     --Substraction
+        r_Mult(7 downto 4) when others;   --Multiplication
+    with i_OpSel select r_Result(3 downto 0) <=
+        (others => '0') when "00",        --Sume
+        (others => '0') when "01",        --Substraction
+        r_Mult(11 downto 8) when others;  --Multiplication
+
+                
 end architecture rtl;
