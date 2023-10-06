@@ -13,8 +13,8 @@
 # //  18 U.S.C. Section 1905.
 # //
 # vsim -t 1ps work.tb_ALU8BitsDisplaysFP 
-# Start time: 23:11:22 on Oct 05,2023
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Start time: 00:18:39 on Oct 06,2023
+# ** Note: (vsim-8009) Loading existing optimized design _opt
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -22,27 +22,419 @@
 # Loading ieee.std_logic_unsigned(body)
 # Loading ieee.numeric_std(body)
 # Loading work.tb_alu8bitsdisplaysfp(rtl)#1
-add wave -position end  sim:/tb_alu8bitsdisplaysfp/U1/r_Result
 add wave -position end  sim:/tb_alu8bitsdisplaysfp/i_CLK
 add wave -position end  sim:/tb_alu8bitsdisplaysfp/i_NumA
 add wave -position end  sim:/tb_alu8bitsdisplaysfp/i_NumB
 add wave -position end  sim:/tb_alu8bitsdisplaysfp/i_OpSel
+add wave -position end  sim:/tb_alu8bitsdisplaysfp/U1/r_Result
+add wave -position end  sim:/tb_alu8bitsdisplaysfp/U1/r_Mult
+add wave -position end  sim:/tb_alu8bitsdisplaysfp/U1/r_Sume
+add wave -position end  sim:/tb_alu8bitsdisplaysfp/U1/r_Subs
+add wave -position end  sim:/tb_alu8bitsdisplaysfp/U1/DisplayDriver/r_NumberSign
 run
-run
-run
-run
-run
-run
-run
-run
-run
-run
-run
-run
-run
-run
-# Break key hit
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 4 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 9 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 14 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 19 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 24 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 29 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 34 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 39 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 44 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 49 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 54 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 59 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 64 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 69 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 74 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 79 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 84 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 89 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 94 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 99 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 104 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 109 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 114 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 119 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 124 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 129 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 134 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 139 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 144 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 149 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 154 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 159 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 164 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 169 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 174 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 179 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 184 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 189 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 194 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 199 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 204 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 209 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 214 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 219 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 224 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 229 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 234 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 239 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 244 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 249 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 254 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 259 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 264 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 269 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 274 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 279 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 284 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 289 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 294 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 299 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 304 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 309 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 314 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 319 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 324 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 329 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 334 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 339 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 344 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 349 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 354 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 359 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 364 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 369 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 374 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 379 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 384 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 389 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 394 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 399 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 404 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 409 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 414 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 419 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 424 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 429 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 434 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 439 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 444 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 449 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 454 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 459 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 464 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 469 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 474 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 479 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 484 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 489 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 494 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 499 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 504 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 509 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 514 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 519 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 524 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 529 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 534 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 539 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 544 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 549 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 554 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 559 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 564 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 569 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 574 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 579 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 584 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 589 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 594 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 599 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 604 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 609 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 614 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 619 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 624 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 629 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 634 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 639 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 644 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 649 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 654 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 659 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 664 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 669 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 674 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 679 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 684 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 689 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 694 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 699 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 704 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 709 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 714 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 719 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 724 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 729 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 734 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 739 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 744 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 749 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 754 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 759 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 764 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 769 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 774 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 779 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 784 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 789 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 794 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 799 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 804 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 809 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 814 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 819 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 824 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 829 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 834 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 839 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 844 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 849 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 854 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 859 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 864 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 869 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 874 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 879 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 884 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 889 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 894 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 899 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 904 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 909 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 914 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 919 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 924 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 929 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 934 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 939 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 944 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 949 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 954 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 959 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 964 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 969 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 974 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 979 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 984 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 989 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 994 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 999 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+add wave -position end  sim:/tb_alu8bitsdisplaysfp/U1/DisplayDriver/r_Number
 restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
 # ** Note: (vsim-8009) Loading existing optimized design _opt
 run
 # ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
@@ -445,5 +837,3 @@ run
 #    Time: 994 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
 # ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
 #    Time: 999 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# End time: 23:46:18 on Oct 05,2023, Elapsed time: 0:34:56
-# Errors: 0, Warnings: 200
