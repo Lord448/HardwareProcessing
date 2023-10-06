@@ -4,6 +4,9 @@ use IEEE.std_logic_unsigned.all;
 use IEEE.numeric_std.all;
 
 entity ALU8BitsDisplaysFP is
+    generic(
+        g_PSC_COUNTS : integer := 100000
+    );
     port (
         i_CLK       : in  std_logic;
         i_NumA      : in  std_logic_vector(7 downto 0);
@@ -19,6 +22,9 @@ end entity ALU8BitsDisplaysFP;
 architecture rtl of ALU8BitsDisplaysFP is
     
     component DisplayDriverALU4_4FP is
+        generic(
+            g_PSC_COUNTS : integer := 100000
+        );
         port (
             i_CLK       : in  std_logic;
             i_OpSel     : in  std_logic_vector(1 downto 0);
@@ -39,14 +45,18 @@ architecture rtl of ALU8BitsDisplaysFP is
 
 begin
 
-    DisplayDriver : DisplayDriverALU4_4FP port map(
-        i_CLK       => i_CLK,
-        i_OpSel     => i_OpSel,
-        i_Number    => r_Result,
-        o_Displays  => o_Displays,
-        o_Segments  => o_Segments,
-        o_DispPoint => o_DispPoint,
-        o_NumSign   => o_NumSign
+    DisplayDriver : DisplayDriverALU4_4FP
+    generic map (
+        g_PSC_COUNTS => g_PSC_COUNTS
+    )
+    port map(
+    i_CLK       => i_CLK,
+    i_OpSel     => i_OpSel,
+    i_Number    => r_Result,
+    o_Displays  => o_Displays,
+    o_Segments  => o_Segments,
+    o_DispPoint => o_DispPoint,
+    o_NumSign   => o_NumSign
     );
 	
     r_AdtA(7 downto 0) <= i_NumA;
@@ -74,7 +84,7 @@ begin
     with i_OpSel select r_Result(3 downto 0) <=
         (others => '0') when "00",        --Sume
         (others => '0') when "01",        --Substraction
-        r_Mult(11 downto 8) when others;  --Multiplication
+        r_Mult(3 downto 0) when others;  --Multiplication
 
                 
 end architecture rtl;

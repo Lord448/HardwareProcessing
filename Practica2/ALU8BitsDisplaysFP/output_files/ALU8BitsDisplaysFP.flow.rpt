@@ -1,5 +1,5 @@
 Flow report for ALU8BitsDisplaysFP
-Mon Oct  2 12:35:38 2023
+Thu Oct  5 22:42:51 2023
 Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 
 
@@ -41,7 +41,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Flow Summary                                                                        ;
 +------------------------------------+------------------------------------------------+
-; Flow Status                        ; Successful - Mon Oct  2 12:35:38 2023          ;
+; Flow Status                        ; Successful - Thu Oct  5 22:42:51 2023          ;
 ; Quartus Prime Version              ; 22.1std.2 Build 922 07/20/2023 SC Lite Edition ;
 ; Revision Name                      ; ALU8BitsDisplaysFP                             ;
 ; Top-level Entity Name              ; ALU8BitsDisplaysFP                             ;
@@ -65,7 +65,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 10/02/2023 12:35:22 ;
+; Start date & time ; 10/05/2023 22:42:37 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; ALU8BitsDisplaysFP  ;
 +-------------------+---------------------+
@@ -76,7 +76,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------+----------------------------------------+---------------+-------------+-----------------------------------+
 ; Assignment Name                     ; Value                                  ; Default Value ; Entity Name ; Section Id                        ;
 +-------------------------------------+----------------------------------------+---------------+-------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID               ; 185350566542371.169627172242926        ; --            ; --          ; --                                ;
+; COMPILER_SIGNATURE_ID               ; 57715611127863.169656735709731         ; --            ; --          ; --                                ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --          ; eda_board_design_timing           ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --          ; eda_board_design_boundary_scan    ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --          ; eda_board_design_signal_integrity ;
@@ -100,12 +100,12 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:07     ; 1.0                     ; 548 MB              ; 00:00:17                           ;
-; Fitter               ; 00:00:03     ; 1.1                     ; 1980 MB             ; 00:00:05                           ;
+; Analysis & Synthesis ; 00:00:05     ; 1.0                     ; 545 MB              ; 00:00:19                           ;
+; Fitter               ; 00:00:03     ; 1.1                     ; 1943 MB             ; 00:00:04                           ;
 ; Assembler            ; 00:00:01     ; 1.0                     ; 353 MB              ; 00:00:00                           ;
-; Timing Analyzer      ; 00:00:01     ; 1.1                     ; 627 MB              ; 00:00:01                           ;
+; Timing Analyzer      ; 00:00:01     ; 1.1                     ; 595 MB              ; 00:00:01                           ;
 ; EDA Netlist Writer   ; 00:00:00     ; 1.0                     ; 604 MB              ; 00:00:00                           ;
-; Total                ; 00:00:12     ; --                      ; --                  ; 00:00:23                           ;
+; Total                ; 00:00:10     ; --                      ; --                  ; 00:00:24                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -114,11 +114,11 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+------------------+------------+------------+----------------+
 ; Module Name          ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
 +----------------------+------------------+------------+------------+----------------+
-; Analysis & Synthesis ; Lord448P         ; Linux Mint ; 21         ; x86_64         ;
-; Fitter               ; Lord448P         ; Linux Mint ; 21         ; x86_64         ;
-; Assembler            ; Lord448P         ; Linux Mint ; 21         ; x86_64         ;
-; Timing Analyzer      ; Lord448P         ; Linux Mint ; 21         ; x86_64         ;
-; EDA Netlist Writer   ; Lord448P         ; Linux Mint ; 21         ; x86_64         ;
+; Analysis & Synthesis ; Lord448          ; Linux Mint ; 21         ; x86_64         ;
+; Fitter               ; Lord448          ; Linux Mint ; 21         ; x86_64         ;
+; Assembler            ; Lord448          ; Linux Mint ; 21         ; x86_64         ;
+; Timing Analyzer      ; Lord448          ; Linux Mint ; 21         ; x86_64         ;
+; EDA Netlist Writer   ; Lord448          ; Linux Mint ; 21         ; x86_64         ;
 +----------------------+------------------+------------+------------+----------------+
 
 

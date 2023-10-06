@@ -4,6 +4,9 @@ use IEEE.std_logic_unsigned.all;
 use IEEE.numeric_std.all;
 
 entity DisplayDriverALU4_4FP is
+    generic(
+        g_PSC_COUNTS : integer := 100000
+    );
     port (
         i_CLK       : in  std_logic;
         i_OpSel     : in  std_logic_vector(1 downto 0);
@@ -79,7 +82,7 @@ begin
     clkCount : process(i_CLK)
     begin
         if rising_edge(i_CLK) then
-            if r_Count < 100000 then --100000
+            if r_Count < g_PSC_COUNTS then
                 r_Count <= r_Count + 1;
             else 
                 r_Sel <= r_Sel + 1;
