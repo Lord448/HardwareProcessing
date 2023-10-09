@@ -130,7 +130,7 @@ begin
 	 --Selecting the sign bit
     with i_OpSel select r_NumberSign <=
         '0' when "00",
-        i_Number(7) when "01",
+        i_Number(12) when "01",
         i_Number(15)  when others; --Multiplication
 		  
     --Coverting A2 into Signed Magnitude

@@ -837,3 +837,5 @@ run
 #    Time: 994 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
 # ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
 #    Time: 999 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
+# End time: 00:26:23 on Oct 06,2023, Elapsed time: 0:07:44
+# Errors: 0, Warnings: 200

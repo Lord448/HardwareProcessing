@@ -1,5 +1,5 @@
 Analysis & Synthesis report for ALU8BitsDisplaysFP
-Thu Oct  5 22:42:42 2023
+Sun Oct  8 18:21:14 2023
 Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 
 
@@ -16,16 +16,17 @@ Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
   8. Analysis & Synthesis DSP Block Usage Summary
   9. General Register Statistics
  10. Multiplexer Restructuring Statistics (Restructuring Performed)
- 11. Parameter Settings for User Entity Instance: DisplayDriverALU4_4FP:DisplayDriver
- 12. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult0
- 13. lpm_mult Parameter Settings by Entity Instance
- 14. Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder4"
- 15. Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder3"
- 16. Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder2"
- 17. Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder1"
- 18. Post-Synthesis Netlist Statistics for Top Partition
- 19. Elapsed Time Per Partition
- 20. Analysis & Synthesis Messages
+ 11. Parameter Settings for User Entity Instance: Top-level Entity: |ALU8BitsDisplaysFP
+ 12. Parameter Settings for User Entity Instance: DisplayDriverALU4_4FP:DisplayDriver
+ 13. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult0
+ 14. lpm_mult Parameter Settings by Entity Instance
+ 15. Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder4"
+ 16. Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder3"
+ 17. Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder2"
+ 18. Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder1"
+ 19. Post-Synthesis Netlist Statistics for Top Partition
+ 20. Elapsed Time Per Partition
+ 21. Analysis & Synthesis Messages
 
 
 
@@ -52,7 +53,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                        ;
 +------------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Oct  5 22:42:42 2023          ;
+; Analysis & Synthesis Status        ; Successful - Sun Oct  8 18:21:14 2023          ;
 ; Quartus Prime Version              ; 22.1std.2 Build 922 07/20/2023 SC Lite Edition ;
 ; Revision Name                      ; ALU8BitsDisplaysFP                             ;
 ; Top-level Entity Name              ; ALU8BitsDisplaysFP                             ;
@@ -169,8 +170,7 @@ https://fpgasoftware.intel.com/eula.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.0%      ;
-;     Processors 3-16        ;   0.0%      ;
+;     Processors 2-16        ;   0.0%      ;
 +----------------------------+-------------+
 
 
@@ -282,6 +282,16 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 ; 4:1                ; 9 bits    ; 18 LEs        ; 18 LEs               ; 0 LEs                  ; No         ; |ALU8BitsDisplaysFP|Mux10                                    ;
 ; 16:1               ; 7 bits    ; 70 LEs        ; 14 LEs               ; 56 LEs                 ; No         ; |ALU8BitsDisplaysFP|DisplayDriverALU4_4FP:DisplayDriver|Mux7 ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |ALU8BitsDisplaysFP ;
++----------------+--------+----------------------------------------------------------+
+; Parameter Name ; Value  ; Type                                                     ;
++----------------+--------+----------------------------------------------------------+
+; g_PSC_COUNTS   ; 100000 ; Signed Integer                                           ;
++----------------+--------+----------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
 +----------------------------------------------------------------------------------+
@@ -440,11 +450,11 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
-    Info: Processing started: Thu Oct  5 22:42:37 2023
+    Info: Processing started: Sun Oct  8 18:21:08 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ALU8BitsDisplaysFP -c ALU8BitsDisplaysFP
 Info (20032): Parallel compilation is enabled and will use up to 16 processors
 Info (12021): Found 2 design units, including 1 entities, in source file ALU8BitsDisplaysFP.vhd
-    Info (12022): Found design unit 1: ALU8BitsDisplaysFP-rtl File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 19
+    Info (12022): Found design unit 1: ALU8BitsDisplaysFP-rtl File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 22
     Info (12023): Found entity 1: ALU8BitsDisplaysFP File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 6
 Info (12021): Found 2 design units, including 1 entities, in source file BCDto7Segs.vhd
     Info (12022): Found design unit 1: BCDto7Segs-rtl File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/BCDto7Segs.vhd Line: 16
@@ -453,7 +463,7 @@ Info (12021): Found 2 design units, including 1 entities, in source file Display
     Info (12022): Found design unit 1: DisplayDriverALU4_4FP-rtl File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 21
     Info (12023): Found entity 1: DisplayDriverALU4_4FP File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 6
 Info (12127): Elaborating entity "ALU8BitsDisplaysFP" for the top level hierarchy
-Info (12128): Elaborating entity "DisplayDriverALU4_4FP" for hierarchy "DisplayDriverALU4_4FP:DisplayDriver" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 45
+Info (12128): Elaborating entity "DisplayDriverALU4_4FP" for hierarchy "DisplayDriverALU4_4FP:DisplayDriver" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 48
 Warning (10036): Verilog HDL or VHDL warning at DisplayDriverALU4_4FP.vhd(40): object "r_Number8" assigned a value but never read File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 40
 Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(96): signal "r_SegsConn1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 96
 Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(97): signal "r_SegsConn2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 97
@@ -489,9 +499,9 @@ Info (21057): Implemented 178 device resources after synthesis - the final resou
     Info (21061): Implemented 145 logic cells
     Info (21062): Implemented 1 DSP elements
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 10 warnings
-    Info: Peak virtual memory: 545 megabytes
-    Info: Processing ended: Thu Oct  5 22:42:42 2023
-    Info: Elapsed time: 00:00:05
-    Info: Total CPU time (on all processors): 00:00:19
+    Info: Peak virtual memory: 535 megabytes
+    Info: Processing ended: Sun Oct  8 18:21:14 2023
+    Info: Elapsed time: 00:00:06
+    Info: Total CPU time (on all processors): 00:00:20
 
 

@@ -37,7 +37,7 @@ architecture rtl of ALU8BitsDisplaysFP is
     end component DisplayDriverALU4_4FP;
 
     signal r_Result     : std_logic_vector(15 downto 0);
-    signal r_Mult : std_logic_vector(15 downto 0);
+    signal r_Mult       : std_logic_vector(15 downto 0);
     signal r_Sume       : std_logic_vector(11 downto 0);
     signal r_Subs       : std_logic_vector(11 downto 0);
     signal r_AdtA       : std_logic_vector(11 downto 0) := (others => '0');
@@ -84,7 +84,7 @@ begin
     with i_OpSel select r_Result(3 downto 0) <=
         (others => '0') when "00",        --Sume
         (others => '0') when "01",        --Substraction
-        r_Mult(3 downto 0) when others;  --Multiplication
+        r_Mult(3 downto 0) when others;   --Multiplication
 
                 
 end architecture rtl;

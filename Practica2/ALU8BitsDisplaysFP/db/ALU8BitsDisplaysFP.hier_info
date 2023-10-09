@@ -78,19 +78,19 @@ i_OpSel[1] => r_Result[2].OUTPUTSELECT
 i_OpSel[1] => r_Result[1].OUTPUTSELECT
 i_OpSel[1] => r_Result[0].OUTPUTSELECT
 i_OpSel[1] => DisplayDriverALU4_4FP:DisplayDriver.i_OpSel[1]
-o_Displays[0] <= DisplayDriverALU4_4FP:DisplayDriver.o_Displays[0]
-o_Displays[1] <= DisplayDriverALU4_4FP:DisplayDriver.o_Displays[1]
-o_Displays[2] <= DisplayDriverALU4_4FP:DisplayDriver.o_Displays[2]
-o_Displays[3] <= DisplayDriverALU4_4FP:DisplayDriver.o_Displays[3]
-o_Segments[0] <= DisplayDriverALU4_4FP:DisplayDriver.o_Segments[0]
-o_Segments[1] <= DisplayDriverALU4_4FP:DisplayDriver.o_Segments[1]
-o_Segments[2] <= DisplayDriverALU4_4FP:DisplayDriver.o_Segments[2]
-o_Segments[3] <= DisplayDriverALU4_4FP:DisplayDriver.o_Segments[3]
-o_Segments[4] <= DisplayDriverALU4_4FP:DisplayDriver.o_Segments[4]
-o_Segments[5] <= DisplayDriverALU4_4FP:DisplayDriver.o_Segments[5]
-o_Segments[6] <= DisplayDriverALU4_4FP:DisplayDriver.o_Segments[6]
-o_DispPoint <= DisplayDriverALU4_4FP:DisplayDriver.o_DispPoint
-o_NumSign <= DisplayDriverALU4_4FP:DisplayDriver.o_NumSign
+o_Displays[0] << DisplayDriverALU4_4FP:DisplayDriver.o_Displays[0]
+o_Displays[1] << DisplayDriverALU4_4FP:DisplayDriver.o_Displays[1]
+o_Displays[2] << DisplayDriverALU4_4FP:DisplayDriver.o_Displays[2]
+o_Displays[3] << DisplayDriverALU4_4FP:DisplayDriver.o_Displays[3]
+o_Segments[0] << DisplayDriverALU4_4FP:DisplayDriver.o_Segments[0]
+o_Segments[1] << DisplayDriverALU4_4FP:DisplayDriver.o_Segments[1]
+o_Segments[2] << DisplayDriverALU4_4FP:DisplayDriver.o_Segments[2]
+o_Segments[3] << DisplayDriverALU4_4FP:DisplayDriver.o_Segments[3]
+o_Segments[4] << DisplayDriverALU4_4FP:DisplayDriver.o_Segments[4]
+o_Segments[5] << DisplayDriverALU4_4FP:DisplayDriver.o_Segments[5]
+o_Segments[6] << DisplayDriverALU4_4FP:DisplayDriver.o_Segments[6]
+o_DispPoint << DisplayDriverALU4_4FP:DisplayDriver.o_DispPoint
+o_NumSign << DisplayDriverALU4_4FP:DisplayDriver.o_NumSign
 
 
 |ALU8BitsDisplaysFP|DisplayDriverALU4_4FP:DisplayDriver
@@ -129,9 +129,9 @@ i_Number[5] => Add2.IN27
 i_Number[5] => r_DecPNumber[5].DATAA
 i_Number[6] => Add2.IN26
 i_Number[6] => r_DecPNumber[6].DATAA
-i_Number[7] => Mux12.IN5
 i_Number[7] => Add2.IN25
 i_Number[7] => r_DecPNumber[7].DATAA
+i_Number[8] => Mux12.IN5
 i_Number[8] => Add2.IN24
 i_Number[8] => r_IntPNumber[0].DATAA
 i_Number[9] => Add2.IN23
