@@ -37,7 +37,6 @@ architecture rtl of DisplayDriverALU4_4FP is
     signal r_Sel                      : std_logic_vector(1 downto 0) := "00";
     signal r_Show                     : std_logic_vector(3 downto 0) := "0000";
     signal r_Number                   : std_logic_vector(15 downto 0);
-    signal r_Number8                  : std_logic_vector(7 downto 0);
     signal r_Count                    : integer range 0 to 100000;
     --Integer Part Registers
     signal r_Segs1, r_Segs2           : std_logic_vector(6 downto 0);
@@ -137,9 +136,6 @@ begin
     with r_NumberSign select r_Number  <=
         not(i_Number-1) when '1',
         i_Number        when others;
-    with r_NumberSign select r_Number8 <=
-        not(i_Number(7 downto 0)-1) when '1',
-        i_Number(7 downto 0) when others;
 
     --Integer Part
     r_IntPNumber <= r_Number(15 downto 8);
