@@ -1,0 +1,204 @@
+m255
+K4
+z2
+Z0 !s99 nomlopt
+R0
+R0
+R0
+R0
+R0
+R0
+R0
+R0
+!s11e vcom 2021.2 2021.04, Apr 14 2021
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z1 d/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP
+T_opt
+!s110 1697482018
+VYXgbTcMXe<@a1N]eJffb]1
+04 21 3 work tb_alu8bitsdisplaysfp rtl 1
+=1-000ae431a4f1-652d8521-db506-134ad
+!s124 OEM10U7 
+o-quiet -auto_acc_if_foreign -work work
+tCvgOpt 0
+n@_opt
+OL;O;2021.2;73
+Ealu8bitsdisplaysfp
+Z2 w1697482011
+Z3 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z4 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z5 DPx4 ieee 16 std_logic_signed 0 22 C<aanc0R`<LWPSe[JYRP^3
+Z6 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z7 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 14
+R1
+Z8 8ALU8BitsDisplaysFP.vhd
+Z9 FALU8BitsDisplaysFP.vhd
+l0
+L6 1
+VeCF[eo><TloVRa>1^Ad7W3
+!s100 D8MeXf0eW?^FB;<Y_<YVG1
+Z10 OL;C;2021.2;73
+32
+Z11 !s110 1697482013
+!i10b 1
+Z12 !s108 1697482013.000000
+Z13 !s90 ALU8BitsDisplaysFP.vhd|BCDto7Segs.vhd|DisplayDriverALU4_4FP.vhd|tb_ALU8BitsDisplaysFP.vhd|
+Z14 !s107 tb_ALU8BitsDisplaysFP.vhd|DisplayDriverALU4_4FP.vhd|BCDto7Segs.vhd|ALU8BitsDisplaysFP.vhd|
+!i113 0
+Z15 tExplicit 1 CvgOpt 0
+Artl
+R3
+R4
+R5
+R6
+R7
+DEx4 work 18 alu8bitsdisplaysfp 0 22 eCF[eo><TloVRa>1^Ad7W3
+!i122 14
+l48
+L22 72
+VoT6JGeKJS:[jWf0Nj=9CH0
+!s100 9WH_>aAc>lCbD?A7[ZF@j0
+R10
+32
+R11
+!i10b 1
+R12
+R13
+R14
+!i113 0
+R15
+Ebcdto7segs
+Z16 w1695916908
+R6
+R7
+!i122 14
+R1
+Z17 8BCDto7Segs.vhd
+Z18 FBCDto7Segs.vhd
+l0
+L5 1
+V8LDaoLalMc7B:25R9>DzH1
+!s100 P6D=7k`HL6i2j`CAO1TcR2
+R10
+32
+R11
+!i10b 1
+R12
+R13
+R14
+!i113 0
+R15
+Artl
+R6
+R7
+DEx4 work 10 bcdto7segs 0 22 8LDaoLalMc7B:25R9>DzH1
+!i122 14
+l30
+L16 39
+V>R[Xkk6j9[AiCkYiSZoTF3
+!s100 ?eObz4mQi^YUX?fURL0k>2
+R10
+32
+R11
+!i10b 1
+R12
+R13
+R14
+!i113 0
+R15
+Edisplaydriveralu4_4fp
+Z19 w1697478084
+R3
+R4
+Z20 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+R6
+R7
+!i122 14
+R1
+Z21 8DisplayDriverALU4_4FP.vhd
+Z22 FDisplayDriverALU4_4FP.vhd
+l0
+L6 1
+VRgI0W;oS=P;RXNlT6iShm3
+!s100 @7c2:ZJCIZHP?F@zFVUTX0
+R10
+32
+R11
+!i10b 1
+R12
+R13
+R14
+!i113 0
+R15
+Artl
+R3
+R4
+R20
+R6
+R7
+DEx4 work 21 displaydriveralu4_4fp 0 22 RgI0W;oS=P;RXNlT6iShm3
+!i122 14
+l51
+L21 131
+VSQ_jizVeH0USb?z6JAFfI3
+!s100 @BFi3R=G@i>>kQWGZ^SEA2
+R10
+32
+R11
+!i10b 1
+R12
+R13
+R14
+!i113 0
+R15
+Etb_alu8bitsdisplaysfp
+Z23 w1697480671
+R3
+R4
+R20
+R6
+R7
+!i122 14
+R1
+Z24 8tb_ALU8BitsDisplaysFP.vhd
+Z25 Ftb_ALU8BitsDisplaysFP.vhd
+l0
+L6 1
+V54<Vbc^]J994o:eGhb4KI0
+!s100 WKNmj1OHCGcd^ZG;NOBWk2
+R10
+32
+R11
+!i10b 1
+R12
+R13
+R14
+!i113 0
+R15
+Artl
+R3
+R4
+R20
+R6
+R7
+DEx4 work 21 tb_alu8bitsdisplaysfp 0 22 54<Vbc^]J994o:eGhb4KI0
+!i122 14
+l36
+L9 79
+VXDH5e^ZoiaKWLYB?kK@dn3
+!s100 ;>95Li0;>Y6o7jPd2WK_k3
+R10
+32
+R11
+!i10b 1
+R12
+R13
+R14
+!i113 0
+R15

@@ -1,6 +1,6 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
-use IEEE.std_logic_unsigned.all;
+use IEEE.std_logic_signed.all;
 use IEEE.numeric_std.all;
 
 entity ALU8BitsDisplaysFP is
@@ -9,8 +9,8 @@ entity ALU8BitsDisplaysFP is
     );
     port (
         i_CLK       : in  std_logic;
-        i_NumA      : in  std_logic_vector(7 downto 0);
-        i_NumB      : in  std_logic_vector(7 downto 0);
+        i_NumA      : in  signed(7 downto 0);
+        i_NumB      : in  signed(7 downto 0);
         i_OpSel     : in  std_logic_vector(1 downto 0);
         o_Displays  : out std_logic_vector(3 downto 0);
         o_Segments  : out std_logic_vector(6 downto 0);
@@ -36,12 +36,14 @@ architecture rtl of ALU8BitsDisplaysFP is
         );
     end component DisplayDriverALU4_4FP;
 
-    signal r_Result     : std_logic_vector(15 downto 0);
-    signal r_Mult       : std_logic_vector(15 downto 0);
-    signal r_Sume       : std_logic_vector(11 downto 0);
-    signal r_Subs       : std_logic_vector(11 downto 0);
-    signal r_AdtA       : std_logic_vector(11 downto 0) := (others => '0');
-    signal r_AdtB       : std_logic_vector(11 downto 0) := (others => '0');
+    signal r_Result     : signed(15 downto 0);
+    signal r_Mult       : signed(15 downto 0);
+    signal r_Sume       : signed(11 downto 0);
+    signal r_Subs       : signed(11 downto 0);
+    signal r_AdtA       : signed(11 downto 0) := (others => '0');
+    signal r_AdtB       : signed(11 downto 0) := (others => '0');
+    --Simulation Watchers
+    signal r_CompB      : signed(11 downto 0) := (others => '0');
 
 begin
 
@@ -52,7 +54,7 @@ begin
     port map(
     i_CLK       => i_CLK,
     i_OpSel     => i_OpSel,
-    i_Number    => r_Result,
+    i_Number    => std_logic_vector(r_Result),
     o_Displays  => o_Displays,
     o_Segments  => o_Segments,
     o_DispPoint => o_DispPoint,
@@ -61,11 +63,13 @@ begin
 	
     r_AdtA(7 downto 0) <= i_NumA;
 
-    r_AdtB(7 downto 0) <= i_NumB;
+    with i_OpSel select r_AdtB(7 downto 0) <=
+        ((not i_NumB)+1) when "01",
+        i_NumB when others;
 
     r_Sume <= r_AdtA + r_AdtB;
 
-    r_Subs <= r_AdtA - r_AdtB;
+    r_Subs <= r_AdtA + r_AdtB;
 
     r_Mult <= i_NumA * i_NumB;
 	 
@@ -85,6 +89,5 @@ begin
         (others => '0') when "00",        --Sume
         (others => '0') when "01",        --Substraction
         r_Mult(3 downto 0) when others;   --Multiplication
-
                 
 end architecture rtl;

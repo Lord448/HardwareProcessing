@@ -14,8 +14,8 @@ architecture rtl of tb_ALU8BitsDisplaysFP is
         );
         port (
             i_CLK       : in  std_logic;
-            i_NumA      : in  std_logic_vector(7 downto 0);
-            i_NumB      : in  std_logic_vector(7 downto 0);
+            i_NumA      : in  signed(7 downto 0);
+            i_NumB      : in  signed(7 downto 0);
             i_OpSel     : in  std_logic_vector(1 downto 0);
             o_Displays  : out std_logic_vector(3 downto 0);
             o_Segments  : out std_logic_vector(6 downto 0);
@@ -25,8 +25,8 @@ architecture rtl of tb_ALU8BitsDisplaysFP is
     end component ALU8BitsDisplaysFP;
 
     signal i_CLK       : std_logic := '0';
-    signal i_NumA      : std_logic_vector(7 downto 0) := (others => '0');
-    signal i_NumB      : std_logic_vector(7 downto 0) := (others => '0');
+    signal i_NumA      : signed(7 downto 0) := (others => '0');
+    signal i_NumB      : signed(7 downto 0) := (others => '0');
     signal i_OpSel     : std_logic_vector(1 downto 0) := (others => '0');
     signal o_Displays  : std_logic_vector(3 downto 0) := (others => '0');
     signal o_Segments  : std_logic_vector(6 downto 0) := (others => '0');
@@ -58,18 +58,30 @@ begin
         wait for 1 ns;
     end process;
     
+--    stim_proc : process
+--    begin
+--        for i in 0 to 255 loop
+--            for j in 0 to 255 loop
+--                for k in 0 to 4 loop
+--                    i_NumA <= signed(to_signed(i, i_NumA'length));
+--                    i_NumB <= signed(to_signed(j, i_NumB'length));
+--                    i_OpSel <= std_logic_vector(to_signed(k, i_OpSel'length));
+--                    wait for 1 ns;
+--                end loop;
+--            end loop;
+--        end loop;
+--        wait;
+--    end process;
+
     stim_proc : process
     begin
-        for i in 0 to 255 loop
-            for j in 0 to 255 loop
-                for k in 0 to 4 loop
-                    i_NumA <= std_logic_vector(to_unsigned(i, i_NumA'length));
-                    i_NumB <= std_logic_vector(to_unsigned(j, i_NumB'length));
-                    i_OpSel <= std_logic_vector(to_unsigned(k, i_OpSel'length));
-                    wait for 1 ns;
-                end loop;
-            end loop;
-        end loop;
+        i_NumA <= "11100001";
+        i_NumB <= "01110000";
+        i_Opsel <= "01";
+        wait for 1 ns;
+        i_NumA <= "11100001";
+        i_NumB <= "10010000";
         wait;
     end process;
+		
 end architecture rtl;

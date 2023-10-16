@@ -13,108 +13,21 @@
 # //  18 U.S.C. Section 1905.
 # //
 # vsim -t 1ps work.tb_ALU8BitsDisplaysFP 
-# Start time: 20:42:47 on Oct 14,2023
-# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Start time: 12:46:57 on Oct 16,2023
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
 # Loading ieee.std_logic_arith(body)
 # Loading ieee.std_logic_unsigned(body)
 # Loading ieee.numeric_std(body)
+# Loading ieee.std_logic_signed(body)
 # Loading work.tb_alu8bitsdisplaysfp(rtl)#1
-add wave -position end  sim:/tb_alu8bitsdisplaysfp/i_CLK
+# Loading work.displaydriveralu4_4fp(rtl)#1
 add wave -position end  sim:/tb_alu8bitsdisplaysfp/i_NumA
 add wave -position end  sim:/tb_alu8bitsdisplaysfp/i_NumB
 add wave -position end  sim:/tb_alu8bitsdisplaysfp/i_OpSel
-add wave -position end  sim:/tb_alu8bitsdisplaysfp/o_Displays
-add wave -position end  sim:/tb_alu8bitsdisplaysfp/o_Segments
-add wave -position end  sim:/tb_alu8bitsdisplaysfp/o_DispPoint
-add wave -position end  sim:/tb_alu8bitsdisplaysfp/o_NumSign
-run
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 4 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 9 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 14 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 19 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 24 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 29 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 34 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 39 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 44 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 49 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 54 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 59 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 64 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 69 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 74 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 79 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 84 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 89 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 94 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 99 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
 add wave -position end  sim:/tb_alu8bitsdisplaysfp/U1/r_Result
-restart
-# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
-# ** Note: (vsim-8009) Loading existing optimized design _opt
 run
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 4 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 9 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 14 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 19 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 24 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 29 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 34 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 39 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 44 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 49 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 54 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 59 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 64 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 69 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 74 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 79 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 84 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 89 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 94 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
-#    Time: 99 ns  Iteration: 0  Instance: /tb_alu8bitsdisplaysfp
-# End time: 00:45:56 on Oct 15,2023, Elapsed time: 4:03:09
-# Errors: 0, Warnings: 20
+# End time: 12:47:45 on Oct 16,2023, Elapsed time: 0:00:48
+# Errors: 0, Warnings: 0

@@ -133,9 +133,11 @@ begin
         i_Number(15)  when others; --Multiplication
 		  
     --Coverting A2 into Signed Magnitude
-    with r_NumberSign select r_Number  <=
-        not(i_Number-1) when '1',
-        i_Number        when others;
+    --with r_NumberSign select r_Number  <=
+        --not(i_Number-1) when '1',
+        --i_Number        when others;
+
+    r_Number <= i_Number;
 
     --Integer Part
     r_IntPNumber <= r_Number(15 downto 8);

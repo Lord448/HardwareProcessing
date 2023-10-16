@@ -1,10 +1,10 @@
-Analysis & Synthesis Status : Successful - Sun Oct  8 18:21:14 2023
+Analysis & Synthesis Status : Successful - Mon Oct 16 12:47:57 2023
 Quartus Prime Version : 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 Revision Name : ALU8BitsDisplaysFP
 Top-level Entity Name : ALU8BitsDisplaysFP
 Family : Cyclone IV E
-Total logic elements : 145
-    Total combinational functions : 145
+Total logic elements : 109
+    Total combinational functions : 109
     Dedicated logic registers : 19
 Total registers : 19
 Total pins : 32
