@@ -48,10 +48,6 @@
 					"strict" : false
 				},
 				{
-					"name" : "o_DispPoint",
-					"strict" : false
-				},
-				{
 					"name" : "o_NumSign",
 					"strict" : false
 				},

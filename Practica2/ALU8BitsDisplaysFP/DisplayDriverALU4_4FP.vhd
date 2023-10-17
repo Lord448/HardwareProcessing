@@ -8,13 +8,14 @@ entity DisplayDriverALU4_4FP is
         g_PSC_COUNTS : integer := 100000
     );
     port (
-        i_CLK       : in  std_logic;
-        i_OpSel     : in  std_logic_vector(1 downto 0);
-        i_Number    : in  std_logic_vector(15 downto 0); --Number with fixed point in the middle (0x00.00)
-        o_Displays  : out std_logic_vector(3 downto 0);
-        o_Segments  : out std_logic_vector(6 downto 0);
-        o_DispPoint : out std_logic;
-        o_NumSign   : out std_logic
+        i_CLK        : in  std_logic;
+        i_OpSel      : in  std_logic_vector(1 downto 0);
+        i_Number     : in  std_logic_vector(15 downto 0); --Number with fixed point in the middle (0x00.00)
+        i_FixedPoint : in  std_logic_vector(3 downto 0);
+        o_Displays   : out std_logic_vector(3 downto 0);
+        o_Segments   : out std_logic_vector(6 downto 0);
+        o_DispPoint  : out std_logic;
+        o_NumSign    : out std_logic
     );
 end entity DisplayDriverALU4_4FP;
 
@@ -36,6 +37,7 @@ architecture rtl of DisplayDriverALU4_4FP is
     --Multiplexor Registers
     signal r_Sel                      : std_logic_vector(1 downto 0) := "00";
     signal r_Show                     : std_logic_vector(3 downto 0) := "0000";
+    signal r_DispPoint                : std_logic_vector(3 downto 0) := "0000";
     signal r_Number                   : std_logic_vector(15 downto 0);
     signal r_Count                    : integer range 0 to 100000;
     --Integer Part Registers
@@ -113,36 +115,47 @@ begin
         case r_Show is
             when "0111" => --Display 1
                 o_Segments  <= r_Segs1;
-                o_DispPoint <= '1'; --Turn off the point led
+                if i_FixedPoint = "0111" then
+                    o_DispPoint <= '0'; --Turn on the point segment
+                else 
+                    o_DispPoint <= '1'; --Turn off the point segment
+                end if;
             when "1011" => --Display 2
                 o_Segments  <= r_Segs2;
-                o_DispPoint <= '0'; --Turn on the point led 
+                if i_FixedPoint = "1011" then 
+                    o_DispPoint <= '0';
+                else 
+                    o_DispPoint <= '1';
+                end if;
             when "1101" => --Display 3
                 o_Segments  <= r_Segs3;
-                o_DispPoint <= '1'; --Turn off the point led
+                if i_FixedPoint = "1101" then
+                    o_DispPoint <= '0';
+                else
+                    o_DispPoint <= '1';
+                end if;
             when others => --Display 4
                 o_Segments  <= r_Segs4;
-                o_DispPoint <= '1'; --Turn off the point led
+                if i_FixedPoint = "1110" then 
+                    o_DispPoint <= '0';
+                else 
+                    o_DispPoint <= '1';
+                end if;
         end case;
     end process;
 	 
-	 --Selecting the sign bit
-    with i_OpSel select r_NumberSign <=
-        '0' when "00",
-        i_Number(12) when "01",
-        i_Number(15)  when others; --Multiplication
-		  
-    --Coverting A2 into Signed Magnitude
-    --with r_NumberSign select r_Number  <=
-        --not(i_Number-1) when '1',
-        --i_Number        when others;
+    --Selecting the sign bit
+    --with i_OpSel select r_NumberSign <=
+    --   '0' when "00",
+    --   i_Number(12) when "01",
+    --   i_Number(15)  when others; --Multiplication
 
-    r_Number <= i_Number;
+    r_NumberSign <= i_Number(15);
 
     --Integer Part
-    r_IntPNumber <= r_Number(15 downto 8);
+    r_IntPNumber <= i_Number(15 downto 8);
     --Decimal Part
-    r_DecPNumber <= r_Number(7 downto 0);
+    r_DecPNumber <= i_Number(7 downto 0);
 
     o_Displays <= r_Show;
 
