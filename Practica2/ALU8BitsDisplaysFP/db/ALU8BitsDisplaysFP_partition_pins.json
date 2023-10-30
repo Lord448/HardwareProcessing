@@ -48,43 +48,11 @@
 					"strict" : false
 				},
 				{
+					"name" : "o_DispPoint",
+					"strict" : false
+				},
+				{
 					"name" : "o_NumSign",
-					"strict" : false
-				},
-				{
-					"name" : "i_OpSel[1]",
-					"strict" : false
-				},
-				{
-					"name" : "i_NumB[7]",
-					"strict" : false
-				},
-				{
-					"name" : "i_OpSel[0]",
-					"strict" : false
-				},
-				{
-					"name" : "i_NumB[6]",
-					"strict" : false
-				},
-				{
-					"name" : "i_NumB[5]",
-					"strict" : false
-				},
-				{
-					"name" : "i_NumB[4]",
-					"strict" : false
-				},
-				{
-					"name" : "i_NumB[3]",
-					"strict" : false
-				},
-				{
-					"name" : "i_NumB[2]",
-					"strict" : false
-				},
-				{
-					"name" : "i_NumB[1]",
 					"strict" : false
 				},
 				{
@@ -92,27 +60,19 @@
 					"strict" : false
 				},
 				{
-					"name" : "i_NumA[7]",
+					"name" : "i_NumA[0]",
 					"strict" : false
 				},
 				{
-					"name" : "i_NumA[6]",
+					"name" : "i_OpSel[0]",
 					"strict" : false
 				},
 				{
-					"name" : "i_NumA[5]",
+					"name" : "i_OpSel[1]",
 					"strict" : false
 				},
 				{
-					"name" : "i_NumA[4]",
-					"strict" : false
-				},
-				{
-					"name" : "i_NumA[3]",
-					"strict" : false
-				},
-				{
-					"name" : "i_NumA[2]",
+					"name" : "i_NumB[1]",
 					"strict" : false
 				},
 				{
@@ -120,7 +80,67 @@
 					"strict" : false
 				},
 				{
-					"name" : "i_NumA[0]",
+					"name" : "i_NumB[2]",
+					"strict" : false
+				},
+				{
+					"name" : "i_NumA[2]",
+					"strict" : false
+				},
+				{
+					"name" : "i_NumB[3]",
+					"strict" : false
+				},
+				{
+					"name" : "i_NumA[3]",
+					"strict" : false
+				},
+				{
+					"name" : "i_NumA[7]",
+					"strict" : false
+				},
+				{
+					"name" : "i_NumB[7]",
+					"strict" : false
+				},
+				{
+					"name" : "i_NumB[6]",
+					"strict" : false
+				},
+				{
+					"name" : "i_NumA[6]",
+					"strict" : false
+				},
+				{
+					"name" : "i_NumB[5]",
+					"strict" : false
+				},
+				{
+					"name" : "i_NumA[5]",
+					"strict" : false
+				},
+				{
+					"name" : "i_NumB[4]",
+					"strict" : false
+				},
+				{
+					"name" : "i_NumA[4]",
+					"strict" : false
+				},
+				{
+					"name" : "i_FixedPoint[0]",
+					"strict" : false
+				},
+				{
+					"name" : "i_FixedPoint[1]",
+					"strict" : false
+				},
+				{
+					"name" : "i_FixedPoint[3]",
+					"strict" : false
+				},
+				{
+					"name" : "i_FixedPoint[2]",
 					"strict" : false
 				},
 				{

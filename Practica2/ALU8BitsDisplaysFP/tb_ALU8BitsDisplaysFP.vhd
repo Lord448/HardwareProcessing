@@ -54,7 +54,7 @@ begin
         o_NumSign    => o_NumSign
     );
 
-    re_NumA <= real(to_signed(i_NumA, i_NumA'length));
+    --re_NumA <= real(to_signed(i_NumA, i_NumA'length));
 
     clk_proc : process
     begin

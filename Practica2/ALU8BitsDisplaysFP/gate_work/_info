@@ -7,6 +7,7 @@ R0
 R0
 R0
 R0
+R0
 !s11e MIXED_VERSIONS
 13
 !s112 1.1
@@ -16,16 +17,15 @@ R0
 cModel Technology
 Z1 d/home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP
 T_opt
-!s110 1697503113
-VW`0Gkgg0F867Az:`?_EnT0
+!s110 1697518738
+VmCBhR6><2ITiKESNT>2E73
 04 21 3 work tb_alu8bitsdisplaysfp rtl 1
-=1-000ae431a4f1-652dd789-82954-a0af
+=1-000ae431a4f1-652e1492-7cbf2-1464c
 !s124 OEM10U7 
 o-quiet -auto_acc_if_foreign -work work
 tCvgOpt 0
 n@_opt
 OL;O;2021.2;73
-R1
 Ealu8bitsdisplaysfp
 Z2 w1697502376
 Z3 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
@@ -33,7 +33,7 @@ Z4 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
 Z5 DPx4 ieee 16 std_logic_signed 0 22 C<aanc0R`<LWPSe[JYRP^3
 Z6 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z7 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
-!i122 23
+!i122 27
 R1
 Z8 8ALU8BitsDisplaysFP.vhd
 Z9 FALU8BitsDisplaysFP.vhd
@@ -43,11 +43,11 @@ VBSZ5;VRR=cWSJCBea;I[Q3
 !s100 b<P^2Y;Fbf3X8heM6JNd`1
 Z10 OL;C;2021.2;73
 32
-Z11 !s110 1697503430
+Z11 !s110 1697518642
 !i10b 1
-Z12 !s108 1697503430.000000
-Z13 !s90 ALU8BitsDisplaysFP.vhd|BCDto7Segs.vhd|DisplayDriverALU4_4FP.vhd|tb_ALU8BitsDisplaysFP.vhd|
-Z14 !s107 tb_ALU8BitsDisplaysFP.vhd|DisplayDriverALU4_4FP.vhd|BCDto7Segs.vhd|ALU8BitsDisplaysFP.vhd|
+Z12 !s108 1697518642.000000
+Z13 !s90 tb_ALU8BitsDisplaysFP.vhd|ALU8BitsDisplaysFP.vhd|DisplayDriverALU4_4FP.vhd|BCDto7Segs.vhd|
+Z14 !s107 BCDto7Segs.vhd|DisplayDriverALU4_4FP.vhd|ALU8BitsDisplaysFP.vhd|tb_ALU8BitsDisplaysFP.vhd|
 !i113 0
 Z15 tExplicit 1 CvgOpt 0
 Artl
@@ -56,12 +56,12 @@ R4
 R5
 R6
 R7
-Z16 DEx4 work 18 alu8bitsdisplaysfp 0 22 BSZ5;VRR=cWSJCBea;I[Q3
-!i122 23
+DEx4 work 18 alu8bitsdisplaysfp 0 22 BSZ5;VRR=cWSJCBea;I[Q3
+!i122 27
 l59
-Z17 L23 101
-Z18 V5hmANbKh_o]if30zAZl473
-Z19 !s100 dIhP3TA<HgUNnjT5d9iD;3
+L23 101
+V5hmANbKh_o]if30zAZl473
+!s100 dIhP3TA<HgUNnjT5d9iD;3
 R10
 32
 R11
@@ -72,13 +72,13 @@ R14
 !i113 0
 R15
 Ebcdto7segs
-Z20 w1695858424
+Z16 w1695858424
 R6
 R7
-!i122 23
+!i122 27
 R1
-Z21 8BCDto7Segs.vhd
-Z22 FBCDto7Segs.vhd
+Z17 8BCDto7Segs.vhd
+Z18 FBCDto7Segs.vhd
 l0
 L5 1
 V8LDaoLalMc7B:25R9>DzH1
@@ -95,12 +95,12 @@ R15
 Artl
 R6
 R7
-Z23 DEx4 work 10 bcdto7segs 0 22 8LDaoLalMc7B:25R9>DzH1
-!i122 23
+DEx4 work 10 bcdto7segs 0 22 8LDaoLalMc7B:25R9>DzH1
+!i122 27
 l30
-Z24 L16 39
-Z25 V>R[Xkk6j9[AiCkYiSZoTF3
-Z26 !s100 ?eObz4mQi^YUX?fURL0k>2
+L16 39
+V>R[Xkk6j9[AiCkYiSZoTF3
+!s100 ?eObz4mQi^YUX?fURL0k>2
 R10
 32
 R11
@@ -111,16 +111,16 @@ R14
 !i113 0
 R15
 Edisplaydriveralu4_4fp
-Z27 w1697497746
+Z19 w1697497746
 R3
 R4
-Z28 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z20 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
 R6
 R7
-!i122 23
+!i122 27
 R1
-Z29 8DisplayDriverALU4_4FP.vhd
-Z30 FDisplayDriverALU4_4FP.vhd
+Z21 8DisplayDriverALU4_4FP.vhd
+Z22 FDisplayDriverALU4_4FP.vhd
 l0
 L6 1
 VKBce>Z?dlZSEK_^KZTPFb3
@@ -137,15 +137,15 @@ R15
 Artl
 R3
 R4
-R28
+R20
 R6
 R7
-Z31 DEx4 work 21 displaydriveralu4_4fp 0 22 KBce>Z?dlZSEK_^KZTPFb3
-!i122 23
+DEx4 work 21 displaydriveralu4_4fp 0 22 KBce>Z?dlZSEK_^KZTPFb3
+!i122 27
 l53
-Z32 L22 143
-Z33 VS>jLAlM:]X]5Kz[<E7B3m0
-Z34 !s100 B1>C3a1^hFF1WYo>36E<[1
+L22 143
+VS>jLAlM:]X]5Kz[<E7B3m0
+!s100 B1>C3a1^hFF1WYo>36E<[1
 R10
 32
 R11
@@ -156,16 +156,16 @@ R14
 !i113 0
 R15
 Etb_alu8bitsdisplaysfp
-Z35 w1697503428
+Z23 w1697518403
 R3
 R4
-R28
+R20
 R6
 R7
-!i122 23
+!i122 27
 R1
-Z36 8tb_ALU8BitsDisplaysFP.vhd
-Z37 Ftb_ALU8BitsDisplaysFP.vhd
+Z24 8tb_ALU8BitsDisplaysFP.vhd
+Z25 Ftb_ALU8BitsDisplaysFP.vhd
 l0
 L6 1
 V54<Vbc^]J994o:eGhb4KI0
@@ -182,20 +182,20 @@ R15
 Artl
 R3
 R4
-R28
+R20
 R6
 R7
 DEx4 work 21 tb_alu8bitsdisplaysfp 0 22 54<Vbc^]J994o:eGhb4KI0
-!i122 20
+!i122 27
 l39
-L9 101
-VK1a]5:>Nbk`jZC`^be:;K2
-!s100 gceYYPYA3e4:9Q^lX`5o30
+L9 103
+VkF_NOm3=f]?PnVnoBKG:Q2
+!s100 53l?:9jLeh4bOda10FKjT2
 R10
 32
-!s110 1697503111
+R11
 !i10b 1
-!s108 1697503111.000000
+R12
 R13
 R14
 !i113 0

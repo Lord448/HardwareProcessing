@@ -1,5 +1,5 @@
 Flow report for ALU8BitsDisplaysFP
-Mon Oct 16 17:22:46 2023
+Mon Oct 30 00:14:15 2023
 Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 
 
@@ -41,15 +41,15 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Flow Summary                                                                        ;
 +------------------------------------+------------------------------------------------+
-; Flow Status                        ; Successful - Mon Oct 16 17:22:46 2023          ;
+; Flow Status                        ; Successful - Mon Oct 30 00:14:15 2023          ;
 ; Quartus Prime Version              ; 22.1std.2 Build 922 07/20/2023 SC Lite Edition ;
 ; Revision Name                      ; ALU8BitsDisplaysFP                             ;
 ; Top-level Entity Name              ; ALU8BitsDisplaysFP                             ;
 ; Family                             ; Cyclone IV E                                   ;
 ; Device                             ; EP4CE6E22C8                                    ;
 ; Timing Models                      ; Final                                          ;
-; Total logic elements               ; 108 / 6,272 ( 2 % )                            ;
-;     Total combinational functions  ; 108 / 6,272 ( 2 % )                            ;
+; Total logic elements               ; 135 / 6,272 ( 2 % )                            ;
+;     Total combinational functions  ; 134 / 6,272 ( 2 % )                            ;
 ;     Dedicated logic registers      ; 19 / 6,272 ( < 1 % )                           ;
 ; Total registers                    ; 19                                             ;
 ; Total pins                         ; 36 / 92 ( 39 % )                               ;
@@ -65,7 +65,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 10/16/2023 17:22:31 ;
+; Start date & time ; 10/30/2023 00:14:00 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; ALU8BitsDisplaysFP  ;
 +-------------------+---------------------+
@@ -76,7 +76,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------+----------------------------------------+---------------+-------------+-----------------------------------+
 ; Assignment Name                     ; Value                                  ; Default Value ; Entity Name ; Section Id                        ;
 +-------------------------------------+----------------------------------------+---------------+-------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID               ; 57715611127863.169749855124747         ; --            ; --          ; --                                ;
+; COMPILER_SIGNATURE_ID               ; 57715611127863.169864644026611         ; --            ; --          ; --                                ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --          ; eda_board_design_timing           ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --          ; eda_board_design_boundary_scan    ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --          ; eda_board_design_signal_integrity ;
@@ -100,12 +100,12 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:06     ; 1.0                     ; 518 MB              ; 00:00:19                           ;
-; Fitter               ; 00:00:03     ; 1.1                     ; 1946 MB             ; 00:00:04                           ;
+; Analysis & Synthesis ; 00:00:06     ; 1.0                     ; 515 MB              ; 00:00:18                           ;
+; Fitter               ; 00:00:03     ; 1.1                     ; 1976 MB             ; 00:00:04                           ;
 ; Assembler            ; 00:00:00     ; 1.0                     ; 359 MB              ; 00:00:00                           ;
-; Timing Analyzer      ; 00:00:01     ; 1.1                     ; 607 MB              ; 00:00:01                           ;
-; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 607 MB              ; 00:00:00                           ;
-; Total                ; 00:00:11     ; --                      ; --                  ; 00:00:24                           ;
+; Timing Analyzer      ; 00:00:01     ; 1.1                     ; 611 MB              ; 00:00:01                           ;
+; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 604 MB              ; 00:00:00                           ;
+; Total                ; 00:00:11     ; --                      ; --                  ; 00:00:23                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
