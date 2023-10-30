@@ -1,5 +1,5 @@
 Timing Analyzer report for ALU8BitsDisplaysFP
-Mon Oct 30 00:14:13 2023
+Mon Oct 30 10:54:41 2023
 Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 
 
@@ -91,21 +91,24 @@ https://fpgasoftware.intel.com/eula.
 +-----------------------+--------------------------------------------------------+
 
 
-+------------------------------------------+
-; Parallel Compilation                     ;
-+----------------------------+-------------+
-; Processors                 ; Number      ;
-+----------------------------+-------------+
-; Number detected on machine ; 16          ;
-; Maximum allowed            ; 16          ;
-;                            ;             ;
-; Average used               ; 1.08        ;
-; Maximum used               ; 16          ;
-;                            ;             ;
-; Usage by Processor         ; % Time Used ;
-;     Processor 1            ; 100.0%      ;
-;     Processors 2-16        ;   0.5%      ;
-+----------------------------+-------------+
+Parallel compilation attempted to use more processors than were available, which may cause increased compilation time. For lowest compilation time, correct your settings.
++-----------------------------------------------+
+; Parallel Compilation                          ;
++---------------------------------+-------------+
+; Processors                      ; Number      ;
++---------------------------------+-------------+
+; Number detected on machine      ; 12          ;
+; Maximum allowed                 ; 16          ;
+;                                 ;             ;
+; Average used                    ; 1.09        ;
+; Maximum used                    ; 16          ;
+;                                 ;             ;
+; Usage by Processor              ; % Time Used ;
+;     Processor 1                 ; 100.0%      ;
+;     Processor 2                 ;   0.6%      ;
+;     Processors 3-12             ;   0.6%      ;
+;     Processors 13-16 (overused) ;   0.6%      ;
++---------------------------------+-------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1227,10 +1230,11 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
-    Info: Processing started: Mon Oct 30 00:14:12 2023
+    Info: Processing started: Mon Oct 30 10:54:40 2023
 Info: Command: quartus_sta ALU8BitsDisplaysFP -c ALU8BitsDisplaysFP
 Info: qsta_default_script.tcl version: #1
 Info (20032): Parallel compilation is enabled and will use up to 16 processors
+Warning (20031): Parallel compilation is enabled for 16 processors, but there are only 6 processors in the system. Runtime may increase due to over usage of the processor space.
 Info (21077): Low junction temperature is 0 degrees C
 Info (21077): High junction temperature is 85 degrees C
 Critical Warning (332012): Synopsys Design Constraints File file not found: 'ALU8BitsDisplaysFP.sdc'. A Synopsys Design Constraints File is required by the Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
@@ -1297,9 +1301,9 @@ Info (332146): Worst-case minimum pulse width slack is -3.000
     Info (332119):    -3.000             -23.258 i_CLK 
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
-Info: Quartus Prime Timing Analyzer was successful. 0 errors, 4 warnings
-    Info: Peak virtual memory: 611 megabytes
-    Info: Processing ended: Mon Oct 30 00:14:13 2023
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 5 warnings
+    Info: Peak virtual memory: 583 megabytes
+    Info: Processing ended: Mon Oct 30 10:54:41 2023
     Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 

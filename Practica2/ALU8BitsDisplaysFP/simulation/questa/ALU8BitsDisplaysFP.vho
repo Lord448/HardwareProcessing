@@ -17,7 +17,7 @@
 -- PROGRAM "Quartus Prime"
 -- VERSION "Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition"
 
--- DATE "10/30/2023 00:14:15"
+-- DATE "10/30/2023 10:54:42"
 
 -- 
 -- Device: Altera EP4CE6E22C8 Package TQFP144
@@ -80,14 +80,14 @@ USE IEEE.STD_LOGIC_1164.ALL;
 ENTITY 	ALU8BitsDisplaysFP IS
     PORT (
 	i_CLK : IN std_logic;
-	i_NumA : IN std_logic_vector(7 DOWNTO 0);
-	i_NumB : IN std_logic_vector(7 DOWNTO 0);
+	i_NumA : IN IEEE.NUMERIC_STD.signed(7 DOWNTO 0);
+	i_NumB : IN IEEE.NUMERIC_STD.signed(7 DOWNTO 0);
 	i_FixedPoint : IN std_logic_vector(3 DOWNTO 0);
 	i_OpSel : IN std_logic_vector(1 DOWNTO 0);
-	o_Displays : BUFFER std_logic_vector(3 DOWNTO 0);
-	o_Segments : BUFFER std_logic_vector(6 DOWNTO 0);
-	o_DispPoint : BUFFER std_logic;
-	o_NumSign : BUFFER std_logic
+	o_Displays : OUT std_logic_vector(3 DOWNTO 0);
+	o_Segments : OUT std_logic_vector(6 DOWNTO 0);
+	o_DispPoint : OUT std_logic;
+	o_NumSign : OUT std_logic
 	);
 END ALU8BitsDisplaysFP;
 
@@ -422,8 +422,8 @@ END COMPONENT;
 BEGIN
 
 ww_i_CLK <= i_CLK;
-ww_i_NumA <= i_NumA;
-ww_i_NumB <= i_NumB;
+ww_i_NumA <= IEEE.STD_LOGIC_1164.STD_LOGIC_VECTOR(i_NumA);
+ww_i_NumB <= IEEE.STD_LOGIC_1164.STD_LOGIC_VECTOR(i_NumB);
 ww_i_FixedPoint <= i_FixedPoint;
 ww_i_OpSel <= i_OpSel;
 o_Displays <= ww_o_Displays;

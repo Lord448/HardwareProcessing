@@ -74,19 +74,19 @@ i_OpSel[0] => DisplayDriverALU4_4FP:DisplayDriver.i_OpSel[0]
 i_OpSel[1] => Mux0.IN4
 i_OpSel[1] => Mux1.IN4
 i_OpSel[1] => DisplayDriverALU4_4FP:DisplayDriver.i_OpSel[1]
-o_Displays[0] << DisplayDriverALU4_4FP:DisplayDriver.o_Displays[0]
-o_Displays[1] << DisplayDriverALU4_4FP:DisplayDriver.o_Displays[1]
-o_Displays[2] << DisplayDriverALU4_4FP:DisplayDriver.o_Displays[2]
-o_Displays[3] << DisplayDriverALU4_4FP:DisplayDriver.o_Displays[3]
-o_Segments[0] << DisplayDriverALU4_4FP:DisplayDriver.o_Segments[0]
-o_Segments[1] << DisplayDriverALU4_4FP:DisplayDriver.o_Segments[1]
-o_Segments[2] << DisplayDriverALU4_4FP:DisplayDriver.o_Segments[2]
-o_Segments[3] << DisplayDriverALU4_4FP:DisplayDriver.o_Segments[3]
-o_Segments[4] << DisplayDriverALU4_4FP:DisplayDriver.o_Segments[4]
-o_Segments[5] << DisplayDriverALU4_4FP:DisplayDriver.o_Segments[5]
-o_Segments[6] << DisplayDriverALU4_4FP:DisplayDriver.o_Segments[6]
-o_DispPoint << DisplayDriverALU4_4FP:DisplayDriver.o_DispPoint
-o_NumSign << DisplayDriverALU4_4FP:DisplayDriver.o_NumSign
+o_Displays[0] <= DisplayDriverALU4_4FP:DisplayDriver.o_Displays[0]
+o_Displays[1] <= DisplayDriverALU4_4FP:DisplayDriver.o_Displays[1]
+o_Displays[2] <= DisplayDriverALU4_4FP:DisplayDriver.o_Displays[2]
+o_Displays[3] <= DisplayDriverALU4_4FP:DisplayDriver.o_Displays[3]
+o_Segments[0] <= DisplayDriverALU4_4FP:DisplayDriver.o_Segments[0]
+o_Segments[1] <= DisplayDriverALU4_4FP:DisplayDriver.o_Segments[1]
+o_Segments[2] <= DisplayDriverALU4_4FP:DisplayDriver.o_Segments[2]
+o_Segments[3] <= DisplayDriverALU4_4FP:DisplayDriver.o_Segments[3]
+o_Segments[4] <= DisplayDriverALU4_4FP:DisplayDriver.o_Segments[4]
+o_Segments[5] <= DisplayDriverALU4_4FP:DisplayDriver.o_Segments[5]
+o_Segments[6] <= DisplayDriverALU4_4FP:DisplayDriver.o_Segments[6]
+o_DispPoint <= DisplayDriverALU4_4FP:DisplayDriver.o_DispPoint
+o_NumSign <= DisplayDriverALU4_4FP:DisplayDriver.o_NumSign
 
 
 |ALU8BitsDisplaysFP|DisplayDriverALU4_4FP:DisplayDriver

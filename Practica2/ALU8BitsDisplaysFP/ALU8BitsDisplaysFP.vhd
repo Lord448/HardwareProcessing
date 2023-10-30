@@ -80,13 +80,13 @@ begin
 	
     r_AdtA(7 downto 0) <= i_NumA;
 
-    with r_Op select r_AdtB(7 downto 0) <=
-        ((not i_NumB)+1) when t_Subs,
-        i_NumB when others;
+    --with r_Op select r_AdtB(7 downto 0) <=
+    --    ((not i_NumB)+1) when t_Subs,
+    --    i_NumB when others;
 
     r_Sume <= r_AdtA + r_AdtB;
 
-    r_Subs <= r_AdtA + r_AdtB;
+    r_Subs <= r_AdtA - r_AdtB;
 
     r_Mult <= i_NumA * i_NumB;
 

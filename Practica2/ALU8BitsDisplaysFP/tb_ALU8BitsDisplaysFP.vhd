@@ -59,9 +59,9 @@ begin
     clk_proc : process
     begin
         i_CLK <= '1';
-        wait for 1 ns;
+        wait for 1 ps;
         i_CLK <= '0';
-        wait for 1 ns;
+        wait for 1 ps;
     end process;
     
 --    stim_proc : process
@@ -84,28 +84,36 @@ begin
         i_NumA <= "11100001";
         i_NumB <= "01110000";
         i_Opsel <= "00";
-        wait for 10 ns;
+        wait for 10 ps;
         i_NumA <= "11100001";
         i_NumB <= "01110000";
         i_Opsel <= "01";
-        wait for 10 ns;
+        wait for 10 ps;
         i_NumA <= "11100001";
         i_NumB <= "01110000";
         i_Opsel <= "10";
-        wait for 10 ns;
+        wait for 10 ps;
         i_NumA <= "10000000";
         i_NumB <= "10000000";
         i_Opsel <= "00";
-        wait for 10 ns;
+        wait for 10 ps;
         i_NumA <= "10000000";
         i_NumB <= "10000000";
         i_Opsel <= "01";
-        wait for 10 ns;
+        wait for 10 ps;
         i_NumA <= "10000000";
         i_NumB <= "10000000";
         i_Opsel <= "10";
-        wait for 10 ns;
-        
+        wait for 10 ps;
+        i_NumA <= "00110001";
+        i_NumB <= "01111100";
+        i_Opsel <= "10";
+        wait for 10 ps;
+        i_NumA <= "01011101";
+        i_NumB <= "10010101";
+        i_Opsel <= "00";
+        wait for 10 ps;
+        wait;
     end process;
 		
 end architecture rtl;

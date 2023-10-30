@@ -13,7 +13,7 @@
 # //  18 U.S.C. Section 1905.
 # //
 # vsim -t 1ps work.tb_ALU8BitsDisplaysFP 
-# Start time: 22:58:58 on Oct 16,2023
+# Start time: 13:05:08 on Oct 30,2023
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
 # Loading std.standard
 # Loading std.textio(body)
@@ -26,12 +26,8 @@
 # Loading work.displaydriveralu4_4fp(rtl)#1
 add wave -position end  sim:/tb_alu8bitsdisplaysfp/i_NumA
 add wave -position end  sim:/tb_alu8bitsdisplaysfp/i_NumB
-add wave -position end  sim:/tb_alu8bitsdisplaysfp/i_OpSel
 add wave -position end  sim:/tb_alu8bitsdisplaysfp/U1/r_Op
 add wave -position end  sim:/tb_alu8bitsdisplaysfp/U1/r_Result
 run
-restart
-# ** Note: (vsim-8009) Loading existing optimized design _opt
-run
-# End time: 23:01:35 on Oct 16,2023, Elapsed time: 0:02:37
+# End time: 17:36:16 on Oct 30,2023, Elapsed time: 4:31:08
 # Errors: 0, Warnings: 0

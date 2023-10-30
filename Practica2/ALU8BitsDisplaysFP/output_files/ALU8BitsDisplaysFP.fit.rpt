@@ -1,5 +1,5 @@
 Fitter report for ALU8BitsDisplaysFP
-Mon Oct 30 00:14:10 2023
+Mon Oct 30 10:54:38 2023
 Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 
 
@@ -69,7 +69,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Fitter Summary                                                                      ;
 +------------------------------------+------------------------------------------------+
-; Fitter Status                      ; Successful - Mon Oct 30 00:14:10 2023          ;
+; Fitter Status                      ; Successful - Mon Oct 30 10:54:38 2023          ;
 ; Quartus Prime Version              ; 22.1std.2 Build 922 07/20/2023 SC Lite Edition ;
 ; Revision Name                      ; ALU8BitsDisplaysFP                             ;
 ; Top-level Entity Name              ; ALU8BitsDisplaysFP                             ;
@@ -149,22 +149,24 @@ https://fpgasoftware.intel.com/eula.
 +--------------------------------------------------------------------+---------------------------------------+---------------------------------------+
 
 
-+------------------------------------------+
-; Parallel Compilation                     ;
-+----------------------------+-------------+
-; Processors                 ; Number      ;
-+----------------------------+-------------+
-; Number detected on machine ; 16          ;
-; Maximum allowed            ; 16          ;
-;                            ;             ;
-; Average used               ; 1.08        ;
-; Maximum used               ; 16          ;
-;                            ;             ;
-; Usage by Processor         ; % Time Used ;
-;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.5%      ;
-;     Processors 3-16        ;   0.5%      ;
-+----------------------------+-------------+
+Parallel compilation attempted to use more processors than were available, which may cause increased compilation time. For lowest compilation time, correct your settings.
++-----------------------------------------------+
+; Parallel Compilation                          ;
++---------------------------------+-------------+
+; Processors                      ; Number      ;
++---------------------------------+-------------+
+; Number detected on machine      ; 12          ;
+; Maximum allowed                 ; 16          ;
+;                                 ;             ;
+; Average used                    ; 1.07        ;
+; Maximum used                    ; 16          ;
+;                                 ;             ;
+; Usage by Processor              ; % Time Used ;
+;     Processor 1                 ; 100.0%      ;
+;     Processor 2                 ;   0.5%      ;
+;     Processors 3-12             ;   0.5%      ;
+;     Processors 13-16 (overused) ;   0.5%      ;
++---------------------------------+-------------+
 
 
 +------------------------------------------------------------------------------------------------+
@@ -216,7 +218,7 @@ https://fpgasoftware.intel.com/eula.
 +--------------+
 ; Pin-Out File ;
 +--------------+
-The pin-out file can be found in /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/output_files/ALU8BitsDisplaysFP.pin.
+The pin-out file can be found in /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/output_files/ALU8BitsDisplaysFP.pin.
 
 
 +--------------------------------------------------------------------+
@@ -1124,6 +1126,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Fitter Messages ;
 +-----------------+
 Info (20032): Parallel compilation is enabled and will use up to 16 processors
+Warning (20031): Parallel compilation is enabled for 16 processors, but there are only 6 processors in the system. Runtime may increase due to over usage of the processor space.
 Info (119006): Selected device EP4CE6E22C8 for design "ALU8BitsDisplaysFP"
 Info (21077): Low junction temperature is 0 degrees C
 Info (21077): High junction temperature is 85 degrees C
@@ -1145,12 +1148,12 @@ Info (332144): No user constrained base clocks found in the design
 Info (332143): No user constrained clock uncertainty found in the design. Calling "derive_clock_uncertainty"
 Info (332154): The derive_clock_uncertainty command did not apply clock uncertainty to any clock-to-clock transfers.
 Info (332130): Timing requirements not specified -- quality metrics such as performance may be sacrificed to reduce compilation time.
-Info (176353): Automatically promoted node i_CLK~input (placed in PIN 23 (CLK1, DIFFCLK_0n)) File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 11
+Info (176353): Automatically promoted node i_CLK~input (placed in PIN 23 (CLK1, DIFFCLK_0n)) File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 11
     Info (176355): Automatically promoted destinations to use location or clock signal Global Clock CLKCTRL_G2
 Info (176233): Starting register packing
 Info (176235): Finished register packing
     Extra Info (176219): No registers were packed into other blocks
-Info (171121): Fitter preparation operations ending: elapsed time is 00:00:01
+Info (171121): Fitter preparation operations ending: elapsed time is 00:00:00
 Info (14896): Fitter has disabled Advanced Physical Optimization because it is not supported for the current family.
 Info (170189): Fitter placement preparation operations beginning
 Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:00
@@ -1163,38 +1166,38 @@ Info (170195): Router estimated average interconnect usage is 0% of the availabl
 Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info (170201): Optimizations that may affect the design's routability were skipped
 Info (170194): Fitter routing operations ending: elapsed time is 00:00:00
-Info (11888): Total time spent on timing analysis during the Fitter is 0.05 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 0.04 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
-Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:00
+Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:01
 Warning (171167): Found invalid Fitter assignments. See the Ignored Assignments panel in the Fitter Compilation Report for more information.
 Warning (169177): 20 pins must meet Intel FPGA requirements for 3.3-, 3.0-, and 2.5-V interfaces. For more information, refer to AN 447: Interfacing Cyclone IV E Devices with 3.3/3.0/2.5-V LVTTL/LVCMOS I/O Systems.
-    Info (169178): Pin i_NumB[0] uses I/O standard 3.3-V LVCMOS at 42 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
-    Info (169178): Pin i_NumA[0] uses I/O standard 3.3-V LVCMOS at 72 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
-    Info (169178): Pin i_OpSel[0] uses I/O standard 3.3-V LVCMOS at 65 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 15
-    Info (169178): Pin i_OpSel[1] uses I/O standard 3.3-V LVCMOS at 64 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 15
-    Info (169178): Pin i_NumB[1] uses I/O standard 3.3-V LVCMOS at 43 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
-    Info (169178): Pin i_NumA[1] uses I/O standard 3.3-V LVCMOS at 73 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
-    Info (169178): Pin i_NumB[2] uses I/O standard 3.3-V LVCMOS at 44 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
-    Info (169178): Pin i_NumA[2] uses I/O standard 3.3-V LVCMOS at 74 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
-    Info (169178): Pin i_NumB[3] uses I/O standard 3.3-V LVCMOS at 46 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
-    Info (169178): Pin i_NumA[3] uses I/O standard 3.3-V LVCMOS at 75 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
-    Info (169178): Pin i_NumA[7] uses I/O standard 3.3-V LVCMOS at 83 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
-    Info (169178): Pin i_NumB[7] uses I/O standard 3.3-V LVCMOS at 52 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
-    Info (169178): Pin i_NumB[6] uses I/O standard 3.3-V LVCMOS at 51 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
-    Info (169178): Pin i_NumA[6] uses I/O standard 3.3-V LVCMOS at 80 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
-    Info (169178): Pin i_NumB[5] uses I/O standard 3.3-V LVCMOS at 50 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
-    Info (169178): Pin i_NumA[5] uses I/O standard 3.3-V LVCMOS at 77 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
-    Info (169178): Pin i_NumB[4] uses I/O standard 3.3-V LVCMOS at 49 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
-    Info (169178): Pin i_NumA[4] uses I/O standard 3.3-V LVCMOS at 76 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
-    Info (169178): Pin i_FixedPoint[3] uses I/O standard 2.5 V at 88 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 14
-    Info (169178): Pin i_FixedPoint[2] uses I/O standard 2.5 V at 89 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 14
-Info (144001): Generated suppressed messages file /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/output_files/ALU8BitsDisplaysFP.fit.smsg
-Info: Quartus Prime Fitter was successful. 0 errors, 5 warnings
-    Info: Peak virtual memory: 1976 megabytes
-    Info: Processing ended: Mon Oct 30 00:14:10 2023
+    Info (169178): Pin i_NumB[0] uses I/O standard 3.3-V LVCMOS at 42 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
+    Info (169178): Pin i_NumA[0] uses I/O standard 3.3-V LVCMOS at 72 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
+    Info (169178): Pin i_OpSel[0] uses I/O standard 3.3-V LVCMOS at 65 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 15
+    Info (169178): Pin i_OpSel[1] uses I/O standard 3.3-V LVCMOS at 64 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 15
+    Info (169178): Pin i_NumB[1] uses I/O standard 3.3-V LVCMOS at 43 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
+    Info (169178): Pin i_NumA[1] uses I/O standard 3.3-V LVCMOS at 73 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
+    Info (169178): Pin i_NumB[2] uses I/O standard 3.3-V LVCMOS at 44 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
+    Info (169178): Pin i_NumA[2] uses I/O standard 3.3-V LVCMOS at 74 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
+    Info (169178): Pin i_NumB[3] uses I/O standard 3.3-V LVCMOS at 46 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
+    Info (169178): Pin i_NumA[3] uses I/O standard 3.3-V LVCMOS at 75 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
+    Info (169178): Pin i_NumA[7] uses I/O standard 3.3-V LVCMOS at 83 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
+    Info (169178): Pin i_NumB[7] uses I/O standard 3.3-V LVCMOS at 52 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
+    Info (169178): Pin i_NumB[6] uses I/O standard 3.3-V LVCMOS at 51 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
+    Info (169178): Pin i_NumA[6] uses I/O standard 3.3-V LVCMOS at 80 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
+    Info (169178): Pin i_NumB[5] uses I/O standard 3.3-V LVCMOS at 50 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
+    Info (169178): Pin i_NumA[5] uses I/O standard 3.3-V LVCMOS at 77 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
+    Info (169178): Pin i_NumB[4] uses I/O standard 3.3-V LVCMOS at 49 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
+    Info (169178): Pin i_NumA[4] uses I/O standard 3.3-V LVCMOS at 76 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
+    Info (169178): Pin i_FixedPoint[3] uses I/O standard 2.5 V at 88 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 14
+    Info (169178): Pin i_FixedPoint[2] uses I/O standard 2.5 V at 89 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 14
+Info (144001): Generated suppressed messages file /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/output_files/ALU8BitsDisplaysFP.fit.smsg
+Info: Quartus Prime Fitter was successful. 0 errors, 6 warnings
+    Info: Peak virtual memory: 1936 megabytes
+    Info: Processing ended: Mon Oct 30 10:54:38 2023
     Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:04
 
@@ -1202,6 +1205,6 @@ Info: Quartus Prime Fitter was successful. 0 errors, 5 warnings
 +----------------------------+
 ; Fitter Suppressed Messages ;
 +----------------------------+
-The suppressed messages can be found in /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/output_files/ALU8BitsDisplaysFP.fit.smsg.
+The suppressed messages can be found in /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/output_files/ALU8BitsDisplaysFP.fit.smsg.
 
 

@@ -5,12 +5,18 @@
 #include <stdio.h>
 //#include <string.h>
 
-#define FIXED_POINT_FRACTIONAL_BITS 4
+#define FIXED_POINT_FRACTIONAL_BITS 0
 #define mask_A 		(uint32_t)0b0011111111 			//a0-a7
 #define mask_B 		(uint32_t)0b1111110011000000	//b6-b7 , b10-b15
 #define mask_Sel 	(uint32_t)0b1100000000			//a8-a9
 
 #define ABS(x) x > 0? x:-x
+
+union fixedpoint
+{
+	int16_t num;
+	unsigned char numhex[sizeof(int16_t)];
+}fixedpoint;
 
 typedef enum bool{
 	false,
@@ -33,6 +39,7 @@ uint32_t current_A = 0, current_B = 0, current_sel = 0;
 char sign[0];
 bool flag_write = true, flag_clear = false;
 float result_dec, result_hex;
+uint32_t fp, bitfrac = 0;
 
 int main(void)
 {
@@ -43,8 +50,10 @@ int main(void)
 
   SSD1306_Init();
 
-  SSD1306_GotoXY(0, 21);
-  SSD1306_Puts("Result: ", &Font_7x10, 1);
+  SSD1306_GotoXY(0, 35);
+  SSD1306_Puts("Dec: ", &Font_7x10, 1);
+  SSD1306_GotoXY(0, 51);
+  SSD1306_Puts("Hex: ", &Font_7x10, 1);
 
   while (1)
   {
@@ -71,19 +80,19 @@ int main(void)
 		  if(past_A != current_A)
 		  {
 			  SSD1306_GotoXY(50, 0);
-			  SSD1306_Puts("          ", &Font_11x18, 1);
+			  SSD1306_Puts("            ", &Font_11x18, 1);
 			  SSD1306_UpdateScreen();
 		  }
 		  else if(past_B != current_B)
 		  {
 			  SSD1306_GotoXY(50, 21);
-			  SSD1306_Puts("          ", &Font_11x18, 1);
+			  SSD1306_Puts("            ", &Font_11x18, 1);
 			  SSD1306_UpdateScreen();
 		  }
 		  else if(past_sel != current_sel)
 		  {
 			  SSD1306_GotoXY(50, 42);
-			  SSD1306_Puts("          ", &Font_11x18, 1);
+			  SSD1306_Puts("            ", &Font_11x18, 1);
 			  SSD1306_UpdateScreen();
 		  }
 		  flag_clear = false;
@@ -96,7 +105,10 @@ void Lectures(void)
 	uint32_t portRead_A = (GPIOA -> IDR) & mask_A;
 	uint32_t portRead_B = (GPIOB -> IDR) & mask_B;
 	uint32_t portRead_sel = (GPIOA -> IDR) & mask_Sel;
+	uint32_t fpRead1 = (GPIOB -> IDR) & 0b000011; //b0 b1
+	uint32_t fpRead2 = (GPIOB -> IDR) & 0b110000; //b4 b5
 
+	fp = fpRead1 | (fpRead2 >> 2);
 	//A
 	uint32_t in_A = portRead_A;
 
@@ -118,7 +130,8 @@ void WriteText(uint32_t value_A, uint32_t value_B, uint32_t value_Sel)
 {
 	float number_A, number_B, number_Resdec;
 	char str_A[8] = "", str_B[8] = "";
-	char str_Resdec[8] = "", str_Reshex[8] = "";
+	char str_Resdec[12] = "", str_Reshex[4] = "", str_Reshex2[4] = "";
+	char hexpoint[12] = "";
 
 	/*STATIC TEXT
 	SSD1306_GotoXY(0, 0);
@@ -134,11 +147,11 @@ void WriteText(uint32_t value_A, uint32_t value_B, uint32_t value_Sel)
 	sprintf(str_A, "%1.4f", number_A);
 	//SSD1306_GotoXY(0, 0);
 	//SSD1306_Puts(sign, &Font_7x10, 1);				//sign
-	SSD1306_GotoXY(0, 0);
+	SSD1306_GotoXY(84, 0);
 	SSD1306_Puts(str_A, &Font_7x10, 1);			//value A
 
 	//IN_SELECTOR
-	SSD1306_GotoXY(60, 0);
+	SSD1306_GotoXY(60, 15);
 	switch (value_Sel)
 	{
 	  case 0b00:
@@ -157,29 +170,65 @@ void WriteText(uint32_t value_A, uint32_t value_B, uint32_t value_Sel)
 	sprintf(str_B, "%1.4f", number_B);
 	//SSD1306_GotoXY(75, 0);
 	//SSD1306_Puts(sign, &Font_7x10, 1);				//sign
-	SSD1306_GotoXY(84, 0);
+	SSD1306_GotoXY(0, 0);
 	SSD1306_Puts(str_B, &Font_7x10, 1);			//value B
 
 
 	//DECIMAL RESULT
 	Result(number_A, number_B, value_Sel, &number_Resdec);
-	sprintf(str_Resdec, "%1.4f", number_Resdec);
-	SSD1306_GotoXY(60, 21);
-	SSD1306_Puts(str_Resdec, &Font_7x10, 1);			//value decimal Result
+	sprintf(str_Resdec, "%1.6f", number_Resdec);
+	SSD1306_GotoXY(40, 35);
+	SSD1306_Puts(str_Resdec, &Font_7x10, 1);
 	SSD1306_UpdateScreen();
 
 	//HEXADECIMAL RESULT
-	int16_t num = float2Fixed(number_Resdec);
+	fixedpoint.num = float2Fixed(number_Resdec);
+	sprintf(str_Reshex, "%02x", fixedpoint.numhex[1]);
+	sprintf(str_Reshex2, "%02x", fixedpoint.numhex[0]);
+	int j = 0;
+	for(int i = 0, k = 4; i < 5; i++, k--)
+	{
+		switch(fp)
+		{
+			case 0b1110:
+				j = 4;
+			break;
+			case 0b1101:
+				j = 3;
+			break;
+			case 0b1011:
+				j = 2;
+			break;
+			case 0b0111:
+				j = 1;
+			break;
+		}
+
+		if (i == j)
+		{
+			hexpoint[k] = '.';
+			k--;
+		}
+		if(i < 2)
+			hexpoint[k] = str_Reshex2[k];
+		else if(i < 4)
+			hexpoint[k] = str_Reshex[k];
+
+	}
 
 
+	SSD1306_GotoXY(40, 51);
+	SSD1306_Puts(str_Reshex, &Font_7x10, 1);
+	SSD1306_Puts(str_Reshex2, &Font_7x10, 1);
 	SSD1306_UpdateScreen();
+
 }
 
 void Complement_2(uint32_t in_X, float *number_X)
 {
     const uint32_t LSB = 0b00000001;
 
-	uint8_t number[7];
+	uint8_t number[8];
 	float weighting = 0;
 	uint32_t position = 7;
 
@@ -191,6 +240,46 @@ void Complement_2(uint32_t in_X, float *number_X)
 	}
 
 	//Addition of binary weighting
+	int j = 0, k = 0;
+	switch(fp)
+	{
+		case 0b1110:
+			j = 0;
+			k = 7;
+			bitfrac = 0;
+		break;
+		case 0b1101:
+			j = -2;
+			k = 5;
+			bitfrac = 0;
+		break;
+		case 0b1011:
+			j = -4;
+			k = 3;
+			bitfrac = 4;
+		break;
+		case 0b0111:
+			j = -6;
+			k = 1;
+			bitfrac = 8;
+		break;
+	}
+
+	position = 7;
+	for(int i=j; i<=k; i++)
+	{
+		if(i == k)
+		{
+			weighting += -number[position]*pow(2,i);
+		}
+		else
+		{
+			weighting += number[position]*pow(2,i);
+		}
+		position --;
+	}
+	*number_X = weighting;
+	/*
 	position = 7;
 	for(int i=-4; i<=3; i++)
 	{
@@ -206,6 +295,24 @@ void Complement_2(uint32_t in_X, float *number_X)
 	}
 
 	*number_X = weighting;
+	*/
+	/*
+	switch(fp)
+	{
+		case 0b1110:
+			*number_X = weighting * 16;
+		break;
+		case 0b1101:
+			*number_X = weighting * 4;
+		break;
+		case 0b1011:
+			*number_X = weighting;
+		break;
+		case 0b0111:
+			*number_X = weighting / 4;
+		break;
+	}
+	*/
 
 }
 
@@ -227,7 +334,7 @@ void Result(float value_A, float value_B, uint32_t value_Sel, float *result_dec)
 
 static int16_t float2Fixed(float number)
 {
-	return (int16_t)(round(number * (1 << FIXED_POINT_FRACTIONAL_BITS)));
+	return (int16_t)(round(number * (1 << bitfrac)));
 }
 
 /**
@@ -332,18 +439,20 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pins : A0_Pin A1_Pin A2_Pin A3_Pin
                            A4_Pin A5_Pin A6_Pin A7_Pin
-                           PA8 PA9 */
+                           Sel0_Pin Sel1_Pin */
   GPIO_InitStruct.Pin = A0_Pin|A1_Pin|A2_Pin|A3_Pin
                           |A4_Pin|A5_Pin|A6_Pin|A7_Pin
-                          |GPIO_PIN_8|GPIO_PIN_9;
+                          |Sel0_Pin|Sel1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PB10 PB11 PB12 PB13
-                           PB14 PB15 PB6 PB7 */
-  GPIO_InitStruct.Pin = GPIO_PIN_10|GPIO_PIN_11|GPIO_PIN_12|GPIO_PIN_13
-                          |GPIO_PIN_14|GPIO_PIN_15|GPIO_PIN_6|GPIO_PIN_7;
+  /*Configure GPIO pins : FP0_Pin FP1_Pin B2_Pin B3_Pin
+                           B4_Pin B5_Pin B6_Pin B7_Pin
+                           FP2_Pin FP3_Pin B0_Pin B1_Pin */
+  GPIO_InitStruct.Pin = FP0_Pin|FP1_Pin|B2_Pin|B3_Pin
+                          |B4_Pin|B5_Pin|B6_Pin|B7_Pin
+                          |FP2_Pin|FP3_Pin|B0_Pin|B1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
