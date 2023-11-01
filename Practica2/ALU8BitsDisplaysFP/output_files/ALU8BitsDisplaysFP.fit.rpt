@@ -1,5 +1,5 @@
 Fitter report for ALU8BitsDisplaysFP
-Mon Oct 30 10:54:38 2023
+Tue Oct 31 18:09:47 2023
 Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 
 
@@ -69,7 +69,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Fitter Summary                                                                      ;
 +------------------------------------+------------------------------------------------+
-; Fitter Status                      ; Successful - Mon Oct 30 10:54:38 2023          ;
+; Fitter Status                      ; Successful - Tue Oct 31 18:09:47 2023          ;
 ; Quartus Prime Version              ; 22.1std.2 Build 922 07/20/2023 SC Lite Edition ;
 ; Revision Name                      ; ALU8BitsDisplaysFP                             ;
 ; Top-level Entity Name              ; ALU8BitsDisplaysFP                             ;
@@ -149,35 +149,34 @@ https://fpgasoftware.intel.com/eula.
 +--------------------------------------------------------------------+---------------------------------------+---------------------------------------+
 
 
-Parallel compilation attempted to use more processors than were available, which may cause increased compilation time. For lowest compilation time, correct your settings.
-+-----------------------------------------------+
-; Parallel Compilation                          ;
-+---------------------------------+-------------+
-; Processors                      ; Number      ;
-+---------------------------------+-------------+
-; Number detected on machine      ; 12          ;
-; Maximum allowed                 ; 16          ;
-;                                 ;             ;
-; Average used                    ; 1.07        ;
-; Maximum used                    ; 16          ;
-;                                 ;             ;
-; Usage by Processor              ; % Time Used ;
-;     Processor 1                 ; 100.0%      ;
-;     Processor 2                 ;   0.5%      ;
-;     Processors 3-12             ;   0.5%      ;
-;     Processors 13-16 (overused) ;   0.5%      ;
-+---------------------------------+-------------+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 16          ;
+; Maximum allowed            ; 16          ;
+;                            ;             ;
+; Average used               ; 1.09        ;
+; Maximum used               ; 16          ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.6%      ;
+;     Processors 3-16        ;   0.6%      ;
++----------------------------+-------------+
 
 
-+------------------------------------------------------------------------------------------------+
-; Ignored Assignments                                                                            ;
-+--------------+--------------------+--------------+------------+---------------+----------------+
-; Name         ; Ignored Entity     ; Ignored From ; Ignored To ; Ignored Value ; Ignored Source ;
-+--------------+--------------------+--------------+------------+---------------+----------------+
-; I/O Standard ; ALU8BitsDisplaysFP ;              ; i_NumA     ; 3.3-V LVCMOS  ; QSF Assignment ;
-; I/O Standard ; ALU8BitsDisplaysFP ;              ; i_NumB     ; 3.3-V LVCMOS  ; QSF Assignment ;
-; I/O Standard ; ALU8BitsDisplaysFP ;              ; i_OpSel    ; 3.3-V LVCMOS  ; QSF Assignment ;
-+--------------+--------------------+--------------+------------+---------------+----------------+
++--------------------------------------------------------------------------------------------------+
+; Ignored Assignments                                                                              ;
++--------------+--------------------+--------------+--------------+---------------+----------------+
+; Name         ; Ignored Entity     ; Ignored From ; Ignored To   ; Ignored Value ; Ignored Source ;
++--------------+--------------------+--------------+--------------+---------------+----------------+
+; I/O Standard ; ALU8BitsDisplaysFP ;              ; i_FixedPoint ; 3.3-V LVCMOS  ; QSF Assignment ;
+; I/O Standard ; ALU8BitsDisplaysFP ;              ; i_NumA       ; 3.3-V LVCMOS  ; QSF Assignment ;
+; I/O Standard ; ALU8BitsDisplaysFP ;              ; i_NumB       ; 3.3-V LVCMOS  ; QSF Assignment ;
+; I/O Standard ; ALU8BitsDisplaysFP ;              ; i_OpSel      ; 3.3-V LVCMOS  ; QSF Assignment ;
++--------------+--------------------+--------------+--------------+---------------+----------------+
 
 
 +--------------------------------------------------------------------------------------------------+
@@ -218,7 +217,7 @@ Parallel compilation attempted to use more processors than were available, which
 +--------------+
 ; Pin-Out File ;
 +--------------+
-The pin-out file can be found in /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/output_files/ALU8BitsDisplaysFP.pin.
+The pin-out file can be found in /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/output_files/ALU8BitsDisplaysFP.pin.
 
 
 +--------------------------------------------------------------------+
@@ -350,10 +349,10 @@ The pin-out file can be found in /home/lord448/Documentos/TEC/9no/Hardware/Hardw
 ; Name            ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Z coordinate ; Combinational Fan-Out ; Registered Fan-Out ; Global ; Input Register ; Power Up High ; PCI I/O Enabled ; Bus Hold ; Weak Pull Up ; I/O Standard ; Termination Control Block ; Location assigned by ; Slew Rate ;
 +-----------------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+---------------------------+----------------------+-----------+
 ; i_CLK           ; 23    ; 1        ; 0            ; 11           ; 7            ; 19                    ; 0                  ; yes    ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; User                 ; no        ;
-; i_FixedPoint[0] ; 91    ; 6        ; 34           ; 12           ; 0            ; 3                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; User                 ; no        ;
-; i_FixedPoint[1] ; 90    ; 6        ; 34           ; 12           ; 7            ; 3                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; User                 ; no        ;
-; i_FixedPoint[2] ; 89    ; 5        ; 34           ; 12           ; 14           ; 3                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; User                 ; no        ;
-; i_FixedPoint[3] ; 88    ; 5        ; 34           ; 12           ; 21           ; 4                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; User                 ; no        ;
+; i_FixedPoint[0] ; 91    ; 6        ; 34           ; 12           ; 0            ; 3                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 3.3-V LVCMOS ; --                        ; User                 ; no        ;
+; i_FixedPoint[1] ; 90    ; 6        ; 34           ; 12           ; 7            ; 3                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 3.3-V LVCMOS ; --                        ; User                 ; no        ;
+; i_FixedPoint[2] ; 89    ; 5        ; 34           ; 12           ; 14           ; 3                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 3.3-V LVCMOS ; --                        ; User                 ; no        ;
+; i_FixedPoint[3] ; 88    ; 5        ; 34           ; 12           ; 21           ; 4                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 3.3-V LVCMOS ; --                        ; User                 ; no        ;
 ; i_NumA[0]       ; 72    ; 4        ; 32           ; 0            ; 7            ; 3                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 3.3-V LVCMOS ; --                        ; User                 ; no        ;
 ; i_NumA[1]       ; 73    ; 5        ; 34           ; 2            ; 21           ; 3                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 3.3-V LVCMOS ; --                        ; User                 ; no        ;
 ; i_NumA[2]       ; 74    ; 5        ; 34           ; 2            ; 14           ; 3                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 3.3-V LVCMOS ; --                        ; User                 ; no        ;
@@ -431,7 +430,7 @@ The pin-out file can be found in /home/lord448/Documentos/TEC/9no/Hardware/Hardw
 ; 3        ; 8 / 11 ( 73 % )  ; 3.3V          ; --           ;
 ; 4        ; 3 / 14 ( 21 % )  ; 3.3V          ; --           ;
 ; 5        ; 10 / 13 ( 77 % ) ; 3.3V          ; --           ;
-; 6        ; 3 / 10 ( 30 % )  ; 2.5V          ; --           ;
+; 6        ; 3 / 10 ( 30 % )  ; 3.3V          ; --           ;
 ; 7        ; 5 / 13 ( 38 % )  ; 2.5V          ; --           ;
 ; 8        ; 7 / 12 ( 58 % )  ; 2.5V          ; --           ;
 +----------+------------------+---------------+--------------+
@@ -529,12 +528,12 @@ The pin-out file can be found in /home/lord448/Documentos/TEC/9no/Hardware/Hardw
 ; 85       ; 119        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; 86       ; 120        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; 87       ; 121        ; 5        ; o_NumSign                                                 ; output ; 3.3-V LVCMOS ;         ; Row I/O    ; Y               ; no       ; Off          ;
-; 88       ; 125        ; 5        ; i_FixedPoint[3]                                           ; input  ; 2.5 V        ;         ; Row I/O    ; Y               ; no       ; Off          ;
-; 89       ; 126        ; 5        ; i_FixedPoint[2]                                           ; input  ; 2.5 V        ;         ; Row I/O    ; Y               ; no       ; Off          ;
-; 90       ; 127        ; 6        ; i_FixedPoint[1]                                           ; input  ; 2.5 V        ;         ; Row I/O    ; Y               ; no       ; Off          ;
-; 91       ; 128        ; 6        ; i_FixedPoint[0]                                           ; input  ; 2.5 V        ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 88       ; 125        ; 5        ; i_FixedPoint[3]                                           ; input  ; 3.3-V LVCMOS ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 89       ; 126        ; 5        ; i_FixedPoint[2]                                           ; input  ; 3.3-V LVCMOS ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 90       ; 127        ; 6        ; i_FixedPoint[1]                                           ; input  ; 3.3-V LVCMOS ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 91       ; 128        ; 6        ; i_FixedPoint[0]                                           ; input  ; 3.3-V LVCMOS ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 92       ; 129        ; 6        ; ^CONF_DONE                                                ;        ;              ;         ; --         ;                 ; --       ; --           ;
-; 93       ;            ; 6        ; VCCIO6                                                    ; power  ;              ; 2.5V    ; --         ;                 ; --       ; --           ;
+; 93       ;            ; 6        ; VCCIO6                                                    ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
 ; 94       ; 130        ; 6        ; ^MSEL0                                                    ;        ;              ;         ; --         ;                 ; --       ; --           ;
 ; 95       ;            ;          ; GND                                                       ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; 96       ; 131        ; 6        ; ^MSEL1                                                    ;        ;              ;         ; --         ;                 ; --       ; --           ;
@@ -543,7 +542,7 @@ The pin-out file can be found in /home/lord448/Documentos/TEC/9no/Hardware/Hardw
 ; 98       ; 136        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; 99       ; 137        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; 100      ; 138        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
-; 101      ; 139        ; 6        ; ~ALTERA_nCEO~ / RESERVED_OUTPUT_OPEN_DRAIN                ; output ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
+; 101      ; 139        ; 6        ; ~ALTERA_nCEO~ / RESERVED_OUTPUT_OPEN_DRAIN                ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; 102      ;            ;          ; VCCINT                                                    ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
 ; 103      ; 140        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; 104      ; 141        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
@@ -592,30 +591,26 @@ The pin-out file can be found in /home/lord448/Documentos/TEC/9no/Hardware/Hardw
 Note: Pin directions (input, output or bidir) are based on device operating in user mode.
 
 
-+-------------------------------------------------+
-; I/O Assignment Warnings                         ;
-+-----------------+-------------------------------+
-; Pin Name        ; Reason                        ;
-+-----------------+-------------------------------+
-; o_Displays[0]   ; Incomplete set of assignments ;
-; o_Displays[1]   ; Incomplete set of assignments ;
-; o_Displays[2]   ; Incomplete set of assignments ;
-; o_Displays[3]   ; Incomplete set of assignments ;
-; o_Segments[0]   ; Incomplete set of assignments ;
-; o_Segments[1]   ; Incomplete set of assignments ;
-; o_Segments[2]   ; Incomplete set of assignments ;
-; o_Segments[3]   ; Incomplete set of assignments ;
-; o_Segments[4]   ; Incomplete set of assignments ;
-; o_Segments[5]   ; Incomplete set of assignments ;
-; o_Segments[6]   ; Incomplete set of assignments ;
-; o_DispPoint     ; Incomplete set of assignments ;
-; o_NumSign       ; Missing drive strength        ;
-; i_FixedPoint[0] ; Incomplete set of assignments ;
-; i_FixedPoint[1] ; Incomplete set of assignments ;
-; i_FixedPoint[3] ; Incomplete set of assignments ;
-; i_FixedPoint[2] ; Incomplete set of assignments ;
-; i_CLK           ; Incomplete set of assignments ;
-+-----------------+-------------------------------+
++-----------------------------------------------+
+; I/O Assignment Warnings                       ;
++---------------+-------------------------------+
+; Pin Name      ; Reason                        ;
++---------------+-------------------------------+
+; o_Displays[0] ; Incomplete set of assignments ;
+; o_Displays[1] ; Incomplete set of assignments ;
+; o_Displays[2] ; Incomplete set of assignments ;
+; o_Displays[3] ; Incomplete set of assignments ;
+; o_Segments[0] ; Incomplete set of assignments ;
+; o_Segments[1] ; Incomplete set of assignments ;
+; o_Segments[2] ; Incomplete set of assignments ;
+; o_Segments[3] ; Incomplete set of assignments ;
+; o_Segments[4] ; Incomplete set of assignments ;
+; o_Segments[5] ; Incomplete set of assignments ;
+; o_Segments[6] ; Incomplete set of assignments ;
+; o_DispPoint   ; Incomplete set of assignments ;
+; o_NumSign     ; Missing drive strength        ;
+; i_CLK         ; Incomplete set of assignments ;
++---------------+-------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1126,7 +1121,6 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Fitter Messages ;
 +-----------------+
 Info (20032): Parallel compilation is enabled and will use up to 16 processors
-Warning (20031): Parallel compilation is enabled for 16 processors, but there are only 6 processors in the system. Runtime may increase due to over usage of the processor space.
 Info (119006): Selected device EP4CE6E22C8 for design "ALU8BitsDisplaysFP"
 Info (21077): Low junction temperature is 0 degrees C
 Info (21077): High junction temperature is 85 degrees C
@@ -1148,12 +1142,12 @@ Info (332144): No user constrained base clocks found in the design
 Info (332143): No user constrained clock uncertainty found in the design. Calling "derive_clock_uncertainty"
 Info (332154): The derive_clock_uncertainty command did not apply clock uncertainty to any clock-to-clock transfers.
 Info (332130): Timing requirements not specified -- quality metrics such as performance may be sacrificed to reduce compilation time.
-Info (176353): Automatically promoted node i_CLK~input (placed in PIN 23 (CLK1, DIFFCLK_0n)) File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 11
+Info (176353): Automatically promoted node i_CLK~input (placed in PIN 23 (CLK1, DIFFCLK_0n)) File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 11
     Info (176355): Automatically promoted destinations to use location or clock signal Global Clock CLKCTRL_G2
 Info (176233): Starting register packing
 Info (176235): Finished register packing
     Extra Info (176219): No registers were packed into other blocks
-Info (171121): Fitter preparation operations ending: elapsed time is 00:00:00
+Info (171121): Fitter preparation operations ending: elapsed time is 00:00:01
 Info (14896): Fitter has disabled Advanced Physical Optimization because it is not supported for the current family.
 Info (170189): Fitter placement preparation operations beginning
 Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:00
@@ -1166,38 +1160,40 @@ Info (170195): Router estimated average interconnect usage is 0% of the availabl
 Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info (170201): Optimizations that may affect the design's routability were skipped
 Info (170194): Fitter routing operations ending: elapsed time is 00:00:00
-Info (11888): Total time spent on timing analysis during the Fitter is 0.04 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 0.05 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
-Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:01
+Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:00
 Warning (171167): Found invalid Fitter assignments. See the Ignored Assignments panel in the Fitter Compilation Report for more information.
-Warning (169177): 20 pins must meet Intel FPGA requirements for 3.3-, 3.0-, and 2.5-V interfaces. For more information, refer to AN 447: Interfacing Cyclone IV E Devices with 3.3/3.0/2.5-V LVTTL/LVCMOS I/O Systems.
-    Info (169178): Pin i_NumB[0] uses I/O standard 3.3-V LVCMOS at 42 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
-    Info (169178): Pin i_NumA[0] uses I/O standard 3.3-V LVCMOS at 72 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
-    Info (169178): Pin i_OpSel[0] uses I/O standard 3.3-V LVCMOS at 65 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 15
-    Info (169178): Pin i_OpSel[1] uses I/O standard 3.3-V LVCMOS at 64 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 15
-    Info (169178): Pin i_NumB[1] uses I/O standard 3.3-V LVCMOS at 43 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
-    Info (169178): Pin i_NumA[1] uses I/O standard 3.3-V LVCMOS at 73 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
-    Info (169178): Pin i_NumB[2] uses I/O standard 3.3-V LVCMOS at 44 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
-    Info (169178): Pin i_NumA[2] uses I/O standard 3.3-V LVCMOS at 74 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
-    Info (169178): Pin i_NumB[3] uses I/O standard 3.3-V LVCMOS at 46 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
-    Info (169178): Pin i_NumA[3] uses I/O standard 3.3-V LVCMOS at 75 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
-    Info (169178): Pin i_NumA[7] uses I/O standard 3.3-V LVCMOS at 83 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
-    Info (169178): Pin i_NumB[7] uses I/O standard 3.3-V LVCMOS at 52 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
-    Info (169178): Pin i_NumB[6] uses I/O standard 3.3-V LVCMOS at 51 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
-    Info (169178): Pin i_NumA[6] uses I/O standard 3.3-V LVCMOS at 80 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
-    Info (169178): Pin i_NumB[5] uses I/O standard 3.3-V LVCMOS at 50 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
-    Info (169178): Pin i_NumA[5] uses I/O standard 3.3-V LVCMOS at 77 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
-    Info (169178): Pin i_NumB[4] uses I/O standard 3.3-V LVCMOS at 49 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
-    Info (169178): Pin i_NumA[4] uses I/O standard 3.3-V LVCMOS at 76 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
-    Info (169178): Pin i_FixedPoint[3] uses I/O standard 2.5 V at 88 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 14
-    Info (169178): Pin i_FixedPoint[2] uses I/O standard 2.5 V at 89 File: /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 14
-Info (144001): Generated suppressed messages file /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/output_files/ALU8BitsDisplaysFP.fit.smsg
-Info: Quartus Prime Fitter was successful. 0 errors, 6 warnings
-    Info: Peak virtual memory: 1936 megabytes
-    Info: Processing ended: Mon Oct 30 10:54:38 2023
+Warning (169177): 22 pins must meet Intel FPGA requirements for 3.3-, 3.0-, and 2.5-V interfaces. For more information, refer to AN 447: Interfacing Cyclone IV E Devices with 3.3/3.0/2.5-V LVTTL/LVCMOS I/O Systems.
+    Info (169178): Pin i_NumB[0] uses I/O standard 3.3-V LVCMOS at 42 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
+    Info (169178): Pin i_NumA[0] uses I/O standard 3.3-V LVCMOS at 72 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
+    Info (169178): Pin i_OpSel[0] uses I/O standard 3.3-V LVCMOS at 65 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 15
+    Info (169178): Pin i_OpSel[1] uses I/O standard 3.3-V LVCMOS at 64 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 15
+    Info (169178): Pin i_NumB[1] uses I/O standard 3.3-V LVCMOS at 43 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
+    Info (169178): Pin i_NumA[1] uses I/O standard 3.3-V LVCMOS at 73 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
+    Info (169178): Pin i_NumB[2] uses I/O standard 3.3-V LVCMOS at 44 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
+    Info (169178): Pin i_NumA[2] uses I/O standard 3.3-V LVCMOS at 74 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
+    Info (169178): Pin i_NumB[3] uses I/O standard 3.3-V LVCMOS at 46 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
+    Info (169178): Pin i_NumA[3] uses I/O standard 3.3-V LVCMOS at 75 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
+    Info (169178): Pin i_NumA[7] uses I/O standard 3.3-V LVCMOS at 83 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
+    Info (169178): Pin i_NumB[7] uses I/O standard 3.3-V LVCMOS at 52 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
+    Info (169178): Pin i_NumB[6] uses I/O standard 3.3-V LVCMOS at 51 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
+    Info (169178): Pin i_NumA[6] uses I/O standard 3.3-V LVCMOS at 80 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
+    Info (169178): Pin i_NumB[5] uses I/O standard 3.3-V LVCMOS at 50 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
+    Info (169178): Pin i_NumA[5] uses I/O standard 3.3-V LVCMOS at 77 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
+    Info (169178): Pin i_NumB[4] uses I/O standard 3.3-V LVCMOS at 49 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 13
+    Info (169178): Pin i_NumA[4] uses I/O standard 3.3-V LVCMOS at 76 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 12
+    Info (169178): Pin i_FixedPoint[0] uses I/O standard 3.3-V LVCMOS at 91 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 14
+    Info (169178): Pin i_FixedPoint[1] uses I/O standard 3.3-V LVCMOS at 90 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 14
+    Info (169178): Pin i_FixedPoint[3] uses I/O standard 3.3-V LVCMOS at 88 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 14
+    Info (169178): Pin i_FixedPoint[2] uses I/O standard 3.3-V LVCMOS at 89 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 14
+Info (144001): Generated suppressed messages file /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/output_files/ALU8BitsDisplaysFP.fit.smsg
+Info: Quartus Prime Fitter was successful. 0 errors, 5 warnings
+    Info: Peak virtual memory: 1945 megabytes
+    Info: Processing ended: Tue Oct 31 18:09:48 2023
     Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:04
 
@@ -1205,6 +1201,6 @@ Info: Quartus Prime Fitter was successful. 0 errors, 6 warnings
 +----------------------------+
 ; Fitter Suppressed Messages ;
 +----------------------------+
-The suppressed messages can be found in /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/output_files/ALU8BitsDisplaysFP.fit.smsg.
+The suppressed messages can be found in /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/output_files/ALU8BitsDisplaysFP.fit.smsg.
 
 

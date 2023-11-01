@@ -17,7 +17,7 @@
 -- PROGRAM "Quartus Prime"
 -- VERSION "Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition"
 
--- DATE "10/30/2023 10:54:42"
+-- DATE "10/31/2023 18:09:52"
 
 -- 
 -- Device: Altera EP4CE6E22C8 Package TQFP144
@@ -45,7 +45,7 @@ END hard_block;
 -- ~ALTERA_FLASH_nCE_nCSO~	=>  Location: PIN_8,	 I/O Standard: 2.5 V,	 Current Strength: Default
 -- ~ALTERA_DCLK~	=>  Location: PIN_12,	 I/O Standard: 2.5 V,	 Current Strength: Default
 -- ~ALTERA_DATA0~	=>  Location: PIN_13,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- ~ALTERA_nCEO~	=>  Location: PIN_101,	 I/O Standard: 2.5 V,	 Current Strength: 8mA
+-- ~ALTERA_nCEO~	=>  Location: PIN_101,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 8mA
 
 
 ARCHITECTURE structure OF hard_block IS
@@ -80,14 +80,14 @@ USE IEEE.STD_LOGIC_1164.ALL;
 ENTITY 	ALU8BitsDisplaysFP IS
     PORT (
 	i_CLK : IN std_logic;
-	i_NumA : IN IEEE.NUMERIC_STD.signed(7 DOWNTO 0);
-	i_NumB : IN IEEE.NUMERIC_STD.signed(7 DOWNTO 0);
+	i_NumA : IN std_logic_vector(7 DOWNTO 0);
+	i_NumB : IN std_logic_vector(7 DOWNTO 0);
 	i_FixedPoint : IN std_logic_vector(3 DOWNTO 0);
 	i_OpSel : IN std_logic_vector(1 DOWNTO 0);
-	o_Displays : OUT std_logic_vector(3 DOWNTO 0);
-	o_Segments : OUT std_logic_vector(6 DOWNTO 0);
-	o_DispPoint : OUT std_logic;
-	o_NumSign : OUT std_logic
+	o_Displays : BUFFER std_logic_vector(3 DOWNTO 0);
+	o_Segments : BUFFER std_logic_vector(6 DOWNTO 0);
+	o_DispPoint : BUFFER std_logic;
+	o_NumSign : BUFFER std_logic
 	);
 END ALU8BitsDisplaysFP;
 
@@ -123,10 +123,10 @@ END ALU8BitsDisplaysFP;
 -- i_NumA[5]	=>  Location: PIN_77,	 I/O Standard: 3.3-V LVCMOS,	 Current Strength: Default
 -- i_NumB[4]	=>  Location: PIN_49,	 I/O Standard: 3.3-V LVCMOS,	 Current Strength: Default
 -- i_NumA[4]	=>  Location: PIN_76,	 I/O Standard: 3.3-V LVCMOS,	 Current Strength: Default
--- i_FixedPoint[0]	=>  Location: PIN_91,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- i_FixedPoint[1]	=>  Location: PIN_90,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- i_FixedPoint[3]	=>  Location: PIN_88,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- i_FixedPoint[2]	=>  Location: PIN_89,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- i_FixedPoint[0]	=>  Location: PIN_91,	 I/O Standard: 3.3-V LVCMOS,	 Current Strength: Default
+-- i_FixedPoint[1]	=>  Location: PIN_90,	 I/O Standard: 3.3-V LVCMOS,	 Current Strength: Default
+-- i_FixedPoint[3]	=>  Location: PIN_88,	 I/O Standard: 3.3-V LVCMOS,	 Current Strength: Default
+-- i_FixedPoint[2]	=>  Location: PIN_89,	 I/O Standard: 3.3-V LVCMOS,	 Current Strength: Default
 -- i_CLK	=>  Location: PIN_23,	 I/O Standard: 2.5 V,	 Current Strength: Default
 
 
@@ -422,8 +422,8 @@ END COMPONENT;
 BEGIN
 
 ww_i_CLK <= i_CLK;
-ww_i_NumA <= IEEE.STD_LOGIC_1164.STD_LOGIC_VECTOR(i_NumA);
-ww_i_NumB <= IEEE.STD_LOGIC_1164.STD_LOGIC_VECTOR(i_NumB);
+ww_i_NumA <= i_NumA;
+ww_i_NumB <= i_NumB;
 ww_i_FixedPoint <= i_FixedPoint;
 ww_i_OpSel <= i_OpSel;
 o_Displays <= ww_o_Displays;

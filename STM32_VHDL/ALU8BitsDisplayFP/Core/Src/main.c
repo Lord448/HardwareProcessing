@@ -29,13 +29,13 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_I2C1_Init(void);
 void Lectures(void);
-void WriteText(uint32_t value_A, uint32_t value_B, uint32_t value_Sel);
+void WriteText(int16_t value_A, int16_t value_B, uint32_t value_Sel);
 void Complement_2(uint32_t in_X, float *number_X);
 void Result(float value_A, float value_B, uint32_t value_Sel, float *result);
-static int16_t float2Fixed(float number);
+static int16_t float2Fixed(int16_t value_A, int16_t value_B, uint16_t value_Sel);
 
-uint32_t past_A = 0, past_B = 0, past_sel = 0;
-uint32_t current_A = 0, current_B = 0, current_sel = 0;
+int16_t past_A = 0, past_B = 0, past_sel = 0;
+int16_t current_A = 0, current_B = 0, current_sel = 0;
 char sign[0];
 bool flag_write = true, flag_clear = false;
 float result_dec, result_hex;
@@ -60,10 +60,6 @@ int main(void)
 	  Lectures();
 
 	  flag_write = past_A != current_A || past_B != current_B || past_sel != current_sel;
-
-	  past_A = current_A;
-	  past_B = current_B;
-	  past_sel = current_sel;
 
 	  if(flag_write)
 	  {
@@ -97,6 +93,9 @@ int main(void)
 		  }
 		  flag_clear = false;
 	  }
+	  past_A = current_A;
+	  past_B = current_B;
+	  past_sel = current_sel;
   }
 }
 
@@ -110,23 +109,23 @@ void Lectures(void)
 
 	fp = fpRead1 | (fpRead2 >> 2);
 	//A
-	uint32_t in_A = portRead_A;
+	int8_t in_A = portRead_A;
 
 	//B
-	uint32_t temp = (portRead_B & mask_B) >> 6;
-	uint32_t LSB_B = temp & 0b0000000011;
-	uint32_t MSB_B =(temp & 0b1111110000) >> 2;
-	uint32_t in_B = MSB_B | LSB_B;
+	int8_t temp = (portRead_B & mask_B) >> 6;
+	int8_t LSB_B = temp & 0b0000000011;
+	int8_t MSB_B =(temp & 0b1111110000) >> 2;
+	int8_t in_B = MSB_B | LSB_B;
 
 	//Selector
-	uint32_t in_sel = portRead_sel >> 8;
+	int16_t in_sel = portRead_sel >> 8;
 
 	current_A = in_A;
 	current_B = in_B;
 	current_sel = in_sel;
 }
 
-void WriteText(uint32_t value_A, uint32_t value_B, uint32_t value_Sel)
+void WriteText(int16_t value_A, int16_t value_B, uint32_t value_Sel)
 {
 	float number_A, number_B, number_Resdec;
 	char str_A[8] = "", str_B[8] = "";
@@ -182,7 +181,7 @@ void WriteText(uint32_t value_A, uint32_t value_B, uint32_t value_Sel)
 	SSD1306_UpdateScreen();
 
 	//HEXADECIMAL RESULT
-	fixedpoint.num = float2Fixed(number_Resdec);
+	fixedpoint.num = float2Fixed(value_A, value_B, value_Sel);
 	sprintf(str_Reshex, "%02x", fixedpoint.numhex[1]);
 	sprintf(str_Reshex2, "%02x", fixedpoint.numhex[0]);
 	int j = 0;
@@ -249,18 +248,18 @@ void Complement_2(uint32_t in_X, float *number_X)
 			bitfrac = 0;
 		break;
 		case 0b1101:
-			j = -2;
-			k = 5;
+			j = -4;
+			k = 3;
 			bitfrac = 0;
 		break;
 		case 0b1011:
-			j = -4;
-			k = 3;
+			j = -8;
+			k = -1;
 			bitfrac = 4;
 		break;
 		case 0b0111:
-			j = -6;
-			k = 1;
+			j = -12;
+			k = -5;
 			bitfrac = 8;
 		break;
 	}
@@ -332,9 +331,21 @@ void Result(float value_A, float value_B, uint32_t value_Sel, float *result_dec)
 	}
 }
 
-static int16_t float2Fixed(float number)
+static int16_t float2Fixed(int16_t value_A, int16_t value_B, uint16_t value_Sel)
 {
-	return (int16_t)(round(number * (1 << bitfrac)));
+	switch (value_Sel)
+	{
+	  case 0b00:
+		  return value_A + value_B;
+  	  break;
+	  case 0b01:
+		  return value_A - value_B;
+	  break;
+	  default:
+		  return value_A * value_B;
+	  break;
+	}
+	//return (int16_t)(round(number * (1 << bitfrac)));
 }
 
 /**

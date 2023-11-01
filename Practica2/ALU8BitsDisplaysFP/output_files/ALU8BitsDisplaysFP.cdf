@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP4CE6E22) Path("/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica2/ALU8BitsDisplaysFP/output_files/") File("ALU8BitsDisplaysFP.sof") MfrSpec(OpMask(1));
+		Device PartName(EP4CE6E22) Path("/home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/output_files/") File("ALU8BitsDisplaysFP.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 
