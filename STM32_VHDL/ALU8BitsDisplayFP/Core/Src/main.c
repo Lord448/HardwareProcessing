@@ -3,7 +3,7 @@
 #include "ssd1306.h"
 #include <math.h>
 #include <stdio.h>
-//#include <string.h>
+#include <string.h>
 
 #define FIXED_POINT_FRACTIONAL_BITS 0
 #define mask_A 		(uint32_t)0b0011111111 			//a0-a7
@@ -18,6 +18,12 @@ union fixedpoint
 	unsigned char numhex[sizeof(int16_t)];
 }fixedpoint;
 
+typedef enum Operations{
+	t_Sume,
+	t_Subs,
+	t_Mult
+}OpSel;
+
 typedef enum bool{
 	false,
 	true
@@ -29,17 +35,18 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_I2C1_Init(void);
 void Lectures(void);
-void WriteText(int16_t value_A, int16_t value_B, uint32_t value_Sel);
+void WriteText(int16_t value_A, int16_t value_B, OpSel value_Sel);
 void Complement_2(uint32_t in_X, float *number_X);
-void Result(float value_A, float value_B, uint32_t value_Sel, float *result);
-static int16_t float2Fixed(int16_t value_A, int16_t value_B, uint16_t value_Sel);
+void Result(float value_A, float value_B, OpSel value_Sel, float *result_dec);
+static int16_t float2Fixed(int8_t value_A, int8_t value_B, OpSel value_Sel);
 
-int16_t past_A = 0, past_B = 0, past_sel = 0;
-int16_t current_A = 0, current_B = 0, current_sel = 0;
+uint32_t past_A = 0, past_B = 0, past_sel = 0;
+uint32_t current_A = 0, current_B = 0, current_sel = 0;
 char sign[0];
 bool flag_write = true, flag_clear = false;
 float result_dec, result_hex;
 uint32_t fp, bitfrac = 0;
+int8_t ReadA8, ReadB8;
 
 int main(void)
 {
@@ -109,54 +116,43 @@ void Lectures(void)
 
 	fp = fpRead1 | (fpRead2 >> 2);
 	//A
-	int8_t in_A = portRead_A;
-
+	uint32_t in_A = portRead_A;
+	ReadA8 = portRead_A;
 	//B
-	int8_t temp = (portRead_B & mask_B) >> 6;
-	int8_t LSB_B = temp & 0b0000000011;
-	int8_t MSB_B =(temp & 0b1111110000) >> 2;
-	int8_t in_B = MSB_B | LSB_B;
-
+	uint32_t temp = (portRead_B & mask_B) >> 6;
+	uint32_t LSB_B = temp & 0b0000000011;
+	uint32_t MSB_B =(temp & 0b1111110000) >> 2;
+	uint32_t in_B = MSB_B | LSB_B;
+	ReadB8 = (int8_t)in_B;
 	//Selector
-	int16_t in_sel = portRead_sel >> 8;
-
+	uint32_t in_sel = portRead_sel >> 8;
+	//External assignments
 	current_A = in_A;
 	current_B = in_B;
 	current_sel = in_sel;
 }
 
-void WriteText(int16_t value_A, int16_t value_B, uint32_t value_Sel)
+void WriteText(int16_t value_A, int16_t value_B, OpSel value_Sel)
 {
 	float number_A, number_B, number_Resdec;
 	char str_A[8] = "", str_B[8] = "";
 	char str_Resdec[12] = "", str_Reshex[4] = "", str_Reshex2[4] = "";
-	char hexpoint[12] = "";
-
-	/*STATIC TEXT
-	SSD1306_GotoXY(0, 0);
-	SSD1306_Puts("A: ", &Font_7x10, 1);
-	SSD1306_GotoXY(60, 0);
-	SSD1306_Puts("OP: ", &Font_7x10, 1);
-	SSD1306_GotoXY(80, 0);
-	SSD1306_Puts("B: ", &Font_7x10, 1);
-	SSD1306_UpdateScreen();*/
+	char hexpoint[6] = "";
 
 	//IN_A
 	Complement_2(value_A, &number_A);
 	sprintf(str_A, "%1.4f", number_A);
-	//SSD1306_GotoXY(0, 0);
-	//SSD1306_Puts(sign, &Font_7x10, 1);				//sign
 	SSD1306_GotoXY(84, 0);
-	SSD1306_Puts(str_A, &Font_7x10, 1);			//value A
+	SSD1306_Puts(str_A, &Font_7x10, 1);
 
 	//IN_SELECTOR
 	SSD1306_GotoXY(60, 15);
 	switch (value_Sel)
 	{
-	  case 0b00:
+	  case t_Sume:
   		SSD1306_Puts("+", &Font_7x10, 1);
   		break;
-	  case 0b01:
+	  case t_Subs:
 	  	SSD1306_Puts("-", &Font_7x10, 1);
 	  	break;
 	  default:
@@ -167,60 +163,57 @@ void WriteText(int16_t value_A, int16_t value_B, uint32_t value_Sel)
 	//IN_B
 	Complement_2(value_B, &number_B);
 	sprintf(str_B, "%1.4f", number_B);
-	//SSD1306_GotoXY(75, 0);
-	//SSD1306_Puts(sign, &Font_7x10, 1);				//sign
 	SSD1306_GotoXY(0, 0);
-	SSD1306_Puts(str_B, &Font_7x10, 1);			//value B
-
+	SSD1306_Puts(str_B, &Font_7x10, 1);
 
 	//DECIMAL RESULT
 	Result(number_A, number_B, value_Sel, &number_Resdec);
 	sprintf(str_Resdec, "%1.6f", number_Resdec);
 	SSD1306_GotoXY(40, 35);
+	SSD1306_Puts("                ", &Font_7x10, 1);
+	SSD1306_GotoXY(40, 35);
 	SSD1306_Puts(str_Resdec, &Font_7x10, 1);
 	SSD1306_UpdateScreen();
 
 	//HEXADECIMAL RESULT
-	fixedpoint.num = float2Fixed(value_A, value_B, value_Sel);
+	fixedpoint.num = float2Fixed(ReadA8, ReadB8, value_Sel);
 	sprintf(str_Reshex, "%02x", fixedpoint.numhex[1]);
 	sprintf(str_Reshex2, "%02x", fixedpoint.numhex[0]);
-	int j = 0;
-	for(int i = 0, k = 4; i < 5; i++, k--)
+
+	int16_t j = 0, k = 3, searcher = 3, limit = 5;
+
+	for(j = 0, k = 3; k >= 0 && searcher != 0; j++, k--)
+		searcher = fp&(1<<k);
+
+	if(fp == 0b1111)  //No point selected
 	{
-		switch(fp)
-		{
-			case 0b1110:
-				j = 4;
-			break;
-			case 0b1101:
-				j = 3;
-			break;
-			case 0b1011:
-				j = 2;
-			break;
-			case 0b0111:
-				j = 1;
-			break;
-		}
-
-		if (i == j)
-		{
-			hexpoint[k] = '.';
-			k--;
-		}
-		if(i < 2)
-			hexpoint[k] = str_Reshex2[k];
-		else if(i < 4)
-			hexpoint[k] = str_Reshex[k];
-
+		limit = 4;
+		SSD1306_GotoXY(40, 51);
+		SSD1306_Puts("      ", &Font_7x10, 1);
 	}
 
+	for(int16_t i = 0, k = 0, firstStr = true; strlen(hexpoint) < limit; i++, (i == j)? k:k++)
+	{
+		if(k > 1)
+		{
+			k = 0;
+			firstStr = false;
+		}
+		if(i == j)
+		{
+			hexpoint[i] = '.';
+			continue;
+		}
+		if(firstStr)
+			hexpoint[i] = str_Reshex[k];
+		else
+			hexpoint[i] = str_Reshex2[k];
+	}
 
+	strupr(hexpoint);
 	SSD1306_GotoXY(40, 51);
-	SSD1306_Puts(str_Reshex, &Font_7x10, 1);
-	SSD1306_Puts(str_Reshex2, &Font_7x10, 1);
+	SSD1306_Puts(hexpoint, &Font_7x10, 1);
 	SSD1306_UpdateScreen();
-
 }
 
 void Complement_2(uint32_t in_X, float *number_X)
@@ -242,11 +235,6 @@ void Complement_2(uint32_t in_X, float *number_X)
 	int j = 0, k = 0;
 	switch(fp)
 	{
-		case 0b1110:
-			j = 0;
-			k = 7;
-			bitfrac = 0;
-		break;
 		case 0b1101:
 			j = -4;
 			k = 3;
@@ -261,6 +249,11 @@ void Complement_2(uint32_t in_X, float *number_X)
 			j = -12;
 			k = -5;
 			bitfrac = 8;
+		break;
+		default: //0b1110
+			j = 0;
+			k = 7;
+			bitfrac = 0;
 		break;
 	}
 
@@ -278,51 +271,16 @@ void Complement_2(uint32_t in_X, float *number_X)
 		position --;
 	}
 	*number_X = weighting;
-	/*
-	position = 7;
-	for(int i=-4; i<=3; i++)
-	{
-		if(i == 3)
-		{
-			weighting += -number[position]*pow(2,i);
-		}
-		else
-		{
-			weighting += number[position]*pow(2,i);
-		}
-		position --;
-	}
-
-	*number_X = weighting;
-	*/
-	/*
-	switch(fp)
-	{
-		case 0b1110:
-			*number_X = weighting * 16;
-		break;
-		case 0b1101:
-			*number_X = weighting * 4;
-		break;
-		case 0b1011:
-			*number_X = weighting;
-		break;
-		case 0b0111:
-			*number_X = weighting / 4;
-		break;
-	}
-	*/
-
 }
 
-void Result(float value_A, float value_B, uint32_t value_Sel, float *result_dec)
+void Result(float value_A, float value_B, OpSel value_Sel, float *result_dec)
 {
 	switch (value_Sel)
 	{
-	  case 0b00:
+	  case t_Sume:
   		*result_dec = value_A + value_B;
   		break;
-	  case 0b01:
+	  case t_Subs:
 		*result_dec = value_A - value_B;
 	  	break;
 	  default:
@@ -331,21 +289,20 @@ void Result(float value_A, float value_B, uint32_t value_Sel, float *result_dec)
 	}
 }
 
-static int16_t float2Fixed(int16_t value_A, int16_t value_B, uint16_t value_Sel)
+static int16_t float2Fixed(int8_t value_A, int8_t value_B, OpSel value_Sel)
 {
 	switch (value_Sel)
 	{
-	  case 0b00:
-		  return value_A + value_B;
+	  case t_Sume:
+		  return (int16_t)(value_A + value_B);
   	  break;
-	  case 0b01:
-		  return value_A - value_B;
+	  case t_Subs:
+		  return (int16_t)(value_A - value_B);
 	  break;
 	  default:
-		  return value_A * value_B;
+		  return (int16_t)(value_A * value_B);
 	  break;
 	}
-	//return (int16_t)(round(number * (1 << bitfrac)));
 }
 
 /**

@@ -109,8 +109,8 @@ begin
         i_NumB <= "01111100";
         i_Opsel <= "10";
         wait for 10 ps;
-        i_NumA <= "01011101";
-        i_NumB <= "10010101";
+        i_NumA <= "10010101";
+        i_NumB <= "01011101";
         i_Opsel <= "00";
         wait for 10 ps;
         wait;
