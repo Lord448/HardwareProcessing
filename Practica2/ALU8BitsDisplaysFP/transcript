@@ -31,3 +31,5 @@ add wave -position end  sim:/tb_alu8bitsdisplaysfp/U1/r_Result
 add wave -position end  sim:/tb_alu8bitsdisplaysfp/U1/r_AdtA
 add wave -position end  sim:/tb_alu8bitsdisplaysfp/U1/r_AdtB
 run
+# End time: 00:41:00 on Nov 02,2023, Elapsed time: 5:08:10
+# Errors: 0, Warnings: 0
