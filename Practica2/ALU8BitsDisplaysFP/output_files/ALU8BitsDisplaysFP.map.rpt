@@ -1,5 +1,5 @@
 Analysis & Synthesis report for ALU8BitsDisplaysFP
-Tue Oct 31 18:09:44 2023
+Mon Nov  6 18:46:00 2023
 Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 
 
@@ -53,13 +53,13 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                        ;
 +------------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue Oct 31 18:09:44 2023          ;
+; Analysis & Synthesis Status        ; Successful - Mon Nov  6 18:46:00 2023          ;
 ; Quartus Prime Version              ; 22.1std.2 Build 922 07/20/2023 SC Lite Edition ;
 ; Revision Name                      ; ALU8BitsDisplaysFP                             ;
 ; Top-level Entity Name              ; ALU8BitsDisplaysFP                             ;
 ; Family                             ; Cyclone IV E                                   ;
-; Total logic elements               ; 134                                            ;
-;     Total combinational functions  ; 134                                            ;
+; Total logic elements               ; 118                                            ;
+;     Total combinational functions  ; 118                                            ;
 ;     Dedicated logic registers      ; 19                                             ;
 ; Total registers                    ; 19                                             ;
 ; Total pins                         ; 36                                             ;
@@ -197,17 +197,17 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+------------------+
 ; Resource                                    ; Usage            ;
 +---------------------------------------------+------------------+
-; Estimated Total logic elements              ; 134              ;
+; Estimated Total logic elements              ; 118              ;
 ;                                             ;                  ;
-; Total combinational functions               ; 134              ;
+; Total combinational functions               ; 118              ;
 ; Logic element usage by number of LUT inputs ;                  ;
-;     -- 4 input functions                    ; 61               ;
+;     -- 4 input functions                    ; 59               ;
 ;     -- 3 input functions                    ; 34               ;
-;     -- <=2 input functions                  ; 39               ;
+;     -- <=2 input functions                  ; 25               ;
 ;                                             ;                  ;
 ; Logic elements by mode                      ;                  ;
-;     -- normal mode                          ; 89               ;
-;     -- arithmetic mode                      ; 45               ;
+;     -- normal mode                          ; 86               ;
+;     -- arithmetic mode                      ; 32               ;
 ;                                             ;                  ;
 ; Total registers                             ; 19               ;
 ;     -- Dedicated logic registers            ; 19               ;
@@ -219,8 +219,8 @@ https://fpgasoftware.intel.com/eula.
 ;                                             ;                  ;
 ; Maximum fan-out node                        ; i_OpSel[1]~input ;
 ; Maximum fan-out                             ; 27               ;
-; Total fan-out                               ; 541              ;
-; Average fan-out                             ; 2.38             ;
+; Total fan-out                               ; 508              ;
+; Average fan-out                             ; 2.41             ;
 +---------------------------------------------+------------------+
 
 
@@ -229,7 +229,7 @@ https://fpgasoftware.intel.com/eula.
 +------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------+-----------------------+--------------+
 ; Compilation Hierarchy Node               ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                ; Entity Name           ; Library Name ;
 +------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------+-----------------------+--------------+
-; |ALU8BitsDisplaysFP                      ; 134 (59)            ; 19 (0)                    ; 0           ; 1            ; 1       ; 0         ; 36   ; 0            ; |ALU8BitsDisplaysFP                                                                ; ALU8BitsDisplaysFP    ; work         ;
+; |ALU8BitsDisplaysFP                      ; 118 (43)            ; 19 (0)                    ; 0           ; 1            ; 1       ; 0         ; 36   ; 0            ; |ALU8BitsDisplaysFP                                                                ; ALU8BitsDisplaysFP    ; work         ;
 ;    |DisplayDriverALU4_4FP:DisplayDriver| ; 75 (47)             ; 19 (19)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU8BitsDisplaysFP|DisplayDriverALU4_4FP:DisplayDriver                            ; DisplayDriverALU4_4FP ; work         ;
 ;       |BCDto7Segs:DisplayDecoder1|       ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU8BitsDisplaysFP|DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder1 ; BCDto7Segs            ; work         ;
 ;       |BCDto7Segs:DisplayDecoder2|       ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ALU8BitsDisplaysFP|DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder2 ; BCDto7Segs            ; work         ;
@@ -280,7 +280,7 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                   ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------+
 ; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |ALU8BitsDisplaysFP|Selector1                                ;
-; 16:1               ; 8 bits    ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; No         ; |ALU8BitsDisplaysFP|DisplayDriverALU4_4FP:DisplayDriver|Mux8 ;
+; 16:1               ; 7 bits    ; 70 LEs        ; 14 LEs               ; 56 LEs                 ; No         ; |ALU8BitsDisplaysFP|DisplayDriverALU4_4FP:DisplayDriver|Mux8 ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------+
 
 
@@ -416,20 +416,20 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; cycloneiii_ff         ; 19                          ;
 ;     SCLR              ; 17                          ;
 ;     plain             ; 2                           ;
-; cycloneiii_lcell_comb ; 135                         ;
-;     arith             ; 45                          ;
-;         2 data inputs ; 29                          ;
+; cycloneiii_lcell_comb ; 119                         ;
+;     arith             ; 32                          ;
+;         2 data inputs ; 16                          ;
 ;         3 data inputs ; 16                          ;
-;     normal            ; 90                          ;
-;         1 data inputs ; 5                           ;
-;         2 data inputs ; 6                           ;
+;     normal            ; 87                          ;
+;         1 data inputs ; 2                           ;
+;         2 data inputs ; 8                           ;
 ;         3 data inputs ; 18                          ;
-;         4 data inputs ; 61                          ;
+;         4 data inputs ; 59                          ;
 ; cycloneiii_mac_mult   ; 1                           ;
 ; cycloneiii_mac_out    ; 1                           ;
 ;                       ;                             ;
-; Max LUT depth         ; 8.00                        ;
-; Average LUT depth     ; 5.27                        ;
+; Max LUT depth         ; 6.80                        ;
+; Average LUT depth     ; 4.37                        ;
 +-----------------------+-----------------------------+
 
 
@@ -448,7 +448,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
-    Info: Processing started: Tue Oct 31 18:09:38 2023
+    Info: Processing started: Mon Nov  6 18:45:54 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ALU8BitsDisplaysFP -c ALU8BitsDisplaysFP
 Info (20032): Parallel compilation is enabled and will use up to 16 processors
 Info (12021): Found 2 design units, including 1 entities, in source file ALU8BitsDisplaysFP.vhd
@@ -461,29 +461,30 @@ Info (12021): Found 2 design units, including 1 entities, in source file Display
     Info (12022): Found design unit 1: DisplayDriverALU4_4FP-rtl File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 22
     Info (12023): Found entity 1: DisplayDriverALU4_4FP File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 6
 Info (12127): Elaborating entity "ALU8BitsDisplaysFP" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at ALU8BitsDisplaysFP.vhd(45): object "r_Mult" assigned a value but never read File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 45
-Warning (10036): Verilog HDL or VHDL warning at ALU8BitsDisplaysFP.vhd(46): object "r_Sume" assigned a value but never read File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 46
-Warning (10036): Verilog HDL or VHDL warning at ALU8BitsDisplaysFP.vhd(47): object "r_Subs" assigned a value but never read File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 47
-Warning (10540): VHDL Signal Declaration warning at ALU8BitsDisplaysFP.vhd(49): used explicit default value for signal "r_AdtB" because signal was never assigned a value File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 49
-Info (12128): Elaborating entity "DisplayDriverALU4_4FP" for hierarchy "DisplayDriverALU4_4FP:DisplayDriver" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 61
+Info (12128): Elaborating entity "DisplayDriverALU4_4FP" for hierarchy "DisplayDriverALU4_4FP:DisplayDriver" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 50
 Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(97): signal "r_SegsConn1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 97
 Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(98): signal "r_SegsConn2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 98
 Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(99): signal "r_SegsConn3" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 99
 Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(100): signal "r_SegsConn4" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 100
 Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(115): signal "r_Show" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 115
 Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(117): signal "r_Segs1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 117
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(118): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 118
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(124): signal "r_Segs2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 124
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(125): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 125
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(131): signal "r_Segs3" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 131
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(132): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 132
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(138): signal "r_Segs4" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 138
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(139): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 139
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(118): signal "i_OpSel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 118
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(121): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 121
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(128): signal "r_Segs2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 128
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(129): signal "i_OpSel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 129
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(130): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 130
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(136): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 136
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(143): signal "r_Segs3" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 143
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(144): signal "i_OpSel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 144
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(147): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 147
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(154): signal "r_Segs4" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 154
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(155): signal "i_OpSel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 155
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(158): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 158
 Info (12128): Elaborating entity "BCDto7Segs" for hierarchy "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder1" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 55
 Info (278001): Inferred 1 megafunctions from design logic
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult0" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 104
-Info (12130): Elaborated megafunction instantiation "lpm_mult:Mult0" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 104
-Info (12133): Instantiated megafunction "lpm_mult:Mult0" with the following parameter: File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 104
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult0" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 88
+Info (12130): Elaborated megafunction instantiation "lpm_mult:Mult0" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 88
+Info (12133): Instantiated megafunction "lpm_mult:Mult0" with the following parameter: File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 88
     Info (12134): Parameter "LPM_WIDTHA" = "8"
     Info (12134): Parameter "LPM_WIDTHB" = "8"
     Info (12134): Parameter "LPM_WIDTHP" = "16"
@@ -498,15 +499,15 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/mult
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 171 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 155 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 23 input pins
     Info (21059): Implemented 13 output pins
-    Info (21061): Implemented 134 logic cells
+    Info (21061): Implemented 118 logic cells
     Info (21062): Implemented 1 DSP elements
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 17 warnings
-    Info: Peak virtual memory: 514 megabytes
-    Info: Processing ended: Tue Oct 31 18:09:44 2023
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 18 warnings
+    Info: Peak virtual memory: 539 megabytes
+    Info: Processing ended: Mon Nov  6 18:46:00 2023
     Info: Elapsed time: 00:00:06
-    Info: Total CPU time (on all processors): 00:00:19
+    Info: Total CPU time (on all processors): 00:00:18
 
 

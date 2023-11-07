@@ -113,33 +113,53 @@ begin
         end case;
         
         case r_Show is
-            when "0111" => --Display 1
+            when "0111" => --Display 1 MSB
                 o_Segments  <= r_Segs1;
-                if i_FixedPoint = "0111" then
-                    o_DispPoint <= '0'; --Turn on the point segment
-                else 
-                    o_DispPoint <= '1'; --Turn off the point segment
+                if i_OpSel = "11" OR i_OpSel = "10" then
+                    o_DispPoint <= '1';
+                else
+                    if i_FixedPoint = "0111" then
+                        o_DispPoint <= '0'; --Turn on the point segment
+                    else 
+                        o_DispPoint <= '1'; --Turn off the point segment
+                    end if;
                 end if;
             when "1011" => --Display 2
                 o_Segments  <= r_Segs2;
-                if i_FixedPoint = "1011" then 
-                    o_DispPoint <= '0';
-                else 
-                    o_DispPoint <= '1';
+                if i_OpSel = "11" OR i_OpSel = "10" then
+                    if i_FixedPoint = "1101" then 
+                        o_DispPoint <= '0';
+                    else
+                        o_DispPoint <= '1';
+                    end if;
+                else
+                    if i_FixedPoint = "1011" then
+                        o_DispPoint <= '0'; --Turn on the point segment
+                    else 
+                        o_DispPoint <= '1'; --Turn off the point segment
+                    end if;
                 end if;
             when "1101" => --Display 3
                 o_Segments  <= r_Segs3;
-                if i_FixedPoint = "1101" then
-                    o_DispPoint <= '0';
+                if i_OpSel = "11" OR i_OpSel = "10" then
+                    o_DispPoint <= '1';
                 else
-                    o_DispPoint <= '1';
+                    if i_FixedPoint = "1101" then
+                        o_DispPoint <= '0'; --Turn on the point segment
+                    else 
+                        o_DispPoint <= '1'; --Turn off the point segment
+                    end if;
                 end if;
-            when others => --Display 4
+            when others => --Display 4 LSB
                 o_Segments  <= r_Segs4;
-                if i_FixedPoint = "1110" then 
-                    o_DispPoint <= '0';
-                else 
+                if i_OpSel = "11" OR i_OpSel = "10" then
                     o_DispPoint <= '1';
+                else
+                    if i_FixedPoint = "1110" then
+                        o_DispPoint <= '0'; --Turn on the point segment
+                    else 
+                        o_DispPoint <= '1'; --Turn off the point segment
+                    end if;
                 end if;
         end case;
     end process;
