@@ -1,5 +1,5 @@
 Analysis & Synthesis report for ALU8BitsDisplaysFP
-Mon Nov  6 18:46:00 2023
+Thu Nov  9 00:52:33 2023
 Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 
 
@@ -53,7 +53,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                        ;
 +------------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Nov  6 18:46:00 2023          ;
+; Analysis & Synthesis Status        ; Successful - Thu Nov  9 00:52:33 2023          ;
 ; Quartus Prime Version              ; 22.1std.2 Build 922 07/20/2023 SC Lite Edition ;
 ; Revision Name                      ; ALU8BitsDisplaysFP                             ;
 ; Top-level Entity Name              ; ALU8BitsDisplaysFP                             ;
@@ -359,52 +359,52 @@ Note: In order to hide this table in the UI and the text report file, please set
 +---------------------------------------+----------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder4"                             ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port         ; Type   ; Severity ; Details                                                                             ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
-; i_disppoint  ; Input  ; Info     ; Stuck at GND                                                                        ;
-; i_chipen     ; Input  ; Info     ; Stuck at VCC                                                                        ;
-; o_dispenable ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; o_disppoint  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder4"                                                  ;
++--------------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port         ; Type   ; Severity ; Details                                                                                                  ;
++--------------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; i_disppoint  ; Input  ; Info     ; Stuck at GND                                                                                             ;
+; i_chipen     ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; o_dispenable ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
+; o_disppoint  ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++--------------+--------+----------+----------------------------------------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder3"                             ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port         ; Type   ; Severity ; Details                                                                             ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
-; i_disppoint  ; Input  ; Info     ; Stuck at GND                                                                        ;
-; i_chipen     ; Input  ; Info     ; Stuck at VCC                                                                        ;
-; o_dispenable ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; o_disppoint  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder3"                                                  ;
++--------------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port         ; Type   ; Severity ; Details                                                                                                  ;
++--------------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; i_disppoint  ; Input  ; Info     ; Stuck at GND                                                                                             ;
+; i_chipen     ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; o_dispenable ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
+; o_disppoint  ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++--------------+--------+----------+----------------------------------------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder2"                             ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port         ; Type   ; Severity ; Details                                                                             ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
-; i_disppoint  ; Input  ; Info     ; Stuck at GND                                                                        ;
-; i_chipen     ; Input  ; Info     ; Stuck at VCC                                                                        ;
-; o_dispenable ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; o_disppoint  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder2"                                                  ;
++--------------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port         ; Type   ; Severity ; Details                                                                                                  ;
++--------------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; i_disppoint  ; Input  ; Info     ; Stuck at GND                                                                                             ;
+; i_chipen     ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; o_dispenable ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
+; o_disppoint  ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++--------------+--------+----------+----------------------------------------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder1"                             ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port         ; Type   ; Severity ; Details                                                                             ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
-; i_disppoint  ; Input  ; Info     ; Stuck at VCC                                                                        ;
-; i_chipen     ; Input  ; Info     ; Stuck at VCC                                                                        ;
-; o_dispenable ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; o_disppoint  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder1"                                                  ;
++--------------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port         ; Type   ; Severity ; Details                                                                                                  ;
++--------------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; i_disppoint  ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; i_chipen     ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; o_dispenable ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
+; o_disppoint  ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++--------------+--------+----------+----------------------------------------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------+
@@ -448,7 +448,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
-    Info: Processing started: Mon Nov  6 18:45:54 2023
+    Info: Processing started: Thu Nov  9 00:52:27 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ALU8BitsDisplaysFP -c ALU8BitsDisplaysFP
 Info (20032): Parallel compilation is enabled and will use up to 16 processors
 Info (12021): Found 2 design units, including 1 entities, in source file ALU8BitsDisplaysFP.vhd
@@ -462,25 +462,25 @@ Info (12021): Found 2 design units, including 1 entities, in source file Display
     Info (12023): Found entity 1: DisplayDriverALU4_4FP File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 6
 Info (12127): Elaborating entity "ALU8BitsDisplaysFP" for the top level hierarchy
 Info (12128): Elaborating entity "DisplayDriverALU4_4FP" for hierarchy "DisplayDriverALU4_4FP:DisplayDriver" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 50
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(97): signal "r_SegsConn1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 97
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(98): signal "r_SegsConn2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 98
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(99): signal "r_SegsConn3" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 99
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(100): signal "r_SegsConn4" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 100
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(115): signal "r_Show" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 115
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(117): signal "r_Segs1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 117
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(118): signal "i_OpSel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 118
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(121): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 121
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(128): signal "r_Segs2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 128
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(129): signal "i_OpSel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 129
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(130): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 130
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(136): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 136
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(143): signal "r_Segs3" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 143
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(144): signal "i_OpSel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 144
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(147): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 147
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(154): signal "r_Segs4" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 154
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(155): signal "i_OpSel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 155
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(158): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 158
-Info (12128): Elaborating entity "BCDto7Segs" for hierarchy "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder1" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 55
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(96): signal "r_SegsConn1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 96
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(97): signal "r_SegsConn2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 97
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(98): signal "r_SegsConn3" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 98
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(99): signal "r_SegsConn4" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 99
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(114): signal "r_Show" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 114
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(116): signal "r_Segs1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 116
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(117): signal "i_OpSel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 117
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(120): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 120
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(127): signal "r_Segs2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 127
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(128): signal "i_OpSel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 128
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(129): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 129
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(135): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 135
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(142): signal "r_Segs3" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 142
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(143): signal "i_OpSel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 143
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(146): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 146
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(153): signal "r_Segs4" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 153
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(154): signal "i_OpSel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 154
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(157): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 157
+Info (12128): Elaborating entity "BCDto7Segs" for hierarchy "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder1" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 53
 Info (278001): Inferred 1 megafunctions from design logic
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult0" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 88
 Info (12130): Elaborated megafunction instantiation "lpm_mult:Mult0" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 88
@@ -496,6 +496,7 @@ Info (12133): Instantiated megafunction "lpm_mult:Mult0" with the following para
     Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
 Info (12021): Found 1 design units, including 1 entities, in source file db/mult_73t.tdf
     Info (12023): Found entity 1: mult_73t File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/db/mult_73t.tdf Line: 29
+Warning (12241): 4 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
@@ -504,9 +505,9 @@ Info (21057): Implemented 155 device resources after synthesis - the final resou
     Info (21059): Implemented 13 output pins
     Info (21061): Implemented 118 logic cells
     Info (21062): Implemented 1 DSP elements
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 18 warnings
-    Info: Peak virtual memory: 539 megabytes
-    Info: Processing ended: Mon Nov  6 18:46:00 2023
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 19 warnings
+    Info: Peak virtual memory: 529 megabytes
+    Info: Processing ended: Thu Nov  9 00:52:33 2023
     Info: Elapsed time: 00:00:06
     Info: Total CPU time (on all processors): 00:00:18
 

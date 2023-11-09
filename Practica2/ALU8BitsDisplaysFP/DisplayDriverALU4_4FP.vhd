@@ -26,19 +26,17 @@ architecture rtl of DisplayDriverALU4_4FP is
             i_DispPoint       : in  std_logic;                     --Display point enable
             i_ChipEn          : in  std_logic;                     --Chip enable (works with PNP transistors)
             i_Number          : in  std_logic_vector(3 downto 0);  --Number that will be displayed
-            o_DisplaySegments : out std_logic_vector(6 downto 0);  --Display segments vector
-            o_DispEnable      : out std_logic;                     --Out pin to enable the display (works with i_ChipEn)
-            o_DispPoint       : out std_logic                      --Turns up or down the display point (works with i_DispPoint)
+            o_DisplaySegments : out std_logic_vector(6 downto 0)  --Display segments vector
+            --o_DispEnable      : out std_logic;                     --Out pin to enable the display (works with i_ChipEn)
+            --o_DispPoint       : out std_logic                      --Turns up or down the display point (works with i_DispPoint)
         );
     end component BCDTo7Segs;
     
-    constant DISP_NEGATIVE_SIGN       : std_logic_vector(6 downto 0) := "0111111";
-    constant DISP_POSITIVE_SIGN       : std_logic_vector(6 downto 0) := "1111111";
+    --constant DISP_NEGATIVE_SIGN       : std_logic_vector(6 downto 0) := "0111111";
+    --constant DISP_POSITIVE_SIGN       : std_logic_vector(6 downto 0) := "1111111";
     --Multiplexor Registers
     signal r_Sel                      : std_logic_vector(1 downto 0) := "00";
     signal r_Show                     : std_logic_vector(3 downto 0) := "0000";
-    signal r_DispPoint                : std_logic_vector(3 downto 0) := "0000";
-    signal r_Number                   : std_logic_vector(15 downto 0);
     signal r_Count                    : integer range 0 to 100000;
     --Integer Part Registers
     signal r_Segs1, r_Segs2           : std_logic_vector(6 downto 0);
@@ -57,6 +55,7 @@ begin
         i_ChipEN          => '1',
         i_Number          => r_IntPNumber(7 downto 4),
         o_DisplaySegments => r_SegsConn1
+
     );
 
     DisplayDecoder2 : BCDTo7Segs port map (

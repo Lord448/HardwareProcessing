@@ -25,16 +25,21 @@ architecture rtl of tb_ALU8BitsDisplaysFP is
         );
     end component ALU8BitsDisplaysFP;
 
+    type t_Nums is (t_Num1, t_Num2, t_Num3, t_Num4, t_Num5);
+    type t_Ops is (t_Sum, t_Subs, t_Mult);
+
     signal i_CLK        : std_logic := '0';
     signal i_NumA       : signed(7 downto 0) := (others => '0');
     signal i_NumB       : signed(7 downto 0) := (others => '0');
-    signal re_NumA      : real := 0.0;
     signal i_FixedPoint : std_logic_vector(3 downto 0) := (others => '0');
     signal i_OpSel      : std_logic_vector(1 downto 0) := (others => '0');
     signal o_Displays   : std_logic_vector(3 downto 0) := (others => '0');
     signal o_Segments   : std_logic_vector(6 downto 0) := (others => '0');
     signal o_DispPoint  : std_logic := '0';
     signal o_NumSign    : std_logic := '0';
+    signal r_Nums       : t_Nums := t_Num1;
+    signal r_i          : t_Nums := t_Num1;
+    signal r_Ops        : t_Ops := t_Sum;
 
 begin
     
@@ -54,8 +59,6 @@ begin
         o_NumSign    => o_NumSign
     );
 
-    --re_NumA <= real(to_signed(i_NumA, i_NumA'length));
-
     clk_proc : process
     begin
         i_CLK <= '1';
@@ -63,57 +66,49 @@ begin
         i_CLK <= '0';
         wait for 1 ps;
     end process;
-    
---    stim_proc : process
---    begin
---        for i in 0 to 255 loop
---            for j in 0 to 255 loop
---                for k in 0 to 4 loop
---                    i_NumA <= signed(to_signed(i, i_NumA'length));
---                    i_NumB <= signed(to_signed(j, i_NumB'length));
---                    i_OpSel <= std_logic_vector(to_signed(k, i_OpSel'length));
---                    wait for 1 ns;
---                end loop;
---            end loop;
---        end loop;
---        wait;
---    end process;
 
     stim_proc : process
     begin
-        i_NumA <= "11100001";
-        i_NumB <= "01110000";
-        i_Opsel <= "00";
-        wait for 10 ps;
-        i_NumA <= "11100001";
-        i_NumB <= "01110000";
-        i_Opsel <= "01";
-        wait for 10 ps;
-        i_NumA <= "11100001";
-        i_NumB <= "01110000";
-        i_Opsel <= "10";
-        wait for 10 ps;
-        i_NumA <= "10000000";
-        i_NumB <= "10000000";
-        i_Opsel <= "00";
-        wait for 10 ps;
-        i_NumA <= "10000000";
-        i_NumB <= "10000000";
-        i_Opsel <= "01";
-        wait for 10 ps;
-        i_NumA <= "10000000";
-        i_NumB <= "10000000";
-        i_Opsel <= "10";
-        wait for 10 ps;
-        i_NumA <= "00110001";
-        i_NumB <= "01111100";
-        i_Opsel <= "10";
-        wait for 10 ps;
-        i_NumA <= "10010101";
-        i_NumB <= "01011101";
-        i_Opsel <= "00";
-        wait for 10 ps;
+        for r_i in t_Nums loop
+            r_Nums <= r_i;
+            r_Ops <= t_Sum;
+            wait for 10 ps;
+            r_Ops <= t_Subs;
+            wait for 10 ps;
+            r_Ops <= t_Mult;
+            wait for 10 ps;
+        end loop;
         wait;
+    end process;
+
+    declarations_proc : process(r_Ops, r_Nums)
+    begin
+        case r_Ops is
+            when t_Sum =>
+                i_OpSel <= "00";
+            when t_Subs =>
+                i_OpSel <= "01";
+            when t_Mult =>
+                i_OpSel <= "11";
+        end case;
+
+        case r_Nums is
+            when t_Num1 =>
+                i_NumA <= "11010100";
+                i_NumB <= "01010101";
+            when t_Num2 =>
+                i_NumA <= "11010100";
+                i_NumB <= "01010101"; 
+            when t_Num3 =>
+                i_NumA <= "11110100";
+                i_NumB <= "11110101";
+            when t_Num4 =>
+                i_NumA <= "11010010";
+                i_NumB <= "10011010";
+            when t_Num5 =>
+                i_NumA <= "10010001";
+                i_NumB <= "10010001";
+        end case;
     end process;
 		
 end architecture rtl;
