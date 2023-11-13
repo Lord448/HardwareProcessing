@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "unistd.h": "c",
+        "history.h": "c",
+        "readline-argp.h": "c"
+    },
+    "stm32-for-vscode.armToolchainPath": false
+}
