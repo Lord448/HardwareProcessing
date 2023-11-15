@@ -13,7 +13,7 @@
 #define ToFixed100(x) (x<<FIXED_POINT)/100
 #define ToFixed5dec(x) (x<<FIXED_POINT)/100000
 #endif
-#define N 5
+#define N 32
 
 #ifdef DOUBLE
 typedef struct FIFO{
@@ -43,16 +43,37 @@ FIFO x;
 #ifdef DOUBLE
 double *px = (double *)&x;
 double y = 0;
-double H[N] = {0.01, 0.13, 0.02, -0.03, 0.01};
+double H[N] = {0.01, 0.13, 0.02, -0.03,
+		       0.01, 0.02, 0.10, 0.05,
+			   0.05, 0.01, 0.03, 0.12,
+			   0.02, -0.40, -0.48, 0.13,
+			   0.01, 0.13, 0.02, -0.03,
+			   0.01, 0.02, 0.10, 0.05,
+			   0.05, 0.01, 0.03, 0.12,
+			   0.02, -0.40, -0.48, 0.13};
 #elif defined(FLOAT)
 float *px = (float *)&x;
 float y = 0;
-float H[N] = {0.01, 0.13, 0.02, -0.03, 0.01};
+float H[N] = {0.01, 0.13, 0.02, -0.03,
+		   0.01, 0.02, 0.10, 0.05,
+		   0.05, 0.01, 0.03, 0.12,
+		   0.02, -0.40, -0.48, 0.13,
+		   0.01, 0.13, 0.02, -0.03,
+		   0.01, 0.02, 0.10, 0.05,
+		   0.05, 0.01, 0.03, 0.12,
+		   0.02, -0.40, -0.48, 0.13};
 #elif defined(FIXED_POINT)
 int32_t *px = (int32_t *)&x;
 int32_t y = 0;
-//Numbers			0.01			0.13			0.02		  -0.03		      0.01
-int32_t H[N] = {ToFixed100(1), ToFixed100(13), ToFixed100(2), ToFixed100(-3), ToFixed100(1)};
+//Numbers			0.01			0.13			0.02		  -0.03
+int32_t H[N] = {ToFixed100(1), ToFixed100(13), ToFixed100(2),  ToFixed100(-3),
+				ToFixed100(1), ToFixed100(2),  ToFixed100(10), ToFixed100(5),
+				ToFixed100(5), ToFixed100(1),  ToFixed100(3),  ToFixed100(12),
+				ToFixed100(2), ToFixed100(-40),ToFixed100(-48),ToFixed100(13),
+				ToFixed100(1), ToFixed100(13), ToFixed100(2),  ToFixed100(10),
+				ToFixed100(5), ToFixed100(5),  ToFixed100(10), ToFixed100(5),
+				ToFixed100(5), ToFixed100(1),  ToFixed100(3),  ToFixed100(12),
+				ToFixed100(2), ToFixed100(-40),ToFixed100(-48),ToFixed100(13)};
 #endif
 
 void SystemClock_Config(void);
@@ -67,16 +88,79 @@ int main(void)
   x = fifocreate();
 #ifdef FIXED_POINT
   fifoADD(&x, intToFixed(1121)); 						//1121
-  fifoADD(&x, ToFixed5dec(25515)); 					//0.25515 Truncated
+  fifoADD(&x, ToFixed5dec(25515)); 					    //0.25515 Truncated
   fifoADD(&x, (intToFixed(50) + ToFixed5dec(20020)));   //50.20020
   fifoADD(&x, intToFixed(20541) + ToFixed10(3)); 		//20541.3
   fifoADD(&x, intToFixed(1041) + ToFixed10(3));         //1041.3
+  fifoADD(&x, intToFixed(1121)); 						//1121
+  fifoADD(&x, ToFixed5dec(25515)); 					    //0.25515 Truncated
+  fifoADD(&x, (intToFixed(50) + ToFixed5dec(20020)));   //50.20020
+  fifoADD(&x, intToFixed(20541) + ToFixed10(3)); 		//20541.3
+  fifoADD(&x, intToFixed(1041) + ToFixed10(3));         //1041.3
+  fifoADD(&x, intToFixed(1121)); 						//1121
+  fifoADD(&x, ToFixed5dec(25515)); 					    //0.25515 Truncated
+  fifoADD(&x, (intToFixed(50) + ToFixed5dec(20020)));   //50.20020
+  fifoADD(&x, intToFixed(20541) + ToFixed10(3)); 		//20541.3
+  fifoADD(&x, intToFixed(1041) + ToFixed10(3));         //1041.3
+  fifoADD(&x, intToFixed(1121)); 						//1121
+  fifoADD(&x, ToFixed5dec(25515)); 					    //0.25515 Truncated
+  fifoADD(&x, (intToFixed(50) + ToFixed5dec(20020)));   //50.20020
+  fifoADD(&x, intToFixed(20541) + ToFixed10(3)); 		//20541.3
+  fifoADD(&x, intToFixed(1041) + ToFixed10(3));         //1041.3
+  fifoADD(&x, intToFixed(1121)); 						//1121
+  fifoADD(&x, ToFixed5dec(25515)); 					    //0.25515 Truncated
+  fifoADD(&x, (intToFixed(50) + ToFixed5dec(20020)));   //50.20020
+  fifoADD(&x, intToFixed(20541) + ToFixed10(3)); 		//20541.3
+  fifoADD(&x, intToFixed(1041) + ToFixed10(3));         //1041.3
+  fifoADD(&x, intToFixed(1121)); 						//1121
+  fifoADD(&x, ToFixed5dec(25515)); 					    //0.25515 Truncated
+  fifoADD(&x, (intToFixed(50) + ToFixed5dec(20020)));   //50.20020
+  fifoADD(&x, intToFixed(20541) + ToFixed10(3)); 		//20541.3
+  fifoADD(&x, intToFixed(1041) + ToFixed10(3));         //1041.3
+  fifoADD(&x, intToFixed(1041) + ToFixed10(3));         //1041.3
+  fifoADD(&x, intToFixed(1121)); 						//1121
+  fifoADD(&x, ToFixed5dec(25515)); 					    //0.25515 Truncated
+  fifoADD(&x, (intToFixed(50) + ToFixed5dec(20020)));   //50.20020
+  fifoADD(&x, intToFixed(20541) + ToFixed10(3)); 		//20541.3
+  fifoADD(&x, intToFixed(1041) + ToFixed10(3));         //1041.3
+  fifoADD(&x, intToFixed(1121)); 						//1121
 #else
   fifoADD(&x, 1121);
   fifoADD(&x, 0.255152);
   fifoADD(&x, 50.20020);
   fifoADD(&x, 20541.3);
   fifoADD(&x, 1041.3);
+  fifoADD(&x, 1121);
+  fifoADD(&x, 0.255152);
+  fifoADD(&x, 50.20020);
+  fifoADD(&x, 20541.3);
+  fifoADD(&x, 1041.3);
+  fifoADD(&x, 1121);
+  fifoADD(&x, 0.255152);
+  fifoADD(&x, 50.20020);
+  fifoADD(&x, 20541.3);
+  fifoADD(&x, 1041.3);
+  fifoADD(&x, 1121);
+  fifoADD(&x, 0.255152);
+  fifoADD(&x, 50.20020);
+  fifoADD(&x, 20541.3);
+  fifoADD(&x, 1041.3);
+  fifoADD(&x, 1121);
+  fifoADD(&x, 0.255152);
+  fifoADD(&x, 50.20020);
+  fifoADD(&x, 20541.3);
+  fifoADD(&x, 1041.3);
+  fifoADD(&x, 1121);
+  fifoADD(&x, 0.255152);
+  fifoADD(&x, 50.20020);
+  fifoADD(&x, 20541.3);
+  fifoADD(&x, 1041.3);
+  fifoADD(&x, 1121);
+  fifoADD(&x, 0.255152);
+  fifoADD(&x, 50.20020);
+  fifoADD(&x, 20541.3);
+  fifoADD(&x, 1041.3);
+  fifoADD(&x, 1121);
 #endif
 
   while (1)
