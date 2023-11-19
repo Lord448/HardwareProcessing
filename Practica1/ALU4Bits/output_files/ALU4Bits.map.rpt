@@ -1,5 +1,5 @@
 Analysis & Synthesis report for ALU4Bits
-Sat Sep 23 00:33:34 2023
+Wed Nov 15 22:59:57 2023
 Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 
 
@@ -46,7 +46,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                        ;
 +------------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Sep 23 00:33:34 2023          ;
+; Analysis & Synthesis Status        ; Successful - Wed Nov 15 22:59:57 2023          ;
 ; Quartus Prime Version              ; 22.1std.2 Build 922 07/20/2023 SC Lite Edition ;
 ; Revision Name                      ; ALU4Bits                                       ;
 ; Top-level Entity Name              ; ALU4Bits                                       ;
@@ -165,29 +165,29 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                         ;
-+----------------------------------+-----------------+-----------------+-------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                  ; Library ;
-+----------------------------------+-----------------+-----------------+-------------------------------------------------------------------------------+---------+
-; ALU4Bits.vhd                     ; yes             ; User VHDL File  ; /home/lord448/altera/ALU4Bits/ALU4Bits.vhd                                    ;         ;
-; lpm_mult.tdf                     ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/lpm_mult.tdf       ;         ;
-; aglobal221.inc                   ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/aglobal221.inc     ;         ;
-; lpm_add_sub.inc                  ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/lpm_add_sub.inc    ;         ;
-; multcore.inc                     ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/multcore.inc       ;         ;
-; bypassff.inc                     ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/bypassff.inc       ;         ;
-; altshift.inc                     ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/altshift.inc       ;         ;
-; multcore.tdf                     ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/multcore.tdf       ;         ;
-; csa_add.inc                      ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/csa_add.inc        ;         ;
-; mpar_add.inc                     ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/mpar_add.inc       ;         ;
-; muleabz.inc                      ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/muleabz.inc        ;         ;
-; mul_lfrg.inc                     ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/mul_lfrg.inc       ;         ;
-; mul_boothc.inc                   ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/mul_boothc.inc     ;         ;
-; alt_ded_mult.inc                 ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/alt_ded_mult.inc   ;         ;
-; alt_ded_mult_y.inc               ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/alt_ded_mult_y.inc ;         ;
-; dffpipe.inc                      ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/dffpipe.inc        ;         ;
-; altshift.tdf                     ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/altshift.tdf       ;         ;
-+----------------------------------+-----------------+-----------------+-------------------------------------------------------------------------------+---------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                          ;
++----------------------------------+-----------------+-----------------+--------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                   ; Library ;
++----------------------------------+-----------------+-----------------+--------------------------------------------------------------------------------+---------+
+; ALU4Bits.vhd                     ; yes             ; User VHDL File  ; /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica1/ALU4Bits/ALU4Bits.vhd ;         ;
+; lpm_mult.tdf                     ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/lpm_mult.tdf        ;         ;
+; aglobal221.inc                   ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/aglobal221.inc      ;         ;
+; lpm_add_sub.inc                  ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/lpm_add_sub.inc     ;         ;
+; multcore.inc                     ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/multcore.inc        ;         ;
+; bypassff.inc                     ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/bypassff.inc        ;         ;
+; altshift.inc                     ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/altshift.inc        ;         ;
+; multcore.tdf                     ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/multcore.tdf        ;         ;
+; csa_add.inc                      ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/csa_add.inc         ;         ;
+; mpar_add.inc                     ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/mpar_add.inc        ;         ;
+; muleabz.inc                      ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/muleabz.inc         ;         ;
+; mul_lfrg.inc                     ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/mul_lfrg.inc        ;         ;
+; mul_boothc.inc                   ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/mul_boothc.inc      ;         ;
+; alt_ded_mult.inc                 ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/alt_ded_mult.inc    ;         ;
+; alt_ded_mult_y.inc               ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/alt_ded_mult_y.inc  ;         ;
+; dffpipe.inc                      ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/dffpipe.inc         ;         ;
+; altshift.tdf                     ; yes             ; Megafunction    ; /opt/intelFPGA_lite/22.1.2/quartus/libraries/megafunctions/altshift.tdf        ;         ;
++----------------------------------+-----------------+-----------------+--------------------------------------------------------------------------------+---------+
 
 
 +------------------------------------------------------------+
@@ -349,13 +349,13 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
-    Info: Processing started: Sat Sep 23 00:33:28 2023
+    Info: Processing started: Wed Nov 15 22:59:52 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ALU4Bits -c ALU4Bits
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
 Info (12021): Found 2 design units, including 1 entities, in source file ALU4Bits.vhd
-    Info (12022): Found design unit 1: ALU4Bits-rtl File: /home/lord448/altera/ALU4Bits/ALU4Bits.vhd Line: 18
-    Info (12023): Found entity 1: ALU4Bits File: /home/lord448/altera/ALU4Bits/ALU4Bits.vhd Line: 9
+    Info (12022): Found design unit 1: ALU4Bits-rtl File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica1/ALU4Bits/ALU4Bits.vhd Line: 18
+    Info (12023): Found entity 1: ALU4Bits File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica1/ALU4Bits/ALU4Bits.vhd Line: 9
 Info (12127): Elaborating entity "ALU4Bits" for the top level hierarchy
 Info (278001): Inferred 1 megafunctions from design logic
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult0" File: /opt/intelFPGA_lite/22.1.2/quartus/libraries/vhdl/synopsys/ieee/syn_arit.vhd Line: 687
@@ -380,9 +380,9 @@ Info (21057): Implemented 34 device resources after synthesis - the final resour
     Info (21059): Implemented 4 output pins
     Info (21061): Implemented 20 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 462 megabytes
-    Info: Processing ended: Sat Sep 23 00:33:34 2023
-    Info: Elapsed time: 00:00:06
-    Info: Total CPU time (on all processors): 00:00:19
+    Info: Peak virtual memory: 465 megabytes
+    Info: Processing ended: Wed Nov 15 22:59:57 2023
+    Info: Elapsed time: 00:00:05
+    Info: Total CPU time (on all processors): 00:00:18
 
 

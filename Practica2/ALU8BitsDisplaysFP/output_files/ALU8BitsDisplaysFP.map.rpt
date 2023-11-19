@@ -1,5 +1,5 @@
 Analysis & Synthesis report for ALU8BitsDisplaysFP
-Thu Nov  9 00:52:33 2023
+Sat Nov 18 21:56:29 2023
 Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 
 
@@ -53,7 +53,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                        ;
 +------------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Nov  9 00:52:33 2023          ;
+; Analysis & Synthesis Status        ; Successful - Sat Nov 18 21:56:29 2023          ;
 ; Quartus Prime Version              ; 22.1std.2 Build 922 07/20/2023 SC Lite Edition ;
 ; Revision Name                      ; ALU8BitsDisplaysFP                             ;
 ; Top-level Entity Name              ; ALU8BitsDisplaysFP                             ;
@@ -448,7 +448,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
-    Info: Processing started: Thu Nov  9 00:52:27 2023
+    Info: Processing started: Sat Nov 18 21:56:23 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ALU8BitsDisplaysFP -c ALU8BitsDisplaysFP
 Info (20032): Parallel compilation is enabled and will use up to 16 processors
 Info (12021): Found 2 design units, including 1 entities, in source file ALU8BitsDisplaysFP.vhd
@@ -462,25 +462,25 @@ Info (12021): Found 2 design units, including 1 entities, in source file Display
     Info (12023): Found entity 1: DisplayDriverALU4_4FP File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 6
 Info (12127): Elaborating entity "ALU8BitsDisplaysFP" for the top level hierarchy
 Info (12128): Elaborating entity "DisplayDriverALU4_4FP" for hierarchy "DisplayDriverALU4_4FP:DisplayDriver" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 50
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(96): signal "r_SegsConn1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 96
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(97): signal "r_SegsConn2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 97
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(98): signal "r_SegsConn3" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 98
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(99): signal "r_SegsConn4" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 99
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(114): signal "r_Show" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 114
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(116): signal "r_Segs1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 116
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(117): signal "i_OpSel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 117
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(120): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 120
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(127): signal "r_Segs2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 127
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(128): signal "i_OpSel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 128
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(129): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 129
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(135): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 135
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(142): signal "r_Segs3" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 142
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(143): signal "i_OpSel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 143
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(146): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 146
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(153): signal "r_Segs4" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 153
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(154): signal "i_OpSel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 154
-Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(157): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 157
-Info (12128): Elaborating entity "BCDto7Segs" for hierarchy "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder1" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 53
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(92): signal "r_SegsConn1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 92
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(93): signal "r_SegsConn2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 93
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(94): signal "r_SegsConn3" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 94
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(95): signal "r_SegsConn4" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 95
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(110): signal "r_Show" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 110
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(112): signal "r_Segs1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 112
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(113): signal "i_OpSel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 113
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(116): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 116
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(123): signal "r_Segs2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 123
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(124): signal "i_OpSel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 124
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(125): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 125
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(131): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 131
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(138): signal "r_Segs3" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 138
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(139): signal "i_OpSel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 139
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(142): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 142
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(149): signal "r_Segs4" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 149
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(150): signal "i_OpSel" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 150
+Warning (10492): VHDL Process Statement warning at DisplayDriverALU4_4FP.vhd(153): signal "i_FixedPoint" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 153
+Info (12128): Elaborating entity "BCDto7Segs" for hierarchy "DisplayDriverALU4_4FP:DisplayDriver|BCDto7Segs:DisplayDecoder1" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/DisplayDriverALU4_4FP.vhd Line: 51
 Info (278001): Inferred 1 megafunctions from design logic
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult0" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 88
 Info (12130): Elaborated megafunction instantiation "lpm_mult:Mult0" File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/ALU8BitsDisplaysFP.vhd Line: 88
@@ -506,9 +506,9 @@ Info (21057): Implemented 155 device resources after synthesis - the final resou
     Info (21061): Implemented 118 logic cells
     Info (21062): Implemented 1 DSP elements
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 19 warnings
-    Info: Peak virtual memory: 529 megabytes
-    Info: Processing ended: Thu Nov  9 00:52:33 2023
+    Info: Peak virtual memory: 518 megabytes
+    Info: Processing ended: Sat Nov 18 21:56:29 2023
     Info: Elapsed time: 00:00:06
-    Info: Total CPU time (on all processors): 00:00:18
+    Info: Total CPU time (on all processors): 00:00:20
 
 

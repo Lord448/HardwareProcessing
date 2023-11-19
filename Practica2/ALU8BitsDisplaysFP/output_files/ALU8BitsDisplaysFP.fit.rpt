@@ -1,5 +1,5 @@
 Fitter report for ALU8BitsDisplaysFP
-Thu Nov  9 00:52:36 2023
+Sat Nov 18 21:56:32 2023
 Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 
 
@@ -69,7 +69,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Fitter Summary                                                                      ;
 +------------------------------------+------------------------------------------------+
-; Fitter Status                      ; Successful - Thu Nov  9 00:52:36 2023          ;
+; Fitter Status                      ; Successful - Sat Nov 18 21:56:32 2023          ;
 ; Quartus Prime Version              ; 22.1std.2 Build 922 07/20/2023 SC Lite Edition ;
 ; Revision Name                      ; ALU8BitsDisplaysFP                             ;
 ; Top-level Entity Name              ; ALU8BitsDisplaysFP                             ;
@@ -157,13 +157,13 @@ https://fpgasoftware.intel.com/eula.
 ; Number detected on machine ; 16          ;
 ; Maximum allowed            ; 16          ;
 ;                            ;             ;
-; Average used               ; 1.08        ;
+; Average used               ; 1.10        ;
 ; Maximum used               ; 16          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.5%      ;
-;     Processors 3-16        ;   0.5%      ;
+;     Processor 2            ;   0.6%      ;
+;     Processors 3-16        ;   0.6%      ;
 +----------------------------+-------------+
 
 
@@ -1195,9 +1195,9 @@ Warning (169177): 22 pins must meet Intel FPGA requirements for 3.3-, 3.0-, and 
 Info (144001): Generated suppressed messages file /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica2/ALU8BitsDisplaysFP/output_files/ALU8BitsDisplaysFP.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 5 warnings
     Info: Peak virtual memory: 1937 megabytes
-    Info: Processing ended: Thu Nov  9 00:52:37 2023
+    Info: Processing ended: Sat Nov 18 21:56:32 2023
     Info: Elapsed time: 00:00:03
-    Info: Total CPU time (on all processors): 00:00:05
+    Info: Total CPU time (on all processors): 00:00:04
 
 
 +----------------------------+

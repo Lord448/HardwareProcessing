@@ -29,7 +29,7 @@ architecture rtl of ALU8BitsDisplaysFP is
         port (
             i_CLK        : in  std_logic;
             i_OpSel      : in  std_logic_vector(1 downto 0);
-            i_Number     : in  std_logic_vector(15 downto 0); --Number with fixed point in the middle (0x00.00)
+            i_Number     : in  std_logic_vector(15 downto 0);
             i_FixedPoint : in  std_logic_vector(3 downto 0);
             o_Displays   : out std_logic_vector(3 downto 0);
             o_Segments   : out std_logic_vector(6 downto 0);

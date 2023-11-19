@@ -27,8 +27,6 @@ architecture rtl of DisplayDriverALU4_4FP is
             i_ChipEn          : in  std_logic;                     --Chip enable (works with PNP transistors)
             i_Number          : in  std_logic_vector(3 downto 0);  --Number that will be displayed
             o_DisplaySegments : out std_logic_vector(6 downto 0)  --Display segments vector
-            --o_DispEnable      : out std_logic;                     --Out pin to enable the display (works with i_ChipEn)
-            --o_DispPoint       : out std_logic                      --Turns up or down the display point (works with i_DispPoint)
         );
     end component BCDTo7Segs;
     
@@ -57,7 +55,6 @@ begin
         o_DisplaySegments => r_SegsConn1
 
     );
-
     DisplayDecoder2 : BCDTo7Segs port map (
         i_DispPoint       => '0',
         i_ChipEN          => '1',
@@ -71,7 +68,6 @@ begin
         i_Number          => r_DecPNumber(7 downto 4),
         o_DisplaySegments => r_SegsConn3
     );
-
     DisplayDecoder4 : BCDTo7Segs port map (
         i_DispPoint       => '0',
         i_ChipEN          => '1',
@@ -162,12 +158,6 @@ begin
                 end if;
         end case;
     end process;
-	 
-    --Selecting the sign bit
-    --with i_OpSel select r_NumberSign <=
-    --   '0' when "00",
-    --   i_Number(12) when "01",
-    --   i_Number(15)  when others; --Multiplication
 
     r_NumberSign <= i_Number(15);
 

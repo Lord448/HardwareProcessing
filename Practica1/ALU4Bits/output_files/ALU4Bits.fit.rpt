@@ -1,5 +1,5 @@
 Fitter report for ALU4Bits
-Sat Sep 23 00:33:35 2023
+Wed Nov 15 22:59:59 2023
 Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 
 
@@ -55,7 +55,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Fitter Summary                                                                      ;
 +------------------------------------+------------------------------------------------+
-; Fitter Status                      ; Failed - Sat Sep 23 00:33:35 2023              ;
+; Fitter Status                      ; Failed - Wed Nov 15 22:59:59 2023              ;
 ; Quartus Prime Version              ; 22.1std.2 Build 922 07/20/2023 SC Lite Edition ;
 ; Revision Name                      ; ALU4Bits                                       ;
 ; Top-level Entity Name              ; ALU4Bits                                       ;
@@ -653,25 +653,25 @@ Info (169124): Fitter converted 4 user pins into dedicated programming pins
     Info (169125): Pin ~ALTERA_DCLK~ is reserved at location 12
     Info (169125): Pin ~ALTERA_DATA0~ is reserved at location 13
 Warning (15714): Some pins have incomplete I/O assignments. Refer to the I/O Assignment Warnings report for details
-Error (169026): Pin RES[1] with I/O standard assignment 3.3-V LVCMOS is incompatible with I/O bank 5. I/O standard 3.3-V LVCMOS, has a VCCIO requirement of 3.3V, which incompatible with the I/O bank's VCCIO setting or with other output or bidirectional pins in the I/O bank using a VCCIO requirement of 3.0V. Assign output and bidirectional pins with different VCCIO requirements to different I/O banks, or change the I/O standard assignment for the specified pin to a compatible I/O standard. The Intel FPGA Knowledge Database contains many articles with specific details on how to resolve this error. Visit the Knowledge Database at https://www.altera.com/support/support-resources/knowledge-base/search.html and search for this specific error message number. File: /home/lord448/altera/ALU4Bits/ALU4Bits.vhd Line: 14
-    Info (169073): Pin RES[0] in I/O bank 5 uses VCCIO 3.0V File: /home/lord448/altera/ALU4Bits/ALU4Bits.vhd Line: 14
-Error (169026): Pin RES[2] with I/O standard assignment 3.3-V LVCMOS is incompatible with I/O bank 5. I/O standard 3.3-V LVCMOS, has a VCCIO requirement of 3.3V, which incompatible with the I/O bank's VCCIO setting or with other output or bidirectional pins in the I/O bank using a VCCIO requirement of 3.0V. Assign output and bidirectional pins with different VCCIO requirements to different I/O banks, or change the I/O standard assignment for the specified pin to a compatible I/O standard. The Intel FPGA Knowledge Database contains many articles with specific details on how to resolve this error. Visit the Knowledge Database at https://www.altera.com/support/support-resources/knowledge-base/search.html and search for this specific error message number. File: /home/lord448/altera/ALU4Bits/ALU4Bits.vhd Line: 14
-    Info (169073): Pin RES[0] in I/O bank 5 uses VCCIO 3.0V File: /home/lord448/altera/ALU4Bits/ALU4Bits.vhd Line: 14
-Error (169026): Pin RES[3] with I/O standard assignment 3.3-V LVCMOS is incompatible with I/O bank 5. I/O standard 3.3-V LVCMOS, has a VCCIO requirement of 3.3V, which incompatible with the I/O bank's VCCIO setting or with other output or bidirectional pins in the I/O bank using a VCCIO requirement of 3.0V. Assign output and bidirectional pins with different VCCIO requirements to different I/O banks, or change the I/O standard assignment for the specified pin to a compatible I/O standard. The Intel FPGA Knowledge Database contains many articles with specific details on how to resolve this error. Visit the Knowledge Database at https://www.altera.com/support/support-resources/knowledge-base/search.html and search for this specific error message number. File: /home/lord448/altera/ALU4Bits/ALU4Bits.vhd Line: 14
-    Info (169073): Pin RES[0] in I/O bank 5 uses VCCIO 3.0V File: /home/lord448/altera/ALU4Bits/ALU4Bits.vhd Line: 14
+Error (169026): Pin RES[1] with I/O standard assignment 3.3-V LVCMOS is incompatible with I/O bank 5. I/O standard 3.3-V LVCMOS, has a VCCIO requirement of 3.3V, which incompatible with the I/O bank's VCCIO setting or with other output or bidirectional pins in the I/O bank using a VCCIO requirement of 3.0V. Assign output and bidirectional pins with different VCCIO requirements to different I/O banks, or change the I/O standard assignment for the specified pin to a compatible I/O standard. The Intel FPGA Knowledge Database contains many articles with specific details on how to resolve this error. Visit the Knowledge Database at https://www.altera.com/support/support-resources/knowledge-base/search.html and search for this specific error message number. File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica1/ALU4Bits/ALU4Bits.vhd Line: 14
+    Info (169073): Pin RES[0] in I/O bank 5 uses VCCIO 3.0V File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica1/ALU4Bits/ALU4Bits.vhd Line: 14
+Error (169026): Pin RES[2] with I/O standard assignment 3.3-V LVCMOS is incompatible with I/O bank 5. I/O standard 3.3-V LVCMOS, has a VCCIO requirement of 3.3V, which incompatible with the I/O bank's VCCIO setting or with other output or bidirectional pins in the I/O bank using a VCCIO requirement of 3.0V. Assign output and bidirectional pins with different VCCIO requirements to different I/O banks, or change the I/O standard assignment for the specified pin to a compatible I/O standard. The Intel FPGA Knowledge Database contains many articles with specific details on how to resolve this error. Visit the Knowledge Database at https://www.altera.com/support/support-resources/knowledge-base/search.html and search for this specific error message number. File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica1/ALU4Bits/ALU4Bits.vhd Line: 14
+    Info (169073): Pin RES[0] in I/O bank 5 uses VCCIO 3.0V File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica1/ALU4Bits/ALU4Bits.vhd Line: 14
+Error (169026): Pin RES[3] with I/O standard assignment 3.3-V LVCMOS is incompatible with I/O bank 5. I/O standard 3.3-V LVCMOS, has a VCCIO requirement of 3.3V, which incompatible with the I/O bank's VCCIO setting or with other output or bidirectional pins in the I/O bank using a VCCIO requirement of 3.0V. Assign output and bidirectional pins with different VCCIO requirements to different I/O banks, or change the I/O standard assignment for the specified pin to a compatible I/O standard. The Intel FPGA Knowledge Database contains many articles with specific details on how to resolve this error. Visit the Knowledge Database at https://www.altera.com/support/support-resources/knowledge-base/search.html and search for this specific error message number. File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica1/ALU4Bits/ALU4Bits.vhd Line: 14
+    Info (169073): Pin RES[0] in I/O bank 5 uses VCCIO 3.0V File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica1/ALU4Bits/ALU4Bits.vhd Line: 14
 Info (171121): Fitter preparation operations ending: elapsed time is 00:00:00
 Warning (171167): Found invalid Fitter assignments. See the Ignored Assignments panel in the Fitter Compilation Report for more information.
 Error (171000): Can't fit design in device
 Warning (169177): 6 pins must meet Intel FPGA requirements for 3.3-, 3.0-, and 2.5-V interfaces. For more information, refer to AN 447: Interfacing Cyclone IV E Devices with 3.3/3.0/2.5-V LVTTL/LVCMOS I/O Systems.
-    Info (169178): Pin INA[0] uses I/O standard 3.3-V LVCMOS at 28 File: /home/lord448/altera/ALU4Bits/ALU4Bits.vhd Line: 11
-    Info (169178): Pin INA[1] uses I/O standard 3.3-V LVCMOS at 31 File: /home/lord448/altera/ALU4Bits/ALU4Bits.vhd Line: 11
-    Info (169178): Pin INB[2] uses I/O standard 3.3-V LVCMOS at 72 File: /home/lord448/altera/ALU4Bits/ALU4Bits.vhd Line: 12
-    Info (169178): Pin INA[2] uses I/O standard 3.3-V LVCMOS at 33 File: /home/lord448/altera/ALU4Bits/ALU4Bits.vhd Line: 11
-    Info (169178): Pin INB[3] uses I/O standard 3.3-V LVCMOS at 70 File: /home/lord448/altera/ALU4Bits/ALU4Bits.vhd Line: 12
-    Info (169178): Pin INA[3] uses I/O standard 3.3-V LVCMOS at 38 File: /home/lord448/altera/ALU4Bits/ALU4Bits.vhd Line: 11
+    Info (169178): Pin INA[0] uses I/O standard 3.3-V LVCMOS at 28 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica1/ALU4Bits/ALU4Bits.vhd Line: 11
+    Info (169178): Pin INA[1] uses I/O standard 3.3-V LVCMOS at 31 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica1/ALU4Bits/ALU4Bits.vhd Line: 11
+    Info (169178): Pin INB[2] uses I/O standard 3.3-V LVCMOS at 72 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica1/ALU4Bits/ALU4Bits.vhd Line: 12
+    Info (169178): Pin INA[2] uses I/O standard 3.3-V LVCMOS at 33 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica1/ALU4Bits/ALU4Bits.vhd Line: 11
+    Info (169178): Pin INB[3] uses I/O standard 3.3-V LVCMOS at 70 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica1/ALU4Bits/ALU4Bits.vhd Line: 12
+    Info (169178): Pin INA[3] uses I/O standard 3.3-V LVCMOS at 38 File: /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica1/ALU4Bits/ALU4Bits.vhd Line: 11
 Error: Quartus Prime Fitter was unsuccessful. 4 errors, 5 warnings
     Error: Peak virtual memory: 386 megabytes
-    Error: Processing ended: Sat Sep 23 00:33:35 2023
+    Error: Processing ended: Wed Nov 15 22:59:59 2023
     Error: Elapsed time: 00:00:01
     Error: Total CPU time (on all processors): 00:00:01
 
