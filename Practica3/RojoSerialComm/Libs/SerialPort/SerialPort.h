@@ -21,16 +21,17 @@
 #include <termios.h>
 #include <unistd.h>
 
-typedef struct Configs {
+typedef struct SerialConfigs {
     char port[16];
+    int portnum;
     char parity[8];
     int baudrate;
     int length;
     int stopbit;
     bool canonical;
-}Configs;
+}SerialConfigs;
 
-int set_interface_attribs(int fd, int speed, Configs config);
+int set_interface_attribs(int fd, int speed, SerialConfigs config);
 
 void set_mincount(int fd, int mcount);
 

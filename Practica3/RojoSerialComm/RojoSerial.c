@@ -37,7 +37,7 @@
 #define  READALL_TOOMUCH    -3  /* Too much input */
 #define  READALL_NOMEM      -4  /* Out of memory */
 
-#define DEFAULT_PORT "/dev/ttyACM0 " //STM32 Virtual Comm
+#define DEFAULT_PORT "/dev/ttyUSB0 " //STM32 Virtual Comm
 #define DEFAULT_BAUDRATE "115200 "
 #define DEFAULT_PARITY "NO "
 #define DEFAULT_LENGTH "8 "
@@ -81,7 +81,7 @@
 /**
  * Argument options:
  * p: Port to connect
- * s: Save the port to the configs
+ * s: Save the port to the serialConfigs
  * b: Baudrate
  * 
 */
@@ -98,8 +98,9 @@ typedef enum shellColors {
     reset = 0
 }shellColors;
 
-Configs configs = {
-    .port = "/dev/ttyACM0", //STM32 Virtual COM Port
+SerialConfigs serialConfigs = {
+    .port = "/dev/ttyUSB0", //STM32 Virtual COM Port
+    .portnum = 1,
     .parity = "NO",
     .baudrate = B115200,
     .length = CS8,
@@ -122,6 +123,7 @@ void printfColor(shellColors color, char *format, ...);
 
 //Globals 
 char *optarg;
+sem_t sem;
 
 int main(int argc, char *argv[])
 {
@@ -140,7 +142,6 @@ int main(int argc, char *argv[])
     ssize_t n_bytes = 0;
     size_t command_len = 0;
     pthread_t thread_id;
-    sem_t sem;
     
     /***
      * ---------------------------------------------------------------------
@@ -175,11 +176,11 @@ int main(int argc, char *argv[])
         if(fileBuffer[0] == 'P') {
             if(fileBuffer[1] == 'o') { //Port
                 for(int i = 6, j = 0; fileBuffer[i] != ' '; i++, j++) //Copy data
-                    configs.port[j] = fileBuffer[i];
+                    serialConfigs.port[j] = fileBuffer[i];
             }
             else if(fileBuffer[1] == 'a') { //Parity
                 for(int i = 8, j = 0; fileBuffer[i] != ' '; i++, j++)
-                    configs.port[j] = fileBuffer[i];
+                    serialConfigs.port[j] = fileBuffer[i];
             }
             else {
                 errorReport("Could not read the file correctly\n");
@@ -195,10 +196,10 @@ int main(int argc, char *argv[])
             switch (rawBaud)
             {
                 case 115200:
-                    configs.baudrate = B115200;
+                    serialConfigs.baudrate = B115200;
                     break;
                 case 9600:
-                    configs.baudrate = B9600;
+                    serialConfigs.baudrate = B9600;
                     break;
                 default:
                     printf("Warning: No standard baudrate\n");
@@ -212,16 +213,16 @@ int main(int argc, char *argv[])
             switch(rawLength)
             {
                 case 8:
-                    configs.length = CS8;
+                    serialConfigs.length = CS8;
                     break;
                 case 7:
-                    configs.length = CS7;
+                    serialConfigs.length = CS7;
                     break;
                 case 6:
-                    configs.length = CS6;
+                    serialConfigs.length = CS6;
                     break;
                 case 5:
-                    configs.length = CS5;
+                    serialConfigs.length = CS5;
                     break;
                 default:
                     printf("Not a standard info length\n");
@@ -235,9 +236,9 @@ int main(int argc, char *argv[])
             switch(rawStop)
             {
                 case 1:
-                    configs.stopbit = CSTOPB;
+                    serialConfigs.stopbit = CSTOPB;
                 case 2:
-                    configs.stopbit = CSTOPB;
+                    serialConfigs.stopbit = CSTOPB;
                 break;
                 default:
                     printf("Could not read the stop bit\n");
@@ -248,9 +249,9 @@ int main(int argc, char *argv[])
         fgets(fileBuffer, sizeof(fileBuffer), config); //Canonical
         if(fileBuffer[0] == 'C') {
             if(fileBuffer[11] == '0')
-                configs.canonical = false;
+                serialConfigs.canonical = false;
             else
-                configs.canonical = true;
+                serialConfigs.canonical = true;
         }
     }
 
@@ -265,16 +266,16 @@ int main(int argc, char *argv[])
         switch (opt)
         {
             case 'p':
-                strcpy(configs.port, optarg);
+                strcpy(serialConfigs.port, optarg);
                 printf("Selected port: %s\n", optarg);
             case 'b':
                 switch(atoi(optarg))
                 {
                     case 115200:
-                        configs.baudrate = B115200;
+                        serialConfigs.baudrate = B115200;
                         break;
                     case 9600:
-                        configs.baudrate = B9600;
+                        serialConfigs.baudrate = B9600;
                         break;
                 }
             case 's':
@@ -290,13 +291,13 @@ int main(int argc, char *argv[])
 
         config = fopen("/data/RojoSerialGeneral.config", "r+");
         if(config == NULL) {
-            printf("Couldn't read the config file to write the port");
+            printf("Couldn't read the config file to write the port\n");
         }
         else {
             while(ch == fgetc(config) != EOF) {
                 if(ch == 'P') {
                     fseek(config, 6, SEEK_CUR);
-                    sprintf(newport, "%s \n", configs.port);
+                    sprintf(newport, "%s \n", serialConfigs.port);
                     fputs(newport, config);
                     break;
                 }
@@ -309,21 +310,23 @@ int main(int argc, char *argv[])
      *                  Setting connection with the desired port
      * -----------------------------------------------------------------------
     */
-    fd = open(configs.port, O_RDWR | O_NOCTTY | O_SYNC);
+    fd = open(serialConfigs.port, O_RDWR | O_NOCTTY | O_SYNC);
     if(fd < 0) {
-        printf("Error opening %s: %s \n", configs.port, strerror(errno));
+        printf("Error opening %s: %s \n", serialConfigs.port, strerror(errno));
         exit(errno);
     }
-    set_interface_attribs(fd, B115200, configs);
+    set_interface_attribs(fd, B115200, serialConfigs);
     //New thread for the receive callbacks
     //sendData(fd, "Conn");
     usleep(300*100);
     tcflush(fd, TCIFLUSH);
-    printf("Waiting a \"Ready\" string from: %s\n", configs.port);
+    printf("Port: %s Port Number: %d\n", serialConfigs.port, serialConfigs.portnum);
     //receiveDataUntil(fd, "Ready");
     pthread_create(&thread_id, NULL, ReceiveDataThread, (void *) &fd);
+    //Initializing the semaphore
     if(sem_init(&sem, 1, 0) != 0)
         errorReport("Cannot init the semaphore");
+    sem_post(&sem);
     /***
      * -----------------------------------------------------------------------
      *                         Setting shell enviroment
@@ -331,11 +334,19 @@ int main(int argc, char *argv[])
     */
     while (1)
     {
+        const int waitSecs = 2;
+        /*
+        for(int i = 0; i < waitSecs; i++) {
+            if(sem_trywait(&sem) == 0)
+                break;
+            if(i == waitSecs)
+        }
+        */
         printf("\033[1;36mRojoSerial>>\033[0m ");
         n_bytes = getline(&command, &command_len, stdin);
         command[n_bytes -1] = '\0';
 
-        //Alocating 
+        //Allocating 
         serialCommand = (char *) malloc(sizeof(char)*command_len+1);
         if(serialCommand == NULL)
             errorReport("Could not init serialCommand string");
@@ -368,10 +379,12 @@ int main(int argc, char *argv[])
         if(hasAnArgument) {
             if(strcmp(serialCommand, "port") == 0) { //Changing port
                 //Changing port
+                //Open a new connection
             }
-            else if(strcmp(serialCommand, "send") == 0) {
+            else if(strcmp(serialCommand, "send") == 0) { //Send data to a port
                 //sendData(fd, serialArgument);
-                printf("Sending: %s\n", serialCommand);
+                printf("Sending to %s: %s\n", serialConfigs.port, serialCommand);
+                sendData(fd, serialCommand);
             }
             else {
                 if(fork() == 0)
@@ -384,10 +397,12 @@ int main(int argc, char *argv[])
             }
         }
         else { //Is a standard data to send
+            memset(serialData, '\0', command_len+1);
             for(int i = 0; i < command_len; i++)
                 serialData[i] = command[i];
+            printf("\033[1;31mRojoSerial>>\033[0m ");
+            printf("Sending to %s: %s\n", serialConfigs.port, serialData);
             sendData(fd, serialData);
-            printf("Sending: %s\n", command);
         }
         free(serialArgument);
         free(serialCommand);
@@ -401,13 +416,12 @@ int main(int argc, char *argv[])
  *                            Threads
  * ----------------------------------------------------------------
 */
-//TODO: Solve bug of no printing the things right
 static void *ReceiveDataThread(void *vargp) {
     int *argptr = (int *) vargp;
     int fd = *argptr;
 
     sleep(1);
-    performReading(fd, configs.port);
+    performReading(fd, serialConfigs.port);
 }
 
 /***
@@ -592,7 +606,6 @@ static void performReading(int fd, char *port) {
         if(rdlen > 0) {
             //Checking a difference
             memcpy(signedbuf, buf, 80);
-            printf("Dat: %s", signedbuf);
             DataReceivedCallback(signedbuf, port);
         }
         else if(rdlen < 0) {
@@ -612,7 +625,7 @@ static void performReading(int fd, char *port) {
 static void DataReceivedCallback(char *buffer, char *port) {
     printf("\033[1;32m%s>>\033[0m ", port);
     printf("%s", buffer);
-    printf("\033[1;36mRojoSerial>>\033[0m ");
+    sem_post(&sem);
 }
 
 //Not Working
@@ -631,4 +644,9 @@ void printfColor(shellColors color, char *format, ...) {
     va_start(args, format);
     vprintf(finalFormat, args);
     va_end(args);
+}
+
+void shellPrint(char *str) {
+    printf("\033[1;36mRojoSerial>>\033[0m ");
+    printf("%s\n", str);
 }

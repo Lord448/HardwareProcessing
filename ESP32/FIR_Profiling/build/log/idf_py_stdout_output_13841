@@ -1,0 +1,123 @@
+[1/9] Performing build step for 'bootloader'
+[1/1] cd /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/build/bootloader/esp-idf/esptool_py && /home/lord448/.espressif/python_env/idf5.0_py3.10_env/bin/python /home/lord448/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/build/bootloader/bootloader.bin
+Bootloader binary size 0x6710 bytes. 0x8f0 bytes (8%) free.
+[2/7] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:50:30: warning: excess elements in array initializer
+   50 |                        0.01, 0.02, 0.10, 0.05,
+      |                              ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:50:30: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:50:36: warning: excess elements in array initializer
+   50 |                        0.01, 0.02, 0.10, 0.05,
+      |                                    ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:50:36: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:50:42: warning: excess elements in array initializer
+   50 |                        0.01, 0.02, 0.10, 0.05,
+      |                                          ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:50:42: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:51:28: warning: excess elements in array initializer
+   51 |                            0.05, 0.01, 0.03, 0.12,
+      |                            ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:51:28: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:51:34: warning: excess elements in array initializer
+   51 |                            0.05, 0.01, 0.03, 0.12,
+      |                                  ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:51:34: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:51:40: warning: excess elements in array initializer
+   51 |                            0.05, 0.01, 0.03, 0.12,
+      |                                        ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:51:40: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:51:46: warning: excess elements in array initializer
+   51 |                            0.05, 0.01, 0.03, 0.12,
+      |                                              ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:51:46: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:52:28: warning: excess elements in array initializer
+   52 |                            0.02, -0.40, -0.48, 0.13,
+      |                            ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:52:28: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:52:34: warning: excess elements in array initializer
+   52 |                            0.02, -0.40, -0.48, 0.13,
+      |                                  ^
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:52:34: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:52:41: warning: excess elements in array initializer
+   52 |                            0.02, -0.40, -0.48, 0.13,
+      |                                         ^
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:52:41: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:52:48: warning: excess elements in array initializer
+   52 |                            0.02, -0.40, -0.48, 0.13,
+      |                                                ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:52:48: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:53:28: warning: excess elements in array initializer
+   53 |                            0.01, 0.13, 0.02, -0.03,
+      |                            ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:53:28: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:53:34: warning: excess elements in array initializer
+   53 |                            0.01, 0.13, 0.02, -0.03,
+      |                                  ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:53:34: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:53:40: warning: excess elements in array initializer
+   53 |                            0.01, 0.13, 0.02, -0.03,
+      |                                        ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:53:40: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:53:46: warning: excess elements in array initializer
+   53 |                            0.01, 0.13, 0.02, -0.03,
+      |                                              ^
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:53:46: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:54:28: warning: excess elements in array initializer
+   54 |                            0.01, 0.02, 0.10, 0.05,
+      |                            ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:54:28: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:54:34: warning: excess elements in array initializer
+   54 |                            0.01, 0.02, 0.10, 0.05,
+      |                                  ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:54:34: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:54:40: warning: excess elements in array initializer
+   54 |                            0.01, 0.02, 0.10, 0.05,
+      |                                        ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:54:40: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:54:46: warning: excess elements in array initializer
+   54 |                            0.01, 0.02, 0.10, 0.05,
+      |                                              ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:54:46: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:55:28: warning: excess elements in array initializer
+   55 |                            0.05, 0.01, 0.03, 0.12,
+      |                            ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:55:28: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:55:34: warning: excess elements in array initializer
+   55 |                            0.05, 0.01, 0.03, 0.12,
+      |                                  ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:55:34: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:55:40: warning: excess elements in array initializer
+   55 |                            0.05, 0.01, 0.03, 0.12,
+      |                                        ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:55:40: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:55:46: warning: excess elements in array initializer
+   55 |                            0.05, 0.01, 0.03, 0.12,
+      |                                              ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:55:46: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:56:28: warning: excess elements in array initializer
+   56 |                            0.02, -0.40, -0.48, 0.13};
+      |                            ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:56:28: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:56:34: warning: excess elements in array initializer
+   56 |                            0.02, -0.40, -0.48, 0.13};
+      |                                  ^
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:56:34: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:56:41: warning: excess elements in array initializer
+   56 |                            0.02, -0.40, -0.48, 0.13};
+      |                                         ^
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:56:41: note: (near initialization for 'H')
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:56:48: warning: excess elements in array initializer
+   56 |                            0.02, -0.40, -0.48, 0.13};
+      |                                                ^~~~
+/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/main/main.c:56:48: note: (near initialization for 'H')
+[3/7] Linking C static library esp-idf/main/libmain.a
+[4/7] Generating ld/sections.ld
+[5/7] Linking CXX executable FIR_Profiling.elf
+[6/7] Generating binary image from built executable
+esptool.py v4.5.1
+Creating esp32 image...
+Merged 2 ELF sections
+Successfully created esp32 image.
+Generated /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/build/FIR_Profiling.bin
+[7/7] cd /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/build/esp-idf/esptool_py && /home/lord448/.espressif/python_env/idf5.0_py3.10_env/bin/python /home/lord448/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/build/partition_table/partition-table.bin /home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/ESP32/FIR_Profiling/build/FIR_Profiling.bin
+FIR_Profiling.bin binary size 0x2d5d0 bytes. Smallest app partition is 0x100000 bytes. 0xd2a30 bytes (82%) free.

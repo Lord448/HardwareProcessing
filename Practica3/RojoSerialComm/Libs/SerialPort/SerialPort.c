@@ -2,7 +2,7 @@
 
 //#define CANONICAL_MODE
 
-int set_interface_attribs(int fd, int speed, Configs config)
+int set_interface_attribs(int fd, int speed, SerialConfigs config)
 {
     struct termios tty;
 
