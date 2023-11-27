@@ -1,0 +1,4 @@
+eclipse.preferences.version=1
+newSoftwareExampleWizardPage.defaultLocation=/home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica3/UART/software/HelloWorld2
+newSoftwareExampleWizardPage.sopcinfoFile=/home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica3/UART/NIOS2.sopcinfo
+newSoftwareExampleWizardPage2.newBspLocation=/home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica3/UART/software/HelloWorld2_bsp
