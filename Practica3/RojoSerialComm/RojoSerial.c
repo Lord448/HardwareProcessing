@@ -334,14 +334,17 @@ int main(int argc, char *argv[])
     */
     while (1)
     {
-        const int waitSecs = 2;
-        /*
-        for(int i = 0; i < waitSecs; i++) {
+        const int waitTrys = 2;
+        //Add wait only if tx
+        for(int i = 0; i < waitTrys; i++) { //Waiting for 1 second
+            shellPrint("Waiting for response");
             if(sem_trywait(&sem) == 0)
                 break;
-            if(i == waitSecs)
+            if(i == waitTrys) {
+                shellPrint("No response");
+            }
+            usleep(500*100); //500 milliseconds
         }
-        */
         printf("\033[1;36mRojoSerial>>\033[0m ");
         n_bytes = getline(&command, &command_len, stdin);
         command[n_bytes -1] = '\0';
