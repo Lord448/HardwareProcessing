@@ -1,0 +1,9 @@
+19:16:10 **** Incremental Build of configuration Nios II for project HelloWorld3 ****
+make all 
+Info: Building ../HelloWorld3_bsp/
+make --no-print-directory -C ../HelloWorld3_bsp/
+[BSP build complete]
+[HelloWorld3 build complete]
+
+19:16:10 Build Finished (took 213ms)
+

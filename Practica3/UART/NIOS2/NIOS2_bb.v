@@ -1,10 +1,30 @@
 
 module NIOS2 (
 	clk_clk,
+	control_pio_external_connection_export,
+	dip_tx_data_pio_external_connection_export,
+	parsedloop_irq_external_connection_export,
 	reset_reset_n,
-	pio_0_external_connection_export);	
+	status_leds_pio_external_connection_export,
+	uart_irq_external_connection_export,
+	uart_rx_data_reg_external_connection_export,
+	uart_rx_pi_external_connection_export,
+	uart_rx_status_reg_external_connection_export,
+	uart_tx_data_reg_external_connection_export,
+	uart_tx_po_external_connection_export,
+	uart_tx_start_external_connection_export);	
 
 	input		clk_clk;
+	input	[3:0]	control_pio_external_connection_export;
+	input	[7:0]	dip_tx_data_pio_external_connection_export;
+	input		parsedloop_irq_external_connection_export;
 	input		reset_reset_n;
-	output	[7:0]	pio_0_external_connection_export;
+	output	[3:0]	status_leds_pio_external_connection_export;
+	input	[1:0]	uart_irq_external_connection_export;
+	input	[7:0]	uart_rx_data_reg_external_connection_export;
+	output	[31:0]	uart_rx_pi_external_connection_export;
+	input	[1:0]	uart_rx_status_reg_external_connection_export;
+	output	[7:0]	uart_tx_data_reg_external_connection_export;
+	output	[31:0]	uart_tx_po_external_connection_export;
+	output		uart_tx_start_external_connection_export;
 endmodule

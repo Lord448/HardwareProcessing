@@ -4,43 +4,123 @@
 			"name" : "Top",
 			"pins" : [
 				{
-					"name" : "pio_0_external_connection_export[0]",
+					"name" : "o_Status_Leds[0]",
 					"strict" : false
 				},
 				{
-					"name" : "pio_0_external_connection_export[1]",
+					"name" : "o_Status_Leds[1]",
 					"strict" : false
 				},
 				{
-					"name" : "pio_0_external_connection_export[2]",
+					"name" : "o_Status_Leds[2]",
 					"strict" : false
 				},
 				{
-					"name" : "pio_0_external_connection_export[3]",
+					"name" : "o_Status_Leds[3]",
 					"strict" : false
 				},
 				{
-					"name" : "pio_0_external_connection_export[4]",
+					"name" : "o_TX",
 					"strict" : false
 				},
 				{
-					"name" : "pio_0_external_connection_export[5]",
+					"name" : "RS",
 					"strict" : false
 				},
 				{
-					"name" : "pio_0_external_connection_export[6]",
+					"name" : "ENA",
 					"strict" : false
 				},
 				{
-					"name" : "pio_0_external_connection_export[7]",
+					"name" : "DATA_LCD[0]",
 					"strict" : false
 				},
 				{
-					"name" : "clk_clk",
+					"name" : "DATA_LCD[1]",
 					"strict" : false
 				},
 				{
-					"name" : "reset_reset_n",
+					"name" : "DATA_LCD[2]",
+					"strict" : false
+				},
+				{
+					"name" : "DATA_LCD[3]",
+					"strict" : false
+				},
+				{
+					"name" : "DATA_LCD[4]",
+					"strict" : false
+				},
+				{
+					"name" : "DATA_LCD[5]",
+					"strict" : false
+				},
+				{
+					"name" : "DATA_LCD[6]",
+					"strict" : false
+				},
+				{
+					"name" : "DATA_LCD[7]",
+					"strict" : false
+				},
+				{
+					"name" : "i_CLK",
+					"strict" : false
+				},
+				{
+					"name" : "i_Reset",
+					"strict" : false
+				},
+				{
+					"name" : "i_Control_Port[2]",
+					"strict" : false
+				},
+				{
+					"name" : "i_TX_Data[2]",
+					"strict" : false
+				},
+				{
+					"name" : "i_Control_Port[1]",
+					"strict" : false
+				},
+				{
+					"name" : "i_TX_Data[1]",
+					"strict" : false
+				},
+				{
+					"name" : "i_Control_Port[0]",
+					"strict" : false
+				},
+				{
+					"name" : "i_TX_Data[0]",
+					"strict" : false
+				},
+				{
+					"name" : "i_Control_Port[3]",
+					"strict" : false
+				},
+				{
+					"name" : "i_TX_Data[3]",
+					"strict" : false
+				},
+				{
+					"name" : "i_TX_Data[4]",
+					"strict" : false
+				},
+				{
+					"name" : "i_TX_Data[5]",
+					"strict" : false
+				},
+				{
+					"name" : "i_TX_Data[7]",
+					"strict" : false
+				},
+				{
+					"name" : "i_TX_Data[6]",
+					"strict" : false
+				},
+				{
+					"name" : "i_RX",
 					"strict" : false
 				},
 				{
