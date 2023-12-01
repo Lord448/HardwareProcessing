@@ -1,6 +1,6 @@
-09:48:02 **** Clean-only build of configuration Nios II for project UART_LCD_bsp ****
-make clean 
-[BSP clean complete]
+17:29:01 **** Incremental Build of configuration Nios II for project UART_LCD_bsp ****
+make all 
+[BSP build complete]
 
-09:48:02 Build Finished (took 170ms)
+17:29:01 Build Finished (took 212ms)
 

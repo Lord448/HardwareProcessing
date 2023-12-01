@@ -78,13 +78,14 @@ architecture rtl of UART_PR is
 			reset_reset_n                                 : in  std_logic                     := 'X';             -- reset_n
 			status_leds_pio_external_connection_export    : out std_logic_vector(3 downto 0);                     -- export
 			uart_rx_data_reg_external_connection_export   : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- export
+			uart_rx_external_connection_export            : in  std_logic                     := 'X';             -- export
 			uart_rx_pi_external_connection_export         : out std_logic_vector(31 downto 0);                    -- export
 			uart_rx_status_reg_external_connection_export : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- export
 			uart_tx_data_reg_external_connection_export   : out std_logic_vector(7 downto 0);                     -- export
+			uart_tx_external_connection_export            : in  std_logic                     := 'X';             -- export
 			uart_tx_po_external_connection_export         : out std_logic_vector(31 downto 0);                    -- export
 			uart_tx_start_external_connection_export      : out std_logic;                                        -- export
-			uart_rx_external_connection_export            : in  std_logic                     := 'X';             -- export
-			uart_tx_external_connection_export            : in  std_logic                     := 'X'              -- export
+			start_timer_external_connection_export        : out std_logic                                         -- export
 		);
 	end component NIOS2;
 
@@ -114,7 +115,8 @@ architecture rtl of UART_PR is
 		);
 	end component UART;
 
-	constant PSCCountsFor1ms: integer := 50000; -- 1ms /20ns
+	constant PSCCountsFor1ms   : integer := 50000; -- 1ms /20ns
+	constant PSCCountsFor100us : integer := 5000; --1us / 20ns
 
 	-- UART Registers
 	signal r_TX_Done  		 : std_logic;
@@ -127,12 +129,15 @@ architecture rtl of UART_PR is
 	signal r_TX_Busy  		 : std_logic;
 
 	-- SoftProcessor Registers
-	signal r_Parse_Count  : integer range 0 to PSCCountsFor1ms := 0;
-	signal r_32Bit_TX     : std_logic_vector(31 downto 0);
-	signal r_32Bit_RX     : std_logic_vector(31 downto 0);
-	signal r_Control_Port : std_logic_vector(3 downto 0);
-	signal r_Status_Leds  : std_logic_vector(3 downto 0);
-	signal r_Parsed_Loop  : std_logic;
+	signal r_Parse_Count       : integer range 0 to PSCCountsFor1ms := 0;
+	signal r_Parse_Pulse_Width : integer range 0 to PSCCountsFor100us := 0;
+	signal r_32Bit_TX          : std_logic_vector(31 downto 0);
+	signal r_32Bit_RX          : std_logic_vector(31 downto 0);
+	signal r_Control_Port      : std_logic_vector(3 downto 0);
+	signal r_Status_Leds       : std_logic_vector(3 downto 0);
+	signal r_Start_Timer		   : std_logic := '0';
+	signal r_Parsed_Loop       : std_logic;
+	
 
 	-- LCD Registers
 	signal r_Ascii_TX : std_logic_vector(63 downto 0);
@@ -192,7 +197,9 @@ begin
 	r_UART_Status_Reg(0) <= r_TX_Busy;
 	r_UART_Status_Reg(1) <= r_RX_Error;
 	r_Control_Port		 <= not i_Control_Port; --Active High
-	o_Status_Leds		 <= not r_Status_Leds;  --Active High
+	o_Status_Leds(3)		  <= not r_Start_Timer;  --Active High
+	o_Status_Leds(2 downto 0) <= not r_Status_Leds(2 downto 0);
+
 
 	U_SoftProcessor : component NIOS2
 	port map (
@@ -209,7 +216,8 @@ begin
 		uart_tx_po_external_connection_export         => r_32Bit_TX,
 		uart_tx_start_external_connection_export      => r_TX_Start,
 		uart_rx_external_connection_export            => r_RX_Done,
-		uart_tx_external_connection_export            => r_TX_Done
+		uart_tx_external_connection_export            => r_TX_Done,
+		start_timer_external_connection_export        => r_Start_Timer
 	);
 
 	U_UART : UART
@@ -228,18 +236,29 @@ begin
 	);
 	
 
-	p_ParsedLoopTimer : process (i_CLK) -- 50MHz - 20ns
+	p_ParsedLoopTimer : process (i_CLK, r_Start_Timer) -- 50MHz - 20ns
 	-- Timer PSC @ 1ms
   	begin
-		if rising_edge(i_CLK) then
-			if r_Parse_Count < PSCCountsFor1ms then 
-				r_Parse_Count <= r_Parse_Count + 1;
-				r_Parsed_Loop <= '0';
-			else -- Pulse width of 20 ns
-				r_Parse_Count <= 0;
-				r_Parsed_Loop <= '1';
+		if r_Start_Timer = '1' then 
+			if rising_edge(i_CLK) then
+				if r_Parse_Count < PSCCountsFor1ms then  --State off 
+					r_Parse_Count <= r_Parse_Count + 1;
+					r_Parsed_Loop <= '0';
+				else -- Pulse width of 20 ns
+					if r_Parse_Pulse_Width < PSCCountsFor100us then --State on
+						r_Parse_Pulse_Width <= r_Parse_Pulse_Width + 1;
+						r_Parsed_Loop <= '1';
+					else
+						r_Parse_Count <= 0;
+						r_Parse_Pulse_Width <= 0;
+					end if;
+				end if;
 			end if;
-		end if;
+		else
+			r_Parse_Count <= 0;
+			r_Parse_Pulse_Width <= 0;
+			r_Parsed_Loop <= '0';
+		end if;	
 	end process;
 
 	tx1 : HexToAscii port map(r_32Bit_TX(3 downto 0), r_Ascii_TX(7 downto 0));

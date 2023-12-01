@@ -1,6 +1,6 @@
 <sld_project_info>
   <project>
-    <hash md5_digest_80b="118863921f136993edb3"/>
+    <hash md5_digest_80b="9675959914a329856779"/>
   </project>
   <file_info>
     <file device="EP4CE6E22C8" path="UART_time_limited.sof" usercode="0xFFFFFFFF"/>
@@ -140,7 +140,7 @@
   <sld_infos>
     <sld_info hpath="NIOS2:U_SoftProcessor" name="U_SoftProcessor">
       <assignment_values>
-        <assignment_value text="QSYS_NAME NIOS2 HAS_SOPCINFO 1 GENERATION_ID 1701445158"/>
+        <assignment_value text="QSYS_NAME NIOS2 HAS_SOPCINFO 1 GENERATION_ID 1701467901"/>
       </assignment_values>
       <parameters/>
     </sld_info>

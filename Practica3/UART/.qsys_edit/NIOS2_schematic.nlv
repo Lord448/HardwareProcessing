@@ -1,40 +1,42 @@
 # # File gsaved with Nlview version 6.3.8  2013-12-19 bk=1.2992 VDI=34 GEI=35
 # 
 preplace inst NIOS2.ParsedLoop_IRQ -pg 1 -lvl 3 -y 30
-preplace inst NIOS2.Control_PIO -pg 1 -lvl 3 -y 850
+preplace inst NIOS2.Control_PIO -pg 1 -lvl 3 -y 970
 preplace inst NIOS2.clk_0 -pg 1 -lvl 1 -y 210
-preplace inst NIOS2.UART_TX_32_PO -pg 1 -lvl 3 -y 650
-preplace inst NIOS2.Status_LEDS_PIO -pg 1 -lvl 3 -y 1050
-preplace inst NIOS2.UART_IRQ -pg 1 -lvl 3 -y 430
-preplace inst NIOS2.UART_TX_START -pg 1 -lvl 3 -y 1150
-preplace inst NIOS2.UART_RX_STATUS_REG -pg 1 -lvl 3 -y 550
-preplace inst NIOS2.UART_RX_32_PO -pg 1 -lvl 3 -y 330
+preplace inst NIOS2.UART_TX_32_PO -pg 1 -lvl 3 -y 770
+preplace inst NIOS2.Status_LEDS_PIO -pg 1 -lvl 3 -y 1170
+preplace inst NIOS2.UART_TX_START -pg 1 -lvl 3 -y 1270
+preplace inst NIOS2.UART_RX_STATUS_REG -pg 1 -lvl 3 -y 670
+preplace inst NIOS2.UART_RX_32_PO -pg 1 -lvl 3 -y 450
 preplace inst NIOS2 -pg 1 -lvl 1 -y 40 -regy -20
 preplace inst NIOS2.nios2_gen2_0 -pg 1 -lvl 2 -y 190
-preplace inst NIOS2.UART_RX_DATA_REG -pg 1 -lvl 3 -y 1250
+preplace inst NIOS2.UART_RX_DATA_REG -pg 1 -lvl 3 -y 1370
+preplace inst NIOS2.UART_TX -pg 1 -lvl 3 -y 550
 preplace inst NIOS2.nios2_gen2_0.cpu -pg 1
 preplace inst NIOS2.nios2_gen2_0.reset_bridge -pg 1
-preplace inst NIOS2.onchip_memory2_0 -pg 1 -lvl 3 -y 150
-preplace inst NIOS2.UART_TX_DATA_REG -pg 1 -lvl 3 -y 750
+preplace inst NIOS2.UART_RX -pg 1 -lvl 3 -y 150
+preplace inst NIOS2.onchip_memory2_0 -pg 1 -lvl 3 -y 270
+preplace inst NIOS2.UART_TX_DATA_REG -pg 1 -lvl 3 -y 870
 preplace inst NIOS2.nios2_gen2_0.clock_bridge -pg 1
-preplace inst NIOS2.jtag_uart_0 -pg 1 -lvl 3 -y 230
-preplace inst NIOS2.DIP_TX_Data_PIO -pg 1 -lvl 3 -y 950
-preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)NIOS2.uart_rx_status_reg_external_connection,(SLAVE)UART_RX_STATUS_REG.external_connection) 1 0 3 NJ 580 NJ 580 NJ
-preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)NIOS2.uart_irq_external_connection,(SLAVE)UART_IRQ.external_connection) 1 0 3 NJ 460 NJ 460 NJ
-preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)Control_PIO.external_connection,(SLAVE)NIOS2.control_pio_external_connection) 1 0 3 NJ 880 NJ 880 NJ
-preplace netloc FAN_OUT<net_container>NIOS2</net_container>(SLAVE)nios2_gen2_0.clk,(SLAVE)Control_PIO.clk,(SLAVE)UART_TX_32_PO.clk,(SLAVE)UART_TX_START.clk,(SLAVE)Status_LEDS_PIO.clk,(SLAVE)jtag_uart_0.clk,(SLAVE)UART_IRQ.clk,(SLAVE)UART_RX_STATUS_REG.clk,(MASTER)clk_0.clk,(SLAVE)UART_RX_DATA_REG.clk,(SLAVE)UART_RX_32_PO.clk,(SLAVE)ParsedLoop_IRQ.clk,(SLAVE)UART_TX_DATA_REG.clk,(SLAVE)DIP_TX_Data_PIO.clk,(SLAVE)onchip_memory2_0.clk1) 1 1 2 430 1200 850
+preplace inst NIOS2.jtag_uart_0 -pg 1 -lvl 3 -y 350
+preplace inst NIOS2.DIP_TX_Data_PIO -pg 1 -lvl 3 -y 1070
+preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)NIOS2.uart_tx_external_connection,(SLAVE)UART_TX.external_connection) 1 0 3 NJ 580 NJ 580 NJ
+preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)NIOS2.uart_rx_status_reg_external_connection,(SLAVE)UART_RX_STATUS_REG.external_connection) 1 0 3 NJ 700 NJ 700 NJ
+preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)Control_PIO.external_connection,(SLAVE)NIOS2.control_pio_external_connection) 1 0 3 NJ 1000 NJ 1000 NJ
+preplace netloc INTERCONNECT<net_container>NIOS2</net_container>(MASTER)nios2_gen2_0.data_master,(MASTER)nios2_gen2_0.instruction_master,(SLAVE)UART_RX_32_PO.s1,(SLAVE)UART_RX_STATUS_REG.s1,(SLAVE)DIP_TX_Data_PIO.s1,(SLAVE)UART_TX_START.s1,(SLAVE)UART_RX_DATA_REG.s1,(SLAVE)jtag_uart_0.avalon_jtag_slave,(SLAVE)UART_TX_DATA_REG.s1,(SLAVE)UART_TX.s1,(SLAVE)UART_TX_32_PO.s1,(SLAVE)UART_RX.s1,(SLAVE)onchip_memory2_0.s1,(SLAVE)nios2_gen2_0.debug_mem_slave,(SLAVE)Control_PIO.s1,(SLAVE)Status_LEDS_PIO.s1,(SLAVE)ParsedLoop_IRQ.s1) 1 1 2 450 1440 850
+preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)UART_RX_DATA_REG.external_connection,(SLAVE)NIOS2.uart_rx_data_reg_external_connection) 1 0 3 NJ 1400 NJ 1400 NJ
+preplace netloc INTERCONNECT<net_container>NIOS2</net_container>(SLAVE)nios2_gen2_0.reset,(MASTER)nios2_gen2_0.debug_reset_request,(SLAVE)UART_RX_32_PO.reset,(SLAVE)ParsedLoop_IRQ.reset,(SLAVE)UART_TX_DATA_REG.reset,(SLAVE)DIP_TX_Data_PIO.reset,(SLAVE)UART_RX_DATA_REG.reset,(MASTER)clk_0.clk_reset,(SLAVE)UART_RX.reset,(SLAVE)UART_TX_START.reset,(SLAVE)UART_RX_STATUS_REG.reset,(SLAVE)UART_TX.reset,(SLAVE)jtag_uart_0.reset,(SLAVE)UART_TX_32_PO.reset,(SLAVE)onchip_memory2_0.reset1,(SLAVE)Status_LEDS_PIO.reset,(SLAVE)Control_PIO.reset) 1 1 2 410 1420 890
+preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)NIOS2.uart_tx_start_external_connection,(SLAVE)UART_TX_START.external_connection) 1 0 3 NJ 1300 NJ 1300 NJ
 preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)ParsedLoop_IRQ.external_connection,(SLAVE)NIOS2.parsedloop_irq_external_connection) 1 0 3 NJ 60 NJ 60 NJ
-preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)NIOS2.uart_tx_data_reg_external_connection,(SLAVE)UART_TX_DATA_REG.external_connection) 1 0 3 NJ 780 NJ 780 NJ
-preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)DIP_TX_Data_PIO.external_connection,(SLAVE)NIOS2.dip_tx_data_pio_external_connection) 1 0 3 NJ 980 NJ 980 NJ
-preplace netloc FAN_OUT<net_container>NIOS2</net_container>(MASTER)nios2_gen2_0.irq,(SLAVE)jtag_uart_0.irq,(SLAVE)UART_IRQ.irq,(SLAVE)ParsedLoop_IRQ.irq) 1 2 1 870
-preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)NIOS2.uart_rx_pi_external_connection,(SLAVE)UART_RX_32_PO.external_connection) 1 0 3 NJ 360 NJ 360 NJ
-preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)NIOS2.reset,(SLAVE)clk_0.clk_in_reset) 1 0 1 NJ
-preplace netloc INTERCONNECT<net_container>NIOS2</net_container>(SLAVE)UART_RX_DATA_REG.reset,(SLAVE)nios2_gen2_0.reset,(SLAVE)UART_RX_STATUS_REG.reset,(SLAVE)Status_LEDS_PIO.reset,(SLAVE)DIP_TX_Data_PIO.reset,(MASTER)clk_0.clk_reset,(SLAVE)onchip_memory2_0.reset1,(SLAVE)Control_PIO.reset,(SLAVE)ParsedLoop_IRQ.reset,(SLAVE)UART_TX_DATA_REG.reset,(SLAVE)UART_IRQ.reset,(SLAVE)UART_RX_32_PO.reset,(SLAVE)UART_TX_32_PO.reset,(SLAVE)UART_TX_START.reset,(MASTER)nios2_gen2_0.debug_reset_request,(SLAVE)jtag_uart_0.reset) 1 1 2 410 1300 810
-preplace netloc INTERCONNECT<net_container>NIOS2</net_container>(MASTER)nios2_gen2_0.data_master,(SLAVE)UART_RX_STATUS_REG.s1,(SLAVE)Status_LEDS_PIO.s1,(SLAVE)ParsedLoop_IRQ.s1,(SLAVE)UART_TX_32_PO.s1,(SLAVE)UART_TX_START.s1,(SLAVE)onchip_memory2_0.s1,(SLAVE)Control_PIO.s1,(SLAVE)UART_IRQ.s1,(SLAVE)UART_RX_DATA_REG.s1,(SLAVE)jtag_uart_0.avalon_jtag_slave,(SLAVE)UART_TX_DATA_REG.s1,(SLAVE)UART_RX_32_PO.s1,(MASTER)nios2_gen2_0.instruction_master,(SLAVE)DIP_TX_Data_PIO.s1,(SLAVE)nios2_gen2_0.debug_mem_slave) 1 1 2 450 1320 830
-preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)NIOS2.uart_tx_po_external_connection,(SLAVE)UART_TX_32_PO.external_connection) 1 0 3 NJ 680 NJ 680 NJ
-preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)NIOS2.uart_rx_data_reg_external_connection,(SLAVE)UART_RX_DATA_REG.external_connection) 1 0 3 NJ 1280 NJ 1280 NJ
-preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)UART_TX_START.external_connection,(SLAVE)NIOS2.uart_tx_start_external_connection) 1 0 3 NJ 1180 NJ 1180 NJ
-preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)Status_LEDS_PIO.external_connection,(SLAVE)NIOS2.status_leds_pio_external_connection) 1 0 3 NJ 1080 NJ 1080 NJ
+preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)NIOS2.uart_tx_data_reg_external_connection,(SLAVE)UART_TX_DATA_REG.external_connection) 1 0 3 NJ 900 NJ 900 NJ
+preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)DIP_TX_Data_PIO.external_connection,(SLAVE)NIOS2.dip_tx_data_pio_external_connection) 1 0 3 NJ 1100 NJ 1100 NJ
+preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)NIOS2.uart_rx_pi_external_connection,(SLAVE)UART_RX_32_PO.external_connection) 1 0 3 NJ 480 NJ 480 NJ
+preplace netloc FAN_OUT<net_container>NIOS2</net_container>(MASTER)clk_0.clk,(SLAVE)Status_LEDS_PIO.clk,(SLAVE)UART_TX_32_PO.clk,(SLAVE)ParsedLoop_IRQ.clk,(SLAVE)Control_PIO.clk,(SLAVE)jtag_uart_0.clk,(SLAVE)nios2_gen2_0.clk,(SLAVE)UART_RX_32_PO.clk,(SLAVE)DIP_TX_Data_PIO.clk,(SLAVE)UART_RX.clk,(SLAVE)UART_TX_DATA_REG.clk,(SLAVE)UART_TX.clk,(SLAVE)UART_RX_STATUS_REG.clk,(SLAVE)UART_RX_DATA_REG.clk,(SLAVE)UART_TX_START.clk,(SLAVE)onchip_memory2_0.clk1) 1 1 2 430 1320 870
+preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)UART_RX.external_connection,(SLAVE)NIOS2.uart_rx_external_connection) 1 0 3 NJ 150 NJ 150 NJ
+preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)NIOS2.uart_tx_po_external_connection,(SLAVE)UART_TX_32_PO.external_connection) 1 0 3 NJ 800 NJ 800 NJ
+preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)clk_0.clk_in_reset,(SLAVE)NIOS2.reset) 1 0 1 NJ
+preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)Status_LEDS_PIO.external_connection,(SLAVE)NIOS2.status_leds_pio_external_connection) 1 0 3 NJ 1200 NJ 1200 NJ
 preplace netloc EXPORT<net_container>NIOS2</net_container>(SLAVE)clk_0.clk_in,(SLAVE)NIOS2.clk) 1 0 1 NJ
+preplace netloc FAN_OUT<net_container>NIOS2</net_container>(MASTER)nios2_gen2_0.irq,(SLAVE)UART_RX.irq,(SLAVE)jtag_uart_0.irq,(SLAVE)ParsedLoop_IRQ.irq,(SLAVE)UART_TX.irq) 1 2 1 830
 levelinfo -pg 1 0 200 1100
 levelinfo -hier NIOS2 210 240 570 940 1090

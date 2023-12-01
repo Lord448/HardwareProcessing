@@ -4,7 +4,7 @@
  * Machine generated for CPU 'nios2_gen2_0' in SOPC Builder design 'NIOS2'
  * SOPC Builder design path: ../../NIOS2.sopcinfo
  *
- * Generated: Fri Dec 01 09:48:01 CST 2023
+ * Generated: Fri Dec 01 16:09:33 CST 2023
  */
 
 /*
@@ -226,6 +226,33 @@
 #define PARSEDLOOP_IRQ_RESET_VALUE 0
 #define PARSEDLOOP_IRQ_SPAN 16
 #define PARSEDLOOP_IRQ_TYPE "altera_avalon_pio"
+
+
+/*
+ * Start_Timer configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_Start_Timer altera_avalon_pio
+#define START_TIMER_BASE 0x0
+#define START_TIMER_BIT_CLEARING_EDGE_REGISTER 0
+#define START_TIMER_BIT_MODIFYING_OUTPUT_REGISTER 1
+#define START_TIMER_CAPTURE 0
+#define START_TIMER_DATA_WIDTH 1
+#define START_TIMER_DO_TEST_BENCH_WIRING 0
+#define START_TIMER_DRIVEN_SIM_VALUE 0
+#define START_TIMER_EDGE_TYPE "NONE"
+#define START_TIMER_FREQ 50000000
+#define START_TIMER_HAS_IN 0
+#define START_TIMER_HAS_OUT 1
+#define START_TIMER_HAS_TRI 0
+#define START_TIMER_IRQ -1
+#define START_TIMER_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define START_TIMER_IRQ_TYPE "NONE"
+#define START_TIMER_NAME "/dev/Start_Timer"
+#define START_TIMER_RESET_VALUE 0
+#define START_TIMER_SPAN 32
+#define START_TIMER_TYPE "altera_avalon_pio"
 
 
 /*

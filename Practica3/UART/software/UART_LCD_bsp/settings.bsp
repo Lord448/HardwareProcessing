@@ -2,12 +2,12 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Dec 1, 2023 9:48:00 AM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1701445680788</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Dec 1, 2023 4:09:33 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1701468573138</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>/home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica3/UART/software/UART_LCD_bsp</BspGeneratedLocation>
         <BspSettingsFile>./settings.bsp</BspSettingsFile>
         <SopcDesignFile>../../NIOS2.sopcinfo</SopcDesignFile>
-        <SystemFileHash>7d1e25cc8988ec1ca530fcaf3afb2ac94258f8c2bff963619ac8688ec5f9bcb</SystemFileHash>
+        <SystemFileHash>ced37bcfdc33741ca590a6a8a98ac9eaf7e78d90aaeae298e31c6db4352b2a2c</SystemFileHash>
         <JdiFile>default</JdiFile>
         <Cpu>nios2_gen2_0</Cpu>
         <SchemaVersion>1.9</SchemaVersion>
@@ -899,6 +899,12 @@
                 <Enabled>false</Enabled>
                 <Group xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
         </Setting>
+        <MemoryMap>
+                <slaveDescriptor>Start_Timer</slaveDescriptor>
+                <addressRange>0x00000000 - 0x0000001F</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>onchip_memory2_0</slaveDescriptor>
                 <addressRange>0x00004000 - 0x000067FF</addressRange>

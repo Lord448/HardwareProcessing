@@ -88,6 +88,14 @@
 #define MaskError 0x0001
 #define MaskBusy  0x0002
 
+#ifndef NULL
+  #ifdef __null
+    #define NULL __null
+  #else
+    #define NULL 0
+  #endif
+#endif
+
 typedef enum bool {
 	false,
 	true
@@ -122,13 +130,10 @@ static ControlPort ControlPortRead(void);
 //----------------------------------------------------
 //			 	      	ISR
 //----------------------------------------------------
-void (*pUART_TXRX_IRQ)(void* isr_context, alt_u32 id);
-void UART_TXRX_CpltCallback(void* isr_context, alt_u32 id);
+static void IRQRegister(void);
+void (*pUART_TX_IRQ)(void* isr_context, alt_u32 id);
 void (*pParsedLoop_IRQ)(void* isr_context, alt_u32 id);
-void ParsedLoopElapsedCallback(void* isr_context, alt_u32 id);
-static void initParsedLoopIRQ(void);
-static void initUARTirq(void);
-
+void (*pUART_RX_IRQ)(void* isr_context, alt_u32 id);
 
 //PIO Ports definitions
 alt_u32 *TXLCDReg = UART_TX_32_PO_BASE; //Prints the data to the LCD
@@ -142,8 +147,8 @@ alt_u8 *StartTX = UART_TX_START_BASE; //When high sends a data to UART -- Needs 
 alt_u8 *UARTStatus = UART_RX_STATUS_REG_BASE; //Status of the UART RX 0 busy, 1 Error, both on Active on High -- Needs mask
 
 //Global isr handlers
-volatile alt_u8 UART_TX;
-volatile alt_u8 UART_RX;
+volatile alt_u8 UART_TX_Edge;
+volatile alt_u8 UART_RX_Edge;
 volatile alt_u8 ParsedLoop_Edge;
 
 //Global variables
@@ -163,10 +168,7 @@ int main()
   alt_irq_init(NULL);
   //alt_putstr("Hello from Nios II!\n");
 #ifdef ALT_ENHANCED_INTERRUPT_API_PRESENT
-  pUART_TXRX_IRQ = &UART_TXRX_CpltCallback;
-  pParsedLoop_IRQ = &ParsedLoopElapsedCallback;
-  alt_ic_isr_register(UART_IRQ_IRQ_INTERRUPT_CONTROLLER_ID, UART_IRQ_IRQ, pUART_TXRX_IRQ,NULL ,0x0);
-  alt_ic_isr_register(PARSEDLOOP_IRQ_IRQ_INTERRUPT_CONTROLLER_ID, PARSEDLOOP_IRQ_IRQ, pParsedLoop_IRQ,NULL ,0x0);
+  IRQRegister();
 #endif
 
   /* Event loop never exits. */
@@ -351,7 +353,7 @@ static void UARTSend(alt_u8 DataTX)
 }
 /**
  * @brief Makes the read of the register
- * @note Prior to the lower button
+ * @note Prior the lower button
  */
 static ControlPort ControlPortRead(void)
 {
@@ -396,10 +398,12 @@ static void StatusWrite(StatusLeds statusLeds, alt_u8 value)
 //----------------------------------------------------
 //			 	      	ISR
 //----------------------------------------------------
-void UART_TXRX_CpltCallback(void* isr_context, alt_u32 id){
-	//IF RX
-	//Copy the value of the port
-	if(EnableReception) {
+void UART_TX_CpltCallback(void* isr_context, alt_u32 id){
+	TXIsBusy = false;
+}
+
+void UART_RX_CpltCallback(void* isr_context, alt_u32 id) {
+  	if(EnableReception) {
 		DataRX = true;
 		WordRX |= (alt_u32) *RXDataReg<<(8*RXCounts);
 		RXCounts++;
@@ -409,19 +413,30 @@ void UART_TXRX_CpltCallback(void* isr_context, alt_u32 id){
 			EndOfWordRX = true;
 		}
 	}
-	//IF TX
-	TXIsBusy = false;
 }
 
 void ParsedLoopElapsedCallback(void* isr_context, alt_u32 id) { 
 	ParsedLoopFlag = false; 
 }
 
-static void initParsedLoopIRQ(void) {
-
-}
-
-static void initUARTirq(void) {
-
+static void IRQRegister(void) {
+  pParsedLoop_IRQ = &ParsedLoopElapsedCallback;
+  pUART_TX_IRQ = &UART_TX_CpltCallback;
+  pUART_RX_IRQ = &UART_RX_CpltCallback;
+  alt_ic_isr_register(UART_TX_IRQ_INTERRUPT_CONTROLLER_ID,
+                      UART_TX_IRQ, 
+                      pUART_TX_IRQ, 
+                      NULL, //Only one IRQ on the peripherial
+                      NULL);
+  alt_ic_isr_register(UART_RX_IRQ_INTERRUPT_CONTROLLER_ID,
+                      UART_RX_IRQ,
+                      pUART_RX_IRQ, 
+                      NULL, //Only one IRQ on the peripherial
+                      NULL);
+  alt_ic_isr_register(PARSEDLOOP_IRQ_IRQ_INTERRUPT_CONTROLLER_ID, 
+                      PARSEDLOOP_IRQ_IRQ, 
+                      pParsedLoop_IRQ,
+                      NULL, //Only one IRQ on the peripherial
+                      NULL);
 }
 

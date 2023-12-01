@@ -1,6 +1,9 @@
 {
     "files.associations": {
         "alt_sys_init.h": "c",
-        "alt_irq.h": "c"
+        "alt_irq.h": "c",
+        "system.h": "c",
+        "nios2.h": "c",
+        "io.h": "c"
     }
 }
