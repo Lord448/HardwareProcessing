@@ -14,11 +14,12 @@ entity NIOS2 is
 		parsedloop_irq_external_connection_export     : in  std_logic                     := '0';             --     parsedloop_irq_external_connection.export
 		reset_reset_n                                 : in  std_logic                     := '0';             --                                  reset.reset_n
 		status_leds_pio_external_connection_export    : out std_logic_vector(3 downto 0);                     --    status_leds_pio_external_connection.export
-		uart_irq_external_connection_export           : in  std_logic_vector(1 downto 0)  := (others => '0'); --           uart_irq_external_connection.export
 		uart_rx_data_reg_external_connection_export   : in  std_logic_vector(7 downto 0)  := (others => '0'); --   uart_rx_data_reg_external_connection.export
+		uart_rx_external_connection_export            : in  std_logic                     := '0';             --            uart_rx_external_connection.export
 		uart_rx_pi_external_connection_export         : out std_logic_vector(31 downto 0);                    --         uart_rx_pi_external_connection.export
 		uart_rx_status_reg_external_connection_export : in  std_logic_vector(1 downto 0)  := (others => '0'); -- uart_rx_status_reg_external_connection.export
 		uart_tx_data_reg_external_connection_export   : out std_logic_vector(7 downto 0);                     --   uart_tx_data_reg_external_connection.export
+		uart_tx_external_connection_export            : in  std_logic                     := '0';             --            uart_tx_external_connection.export
 		uart_tx_po_external_connection_export         : out std_logic_vector(31 downto 0);                    --         uart_tx_po_external_connection.export
 		uart_tx_start_external_connection_export      : out std_logic                                         --      uart_tx_start_external_connection.export
 	);
@@ -72,7 +73,7 @@ architecture rtl of NIOS2 is
 		);
 	end component NIOS2_Status_LEDS_PIO;
 
-	component NIOS2_UART_IRQ is
+	component NIOS2_UART_RX is
 		port (
 			clk        : in  std_logic                     := 'X';             -- clk
 			reset_n    : in  std_logic                     := 'X';             -- reset_n
@@ -81,10 +82,10 @@ architecture rtl of NIOS2 is
 			writedata  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
 			chipselect : in  std_logic                     := 'X';             -- chipselect
 			readdata   : out std_logic_vector(31 downto 0);                    -- readdata
-			in_port    : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- export
+			in_port    : in  std_logic                     := 'X';             -- export
 			irq        : out std_logic                                         -- irq
 		);
-	end component NIOS2_UART_IRQ;
+	end component NIOS2_UART_RX;
 
 	component NIOS2_UART_RX_32_PO is
 		port (
@@ -254,11 +255,11 @@ architecture rtl of NIOS2 is
 			Status_LEDS_PIO_s1_readdata                    : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			Status_LEDS_PIO_s1_writedata                   : out std_logic_vector(31 downto 0);                    -- writedata
 			Status_LEDS_PIO_s1_chipselect                  : out std_logic;                                        -- chipselect
-			UART_IRQ_s1_address                            : out std_logic_vector(1 downto 0);                     -- address
-			UART_IRQ_s1_write                              : out std_logic;                                        -- write
-			UART_IRQ_s1_readdata                           : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
-			UART_IRQ_s1_writedata                          : out std_logic_vector(31 downto 0);                    -- writedata
-			UART_IRQ_s1_chipselect                         : out std_logic;                                        -- chipselect
+			UART_RX_s1_address                             : out std_logic_vector(1 downto 0);                     -- address
+			UART_RX_s1_write                               : out std_logic;                                        -- write
+			UART_RX_s1_readdata                            : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			UART_RX_s1_writedata                           : out std_logic_vector(31 downto 0);                    -- writedata
+			UART_RX_s1_chipselect                          : out std_logic;                                        -- chipselect
 			UART_RX_32_PO_s1_address                       : out std_logic_vector(1 downto 0);                     -- address
 			UART_RX_32_PO_s1_write                         : out std_logic;                                        -- write
 			UART_RX_32_PO_s1_readdata                      : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
@@ -268,6 +269,11 @@ architecture rtl of NIOS2 is
 			UART_RX_DATA_REG_s1_readdata                   : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			UART_RX_STATUS_REG_s1_address                  : out std_logic_vector(1 downto 0);                     -- address
 			UART_RX_STATUS_REG_s1_readdata                 : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			UART_TX_s1_address                             : out std_logic_vector(1 downto 0);                     -- address
+			UART_TX_s1_write                               : out std_logic;                                        -- write
+			UART_TX_s1_readdata                            : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			UART_TX_s1_writedata                           : out std_logic_vector(31 downto 0);                    -- writedata
+			UART_TX_s1_chipselect                          : out std_logic;                                        -- chipselect
 			UART_TX_32_PO_s1_address                       : out std_logic_vector(1 downto 0);                     -- address
 			UART_TX_32_PO_s1_write                         : out std_logic;                                        -- write
 			UART_TX_32_PO_s1_readdata                      : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
@@ -293,6 +299,7 @@ architecture rtl of NIOS2 is
 			receiver0_irq : in  std_logic                     := 'X'; -- irq
 			receiver1_irq : in  std_logic                     := 'X'; -- irq
 			receiver2_irq : in  std_logic                     := 'X'; -- irq
+			receiver3_irq : in  std_logic                     := 'X'; -- irq
 			sender_irq    : out std_logic_vector(31 downto 0)         -- irq
 		);
 	end component NIOS2_irq_mapper;
@@ -326,9 +333,10 @@ architecture rtl of NIOS2 is
 		);
 		port (
 			reset_in0      : in  std_logic := 'X'; -- reset_in0.reset
+			reset_in1      : in  std_logic := 'X'; -- reset_in1.reset
 			clk            : in  std_logic := 'X'; --       clk.clk
 			reset_out      : out std_logic;        -- reset_out.reset
-			reset_in1      : in  std_logic := 'X';
+			reset_req      : out std_logic;        --          .reset_req
 			reset_in10     : in  std_logic := 'X';
 			reset_in11     : in  std_logic := 'X';
 			reset_in12     : in  std_logic := 'X';
@@ -343,7 +351,6 @@ architecture rtl of NIOS2 is
 			reset_in7      : in  std_logic := 'X';
 			reset_in8      : in  std_logic := 'X';
 			reset_in9      : in  std_logic := 'X';
-			reset_req      : out std_logic;
 			reset_req_in0  : in  std_logic := 'X';
 			reset_req_in1  : in  std_logic := 'X';
 			reset_req_in10 : in  std_logic := 'X';
@@ -392,10 +399,9 @@ architecture rtl of NIOS2 is
 		);
 		port (
 			reset_in0      : in  std_logic := 'X'; -- reset_in0.reset
-			reset_in1      : in  std_logic := 'X'; -- reset_in1.reset
 			clk            : in  std_logic := 'X'; --       clk.clk
 			reset_out      : out std_logic;        -- reset_out.reset
-			reset_req      : out std_logic;        --          .reset_req
+			reset_in1      : in  std_logic := 'X';
 			reset_in10     : in  std_logic := 'X';
 			reset_in11     : in  std_logic := 'X';
 			reset_in12     : in  std_logic := 'X';
@@ -410,6 +416,7 @@ architecture rtl of NIOS2 is
 			reset_in7      : in  std_logic := 'X';
 			reset_in8      : in  std_logic := 'X';
 			reset_in9      : in  std_logic := 'X';
+			reset_req      : out std_logic;
 			reset_req_in0  : in  std_logic := 'X';
 			reset_req_in1  : in  std_logic := 'X';
 			reset_req_in10 : in  std_logic := 'X';
@@ -475,11 +482,6 @@ architecture rtl of NIOS2 is
 	signal mm_interconnect_0_uart_rx_32_po_s1_address                      : std_logic_vector(1 downto 0);  -- mm_interconnect_0:UART_RX_32_PO_s1_address -> UART_RX_32_PO:address
 	signal mm_interconnect_0_uart_rx_32_po_s1_write                        : std_logic;                     -- mm_interconnect_0:UART_RX_32_PO_s1_write -> mm_interconnect_0_uart_rx_32_po_s1_write:in
 	signal mm_interconnect_0_uart_rx_32_po_s1_writedata                    : std_logic_vector(31 downto 0); -- mm_interconnect_0:UART_RX_32_PO_s1_writedata -> UART_RX_32_PO:writedata
-	signal mm_interconnect_0_uart_irq_s1_chipselect                        : std_logic;                     -- mm_interconnect_0:UART_IRQ_s1_chipselect -> UART_IRQ:chipselect
-	signal mm_interconnect_0_uart_irq_s1_readdata                          : std_logic_vector(31 downto 0); -- UART_IRQ:readdata -> mm_interconnect_0:UART_IRQ_s1_readdata
-	signal mm_interconnect_0_uart_irq_s1_address                           : std_logic_vector(1 downto 0);  -- mm_interconnect_0:UART_IRQ_s1_address -> UART_IRQ:address
-	signal mm_interconnect_0_uart_irq_s1_write                             : std_logic;                     -- mm_interconnect_0:UART_IRQ_s1_write -> mm_interconnect_0_uart_irq_s1_write:in
-	signal mm_interconnect_0_uart_irq_s1_writedata                         : std_logic_vector(31 downto 0); -- mm_interconnect_0:UART_IRQ_s1_writedata -> UART_IRQ:writedata
 	signal mm_interconnect_0_uart_rx_data_reg_s1_readdata                  : std_logic_vector(31 downto 0); -- UART_RX_DATA_REG:readdata -> mm_interconnect_0:UART_RX_DATA_REG_s1_readdata
 	signal mm_interconnect_0_uart_rx_data_reg_s1_address                   : std_logic_vector(1 downto 0);  -- mm_interconnect_0:UART_RX_DATA_REG_s1_address -> UART_RX_DATA_REG:address
 	signal mm_interconnect_0_uart_tx_data_reg_s1_chipselect                : std_logic;                     -- mm_interconnect_0:UART_TX_DATA_REG_s1_chipselect -> UART_TX_DATA_REG:chipselect
@@ -508,26 +510,38 @@ architecture rtl of NIOS2 is
 	signal mm_interconnect_0_parsedloop_irq_s1_address                     : std_logic_vector(1 downto 0);  -- mm_interconnect_0:ParsedLoop_IRQ_s1_address -> ParsedLoop_IRQ:address
 	signal mm_interconnect_0_parsedloop_irq_s1_write                       : std_logic;                     -- mm_interconnect_0:ParsedLoop_IRQ_s1_write -> mm_interconnect_0_parsedloop_irq_s1_write:in
 	signal mm_interconnect_0_parsedloop_irq_s1_writedata                   : std_logic_vector(31 downto 0); -- mm_interconnect_0:ParsedLoop_IRQ_s1_writedata -> ParsedLoop_IRQ:writedata
+	signal mm_interconnect_0_uart_rx_s1_chipselect                         : std_logic;                     -- mm_interconnect_0:UART_RX_s1_chipselect -> UART_RX:chipselect
+	signal mm_interconnect_0_uart_rx_s1_readdata                           : std_logic_vector(31 downto 0); -- UART_RX:readdata -> mm_interconnect_0:UART_RX_s1_readdata
+	signal mm_interconnect_0_uart_rx_s1_address                            : std_logic_vector(1 downto 0);  -- mm_interconnect_0:UART_RX_s1_address -> UART_RX:address
+	signal mm_interconnect_0_uart_rx_s1_write                              : std_logic;                     -- mm_interconnect_0:UART_RX_s1_write -> mm_interconnect_0_uart_rx_s1_write:in
+	signal mm_interconnect_0_uart_rx_s1_writedata                          : std_logic_vector(31 downto 0); -- mm_interconnect_0:UART_RX_s1_writedata -> UART_RX:writedata
+	signal mm_interconnect_0_uart_tx_s1_chipselect                         : std_logic;                     -- mm_interconnect_0:UART_TX_s1_chipselect -> UART_TX:chipselect
+	signal mm_interconnect_0_uart_tx_s1_readdata                           : std_logic_vector(31 downto 0); -- UART_TX:readdata -> mm_interconnect_0:UART_TX_s1_readdata
+	signal mm_interconnect_0_uart_tx_s1_address                            : std_logic_vector(1 downto 0);  -- mm_interconnect_0:UART_TX_s1_address -> UART_TX:address
+	signal mm_interconnect_0_uart_tx_s1_write                              : std_logic;                     -- mm_interconnect_0:UART_TX_s1_write -> mm_interconnect_0_uart_tx_s1_write:in
+	signal mm_interconnect_0_uart_tx_s1_writedata                          : std_logic_vector(31 downto 0); -- mm_interconnect_0:UART_TX_s1_writedata -> UART_TX:writedata
 	signal irq_mapper_receiver0_irq                                        : std_logic;                     -- jtag_uart_0:av_irq -> irq_mapper:receiver0_irq
-	signal irq_mapper_receiver1_irq                                        : std_logic;                     -- UART_IRQ:irq -> irq_mapper:receiver1_irq
-	signal irq_mapper_receiver2_irq                                        : std_logic;                     -- ParsedLoop_IRQ:irq -> irq_mapper:receiver2_irq
+	signal irq_mapper_receiver1_irq                                        : std_logic;                     -- ParsedLoop_IRQ:irq -> irq_mapper:receiver1_irq
+	signal irq_mapper_receiver2_irq                                        : std_logic;                     -- UART_RX:irq -> irq_mapper:receiver2_irq
+	signal irq_mapper_receiver3_irq                                        : std_logic;                     -- UART_TX:irq -> irq_mapper:receiver3_irq
 	signal nios2_gen2_0_irq_irq                                            : std_logic_vector(31 downto 0); -- irq_mapper:sender_irq -> nios2_gen2_0:irq
-	signal rst_controller_reset_out_reset                                  : std_logic;                     -- rst_controller:reset_out -> [mm_interconnect_0:jtag_uart_0_reset_reset_bridge_in_reset_reset, rst_controller_reset_out_reset:in]
-	signal rst_controller_001_reset_out_reset                              : std_logic;                     -- rst_controller_001:reset_out -> [irq_mapper:reset, mm_interconnect_0:nios2_gen2_0_reset_reset_bridge_in_reset_reset, onchip_memory2_0:reset, rst_controller_001_reset_out_reset:in]
-	signal rst_controller_001_reset_out_reset_req                          : std_logic;                     -- rst_controller_001:reset_req -> [nios2_gen2_0:reset_req, onchip_memory2_0:reset_req, rst_translator:reset_req_in]
-	signal nios2_gen2_0_debug_reset_request_reset                          : std_logic;                     -- nios2_gen2_0:debug_reset_request -> rst_controller_001:reset_in1
+	signal rst_controller_reset_out_reset                                  : std_logic;                     -- rst_controller:reset_out -> [irq_mapper:reset, mm_interconnect_0:nios2_gen2_0_reset_reset_bridge_in_reset_reset, onchip_memory2_0:reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
+	signal rst_controller_reset_out_reset_req                              : std_logic;                     -- rst_controller:reset_req -> [nios2_gen2_0:reset_req, onchip_memory2_0:reset_req, rst_translator:reset_req_in]
+	signal nios2_gen2_0_debug_reset_request_reset                          : std_logic;                     -- nios2_gen2_0:debug_reset_request -> rst_controller:reset_in1
+	signal rst_controller_001_reset_out_reset                              : std_logic;                     -- rst_controller_001:reset_out -> [mm_interconnect_0:jtag_uart_0_reset_reset_bridge_in_reset_reset, rst_controller_001_reset_out_reset:in]
 	signal reset_reset_n_ports_inv                                         : std_logic;                     -- reset_reset_n:inv -> [rst_controller:reset_in0, rst_controller_001:reset_in0]
 	signal mm_interconnect_0_jtag_uart_0_avalon_jtag_slave_read_ports_inv  : std_logic;                     -- mm_interconnect_0_jtag_uart_0_avalon_jtag_slave_read:inv -> jtag_uart_0:av_read_n
 	signal mm_interconnect_0_jtag_uart_0_avalon_jtag_slave_write_ports_inv : std_logic;                     -- mm_interconnect_0_jtag_uart_0_avalon_jtag_slave_write:inv -> jtag_uart_0:av_write_n
 	signal mm_interconnect_0_uart_tx_32_po_s1_write_ports_inv              : std_logic;                     -- mm_interconnect_0_uart_tx_32_po_s1_write:inv -> UART_TX_32_PO:write_n
 	signal mm_interconnect_0_uart_rx_32_po_s1_write_ports_inv              : std_logic;                     -- mm_interconnect_0_uart_rx_32_po_s1_write:inv -> UART_RX_32_PO:write_n
-	signal mm_interconnect_0_uart_irq_s1_write_ports_inv                   : std_logic;                     -- mm_interconnect_0_uart_irq_s1_write:inv -> UART_IRQ:write_n
 	signal mm_interconnect_0_uart_tx_data_reg_s1_write_ports_inv           : std_logic;                     -- mm_interconnect_0_uart_tx_data_reg_s1_write:inv -> UART_TX_DATA_REG:write_n
 	signal mm_interconnect_0_uart_tx_start_s1_write_ports_inv              : std_logic;                     -- mm_interconnect_0_uart_tx_start_s1_write:inv -> UART_TX_START:write_n
 	signal mm_interconnect_0_status_leds_pio_s1_write_ports_inv            : std_logic;                     -- mm_interconnect_0_status_leds_pio_s1_write:inv -> Status_LEDS_PIO:write_n
 	signal mm_interconnect_0_parsedloop_irq_s1_write_ports_inv             : std_logic;                     -- mm_interconnect_0_parsedloop_irq_s1_write:inv -> ParsedLoop_IRQ:write_n
-	signal rst_controller_reset_out_reset_ports_inv                        : std_logic;                     -- rst_controller_reset_out_reset:inv -> [Control_PIO:reset_n, DIP_TX_Data_PIO:reset_n, ParsedLoop_IRQ:reset_n, Status_LEDS_PIO:reset_n, UART_IRQ:reset_n, UART_RX_32_PO:reset_n, UART_RX_DATA_REG:reset_n, UART_RX_STATUS_REG:reset_n, UART_TX_32_PO:reset_n, UART_TX_DATA_REG:reset_n, UART_TX_START:reset_n, jtag_uart_0:rst_n]
-	signal rst_controller_001_reset_out_reset_ports_inv                    : std_logic;                     -- rst_controller_001_reset_out_reset:inv -> nios2_gen2_0:reset_n
+	signal mm_interconnect_0_uart_rx_s1_write_ports_inv                    : std_logic;                     -- mm_interconnect_0_uart_rx_s1_write:inv -> UART_RX:write_n
+	signal mm_interconnect_0_uart_tx_s1_write_ports_inv                    : std_logic;                     -- mm_interconnect_0_uart_tx_s1_write:inv -> UART_TX:write_n
+	signal rst_controller_reset_out_reset_ports_inv                        : std_logic;                     -- rst_controller_reset_out_reset:inv -> [Control_PIO:reset_n, DIP_TX_Data_PIO:reset_n, ParsedLoop_IRQ:reset_n, Status_LEDS_PIO:reset_n, UART_RX:reset_n, UART_RX_32_PO:reset_n, UART_RX_DATA_REG:reset_n, UART_RX_STATUS_REG:reset_n, UART_TX:reset_n, UART_TX_32_PO:reset_n, UART_TX_DATA_REG:reset_n, UART_TX_START:reset_n, nios2_gen2_0:reset_n]
+	signal rst_controller_001_reset_out_reset_ports_inv                    : std_logic;                     -- rst_controller_001_reset_out_reset:inv -> jtag_uart_0:rst_n
 
 begin
 
@@ -559,7 +573,7 @@ begin
 			chipselect => mm_interconnect_0_parsedloop_irq_s1_chipselect,      --                    .chipselect
 			readdata   => mm_interconnect_0_parsedloop_irq_s1_readdata,        --                    .readdata
 			in_port    => parsedloop_irq_external_connection_export,           -- external_connection.export
-			irq        => irq_mapper_receiver2_irq                             --                 irq.irq
+			irq        => irq_mapper_receiver1_irq                             --                 irq.irq
 		);
 
 	status_leds_pio : component NIOS2_Status_LEDS_PIO
@@ -574,17 +588,17 @@ begin
 			out_port   => status_leds_pio_external_connection_export            -- external_connection.export
 		);
 
-	uart_irq : component NIOS2_UART_IRQ
+	uart_rx : component NIOS2_UART_RX
 		port map (
-			clk        => clk_clk,                                       --                 clk.clk
-			reset_n    => rst_controller_reset_out_reset_ports_inv,      --               reset.reset_n
-			address    => mm_interconnect_0_uart_irq_s1_address,         --                  s1.address
-			write_n    => mm_interconnect_0_uart_irq_s1_write_ports_inv, --                    .write_n
-			writedata  => mm_interconnect_0_uart_irq_s1_writedata,       --                    .writedata
-			chipselect => mm_interconnect_0_uart_irq_s1_chipselect,      --                    .chipselect
-			readdata   => mm_interconnect_0_uart_irq_s1_readdata,        --                    .readdata
-			in_port    => uart_irq_external_connection_export,           -- external_connection.export
-			irq        => irq_mapper_receiver1_irq                       --                 irq.irq
+			clk        => clk_clk,                                      --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,     --               reset.reset_n
+			address    => mm_interconnect_0_uart_rx_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_0_uart_rx_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_0_uart_rx_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_0_uart_rx_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_0_uart_rx_s1_readdata,        --                    .readdata
+			in_port    => uart_rx_external_connection_export,           -- external_connection.export
+			irq        => irq_mapper_receiver2_irq                      --                 irq.irq
 		);
 
 	uart_rx_32_po : component NIOS2_UART_RX_32_PO
@@ -615,6 +629,19 @@ begin
 			address  => mm_interconnect_0_uart_rx_status_reg_s1_address,  --                  s1.address
 			readdata => mm_interconnect_0_uart_rx_status_reg_s1_readdata, --                    .readdata
 			in_port  => uart_rx_status_reg_external_connection_export     -- external_connection.export
+		);
+
+	uart_tx : component NIOS2_UART_RX
+		port map (
+			clk        => clk_clk,                                      --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,     --               reset.reset_n
+			address    => mm_interconnect_0_uart_tx_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_0_uart_tx_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_0_uart_tx_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_0_uart_tx_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_0_uart_tx_s1_readdata,        --                    .readdata
+			in_port    => uart_tx_external_connection_export,           -- external_connection.export
+			irq        => irq_mapper_receiver3_irq                      --                 irq.irq
 		);
 
 	uart_tx_32_po : component NIOS2_UART_RX_32_PO
@@ -656,7 +683,7 @@ begin
 	jtag_uart_0 : component NIOS2_jtag_uart_0
 		port map (
 			clk            => clk_clk,                                                         --               clk.clk
-			rst_n          => rst_controller_reset_out_reset_ports_inv,                        --             reset.reset_n
+			rst_n          => rst_controller_001_reset_out_reset_ports_inv,                    --             reset.reset_n
 			av_chipselect  => mm_interconnect_0_jtag_uart_0_avalon_jtag_slave_chipselect,      -- avalon_jtag_slave.chipselect
 			av_address     => mm_interconnect_0_jtag_uart_0_avalon_jtag_slave_address(0),      --                  .address
 			av_read_n      => mm_interconnect_0_jtag_uart_0_avalon_jtag_slave_read_ports_inv,  --                  .read_n
@@ -670,8 +697,8 @@ begin
 	nios2_gen2_0 : component NIOS2_nios2_gen2_0
 		port map (
 			clk                                 => clk_clk,                                                    --                       clk.clk
-			reset_n                             => rst_controller_001_reset_out_reset_ports_inv,               --                     reset.reset_n
-			reset_req                           => rst_controller_001_reset_out_reset_req,                     --                          .reset_req
+			reset_n                             => rst_controller_reset_out_reset_ports_inv,                   --                     reset.reset_n
+			reset_req                           => rst_controller_reset_out_reset_req,                         --                          .reset_req
 			d_address                           => nios2_gen2_0_data_master_address,                           --               data_master.address
 			d_byteenable                        => nios2_gen2_0_data_master_byteenable,                        --                          .byteenable
 			d_read                              => nios2_gen2_0_data_master_read,                              --                          .read
@@ -709,16 +736,16 @@ begin
 			readdata   => mm_interconnect_0_onchip_memory2_0_s1_readdata,   --       .readdata
 			writedata  => mm_interconnect_0_onchip_memory2_0_s1_writedata,  --       .writedata
 			byteenable => mm_interconnect_0_onchip_memory2_0_s1_byteenable, --       .byteenable
-			reset      => rst_controller_001_reset_out_reset,               -- reset1.reset
-			reset_req  => rst_controller_001_reset_out_reset_req,           --       .reset_req
+			reset      => rst_controller_reset_out_reset,                   -- reset1.reset
+			reset_req  => rst_controller_reset_out_reset_req,               --       .reset_req
 			freeze     => '0'                                               -- (terminated)
 		);
 
 	mm_interconnect_0 : component NIOS2_mm_interconnect_0
 		port map (
 			clk_0_clk_clk                                  => clk_clk,                                                     --                                clk_0_clk.clk
-			jtag_uart_0_reset_reset_bridge_in_reset_reset  => rst_controller_reset_out_reset,                              --  jtag_uart_0_reset_reset_bridge_in_reset.reset
-			nios2_gen2_0_reset_reset_bridge_in_reset_reset => rst_controller_001_reset_out_reset,                          -- nios2_gen2_0_reset_reset_bridge_in_reset.reset
+			jtag_uart_0_reset_reset_bridge_in_reset_reset  => rst_controller_001_reset_out_reset,                          --  jtag_uart_0_reset_reset_bridge_in_reset.reset
+			nios2_gen2_0_reset_reset_bridge_in_reset_reset => rst_controller_reset_out_reset,                              -- nios2_gen2_0_reset_reset_bridge_in_reset.reset
 			nios2_gen2_0_data_master_address               => nios2_gen2_0_data_master_address,                            --                 nios2_gen2_0_data_master.address
 			nios2_gen2_0_data_master_waitrequest           => nios2_gen2_0_data_master_waitrequest,                        --                                         .waitrequest
 			nios2_gen2_0_data_master_byteenable            => nios2_gen2_0_data_master_byteenable,                         --                                         .byteenable
@@ -769,11 +796,11 @@ begin
 			Status_LEDS_PIO_s1_readdata                    => mm_interconnect_0_status_leds_pio_s1_readdata,               --                                         .readdata
 			Status_LEDS_PIO_s1_writedata                   => mm_interconnect_0_status_leds_pio_s1_writedata,              --                                         .writedata
 			Status_LEDS_PIO_s1_chipselect                  => mm_interconnect_0_status_leds_pio_s1_chipselect,             --                                         .chipselect
-			UART_IRQ_s1_address                            => mm_interconnect_0_uart_irq_s1_address,                       --                              UART_IRQ_s1.address
-			UART_IRQ_s1_write                              => mm_interconnect_0_uart_irq_s1_write,                         --                                         .write
-			UART_IRQ_s1_readdata                           => mm_interconnect_0_uart_irq_s1_readdata,                      --                                         .readdata
-			UART_IRQ_s1_writedata                          => mm_interconnect_0_uart_irq_s1_writedata,                     --                                         .writedata
-			UART_IRQ_s1_chipselect                         => mm_interconnect_0_uart_irq_s1_chipselect,                    --                                         .chipselect
+			UART_RX_s1_address                             => mm_interconnect_0_uart_rx_s1_address,                        --                               UART_RX_s1.address
+			UART_RX_s1_write                               => mm_interconnect_0_uart_rx_s1_write,                          --                                         .write
+			UART_RX_s1_readdata                            => mm_interconnect_0_uart_rx_s1_readdata,                       --                                         .readdata
+			UART_RX_s1_writedata                           => mm_interconnect_0_uart_rx_s1_writedata,                      --                                         .writedata
+			UART_RX_s1_chipselect                          => mm_interconnect_0_uart_rx_s1_chipselect,                     --                                         .chipselect
 			UART_RX_32_PO_s1_address                       => mm_interconnect_0_uart_rx_32_po_s1_address,                  --                         UART_RX_32_PO_s1.address
 			UART_RX_32_PO_s1_write                         => mm_interconnect_0_uart_rx_32_po_s1_write,                    --                                         .write
 			UART_RX_32_PO_s1_readdata                      => mm_interconnect_0_uart_rx_32_po_s1_readdata,                 --                                         .readdata
@@ -783,6 +810,11 @@ begin
 			UART_RX_DATA_REG_s1_readdata                   => mm_interconnect_0_uart_rx_data_reg_s1_readdata,              --                                         .readdata
 			UART_RX_STATUS_REG_s1_address                  => mm_interconnect_0_uart_rx_status_reg_s1_address,             --                    UART_RX_STATUS_REG_s1.address
 			UART_RX_STATUS_REG_s1_readdata                 => mm_interconnect_0_uart_rx_status_reg_s1_readdata,            --                                         .readdata
+			UART_TX_s1_address                             => mm_interconnect_0_uart_tx_s1_address,                        --                               UART_TX_s1.address
+			UART_TX_s1_write                               => mm_interconnect_0_uart_tx_s1_write,                          --                                         .write
+			UART_TX_s1_readdata                            => mm_interconnect_0_uart_tx_s1_readdata,                       --                                         .readdata
+			UART_TX_s1_writedata                           => mm_interconnect_0_uart_tx_s1_writedata,                      --                                         .writedata
+			UART_TX_s1_chipselect                          => mm_interconnect_0_uart_tx_s1_chipselect,                     --                                         .chipselect
 			UART_TX_32_PO_s1_address                       => mm_interconnect_0_uart_tx_32_po_s1_address,                  --                         UART_TX_32_PO_s1.address
 			UART_TX_32_PO_s1_write                         => mm_interconnect_0_uart_tx_32_po_s1_write,                    --                                         .write
 			UART_TX_32_PO_s1_readdata                      => mm_interconnect_0_uart_tx_32_po_s1_readdata,                 --                                         .readdata
@@ -802,80 +834,16 @@ begin
 
 	irq_mapper : component NIOS2_irq_mapper
 		port map (
-			clk           => clk_clk,                            --       clk.clk
-			reset         => rst_controller_001_reset_out_reset, -- clk_reset.reset
-			receiver0_irq => irq_mapper_receiver0_irq,           -- receiver0.irq
-			receiver1_irq => irq_mapper_receiver1_irq,           -- receiver1.irq
-			receiver2_irq => irq_mapper_receiver2_irq,           -- receiver2.irq
-			sender_irq    => nios2_gen2_0_irq_irq                --    sender.irq
+			clk           => clk_clk,                        --       clk.clk
+			reset         => rst_controller_reset_out_reset, -- clk_reset.reset
+			receiver0_irq => irq_mapper_receiver0_irq,       -- receiver0.irq
+			receiver1_irq => irq_mapper_receiver1_irq,       -- receiver1.irq
+			receiver2_irq => irq_mapper_receiver2_irq,       -- receiver2.irq
+			receiver3_irq => irq_mapper_receiver3_irq,       -- receiver3.irq
+			sender_irq    => nios2_gen2_0_irq_irq            --    sender.irq
 		);
 
 	rst_controller : component nios2_rst_controller
-		generic map (
-			NUM_RESET_INPUTS          => 1,
-			OUTPUT_RESET_SYNC_EDGES   => "deassert",
-			SYNC_DEPTH                => 2,
-			RESET_REQUEST_PRESENT     => 0,
-			RESET_REQ_WAIT_TIME       => 1,
-			MIN_RST_ASSERTION_TIME    => 3,
-			RESET_REQ_EARLY_DSRT_TIME => 1,
-			USE_RESET_REQUEST_IN0     => 0,
-			USE_RESET_REQUEST_IN1     => 0,
-			USE_RESET_REQUEST_IN2     => 0,
-			USE_RESET_REQUEST_IN3     => 0,
-			USE_RESET_REQUEST_IN4     => 0,
-			USE_RESET_REQUEST_IN5     => 0,
-			USE_RESET_REQUEST_IN6     => 0,
-			USE_RESET_REQUEST_IN7     => 0,
-			USE_RESET_REQUEST_IN8     => 0,
-			USE_RESET_REQUEST_IN9     => 0,
-			USE_RESET_REQUEST_IN10    => 0,
-			USE_RESET_REQUEST_IN11    => 0,
-			USE_RESET_REQUEST_IN12    => 0,
-			USE_RESET_REQUEST_IN13    => 0,
-			USE_RESET_REQUEST_IN14    => 0,
-			USE_RESET_REQUEST_IN15    => 0,
-			ADAPT_RESET_REQUEST       => 0
-		)
-		port map (
-			reset_in0      => reset_reset_n_ports_inv,        -- reset_in0.reset
-			clk            => clk_clk,                        --       clk.clk
-			reset_out      => rst_controller_reset_out_reset, -- reset_out.reset
-			reset_req      => open,                           -- (terminated)
-			reset_req_in0  => '0',                            -- (terminated)
-			reset_in1      => '0',                            -- (terminated)
-			reset_req_in1  => '0',                            -- (terminated)
-			reset_in2      => '0',                            -- (terminated)
-			reset_req_in2  => '0',                            -- (terminated)
-			reset_in3      => '0',                            -- (terminated)
-			reset_req_in3  => '0',                            -- (terminated)
-			reset_in4      => '0',                            -- (terminated)
-			reset_req_in4  => '0',                            -- (terminated)
-			reset_in5      => '0',                            -- (terminated)
-			reset_req_in5  => '0',                            -- (terminated)
-			reset_in6      => '0',                            -- (terminated)
-			reset_req_in6  => '0',                            -- (terminated)
-			reset_in7      => '0',                            -- (terminated)
-			reset_req_in7  => '0',                            -- (terminated)
-			reset_in8      => '0',                            -- (terminated)
-			reset_req_in8  => '0',                            -- (terminated)
-			reset_in9      => '0',                            -- (terminated)
-			reset_req_in9  => '0',                            -- (terminated)
-			reset_in10     => '0',                            -- (terminated)
-			reset_req_in10 => '0',                            -- (terminated)
-			reset_in11     => '0',                            -- (terminated)
-			reset_req_in11 => '0',                            -- (terminated)
-			reset_in12     => '0',                            -- (terminated)
-			reset_req_in12 => '0',                            -- (terminated)
-			reset_in13     => '0',                            -- (terminated)
-			reset_req_in13 => '0',                            -- (terminated)
-			reset_in14     => '0',                            -- (terminated)
-			reset_req_in14 => '0',                            -- (terminated)
-			reset_in15     => '0',                            -- (terminated)
-			reset_req_in15 => '0'                             -- (terminated)
-		);
-
-	rst_controller_001 : component nios2_rst_controller_001
 		generic map (
 			NUM_RESET_INPUTS          => 2,
 			OUTPUT_RESET_SYNC_EDGES   => "deassert",
@@ -906,8 +874,8 @@ begin
 			reset_in0      => reset_reset_n_ports_inv,                -- reset_in0.reset
 			reset_in1      => nios2_gen2_0_debug_reset_request_reset, -- reset_in1.reset
 			clk            => clk_clk,                                --       clk.clk
-			reset_out      => rst_controller_001_reset_out_reset,     -- reset_out.reset
-			reset_req      => rst_controller_001_reset_out_reset_req, --          .reset_req
+			reset_out      => rst_controller_reset_out_reset,         -- reset_out.reset
+			reset_req      => rst_controller_reset_out_reset_req,     --          .reset_req
 			reset_req_in0  => '0',                                    -- (terminated)
 			reset_req_in1  => '0',                                    -- (terminated)
 			reset_in2      => '0',                                    -- (terminated)
@@ -940,6 +908,71 @@ begin
 			reset_req_in15 => '0'                                     -- (terminated)
 		);
 
+	rst_controller_001 : component nios2_rst_controller_001
+		generic map (
+			NUM_RESET_INPUTS          => 1,
+			OUTPUT_RESET_SYNC_EDGES   => "deassert",
+			SYNC_DEPTH                => 2,
+			RESET_REQUEST_PRESENT     => 0,
+			RESET_REQ_WAIT_TIME       => 1,
+			MIN_RST_ASSERTION_TIME    => 3,
+			RESET_REQ_EARLY_DSRT_TIME => 1,
+			USE_RESET_REQUEST_IN0     => 0,
+			USE_RESET_REQUEST_IN1     => 0,
+			USE_RESET_REQUEST_IN2     => 0,
+			USE_RESET_REQUEST_IN3     => 0,
+			USE_RESET_REQUEST_IN4     => 0,
+			USE_RESET_REQUEST_IN5     => 0,
+			USE_RESET_REQUEST_IN6     => 0,
+			USE_RESET_REQUEST_IN7     => 0,
+			USE_RESET_REQUEST_IN8     => 0,
+			USE_RESET_REQUEST_IN9     => 0,
+			USE_RESET_REQUEST_IN10    => 0,
+			USE_RESET_REQUEST_IN11    => 0,
+			USE_RESET_REQUEST_IN12    => 0,
+			USE_RESET_REQUEST_IN13    => 0,
+			USE_RESET_REQUEST_IN14    => 0,
+			USE_RESET_REQUEST_IN15    => 0,
+			ADAPT_RESET_REQUEST       => 0
+		)
+		port map (
+			reset_in0      => reset_reset_n_ports_inv,            -- reset_in0.reset
+			clk            => clk_clk,                            --       clk.clk
+			reset_out      => rst_controller_001_reset_out_reset, -- reset_out.reset
+			reset_req      => open,                               -- (terminated)
+			reset_req_in0  => '0',                                -- (terminated)
+			reset_in1      => '0',                                -- (terminated)
+			reset_req_in1  => '0',                                -- (terminated)
+			reset_in2      => '0',                                -- (terminated)
+			reset_req_in2  => '0',                                -- (terminated)
+			reset_in3      => '0',                                -- (terminated)
+			reset_req_in3  => '0',                                -- (terminated)
+			reset_in4      => '0',                                -- (terminated)
+			reset_req_in4  => '0',                                -- (terminated)
+			reset_in5      => '0',                                -- (terminated)
+			reset_req_in5  => '0',                                -- (terminated)
+			reset_in6      => '0',                                -- (terminated)
+			reset_req_in6  => '0',                                -- (terminated)
+			reset_in7      => '0',                                -- (terminated)
+			reset_req_in7  => '0',                                -- (terminated)
+			reset_in8      => '0',                                -- (terminated)
+			reset_req_in8  => '0',                                -- (terminated)
+			reset_in9      => '0',                                -- (terminated)
+			reset_req_in9  => '0',                                -- (terminated)
+			reset_in10     => '0',                                -- (terminated)
+			reset_req_in10 => '0',                                -- (terminated)
+			reset_in11     => '0',                                -- (terminated)
+			reset_req_in11 => '0',                                -- (terminated)
+			reset_in12     => '0',                                -- (terminated)
+			reset_req_in12 => '0',                                -- (terminated)
+			reset_in13     => '0',                                -- (terminated)
+			reset_req_in13 => '0',                                -- (terminated)
+			reset_in14     => '0',                                -- (terminated)
+			reset_req_in14 => '0',                                -- (terminated)
+			reset_in15     => '0',                                -- (terminated)
+			reset_req_in15 => '0'                                 -- (terminated)
+		);
+
 	reset_reset_n_ports_inv <= not reset_reset_n;
 
 	mm_interconnect_0_jtag_uart_0_avalon_jtag_slave_read_ports_inv <= not mm_interconnect_0_jtag_uart_0_avalon_jtag_slave_read;
@@ -950,8 +983,6 @@ begin
 
 	mm_interconnect_0_uart_rx_32_po_s1_write_ports_inv <= not mm_interconnect_0_uart_rx_32_po_s1_write;
 
-	mm_interconnect_0_uart_irq_s1_write_ports_inv <= not mm_interconnect_0_uart_irq_s1_write;
-
 	mm_interconnect_0_uart_tx_data_reg_s1_write_ports_inv <= not mm_interconnect_0_uart_tx_data_reg_s1_write;
 
 	mm_interconnect_0_uart_tx_start_s1_write_ports_inv <= not mm_interconnect_0_uart_tx_start_s1_write;
@@ -959,6 +990,10 @@ begin
 	mm_interconnect_0_status_leds_pio_s1_write_ports_inv <= not mm_interconnect_0_status_leds_pio_s1_write;
 
 	mm_interconnect_0_parsedloop_irq_s1_write_ports_inv <= not mm_interconnect_0_parsedloop_irq_s1_write;
+
+	mm_interconnect_0_uart_rx_s1_write_ports_inv <= not mm_interconnect_0_uart_rx_s1_write;
+
+	mm_interconnect_0_uart_tx_s1_write_ports_inv <= not mm_interconnect_0_uart_tx_s1_write;
 
 	rst_controller_reset_out_reset_ports_inv <= not rst_controller_reset_out_reset;
 

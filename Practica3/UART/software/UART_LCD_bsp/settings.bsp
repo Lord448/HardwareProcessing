@@ -2,12 +2,12 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Nov 30, 2023 12:56:51 AM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1701327411739</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Dec 1, 2023 9:48:00 AM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1701445680788</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>/home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica3/UART/software/UART_LCD_bsp</BspGeneratedLocation>
         <BspSettingsFile>./settings.bsp</BspSettingsFile>
         <SopcDesignFile>../../NIOS2.sopcinfo</SopcDesignFile>
-        <SystemFileHash>dbf1bbf462362891f41e27aba6e8728975d0b42d6e90f8491c98fe7ba9c76240</SystemFileHash>
+        <SystemFileHash>7d1e25cc8988ec1ca530fcaf3afb2ac94258f8c2bff963619ac8688ec5f9bcb</SystemFileHash>
         <JdiFile>default</JdiFile>
         <Cpu>nios2_gen2_0</Cpu>
         <SchemaVersion>1.9</SchemaVersion>
@@ -924,56 +924,62 @@
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>ParsedLoop_IRQ</slaveDescriptor>
-                <addressRange>0x00009140 - 0x0000914F</addressRange>
-                <addressSpan>16</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
-                <slaveDescriptor>DIP_TX_Data_PIO</slaveDescriptor>
+                <slaveDescriptor>UART_TX</slaveDescriptor>
                 <addressRange>0x00009150 - 0x0000915F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>UART_RX_STATUS_REG</slaveDescriptor>
+                <slaveDescriptor>UART_RX</slaveDescriptor>
                 <addressRange>0x00009160 - 0x0000916F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>UART_TX_DATA_REG</slaveDescriptor>
+                <slaveDescriptor>ParsedLoop_IRQ</slaveDescriptor>
                 <addressRange>0x00009170 - 0x0000917F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>UART_RX_DATA_REG</slaveDescriptor>
+                <slaveDescriptor>DIP_TX_Data_PIO</slaveDescriptor>
                 <addressRange>0x00009180 - 0x0000918F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>UART_IRQ</slaveDescriptor>
+                <slaveDescriptor>UART_RX_STATUS_REG</slaveDescriptor>
                 <addressRange>0x00009190 - 0x0000919F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>UART_RX_32_PO</slaveDescriptor>
+                <slaveDescriptor>UART_TX_DATA_REG</slaveDescriptor>
                 <addressRange>0x000091A0 - 0x000091AF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>UART_TX_32_PO</slaveDescriptor>
+                <slaveDescriptor>UART_RX_DATA_REG</slaveDescriptor>
                 <addressRange>0x000091B0 - 0x000091BF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
+                <slaveDescriptor>UART_RX_32_PO</slaveDescriptor>
+                <addressRange>0x000091C0 - 0x000091CF</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>UART_TX_32_PO</slaveDescriptor>
+                <addressRange>0x000091D0 - 0x000091DF</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
                 <slaveDescriptor>jtag_uart_0</slaveDescriptor>
-                <addressRange>0x000091C0 - 0x000091C7</addressRange>
+                <addressRange>0x000091E0 - 0x000091E7</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes>printable</attributes>
         </MemoryMap>

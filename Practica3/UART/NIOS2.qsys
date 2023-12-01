@@ -13,7 +13,7 @@
    {
       datum _sortIndex
       {
-         value = "11";
+         value = "10";
          type = "int";
       }
    }
@@ -29,7 +29,7 @@
    {
       datum _sortIndex
       {
-         value = "13";
+         value = "12";
          type = "int";
       }
       datum sopceditor_expanded
@@ -42,7 +42,7 @@
    {
       datum baseAddress
       {
-         value = "37200";
+         value = "37248";
          type = "String";
       }
    }
@@ -58,7 +58,7 @@
    {
       datum _sortIndex
       {
-         value = "14";
+         value = "13";
          type = "int";
       }
    }
@@ -66,7 +66,7 @@
    {
       datum baseAddress
       {
-         value = "37184";
+         value = "37232";
          type = "String";
       }
    }
@@ -74,7 +74,7 @@
    {
       datum _sortIndex
       {
-         value = "12";
+         value = "11";
          type = "int";
       }
    }
@@ -86,19 +86,19 @@
          type = "String";
       }
    }
-   element UART_IRQ
+   element UART_RX
    {
       datum _sortIndex
       {
-         value = "6";
+         value = "14";
          type = "int";
       }
    }
-   element UART_IRQ.s1
+   element UART_RX.s1
    {
       datum baseAddress
       {
-         value = "37264";
+         value = "37216";
          type = "String";
       }
    }
@@ -114,7 +114,7 @@
    {
       datum baseAddress
       {
-         value = "37280";
+         value = "37312";
          type = "String";
       }
    }
@@ -122,7 +122,7 @@
    {
       datum _sortIndex
       {
-         value = "8";
+         value = "7";
          type = "int";
       }
    }
@@ -130,7 +130,7 @@
    {
       datum baseAddress
       {
-         value = "37248";
+         value = "37296";
          type = "String";
       }
    }
@@ -138,7 +138,7 @@
    {
       datum _sortIndex
       {
-         value = "9";
+         value = "8";
          type = "int";
       }
    }
@@ -146,7 +146,23 @@
    {
       datum baseAddress
       {
-         value = "37216";
+         value = "37264";
+         type = "String";
+      }
+   }
+   element UART_TX
+   {
+      datum _sortIndex
+      {
+         value = "15";
+         type = "int";
+      }
+   }
+   element UART_TX.s1
+   {
+      datum baseAddress
+      {
+         value = "37200";
          type = "String";
       }
    }
@@ -162,7 +178,7 @@
    {
       datum baseAddress
       {
-         value = "37296";
+         value = "37328";
          type = "String";
       }
    }
@@ -170,7 +186,7 @@
    {
       datum _sortIndex
       {
-         value = "7";
+         value = "6";
          type = "int";
       }
    }
@@ -178,7 +194,7 @@
    {
       datum baseAddress
       {
-         value = "37232";
+         value = "37280";
          type = "String";
       }
    }
@@ -186,7 +202,7 @@
    {
       datum _sortIndex
       {
-         value = "10";
+         value = "9";
          type = "int";
       }
    }
@@ -218,7 +234,7 @@
    {
       datum baseAddress
       {
-         value = "37312";
+         value = "37344";
          type = "String";
       }
    }
@@ -298,13 +314,13 @@
    type="conduit"
    dir="end" />
  <interface
-   name="uart_irq_external_connection"
-   internal="UART_IRQ.external_connection"
+   name="uart_rx_data_reg_external_connection"
+   internal="UART_RX_DATA_REG.external_connection"
    type="conduit"
    dir="end" />
  <interface
-   name="uart_rx_data_reg_external_connection"
-   internal="UART_RX_DATA_REG.external_connection"
+   name="uart_rx_external_connection"
+   internal="UART_RX.external_connection"
    type="conduit"
    dir="end" />
  <interface
@@ -320,6 +336,11 @@
  <interface
    name="uart_tx_data_reg_external_connection"
    internal="UART_TX_DATA_REG.external_connection"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="uart_tx_external_connection"
+   internal="UART_TX.external_connection"
    type="conduit"
    dir="end" />
  <interface
@@ -404,8 +425,8 @@
   <parameter name="simDrivenValue" value="0" />
   <parameter name="width" value="4" />
  </module>
- <module name="UART_IRQ" kind="altera_avalon_pio" version="22.1" enabled="1">
-  <parameter name="bitClearingEdgeCapReg" value="true" />
+ <module name="UART_RX" kind="altera_avalon_pio" version="22.1" enabled="1">
+  <parameter name="bitClearingEdgeCapReg" value="false" />
   <parameter name="bitModifyingOutReg" value="false" />
   <parameter name="captureEdge" value="true" />
   <parameter name="clockRate" value="50000000" />
@@ -416,7 +437,7 @@
   <parameter name="resetValue" value="0" />
   <parameter name="simDoTestBenchWiring" value="false" />
   <parameter name="simDrivenValue" value="0" />
-  <parameter name="width" value="2" />
+  <parameter name="width" value="1" />
  </module>
  <module
    name="UART_RX_32_PO"
@@ -471,6 +492,20 @@
   <parameter name="simDoTestBenchWiring" value="false" />
   <parameter name="simDrivenValue" value="0" />
   <parameter name="width" value="2" />
+ </module>
+ <module name="UART_TX" kind="altera_avalon_pio" version="22.1" enabled="1">
+  <parameter name="bitClearingEdgeCapReg" value="false" />
+  <parameter name="bitModifyingOutReg" value="false" />
+  <parameter name="captureEdge" value="true" />
+  <parameter name="clockRate" value="50000000" />
+  <parameter name="direction" value="Input" />
+  <parameter name="edgeType" value="RISING" />
+  <parameter name="generateIRQ" value="true" />
+  <parameter name="irqType" value="EDGE" />
+  <parameter name="resetValue" value="0" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="1" />
  </module>
  <module
    name="UART_TX_32_PO"
@@ -575,7 +610,7 @@
   <parameter name="dataAddrWidth" value="16" />
   <parameter name="dataMasterHighPerformanceAddrWidth" value="1" />
   <parameter name="dataMasterHighPerformanceMapParam" value="" />
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x4000' end='0x6800' type='altera_avalon_onchip_memory2.s1' /><slave name='nios2_gen2_0.debug_mem_slave' start='0x8800' end='0x9000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='Status_LEDS_PIO.s1' start='0x9060' end='0x9080' type='altera_avalon_pio.s1' /><slave name='Control_PIO.s1' start='0x9080' end='0x90A0' type='altera_avalon_pio.s1' /><slave name='UART_TX_START.s1' start='0x90A0' end='0x90C0' type='altera_avalon_pio.s1' /><slave name='ParsedLoop_IRQ.s1' start='0x9140' end='0x9150' type='altera_avalon_pio.s1' /><slave name='DIP_TX_Data_PIO.s1' start='0x9150' end='0x9160' type='altera_avalon_pio.s1' /><slave name='UART_RX_STATUS_REG.s1' start='0x9160' end='0x9170' type='altera_avalon_pio.s1' /><slave name='UART_TX_DATA_REG.s1' start='0x9170' end='0x9180' type='altera_avalon_pio.s1' /><slave name='UART_RX_DATA_REG.s1' start='0x9180' end='0x9190' type='altera_avalon_pio.s1' /><slave name='UART_IRQ.s1' start='0x9190' end='0x91A0' type='altera_avalon_pio.s1' /><slave name='UART_RX_32_PO.s1' start='0x91A0' end='0x91B0' type='altera_avalon_pio.s1' /><slave name='UART_TX_32_PO.s1' start='0x91B0' end='0x91C0' type='altera_avalon_pio.s1' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x91C0' end='0x91C8' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x4000' end='0x6800' type='altera_avalon_onchip_memory2.s1' /><slave name='nios2_gen2_0.debug_mem_slave' start='0x8800' end='0x9000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='Status_LEDS_PIO.s1' start='0x9060' end='0x9080' type='altera_avalon_pio.s1' /><slave name='Control_PIO.s1' start='0x9080' end='0x90A0' type='altera_avalon_pio.s1' /><slave name='UART_TX_START.s1' start='0x90A0' end='0x90C0' type='altera_avalon_pio.s1' /><slave name='UART_TX.s1' start='0x9150' end='0x9160' type='altera_avalon_pio.s1' /><slave name='UART_RX.s1' start='0x9160' end='0x9170' type='altera_avalon_pio.s1' /><slave name='ParsedLoop_IRQ.s1' start='0x9170' end='0x9180' type='altera_avalon_pio.s1' /><slave name='DIP_TX_Data_PIO.s1' start='0x9180' end='0x9190' type='altera_avalon_pio.s1' /><slave name='UART_RX_STATUS_REG.s1' start='0x9190' end='0x91A0' type='altera_avalon_pio.s1' /><slave name='UART_TX_DATA_REG.s1' start='0x91A0' end='0x91B0' type='altera_avalon_pio.s1' /><slave name='UART_RX_DATA_REG.s1' start='0x91B0' end='0x91C0' type='altera_avalon_pio.s1' /><slave name='UART_RX_32_PO.s1' start='0x91C0' end='0x91D0' type='altera_avalon_pio.s1' /><slave name='UART_TX_32_PO.s1' start='0x91D0' end='0x91E0' type='altera_avalon_pio.s1' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x91E0' end='0x91E8' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></parameter>
   <parameter name="data_master_high_performance_paddr_base" value="0" />
   <parameter name="data_master_high_performance_paddr_size" value="0" />
   <parameter name="data_master_paddr_base" value="0" />
@@ -614,14 +649,14 @@
   <parameter name="icache_tagramBlockType" value="Automatic" />
   <parameter name="impl" value="Fast" />
   <parameter name="instAddrWidth" value="16" />
-  <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x4000' end='0x6800' type='altera_avalon_onchip_memory2.s1' /><slave name='nios2_gen2_0.debug_mem_slave' start='0x8800' end='0x9000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='Status_LEDS_PIO.s1' start='0x9060' end='0x9080' type='altera_avalon_pio.s1' /><slave name='Control_PIO.s1' start='0x9080' end='0x90A0' type='altera_avalon_pio.s1' /><slave name='UART_TX_START.s1' start='0x90A0' end='0x90C0' type='altera_avalon_pio.s1' /><slave name='ParsedLoop_IRQ.s1' start='0x9140' end='0x9150' type='altera_avalon_pio.s1' /><slave name='DIP_TX_Data_PIO.s1' start='0x9150' end='0x9160' type='altera_avalon_pio.s1' /><slave name='UART_RX_STATUS_REG.s1' start='0x9160' end='0x9170' type='altera_avalon_pio.s1' /><slave name='UART_TX_DATA_REG.s1' start='0x9170' end='0x9180' type='altera_avalon_pio.s1' /><slave name='UART_RX_DATA_REG.s1' start='0x9180' end='0x9190' type='altera_avalon_pio.s1' /><slave name='UART_IRQ.s1' start='0x9190' end='0x91A0' type='altera_avalon_pio.s1' /><slave name='UART_RX_32_PO.s1' start='0x91A0' end='0x91B0' type='altera_avalon_pio.s1' /><slave name='UART_TX_32_PO.s1' start='0x91B0' end='0x91C0' type='altera_avalon_pio.s1' /></address-map>]]></parameter>
+  <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x4000' end='0x6800' type='altera_avalon_onchip_memory2.s1' /><slave name='nios2_gen2_0.debug_mem_slave' start='0x8800' end='0x9000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='Status_LEDS_PIO.s1' start='0x9060' end='0x9080' type='altera_avalon_pio.s1' /><slave name='Control_PIO.s1' start='0x9080' end='0x90A0' type='altera_avalon_pio.s1' /><slave name='UART_TX_START.s1' start='0x90A0' end='0x90C0' type='altera_avalon_pio.s1' /><slave name='UART_TX.s1' start='0x9150' end='0x9160' type='altera_avalon_pio.s1' /><slave name='UART_RX.s1' start='0x9160' end='0x9170' type='altera_avalon_pio.s1' /><slave name='ParsedLoop_IRQ.s1' start='0x9170' end='0x9180' type='altera_avalon_pio.s1' /><slave name='DIP_TX_Data_PIO.s1' start='0x9180' end='0x9190' type='altera_avalon_pio.s1' /><slave name='UART_RX_STATUS_REG.s1' start='0x9190' end='0x91A0' type='altera_avalon_pio.s1' /><slave name='UART_TX_DATA_REG.s1' start='0x91A0' end='0x91B0' type='altera_avalon_pio.s1' /><slave name='UART_RX_DATA_REG.s1' start='0x91B0' end='0x91C0' type='altera_avalon_pio.s1' /><slave name='UART_RX_32_PO.s1' start='0x91C0' end='0x91D0' type='altera_avalon_pio.s1' /><slave name='UART_TX_32_PO.s1' start='0x91D0' end='0x91E0' type='altera_avalon_pio.s1' /></address-map>]]></parameter>
   <parameter name="instructionMasterHighPerformanceAddrWidth" value="1" />
   <parameter name="instructionMasterHighPerformanceMapParam" value="" />
   <parameter name="instruction_master_high_performance_paddr_base" value="0" />
   <parameter name="instruction_master_high_performance_paddr_size" value="0" />
   <parameter name="instruction_master_paddr_base" value="0" />
   <parameter name="instruction_master_paddr_size" value="0" />
-  <parameter name="internalIrqMaskSystemInfo" value="7" />
+  <parameter name="internalIrqMaskSystemInfo" value="15" />
   <parameter name="io_regionbase" value="0" />
   <parameter name="io_regionsize" value="0" />
   <parameter name="master_addr_map" value="false" />
@@ -771,6 +806,42 @@
    start="nios2_gen2_0.data_master"
    end="jtag_uart_0.avalon_jtag_slave">
   <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x91e0" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="22.1"
+   start="nios2_gen2_0.data_master"
+   end="nios2_gen2_0.debug_mem_slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x8800" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="22.1"
+   start="nios2_gen2_0.data_master"
+   end="onchip_memory2_0.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x4000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="22.1"
+   start="nios2_gen2_0.data_master"
+   end="UART_TX_32_PO.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x91d0" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="22.1"
+   start="nios2_gen2_0.data_master"
+   end="UART_RX_32_PO.s1">
+  <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x91c0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
@@ -778,25 +849,7 @@
    kind="avalon"
    version="22.1"
    start="nios2_gen2_0.data_master"
-   end="nios2_gen2_0.debug_mem_slave">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x8800" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="22.1"
-   start="nios2_gen2_0.data_master"
-   end="onchip_memory2_0.s1">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x4000" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="22.1"
-   start="nios2_gen2_0.data_master"
-   end="UART_TX_32_PO.s1">
+   end="UART_RX_DATA_REG.s1">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x91b0" />
   <parameter name="defaultConnection" value="false" />
@@ -805,7 +858,7 @@
    kind="avalon"
    version="22.1"
    start="nios2_gen2_0.data_master"
-   end="UART_RX_32_PO.s1">
+   end="UART_TX_DATA_REG.s1">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x91a0" />
   <parameter name="defaultConnection" value="false" />
@@ -814,36 +867,9 @@
    kind="avalon"
    version="22.1"
    start="nios2_gen2_0.data_master"
-   end="UART_IRQ.s1">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x9190" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="22.1"
-   start="nios2_gen2_0.data_master"
-   end="UART_RX_DATA_REG.s1">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x9180" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="22.1"
-   start="nios2_gen2_0.data_master"
-   end="UART_TX_DATA_REG.s1">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x9170" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="22.1"
-   start="nios2_gen2_0.data_master"
    end="UART_RX_STATUS_REG.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x9160" />
+  <parameter name="baseAddress" value="0x9190" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -879,7 +905,7 @@
    start="nios2_gen2_0.data_master"
    end="DIP_TX_Data_PIO.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x9150" />
+  <parameter name="baseAddress" value="0x9180" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -888,7 +914,25 @@
    start="nios2_gen2_0.data_master"
    end="ParsedLoop_IRQ.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x9140" />
+  <parameter name="baseAddress" value="0x9170" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="22.1"
+   start="nios2_gen2_0.data_master"
+   end="UART_RX.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x9160" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="22.1"
+   start="nios2_gen2_0.data_master"
+   end="UART_TX.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x9150" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -915,7 +959,7 @@
    start="nios2_gen2_0.instruction_master"
    end="UART_TX_32_PO.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x91b0" />
+  <parameter name="baseAddress" value="0x91d0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -924,16 +968,7 @@
    start="nios2_gen2_0.instruction_master"
    end="UART_RX_32_PO.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x91a0" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="22.1"
-   start="nios2_gen2_0.instruction_master"
-   end="UART_IRQ.s1">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x9190" />
+  <parameter name="baseAddress" value="0x91c0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -942,7 +977,7 @@
    start="nios2_gen2_0.instruction_master"
    end="UART_RX_DATA_REG.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x9180" />
+  <parameter name="baseAddress" value="0x91b0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -951,7 +986,7 @@
    start="nios2_gen2_0.instruction_master"
    end="UART_TX_DATA_REG.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x9170" />
+  <parameter name="baseAddress" value="0x91a0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -960,7 +995,7 @@
    start="nios2_gen2_0.instruction_master"
    end="UART_RX_STATUS_REG.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x9160" />
+  <parameter name="baseAddress" value="0x9190" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -996,7 +1031,7 @@
    start="nios2_gen2_0.instruction_master"
    end="DIP_TX_Data_PIO.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x9150" />
+  <parameter name="baseAddress" value="0x9180" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1005,14 +1040,31 @@
    start="nios2_gen2_0.instruction_master"
    end="ParsedLoop_IRQ.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x9140" />
+  <parameter name="baseAddress" value="0x9170" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="22.1"
+   start="nios2_gen2_0.instruction_master"
+   end="UART_RX.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x9160" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="22.1"
+   start="nios2_gen2_0.instruction_master"
+   end="UART_TX.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x9150" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection kind="clock" version="22.1" start="clk_0.clk" end="nios2_gen2_0.clk" />
  <connection kind="clock" version="22.1" start="clk_0.clk" end="jtag_uart_0.clk" />
  <connection kind="clock" version="22.1" start="clk_0.clk" end="UART_TX_32_PO.clk" />
  <connection kind="clock" version="22.1" start="clk_0.clk" end="UART_RX_32_PO.clk" />
- <connection kind="clock" version="22.1" start="clk_0.clk" end="UART_IRQ.clk" />
  <connection
    kind="clock"
    version="22.1"
@@ -1045,6 +1097,8 @@
    version="22.1"
    start="clk_0.clk"
    end="ParsedLoop_IRQ.clk" />
+ <connection kind="clock" version="22.1" start="clk_0.clk" end="UART_RX.clk" />
+ <connection kind="clock" version="22.1" start="clk_0.clk" end="UART_TX.clk" />
  <connection
    kind="clock"
    version="22.1"
@@ -1061,15 +1115,22 @@
    kind="interrupt"
    version="22.1"
    start="nios2_gen2_0.irq"
-   end="UART_IRQ.irq">
-  <parameter name="irqNumber" value="1" />
+   end="ParsedLoop_IRQ.irq">
+  <parameter name="irqNumber" value="2" />
  </connection>
  <connection
    kind="interrupt"
    version="22.1"
    start="nios2_gen2_0.irq"
-   end="ParsedLoop_IRQ.irq">
-  <parameter name="irqNumber" value="2" />
+   end="UART_RX.irq">
+  <parameter name="irqNumber" value="3" />
+ </connection>
+ <connection
+   kind="interrupt"
+   version="22.1"
+   start="nios2_gen2_0.irq"
+   end="UART_TX.irq">
+  <parameter name="irqNumber" value="1" />
  </connection>
  <connection
    kind="reset"
@@ -1091,11 +1152,6 @@
    version="22.1"
    start="clk_0.clk_reset"
    end="UART_RX_32_PO.reset" />
- <connection
-   kind="reset"
-   version="22.1"
-   start="clk_0.clk_reset"
-   end="UART_IRQ.reset" />
  <connection
    kind="reset"
    version="22.1"
@@ -1140,12 +1196,82 @@
    kind="reset"
    version="22.1"
    start="clk_0.clk_reset"
+   end="UART_RX.reset" />
+ <connection
+   kind="reset"
+   version="22.1"
+   start="clk_0.clk_reset"
+   end="UART_TX.reset" />
+ <connection
+   kind="reset"
+   version="22.1"
+   start="clk_0.clk_reset"
    end="onchip_memory2_0.reset1" />
  <connection
    kind="reset"
    version="22.1"
    start="nios2_gen2_0.debug_reset_request"
    end="nios2_gen2_0.reset" />
+ <connection
+   kind="reset"
+   version="22.1"
+   start="nios2_gen2_0.debug_reset_request"
+   end="UART_TX.reset" />
+ <connection
+   kind="reset"
+   version="22.1"
+   start="nios2_gen2_0.debug_reset_request"
+   end="UART_RX.reset" />
+ <connection
+   kind="reset"
+   version="22.1"
+   start="nios2_gen2_0.debug_reset_request"
+   end="ParsedLoop_IRQ.reset" />
+ <connection
+   kind="reset"
+   version="22.1"
+   start="nios2_gen2_0.debug_reset_request"
+   end="DIP_TX_Data_PIO.reset" />
+ <connection
+   kind="reset"
+   version="22.1"
+   start="nios2_gen2_0.debug_reset_request"
+   end="Status_LEDS_PIO.reset" />
+ <connection
+   kind="reset"
+   version="22.1"
+   start="nios2_gen2_0.debug_reset_request"
+   end="Control_PIO.reset" />
+ <connection
+   kind="reset"
+   version="22.1"
+   start="nios2_gen2_0.debug_reset_request"
+   end="UART_TX_START.reset" />
+ <connection
+   kind="reset"
+   version="22.1"
+   start="nios2_gen2_0.debug_reset_request"
+   end="UART_RX_STATUS_REG.reset" />
+ <connection
+   kind="reset"
+   version="22.1"
+   start="nios2_gen2_0.debug_reset_request"
+   end="UART_RX_DATA_REG.reset" />
+ <connection
+   kind="reset"
+   version="22.1"
+   start="nios2_gen2_0.debug_reset_request"
+   end="UART_TX_DATA_REG.reset" />
+ <connection
+   kind="reset"
+   version="22.1"
+   start="nios2_gen2_0.debug_reset_request"
+   end="UART_RX_32_PO.reset" />
+ <connection
+   kind="reset"
+   version="22.1"
+   start="nios2_gen2_0.debug_reset_request"
+   end="UART_TX_32_PO.reset" />
  <connection
    kind="reset"
    version="22.1"

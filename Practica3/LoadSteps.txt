@@ -1,0 +1,15 @@
+GDBServer
+
+make all
+nios2-download -g ${FILE}.elf #If want just to run, otherwise skip
+nios2-gdb-server --tcpport 2342 --tcppersist #Only if want  to debug
+
+#If the server ends with a non zero value
+pkill -9 -f nios2-gdb-server
+
+
+GDB Launcher
+nios2-elf-gdb ${FILE}.elf
+#Inside GDB shell
+target remote localhost:2342
+load

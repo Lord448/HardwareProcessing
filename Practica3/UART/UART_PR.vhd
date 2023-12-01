@@ -77,13 +77,14 @@ architecture rtl of UART_PR is
 			parsedloop_irq_external_connection_export     : in  std_logic                     := 'X';             -- export
 			reset_reset_n                                 : in  std_logic                     := 'X';             -- reset_n
 			status_leds_pio_external_connection_export    : out std_logic_vector(3 downto 0);                     -- export
-			uart_irq_external_connection_export           : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- export
 			uart_rx_data_reg_external_connection_export   : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- export
 			uart_rx_pi_external_connection_export         : out std_logic_vector(31 downto 0);                    -- export
 			uart_rx_status_reg_external_connection_export : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- export
 			uart_tx_data_reg_external_connection_export   : out std_logic_vector(7 downto 0);                     -- export
 			uart_tx_po_external_connection_export         : out std_logic_vector(31 downto 0);                    -- export
-			uart_tx_start_external_connection_export      : out std_logic                                         -- export
+			uart_tx_start_external_connection_export      : out std_logic;                                        -- export
+			uart_rx_external_connection_export            : in  std_logic                     := 'X';             -- export
+			uart_tx_external_connection_export            : in  std_logic                     := 'X'              -- export
 		);
 	end component NIOS2;
 
@@ -129,7 +130,6 @@ architecture rtl of UART_PR is
 	signal r_Parse_Count  : integer range 0 to PSCCountsFor1ms := 0;
 	signal r_32Bit_TX     : std_logic_vector(31 downto 0);
 	signal r_32Bit_RX     : std_logic_vector(31 downto 0);
-	signal r_UART_IRQ     : std_logic_vector(1 downto 0);
 	signal r_Control_Port : std_logic_vector(3 downto 0);
 	signal r_Status_Leds  : std_logic_vector(3 downto 0);
 	signal r_Parsed_Loop  : std_logic;
@@ -189,9 +189,6 @@ begin
 
     -------------------------------------------------------------------
     -----------------ABAJO ESCRIBE TU C�DIGO EN VHDL-------------------
-
-	r_UART_IRQ(0) 		 <= r_TX_Done;
-	r_UART_IRQ(1) 		 <= r_RX_Done;
 	r_UART_Status_Reg(0) <= r_TX_Busy;
 	r_UART_Status_Reg(1) <= r_RX_Error;
 	r_Control_Port		 <= not i_Control_Port; --Active High
@@ -201,17 +198,18 @@ begin
 	port map (
 		clk_clk                                       => i_CLK,
 		reset_reset_n                                 => i_Reset,
-		uart_irq_external_connection_export           => r_UART_IRQ,
+		control_pio_external_connection_export        => r_Control_Port,
+		dip_tx_data_pio_external_connection_export    => i_TX_Data,
+		parsedloop_irq_external_connection_export     => r_Parsed_Loop,
+		status_leds_pio_external_connection_export    => r_Status_Leds,
 		uart_rx_data_reg_external_connection_export   => r_RX_Data,
 		uart_rx_pi_external_connection_export         => r_32Bit_RX,
 		uart_rx_status_reg_external_connection_export => r_UART_Status_Reg,
 		uart_tx_data_reg_external_connection_export   => r_TX_Data,
 		uart_tx_po_external_connection_export         => r_32Bit_TX,
 		uart_tx_start_external_connection_export      => r_TX_Start,
-		control_pio_external_connection_export        => r_Control_Port,
-		status_leds_pio_external_connection_export    => r_Status_Leds,
-		dip_tx_data_pio_external_connection_export    => i_TX_Data,
-		parsedloop_irq_external_connection_export     => r_Parsed_Loop
+		uart_rx_external_connection_export            => r_RX_Done,
+		uart_tx_external_connection_export            => r_TX_Done
 	);
 
 	U_UART : UART

@@ -122,10 +122,12 @@ static ControlPort ControlPortRead(void);
 //----------------------------------------------------
 //			 	      	ISR
 //----------------------------------------------------
-void (*pUART_TXRX_IRQ)(void* isr_context);
-void UART_TXRX_CpltCallback(void* isr_context);
-void (*pParsedLoop_IRQ)(void* isr_context);
-void ParsedLoopElapsedCallback(void* isr_context);
+void (*pUART_TXRX_IRQ)(void* isr_context, alt_u32 id);
+void UART_TXRX_CpltCallback(void* isr_context, alt_u32 id);
+void (*pParsedLoop_IRQ)(void* isr_context, alt_u32 id);
+void ParsedLoopElapsedCallback(void* isr_context, alt_u32 id);
+static void initParsedLoopIRQ(void);
+static void initUARTirq(void);
 
 
 //PIO Ports definitions
@@ -138,6 +140,11 @@ alt_u8 *ControlBase = CONTROL_PIO_BASE; //Buttons to control the program -- Need
 alt_u8 *StatusLed = STATUS_LEDS_PIO_BASE; //LEDs to report status of program -- Needs mask 4 LSB
 alt_u8 *StartTX = UART_TX_START_BASE; //When high sends a data to UART -- Needs mask of 1 LSB
 alt_u8 *UARTStatus = UART_RX_STATUS_REG_BASE; //Status of the UART RX 0 busy, 1 Error, both on Active on High -- Needs mask
+
+//Global isr handlers
+volatile alt_u8 UART_TX;
+volatile alt_u8 UART_RX;
+volatile alt_u8 ParsedLoop_Edge;
 
 //Global variables
 alt_u32 WordRX = 0;
@@ -154,7 +161,7 @@ int main()
 {
   alt_sys_init();
   alt_irq_init(NULL);
-  alt_putstr("Hello from Nios II!\n");
+  //alt_putstr("Hello from Nios II!\n");
 #ifdef ALT_ENHANCED_INTERRUPT_API_PRESENT
   pUART_TXRX_IRQ = &UART_TXRX_CpltCallback;
   pParsedLoop_IRQ = &ParsedLoopElapsedCallback;
@@ -389,7 +396,7 @@ static void StatusWrite(StatusLeds statusLeds, alt_u8 value)
 //----------------------------------------------------
 //			 	      	ISR
 //----------------------------------------------------
-void UART_TXRX_CpltCallback(void* isr_context) {
+void UART_TXRX_CpltCallback(void* isr_context, alt_u32 id){
 	//IF RX
 	//Copy the value of the port
 	if(EnableReception) {
@@ -406,6 +413,15 @@ void UART_TXRX_CpltCallback(void* isr_context) {
 	TXIsBusy = false;
 }
 
-void ParsedLoopElapsedCallback(void* isr_context) { ParsedLoopFlag = false; }
-void ParsedLoopElapsedCallback(void* isr_context) { ParsedLoopFlag = false; }
+void ParsedLoopElapsedCallback(void* isr_context, alt_u32 id) { 
+	ParsedLoopFlag = false; 
+}
+
+static void initParsedLoopIRQ(void) {
+
+}
+
+static void initUARTirq(void) {
+
+}
 

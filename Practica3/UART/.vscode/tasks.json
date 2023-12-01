@@ -1,0 +1,89 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "GDB NiosII",
+            "type": "shell",
+            "problemMatcher": [],
+            "dependsOrder": "parallel",
+            "dependsOn" : [
+                "GDB Server",
+                "GDB"
+            ],
+            "options": {
+                "cwd": "software/${input:dir}"
+            },
+            "group": {
+                "kind" : "build",
+                "isDefault": true
+            }
+            
+        },
+        //General Task for GDB Server
+        {
+            "label": "GDB Server",
+            "type": "shell",
+            "dependsOrder": "sequence",
+            "dependsOn":[
+                "Build",
+                "Flash",
+                "GDBServer"
+            ],
+            "problemMatcher": []
+        },
+        //General Task for GDB
+        {
+            "label": "GDB",
+            "type": "shell",
+            "dependsOrder": "sequence",
+            "dependsOn":[
+                "Build",
+                "Flash",
+                "GDBConn"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Build",
+            "type": "shell",
+            "command" : "make all",
+            "options": {
+                "cwd": "software/${input:dir}"
+            }
+        },
+        {
+            "label": "Flash",
+            "type": "shell",
+            "options": {
+                "cwd": "software/${input:dir}"
+            },
+            "command" : "nios2-download -g ${input:dir}/${fileDirname}.elf"
+        },
+        {
+            "label": "GDBServer",
+            "type": "shell",
+            "command" : "nios2-gdb-server --tcpport 2342 --tcppersist",
+            "options": {
+                "cwd": "software/${input:dir}"
+            }
+        },
+        {
+            "label": "GDBConn",
+            "type": "shell",
+            "command": "nios2-elf-gdb ${fileDirname}.elf",
+            "options": {
+                "cwd": "software/${input:dir}"
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "dir",
+            "description": "Directory of the project that contains the binaries",
+            "default": "UART_LCD",
+            "type": "promptString"
+        }
+    ]
+}
