@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP4CE6) Path("/home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica3/UART/output_files/") File("output_file.jic") MfrSpec(OpMask(1) SEC_Device(EPCS16) Child_OpMask(1 1));
+		Device PartName(EP4CE6E22) Path("/home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica3/UART/output_files/") File("UART_time_limited.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

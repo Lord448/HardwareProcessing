@@ -44,6 +44,7 @@ module NIOS2_nios2_gen2_0_cpu_test_bench (
                                             W_badaddr_reg,
                                             W_bstatus_reg,
                                             W_dst_regnum,
+                                            W_dst_regset,
                                             W_estatus_reg,
                                             W_exception_reg,
                                             W_iw,
@@ -105,6 +106,7 @@ module NIOS2_nios2_gen2_0_cpu_test_bench (
   input   [ 31: 0] W_badaddr_reg;
   input   [ 31: 0] W_bstatus_reg;
   input   [  4: 0] W_dst_regnum;
+  input   [  1: 0] W_dst_regset;
   input   [ 31: 0] W_estatus_reg;
   input   [ 31: 0] W_exception_reg;
   input   [ 31: 0] W_iw;
@@ -727,6 +729,20 @@ wire             test_has_ended;
           if (^(A_en) === 1'bx)
             begin
               $write("%0d ns: ERROR: NIOS2_nios2_gen2_0_cpu_test_bench/A_en is 'x'\n", $time);
+              $stop;
+            end
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+        begin
+        end
+      else if (W_wr_dst_reg)
+          if (^(W_dst_regset) === 1'bx)
+            begin
+              $write("%0d ns: ERROR: NIOS2_nios2_gen2_0_cpu_test_bench/W_dst_regset is 'x'\n", $time);
               $stop;
             end
     end

@@ -118,7 +118,7 @@ LOAD /opt/intelFPGA_lite/22.1.2/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/../li
                 0x0000000000004188                PROVIDE (__ram_exceptions_end = ABSOLUTE (.))
                 0x0000000000004020                PROVIDE (__flash_exceptions_start = LOADADDR (.exceptions))
 
-.text           0x0000000000004188      0x640
+.text           0x0000000000004188      0x6a4
                 [!provide]                        PROVIDE (stext = ABSOLUTE (.))
  *(.interp)
  *(.hash)
@@ -163,49 +163,49 @@ LOAD /opt/intelFPGA_lite/22.1.2/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/../li
  *(.init)
  *(.plt)
  *(.text .stub .text.* .gnu.linkonce.t.*)
- .text          0x0000000000004188       0x4c ../UART_LCD_bsp//obj/HAL/src/crt0.o
+ .text          0x0000000000004188       0x8c ../UART_LCD_bsp//obj/HAL/src/crt0.o
                 0x0000000000004188                _start
- .text          0x00000000000041d4       0x98 obj/default/hello_world_small.o
- .text.startup  0x000000000000426c      0x2c0 obj/default/hello_world_small.o
-                0x000000000000426c                main
- .text          0x000000000000452c       0x8c ../UART_LCD_bsp//libhal_bsp.a(alt_iic.o)
-                0x000000000000452c                alt_ic_isr_register
-                0x0000000000004530                alt_ic_irq_enable
-                0x0000000000004568                alt_ic_irq_disable
-                0x00000000000045a0                alt_ic_irq_enabled
- .text          0x00000000000045b8       0x68 ../UART_LCD_bsp//libhal_bsp.a(alt_iic_isr_register.o)
-                0x00000000000045b8                alt_iic_isr_register
- .text          0x0000000000004620        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_entry.o)
- .text          0x0000000000004620        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_handler.o)
- .text          0x0000000000004620        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_vars.o)
- .text          0x0000000000004620       0x84 ../UART_LCD_bsp//libhal_bsp.a(alt_load.o)
-                0x0000000000004620                alt_load
- .text          0x00000000000046a4       0x2c ../UART_LCD_bsp//libhal_bsp.a(alt_main.o)
-                0x00000000000046a4                alt_main
- .text          0x00000000000046d0       0x24 ../UART_LCD_bsp//libhal_bsp.a(alt_sys_init.o)
-                0x00000000000046d0                alt_irq_init
-                0x00000000000046f0                alt_sys_init
- .text          0x00000000000046f4       0x18 ../UART_LCD_bsp//libhal_bsp.a(alt_dcache_flush_all.o)
-                0x00000000000046f4                alt_dcache_flush_all
- .text          0x000000000000470c        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_exception_entry.o)
- .text          0x000000000000470c        0xc ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush_all.o)
-                0x000000000000470c                alt_icache_flush_all
- .text          0x0000000000004718       0x24 ../UART_LCD_bsp//libhal_bsp.a(alt_instruction_exception_entry.o)
-                0x0000000000004718                alt_exception_cause_generated_bad_addr
- .text          0x000000000000473c        0x8 ../UART_LCD_bsp//libhal_bsp.a(altera_nios2_gen2_irq.o)
-                0x000000000000473c                altera_nios2_gen2_irq_init
- .text          0x0000000000004744       0x5c ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush.o)
-                0x0000000000004744                alt_icache_flush
- .text          0x00000000000047a0        0x0 /opt/intelFPGA_lite/22.1.2/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/../lib/gcc/nios2-elf/12.2.1/../../../../../H-x86_64-pc-linux-gnu/nios2-elf/lib/libsmallc.a(lib_a-memcpy.o)
- .text.memcpy   0x00000000000047a0       0x28 /opt/intelFPGA_lite/22.1.2/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/../lib/gcc/nios2-elf/12.2.1/../../../../../H-x86_64-pc-linux-gnu/nios2-elf/lib/libsmallc.a(lib_a-memcpy.o)
-                0x00000000000047a0                memcpy
+ .text          0x0000000000004214       0x88 obj/default/hello_world_small.o
+ .text.startup  0x000000000000429c      0x2c0 obj/default/hello_world_small.o
+                0x000000000000429c                main
+ .text          0x000000000000455c       0xac ../UART_LCD_bsp//libhal_bsp.a(alt_iic.o)
+                0x000000000000455c                alt_ic_isr_register
+                0x0000000000004560                alt_ic_irq_enable
+                0x00000000000045a8                alt_ic_irq_disable
+                0x00000000000045f0                alt_ic_irq_enabled
+ .text          0x0000000000004608       0x7c ../UART_LCD_bsp//libhal_bsp.a(alt_iic_isr_register.o)
+                0x0000000000004608                alt_iic_isr_register
+ .text          0x0000000000004684        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_entry.o)
+ .text          0x0000000000004684        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_handler.o)
+ .text          0x0000000000004684        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_vars.o)
+ .text          0x0000000000004684       0x84 ../UART_LCD_bsp//libhal_bsp.a(alt_load.o)
+                0x0000000000004684                alt_load
+ .text          0x0000000000004708       0x2c ../UART_LCD_bsp//libhal_bsp.a(alt_main.o)
+                0x0000000000004708                alt_main
+ .text          0x0000000000004734       0x24 ../UART_LCD_bsp//libhal_bsp.a(alt_sys_init.o)
+                0x0000000000004734                alt_irq_init
+                0x0000000000004754                alt_sys_init
+ .text          0x0000000000004758       0x18 ../UART_LCD_bsp//libhal_bsp.a(alt_dcache_flush_all.o)
+                0x0000000000004758                alt_dcache_flush_all
+ .text          0x0000000000004770        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_exception_entry.o)
+ .text          0x0000000000004770        0xc ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush_all.o)
+                0x0000000000004770                alt_icache_flush_all
+ .text          0x000000000000477c       0x24 ../UART_LCD_bsp//libhal_bsp.a(alt_instruction_exception_entry.o)
+                0x000000000000477c                alt_exception_cause_generated_bad_addr
+ .text          0x00000000000047a0        0x8 ../UART_LCD_bsp//libhal_bsp.a(altera_nios2_gen2_irq.o)
+                0x00000000000047a0                altera_nios2_gen2_irq_init
+ .text          0x00000000000047a8       0x5c ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush.o)
+                0x00000000000047a8                alt_icache_flush
+ .text          0x0000000000004804        0x0 /opt/intelFPGA_lite/22.1.2/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/../lib/gcc/nios2-elf/12.2.1/../../../../../H-x86_64-pc-linux-gnu/nios2-elf/lib/libsmallc.a(lib_a-memcpy.o)
+ .text.memcpy   0x0000000000004804       0x28 /opt/intelFPGA_lite/22.1.2/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/../lib/gcc/nios2-elf/12.2.1/../../../../../H-x86_64-pc-linux-gnu/nios2-elf/lib/libsmallc.a(lib_a-memcpy.o)
+                0x0000000000004804                memcpy
  *(.gnu.warning.*)
  *(.fini)
                 [!provide]                        PROVIDE (__etext = ABSOLUTE (.))
                 [!provide]                        PROVIDE (_etext = ABSOLUTE (.))
                 [!provide]                        PROVIDE (etext = ABSOLUTE (.))
  *(.eh_frame_hdr)
-                0x00000000000047c8                . = ALIGN (0x4)
+                0x000000000000482c                . = ALIGN (0x4)
                 [!provide]                        PROVIDE (__preinit_array_start = ABSOLUTE (.))
  *(.preinit_array)
                 [!provide]                        PROVIDE (__preinit_array_end = ABSOLUTE (.))
@@ -227,124 +227,124 @@ LOAD /opt/intelFPGA_lite/22.1.2/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/../li
  *(SORT_BY_NAME(.dtors.*))
                 [!provide]                        PROVIDE (__DTOR_END__ = ABSOLUTE (.))
  *(.jcr)
-                0x00000000000047c8                . = ALIGN (0x4)
+                0x000000000000482c                . = ALIGN (0x4)
 
-.rodata         0x00000000000047c8        0x0
-                0x00000000000047c8                PROVIDE (__ram_rodata_start = ABSOLUTE (.))
-                0x00000000000047c8                . = ALIGN (0x4)
+.rodata         0x000000000000482c        0x0
+                0x000000000000482c                PROVIDE (__ram_rodata_start = ABSOLUTE (.))
+                0x000000000000482c                . = ALIGN (0x4)
  *(.rodata .rodata.* .gnu.linkonce.r.*)
  *(.rodata1)
-                0x00000000000047c8                . = ALIGN (0x4)
-                0x00000000000047c8                PROVIDE (__ram_rodata_end = ABSOLUTE (.))
-                0x00000000000047c8                PROVIDE (__flash_rodata_start = LOADADDR (.rodata))
+                0x000000000000482c                . = ALIGN (0x4)
+                0x000000000000482c                PROVIDE (__ram_rodata_end = ABSOLUTE (.))
+                0x000000000000482c                PROVIDE (__flash_rodata_start = LOADADDR (.rodata))
 
-.rwdata         0x00000000000047c8       0x48 load address 0x0000000000004810
-                0x00000000000047c8                PROVIDE (__ram_rwdata_start = ABSOLUTE (.))
-                0x00000000000047c8                . = ALIGN (0x4)
+.rwdata         0x000000000000482c       0x48 load address 0x0000000000004874
+                0x000000000000482c                PROVIDE (__ram_rwdata_start = ABSOLUTE (.))
+                0x000000000000482c                . = ALIGN (0x4)
  *(.got.plt)
  *(.got)
  *(.data1)
  *(.data .data.* .gnu.linkonce.d.*)
- .data          0x00000000000047c8        0x0 ../UART_LCD_bsp//obj/HAL/src/crt0.o
- .data          0x00000000000047c8       0x18 obj/default/hello_world_small.o
-                0x00000000000047c8                UARTRead
- .data          0x00000000000047e0        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_iic.o)
- .data          0x00000000000047e0        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_iic_isr_register.o)
- .data          0x00000000000047e0        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_entry.o)
- .data          0x00000000000047e0        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_handler.o)
- .data          0x00000000000047e0        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_vars.o)
- .data          0x00000000000047e0        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_load.o)
- .data          0x00000000000047e0        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_main.o)
- .data          0x00000000000047e0        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_sys_init.o)
- .data          0x00000000000047e0        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_dcache_flush_all.o)
- .data          0x00000000000047e0        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_exception_entry.o)
- .data          0x00000000000047e0        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush_all.o)
- .data          0x00000000000047e0        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_instruction_exception_entry.o)
- .data          0x00000000000047e0        0x0 ../UART_LCD_bsp//libhal_bsp.a(altera_nios2_gen2_irq.o)
- .data          0x00000000000047e0        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush.o)
- .data          0x00000000000047e0        0x0 /opt/intelFPGA_lite/22.1.2/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/../lib/gcc/nios2-elf/12.2.1/../../../../../H-x86_64-pc-linux-gnu/nios2-elf/lib/libsmallc.a(lib_a-memcpy.o)
-                0x000000000000c7e0                _gp = ABSOLUTE ((. + 0x8000))
+ .data          0x000000000000482c        0x0 ../UART_LCD_bsp//obj/HAL/src/crt0.o
+ .data          0x000000000000482c       0x18 obj/default/hello_world_small.o
+                0x000000000000482c                UARTRead
+ .data          0x0000000000004844        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_iic.o)
+ .data          0x0000000000004844        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_iic_isr_register.o)
+ .data          0x0000000000004844        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_entry.o)
+ .data          0x0000000000004844        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_handler.o)
+ .data          0x0000000000004844        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_vars.o)
+ .data          0x0000000000004844        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_load.o)
+ .data          0x0000000000004844        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_main.o)
+ .data          0x0000000000004844        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_sys_init.o)
+ .data          0x0000000000004844        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_dcache_flush_all.o)
+ .data          0x0000000000004844        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_exception_entry.o)
+ .data          0x0000000000004844        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush_all.o)
+ .data          0x0000000000004844        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_instruction_exception_entry.o)
+ .data          0x0000000000004844        0x0 ../UART_LCD_bsp//libhal_bsp.a(altera_nios2_gen2_irq.o)
+ .data          0x0000000000004844        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush.o)
+ .data          0x0000000000004844        0x0 /opt/intelFPGA_lite/22.1.2/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/../lib/gcc/nios2-elf/12.2.1/../../../../../H-x86_64-pc-linux-gnu/nios2-elf/lib/libsmallc.a(lib_a-memcpy.o)
+                0x000000000000c844                _gp = ABSOLUTE ((. + 0x8000))
                 [!provide]                        PROVIDE (gp = _gp)
  *(.rwdata .rwdata.*)
  *(.sdata .sdata.* .gnu.linkonce.s.*)
- .sdata         0x00000000000047e0       0x28 obj/default/hello_world_small.o
-                0x00000000000047e0                ParsedLoopFlag
-                0x00000000000047e4                UARTStatus
-                0x00000000000047e8                StartTX
-                0x00000000000047ec                StatusLed
-                0x00000000000047f0                ControlBase
-                0x00000000000047f4                TXDataSel
-                0x00000000000047f8                RXDataReg
-                0x00000000000047fc                TXDataReg
-                0x0000000000004800                RXLDCaReg
-                0x0000000000004804                TXLCDReg
- .sdata         0x0000000000004808        0x4 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_vars.o)
-                0x0000000000004808                alt_priority_mask
- .sdata         0x000000000000480c        0x4 ../UART_LCD_bsp//libhal_bsp.a(alt_sys_init.o)
-                0x000000000000480c                jtag_uart_0
+ .sdata         0x0000000000004844       0x28 obj/default/hello_world_small.o
+                0x0000000000004844                ParsedLoopFlag
+                0x0000000000004848                UARTStatus
+                0x000000000000484c                StartTX
+                0x0000000000004850                StatusLed
+                0x0000000000004854                ControlBase
+                0x0000000000004858                TXDataSel
+                0x000000000000485c                RXDataReg
+                0x0000000000004860                TXDataReg
+                0x0000000000004864                RXLDCaReg
+                0x0000000000004868                TXLCDReg
+ .sdata         0x000000000000486c        0x4 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_vars.o)
+                0x000000000000486c                alt_priority_mask
+ .sdata         0x0000000000004870        0x4 ../UART_LCD_bsp//libhal_bsp.a(alt_sys_init.o)
+                0x0000000000004870                jtag_uart_0
  *(.sdata2 .sdata2.* .gnu.linkonce.s2.*)
-                0x0000000000004810                . = ALIGN (0x4)
-                0x0000000000004810                _edata = ABSOLUTE (.)
+                0x0000000000004874                . = ALIGN (0x4)
+                0x0000000000004874                _edata = ABSOLUTE (.)
                 [!provide]                        PROVIDE (edata = ABSOLUTE (.))
-                0x0000000000004810                PROVIDE (__ram_rwdata_end = ABSOLUTE (.))
-                0x0000000000004810                PROVIDE (__flash_rwdata_start = LOADADDR (.rwdata))
+                0x0000000000004874                PROVIDE (__ram_rwdata_end = ABSOLUTE (.))
+                0x0000000000004874                PROVIDE (__flash_rwdata_start = LOADADDR (.rwdata))
 
-.bss            0x0000000000004858      0x140
-                0x0000000000004858                __bss_start = ABSOLUTE (.)
+.bss            0x00000000000048bc      0x140
+                0x00000000000048bc                __bss_start = ABSOLUTE (.)
                 [!provide]                        PROVIDE (__sbss_start = ABSOLUTE (.))
                 [!provide]                        PROVIDE (___sbss_start = ABSOLUTE (.))
  *(.dynsbss)
  *(.sbss .sbss.* .gnu.linkonce.sb.*)
- .sbss          0x0000000000004858       0x2c obj/default/hello_world_small.o
-                0x0000000000004874                needToClearTX
-                0x0000000000004878                PortReadTX
-                0x000000000000487c                TXIsBusy
-                0x0000000000004880                StartTimer
- .sbss          0x0000000000004884        0x4 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_vars.o)
-                0x0000000000004884                alt_irq_active
- .sbss          0x0000000000004888        0xc ../UART_LCD_bsp//libhal_bsp.a(alt_main.o)
-                0x0000000000004888                alt_envp
-                0x000000000000488c                alt_argv
-                0x0000000000004890                alt_argc
- .sbss          0x0000000000004894        0x4 ../UART_LCD_bsp//libhal_bsp.a(alt_instruction_exception_entry.o)
-                0x0000000000004894                alt_instruction_exception_handler
+ .sbss          0x00000000000048bc       0x2c obj/default/hello_world_small.o
+                0x00000000000048d8                needToClearTX
+                0x00000000000048dc                PortReadTX
+                0x00000000000048e0                TXIsBusy
+                0x00000000000048e4                StartTimer
+ .sbss          0x00000000000048e8        0x4 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_vars.o)
+                0x00000000000048e8                alt_irq_active
+ .sbss          0x00000000000048ec        0xc ../UART_LCD_bsp//libhal_bsp.a(alt_main.o)
+                0x00000000000048ec                alt_envp
+                0x00000000000048f0                alt_argv
+                0x00000000000048f4                alt_argc
+ .sbss          0x00000000000048f8        0x4 ../UART_LCD_bsp//libhal_bsp.a(alt_instruction_exception_entry.o)
+                0x00000000000048f8                alt_instruction_exception_handler
  *(.sbss2 .sbss2.* .gnu.linkonce.sb2.*)
  *(.scommon)
                 [!provide]                        PROVIDE (__sbss_end = ABSOLUTE (.))
                 [!provide]                        PROVIDE (___sbss_end = ABSOLUTE (.))
  *(.dynbss)
  *(.bss .bss.* .gnu.linkonce.b.*)
- .bss           0x0000000000004898        0x0 ../UART_LCD_bsp//obj/HAL/src/crt0.o
- .bss           0x0000000000004898        0x0 obj/default/hello_world_small.o
- .bss           0x0000000000004898        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_iic.o)
- .bss           0x0000000000004898        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_iic_isr_register.o)
- .bss           0x0000000000004898        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_entry.o)
- .bss           0x0000000000004898      0x100 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_handler.o)
-                0x0000000000004898                alt_irq
- .bss           0x0000000000004998        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_vars.o)
- .bss           0x0000000000004998        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_load.o)
- .bss           0x0000000000004998        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_main.o)
- .bss           0x0000000000004998        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_sys_init.o)
- .bss           0x0000000000004998        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_dcache_flush_all.o)
- .bss           0x0000000000004998        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_exception_entry.o)
- .bss           0x0000000000004998        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush_all.o)
- .bss           0x0000000000004998        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_instruction_exception_entry.o)
- .bss           0x0000000000004998        0x0 ../UART_LCD_bsp//libhal_bsp.a(altera_nios2_gen2_irq.o)
- .bss           0x0000000000004998        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush.o)
- .bss           0x0000000000004998        0x0 /opt/intelFPGA_lite/22.1.2/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/../lib/gcc/nios2-elf/12.2.1/../../../../../H-x86_64-pc-linux-gnu/nios2-elf/lib/libsmallc.a(lib_a-memcpy.o)
+ .bss           0x00000000000048fc        0x0 ../UART_LCD_bsp//obj/HAL/src/crt0.o
+ .bss           0x00000000000048fc        0x0 obj/default/hello_world_small.o
+ .bss           0x00000000000048fc        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_iic.o)
+ .bss           0x00000000000048fc        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_iic_isr_register.o)
+ .bss           0x00000000000048fc        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_entry.o)
+ .bss           0x00000000000048fc      0x100 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_handler.o)
+                0x00000000000048fc                alt_irq
+ .bss           0x00000000000049fc        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_vars.o)
+ .bss           0x00000000000049fc        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_load.o)
+ .bss           0x00000000000049fc        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_main.o)
+ .bss           0x00000000000049fc        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_sys_init.o)
+ .bss           0x00000000000049fc        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_dcache_flush_all.o)
+ .bss           0x00000000000049fc        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_exception_entry.o)
+ .bss           0x00000000000049fc        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush_all.o)
+ .bss           0x00000000000049fc        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_instruction_exception_entry.o)
+ .bss           0x00000000000049fc        0x0 ../UART_LCD_bsp//libhal_bsp.a(altera_nios2_gen2_irq.o)
+ .bss           0x00000000000049fc        0x0 ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush.o)
+ .bss           0x00000000000049fc        0x0 /opt/intelFPGA_lite/22.1.2/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/../lib/gcc/nios2-elf/12.2.1/../../../../../H-x86_64-pc-linux-gnu/nios2-elf/lib/libsmallc.a(lib_a-memcpy.o)
  *(COMMON)
-                0x0000000000004998                . = ALIGN (0x4)
-                0x0000000000004998                __bss_end = ABSOLUTE (.)
+                0x00000000000049fc                . = ALIGN (0x4)
+                0x00000000000049fc                __bss_end = ABSOLUTE (.)
 
 .onchip_memory2_0
-                0x0000000000004998        0x0
+                0x00000000000049fc        0x0
                 [!provide]                        PROVIDE (_alt_partition_onchip_memory2_0_start = ABSOLUTE (.))
  *(.onchip_memory2_0 .onchip_memory2_0. onchip_memory2_0.*)
-                0x0000000000004998                . = ALIGN (0x4)
+                0x00000000000049fc                . = ALIGN (0x4)
                 [!provide]                        PROVIDE (_alt_partition_onchip_memory2_0_end = ABSOLUTE (.))
-                0x0000000000004998                _end = ABSOLUTE (.)
-                0x0000000000004998                end = ABSOLUTE (.)
-                0x0000000000004998                __alt_stack_base = ABSOLUTE (.)
+                0x00000000000049fc                _end = ABSOLUTE (.)
+                0x00000000000049fc                end = ABSOLUTE (.)
+                0x00000000000049fc                __alt_stack_base = ABSOLUTE (.)
                 [!provide]                        PROVIDE (_alt_partition_onchip_memory2_0_load_addr = LOADADDR (.onchip_memory2_0))
 
 .stab
@@ -435,65 +435,65 @@ LOAD /opt/intelFPGA_lite/22.1.2/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/../li
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000     0x1bc4
+.debug_info     0x0000000000000000     0x1c3a
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000       0x22 ../UART_LCD_bsp//obj/HAL/src/crt0.o
- .debug_info    0x0000000000000022      0x83a obj/default/hello_world_small.o
- .debug_info    0x000000000000085c      0x3d8 ../UART_LCD_bsp//libhal_bsp.a(alt_iic.o)
- .debug_info    0x0000000000000c34      0x27f ../UART_LCD_bsp//libhal_bsp.a(alt_iic_isr_register.o)
- .debug_info    0x0000000000000eb3       0x22 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_entry.o)
- .debug_info    0x0000000000000ed5      0x195 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_handler.o)
- .debug_info    0x000000000000106a       0x88 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_vars.o)
- .debug_info    0x00000000000010f2      0x239 ../UART_LCD_bsp//libhal_bsp.a(alt_load.o)
- .debug_info    0x000000000000132b      0x13e ../UART_LCD_bsp//libhal_bsp.a(alt_main.o)
- .debug_info    0x0000000000001469      0x127 ../UART_LCD_bsp//libhal_bsp.a(alt_sys_init.o)
- .debug_info    0x0000000000001590       0xa6 ../UART_LCD_bsp//libhal_bsp.a(alt_dcache_flush_all.o)
- .debug_info    0x0000000000001636       0x22 ../UART_LCD_bsp//libhal_bsp.a(alt_exception_entry.o)
- .debug_info    0x0000000000001658       0xc9 ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush_all.o)
- .debug_info    0x0000000000001721      0x209 ../UART_LCD_bsp//libhal_bsp.a(alt_instruction_exception_entry.o)
- .debug_info    0x000000000000192a       0x8d ../UART_LCD_bsp//libhal_bsp.a(altera_nios2_gen2_irq.o)
- .debug_info    0x00000000000019b7       0xec ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush.o)
- .debug_info    0x0000000000001aa3      0x121 /opt/intelFPGA_lite/22.1.2/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/../lib/gcc/nios2-elf/12.2.1/../../../../../H-x86_64-pc-linux-gnu/nios2-elf/lib/libsmallc.a(lib_a-memcpy.o)
+ .debug_info    0x0000000000000022      0x875 obj/default/hello_world_small.o
+ .debug_info    0x0000000000000897      0x3fe ../UART_LCD_bsp//libhal_bsp.a(alt_iic.o)
+ .debug_info    0x0000000000000c95      0x294 ../UART_LCD_bsp//libhal_bsp.a(alt_iic_isr_register.o)
+ .debug_info    0x0000000000000f29       0x22 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_entry.o)
+ .debug_info    0x0000000000000f4b      0x195 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_handler.o)
+ .debug_info    0x00000000000010e0       0x88 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_vars.o)
+ .debug_info    0x0000000000001168      0x239 ../UART_LCD_bsp//libhal_bsp.a(alt_load.o)
+ .debug_info    0x00000000000013a1      0x13e ../UART_LCD_bsp//libhal_bsp.a(alt_main.o)
+ .debug_info    0x00000000000014df      0x127 ../UART_LCD_bsp//libhal_bsp.a(alt_sys_init.o)
+ .debug_info    0x0000000000001606       0xa6 ../UART_LCD_bsp//libhal_bsp.a(alt_dcache_flush_all.o)
+ .debug_info    0x00000000000016ac       0x22 ../UART_LCD_bsp//libhal_bsp.a(alt_exception_entry.o)
+ .debug_info    0x00000000000016ce       0xc9 ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush_all.o)
+ .debug_info    0x0000000000001797      0x209 ../UART_LCD_bsp//libhal_bsp.a(alt_instruction_exception_entry.o)
+ .debug_info    0x00000000000019a0       0x8d ../UART_LCD_bsp//libhal_bsp.a(altera_nios2_gen2_irq.o)
+ .debug_info    0x0000000000001a2d       0xec ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush.o)
+ .debug_info    0x0000000000001b19      0x121 /opt/intelFPGA_lite/22.1.2/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/../lib/gcc/nios2-elf/12.2.1/../../../../../H-x86_64-pc-linux-gnu/nios2-elf/lib/libsmallc.a(lib_a-memcpy.o)
 
-.debug_abbrev   0x0000000000000000      0xf25
+.debug_abbrev   0x0000000000000000      0xf58
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000       0x12 ../UART_LCD_bsp//obj/HAL/src/crt0.o
- .debug_abbrev  0x0000000000000012      0x2fa obj/default/hello_world_small.o
- .debug_abbrev  0x000000000000030c      0x1dd ../UART_LCD_bsp//libhal_bsp.a(alt_iic.o)
- .debug_abbrev  0x00000000000004e9      0x1d9 ../UART_LCD_bsp//libhal_bsp.a(alt_iic_isr_register.o)
- .debug_abbrev  0x00000000000006c2       0x12 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_entry.o)
- .debug_abbrev  0x00000000000006d4      0x147 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_handler.o)
- .debug_abbrev  0x000000000000081b       0x46 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_vars.o)
- .debug_abbrev  0x0000000000000861      0x12c ../UART_LCD_bsp//libhal_bsp.a(alt_load.o)
- .debug_abbrev  0x000000000000098d       0xeb ../UART_LCD_bsp//libhal_bsp.a(alt_main.o)
- .debug_abbrev  0x0000000000000a78      0x107 ../UART_LCD_bsp//libhal_bsp.a(alt_sys_init.o)
- .debug_abbrev  0x0000000000000b7f       0x60 ../UART_LCD_bsp//libhal_bsp.a(alt_dcache_flush_all.o)
- .debug_abbrev  0x0000000000000bdf       0x12 ../UART_LCD_bsp//libhal_bsp.a(alt_exception_entry.o)
- .debug_abbrev  0x0000000000000bf1       0x8a ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush_all.o)
- .debug_abbrev  0x0000000000000c7b      0x106 ../UART_LCD_bsp//libhal_bsp.a(alt_instruction_exception_entry.o)
- .debug_abbrev  0x0000000000000d81       0x43 ../UART_LCD_bsp//libhal_bsp.a(altera_nios2_gen2_irq.o)
- .debug_abbrev  0x0000000000000dc4       0xa0 ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush.o)
- .debug_abbrev  0x0000000000000e64       0xc1 /opt/intelFPGA_lite/22.1.2/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/../lib/gcc/nios2-elf/12.2.1/../../../../../H-x86_64-pc-linux-gnu/nios2-elf/lib/libsmallc.a(lib_a-memcpy.o)
+ .debug_abbrev  0x0000000000000012      0x32b obj/default/hello_world_small.o
+ .debug_abbrev  0x000000000000033d      0x1dd ../UART_LCD_bsp//libhal_bsp.a(alt_iic.o)
+ .debug_abbrev  0x000000000000051a      0x1db ../UART_LCD_bsp//libhal_bsp.a(alt_iic_isr_register.o)
+ .debug_abbrev  0x00000000000006f5       0x12 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_entry.o)
+ .debug_abbrev  0x0000000000000707      0x147 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_handler.o)
+ .debug_abbrev  0x000000000000084e       0x46 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_vars.o)
+ .debug_abbrev  0x0000000000000894      0x12c ../UART_LCD_bsp//libhal_bsp.a(alt_load.o)
+ .debug_abbrev  0x00000000000009c0       0xeb ../UART_LCD_bsp//libhal_bsp.a(alt_main.o)
+ .debug_abbrev  0x0000000000000aab      0x107 ../UART_LCD_bsp//libhal_bsp.a(alt_sys_init.o)
+ .debug_abbrev  0x0000000000000bb2       0x60 ../UART_LCD_bsp//libhal_bsp.a(alt_dcache_flush_all.o)
+ .debug_abbrev  0x0000000000000c12       0x12 ../UART_LCD_bsp//libhal_bsp.a(alt_exception_entry.o)
+ .debug_abbrev  0x0000000000000c24       0x8a ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush_all.o)
+ .debug_abbrev  0x0000000000000cae      0x106 ../UART_LCD_bsp//libhal_bsp.a(alt_instruction_exception_entry.o)
+ .debug_abbrev  0x0000000000000db4       0x43 ../UART_LCD_bsp//libhal_bsp.a(altera_nios2_gen2_irq.o)
+ .debug_abbrev  0x0000000000000df7       0xa0 ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush.o)
+ .debug_abbrev  0x0000000000000e97       0xc1 /opt/intelFPGA_lite/22.1.2/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/../lib/gcc/nios2-elf/12.2.1/../../../../../H-x86_64-pc-linux-gnu/nios2-elf/lib/libsmallc.a(lib_a-memcpy.o)
 
-.debug_line     0x0000000000000000      0xdf4
+.debug_line     0x0000000000000000      0xe6e
  *(.debug_line)
- .debug_line    0x0000000000000000       0x72 ../UART_LCD_bsp//obj/HAL/src/crt0.o
- .debug_line    0x0000000000000072      0x3b2 obj/default/hello_world_small.o
- .debug_line    0x0000000000000424      0x152 ../UART_LCD_bsp//libhal_bsp.a(alt_iic.o)
- .debug_line    0x0000000000000576      0x115 ../UART_LCD_bsp//libhal_bsp.a(alt_iic_isr_register.o)
- .debug_line    0x000000000000068b       0x6b ../UART_LCD_bsp//libhal_bsp.a(alt_irq_entry.o)
- .debug_line    0x00000000000006f6       0xf9 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_handler.o)
- .debug_line    0x00000000000007ef       0x43 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_vars.o)
- .debug_line    0x0000000000000832       0xd2 ../UART_LCD_bsp//libhal_bsp.a(alt_load.o)
- .debug_line    0x0000000000000904       0xa2 ../UART_LCD_bsp//libhal_bsp.a(alt_main.o)
- .debug_line    0x00000000000009a6       0x8e ../UART_LCD_bsp//libhal_bsp.a(alt_sys_init.o)
- .debug_line    0x0000000000000a34       0x70 ../UART_LCD_bsp//libhal_bsp.a(alt_dcache_flush_all.o)
- .debug_line    0x0000000000000aa4       0x9d ../UART_LCD_bsp//libhal_bsp.a(alt_exception_entry.o)
- .debug_line    0x0000000000000b41       0x67 ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush_all.o)
- .debug_line    0x0000000000000ba8       0xc2 ../UART_LCD_bsp//libhal_bsp.a(alt_instruction_exception_entry.o)
- .debug_line    0x0000000000000c6a       0x54 ../UART_LCD_bsp//libhal_bsp.a(altera_nios2_gen2_irq.o)
- .debug_line    0x0000000000000cbe       0xaa ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush.o)
- .debug_line    0x0000000000000d68       0x8c /opt/intelFPGA_lite/22.1.2/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/../lib/gcc/nios2-elf/12.2.1/../../../../../H-x86_64-pc-linux-gnu/nios2-elf/lib/libsmallc.a(lib_a-memcpy.o)
+ .debug_line    0x0000000000000000       0x87 ../UART_LCD_bsp//obj/HAL/src/crt0.o
+ .debug_line    0x0000000000000087      0x3a7 obj/default/hello_world_small.o
+ .debug_line    0x000000000000042e      0x184 ../UART_LCD_bsp//libhal_bsp.a(alt_iic.o)
+ .debug_line    0x00000000000005b2      0x153 ../UART_LCD_bsp//libhal_bsp.a(alt_iic_isr_register.o)
+ .debug_line    0x0000000000000705       0x6b ../UART_LCD_bsp//libhal_bsp.a(alt_irq_entry.o)
+ .debug_line    0x0000000000000770       0xf9 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_handler.o)
+ .debug_line    0x0000000000000869       0x43 ../UART_LCD_bsp//libhal_bsp.a(alt_irq_vars.o)
+ .debug_line    0x00000000000008ac       0xd2 ../UART_LCD_bsp//libhal_bsp.a(alt_load.o)
+ .debug_line    0x000000000000097e       0xa2 ../UART_LCD_bsp//libhal_bsp.a(alt_main.o)
+ .debug_line    0x0000000000000a20       0x8e ../UART_LCD_bsp//libhal_bsp.a(alt_sys_init.o)
+ .debug_line    0x0000000000000aae       0x70 ../UART_LCD_bsp//libhal_bsp.a(alt_dcache_flush_all.o)
+ .debug_line    0x0000000000000b1e       0x9d ../UART_LCD_bsp//libhal_bsp.a(alt_exception_entry.o)
+ .debug_line    0x0000000000000bbb       0x67 ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush_all.o)
+ .debug_line    0x0000000000000c22       0xc2 ../UART_LCD_bsp//libhal_bsp.a(alt_instruction_exception_entry.o)
+ .debug_line    0x0000000000000ce4       0x54 ../UART_LCD_bsp//libhal_bsp.a(altera_nios2_gen2_irq.o)
+ .debug_line    0x0000000000000d38       0xaa ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush.o)
+ .debug_line    0x0000000000000de2       0x8c /opt/intelFPGA_lite/22.1.2/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/../lib/gcc/nios2-elf/12.2.1/../../../../../H-x86_64-pc-linux-gnu/nios2-elf/lib/libsmallc.a(lib_a-memcpy.o)
 
 .debug_frame    0x0000000000000000      0x280
  *(.debug_frame)
@@ -582,25 +582,25 @@ LOAD linker stubs
  .debug_ranges  0x0000000000000048       0x28 ../UART_LCD_bsp//libhal_bsp.a(alt_exception_entry.o)
 
 .debug_loclists
-                0x0000000000000000      0x5dc
+                0x0000000000000000      0x649
  .debug_loclists
-                0x0000000000000000      0x113 obj/default/hello_world_small.o
+                0x0000000000000000      0x11e obj/default/hello_world_small.o
  .debug_loclists
-                0x0000000000000113       0xf9 ../UART_LCD_bsp//libhal_bsp.a(alt_iic.o)
+                0x000000000000011e      0x13e ../UART_LCD_bsp//libhal_bsp.a(alt_iic.o)
  .debug_loclists
-                0x000000000000020c      0x130 ../UART_LCD_bsp//libhal_bsp.a(alt_iic_isr_register.o)
+                0x000000000000025c      0x14d ../UART_LCD_bsp//libhal_bsp.a(alt_iic_isr_register.o)
  .debug_loclists
-                0x000000000000033c       0x6e ../UART_LCD_bsp//libhal_bsp.a(alt_irq_handler.o)
+                0x00000000000003a9       0x6e ../UART_LCD_bsp//libhal_bsp.a(alt_irq_handler.o)
  .debug_loclists
-                0x00000000000003aa       0x1e ../UART_LCD_bsp//libhal_bsp.a(alt_sys_init.o)
+                0x0000000000000417       0x1e ../UART_LCD_bsp//libhal_bsp.a(alt_sys_init.o)
  .debug_loclists
-                0x00000000000003c8       0x1c ../UART_LCD_bsp//libhal_bsp.a(alt_dcache_flush_all.o)
+                0x0000000000000435       0x1c ../UART_LCD_bsp//libhal_bsp.a(alt_dcache_flush_all.o)
  .debug_loclists
-                0x00000000000003e4       0x82 ../UART_LCD_bsp//libhal_bsp.a(alt_instruction_exception_entry.o)
+                0x0000000000000451       0x82 ../UART_LCD_bsp//libhal_bsp.a(alt_instruction_exception_entry.o)
  .debug_loclists
-                0x0000000000000466       0xaa ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush.o)
+                0x00000000000004d3       0xaa ../UART_LCD_bsp//libhal_bsp.a(alt_icache_flush.o)
  .debug_loclists
-                0x0000000000000510       0xcc /opt/intelFPGA_lite/22.1.2/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/../lib/gcc/nios2-elf/12.2.1/../../../../../H-x86_64-pc-linux-gnu/nios2-elf/lib/libsmallc.a(lib_a-memcpy.o)
+                0x000000000000057d       0xcc /opt/intelFPGA_lite/22.1.2/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/../lib/gcc/nios2-elf/12.2.1/../../../../../H-x86_64-pc-linux-gnu/nios2-elf/lib/libsmallc.a(lib_a-memcpy.o)
 
 .debug_rnglists
                 0x0000000000000000      0x125

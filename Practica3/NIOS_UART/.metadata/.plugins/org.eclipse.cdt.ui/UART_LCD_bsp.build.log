@@ -1,6 +1,6 @@
-22:06:09 **** Incremental Build of configuration Nios II for project UART_LCD_bsp ****
+00:26:23 **** Incremental Build of configuration Nios II for project UART_LCD_bsp ****
 make all 
 [BSP build complete]
 
-22:06:09 Build Finished (took 211ms)
+00:26:23 Build Finished (took 162ms)
 

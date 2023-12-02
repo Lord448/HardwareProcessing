@@ -69,6 +69,30 @@ architecture rtl of UART_PR is
     ---------------------------------------------------------
     --------------AGREGA TUS SEÑALES AQUÍ--------------------
 
+	--Copyright (C) 2023  Intel Corporation. All rights reserved.
+	--Your use of Intel Corporation's design tools, logic functions 
+	--and other software and tools, and any partner logic 
+	--functions, and any output files from any of the foregoing 
+	--(including device programming or simulation files), and any 
+	--associated documentation or information are expressly subject 
+	--to the terms and conditions of the Intel Program License 
+	--Subscription Agreement, the Intel Quartus Prime License Agreement,
+	--the Intel FPGA IP License Agreement, or other applicable license
+	--agreement, including, without limitation, that your use is for
+	--the sole purpose of programming logic devices manufactured by
+	--Intel and sold by Intel or its authorized distributors.  Please
+	--refer to the applicable agreement for further details, at
+	--https://fpgasoftware.intel.com/eula.
+	component PLL
+	PORT
+	(
+		areset		: IN STD_LOGIC  := '0';
+		inclk0		: IN STD_LOGIC  := '0';
+		c0		: OUT STD_LOGIC 
+	);
+	end component;
+
+
 	component NIOS2 is
 		port (
 			clk_clk                                       : in  std_logic                     := 'X';             -- clk
@@ -135,10 +159,11 @@ architecture rtl of UART_PR is
 	signal r_32Bit_RX          : std_logic_vector(31 downto 0);
 	signal r_Control_Port      : std_logic_vector(3 downto 0);
 	signal r_Status_Leds       : std_logic_vector(3 downto 0);
-	signal r_Start_Timer		   : std_logic := '0';
+	signal r_Start_Timer	   : std_logic := '0';
 	signal r_Parsed_Loop       : std_logic;
-	
+	signal r_PLL_CLK		   : std_logic;
 
+	
 	-- LCD Registers
 	signal r_Ascii_TX : std_logic_vector(63 downto 0);
 	signal r_Ascii_RX : std_logic_vector(63 downto 0);
@@ -200,10 +225,15 @@ begin
 	o_Status_Leds(3)		  <= not r_Start_Timer;  --Active High
 	o_Status_Leds(2 downto 0) <= not r_Status_Leds(2 downto 0);
 
+	PLL_inst : PLL PORT MAP (
+		areset	 => not i_Reset,
+		inclk0	 => i_CLK,
+		c0	 => r_PLL_CLK
+	);
 
 	U_SoftProcessor : component NIOS2
 	port map (
-		clk_clk                                       => i_CLK,
+		clk_clk                                       => r_PLL_CLK,
 		reset_reset_n                                 => i_Reset,
 		control_pio_external_connection_export        => r_Control_Port,
 		dip_tx_data_pio_external_connection_export    => i_TX_Data,

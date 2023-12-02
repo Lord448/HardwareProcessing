@@ -96,11 +96,7 @@
 					"strict" : false
 				},
 				{
-					"name" : "i_Control_Port[3]",
-					"strict" : false
-				},
-				{
-					"name" : "i_TX_Data[3]",
+					"name" : "i_TX_Data[5]",
 					"strict" : false
 				},
 				{
@@ -108,7 +104,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "i_TX_Data[5]",
+					"name" : "i_Control_Port[3]",
+					"strict" : false
+				},
+				{
+					"name" : "i_TX_Data[3]",
 					"strict" : false
 				},
 				{

@@ -420,7 +420,7 @@ static void UART_RX_CpltCallback(void* isr_context) {
 	/* Read the PIO to delay ISR exit. This is done to prevent a 
 	   spurious interrupt in systems with high processor -> pio 
 	   latency and fast interrupts. */
-	IORD_ALTERA_AVALON_PIO_EDGE_CAP(UART_RX_BASE);
+	//IORD_ALTERA_AVALON_PIO_EDGE_CAP(UART_RX_BASE);
 }
 
 static void UART_TX_CpltCallback(void* isr_context){
@@ -432,7 +432,7 @@ static void UART_TX_CpltCallback(void* isr_context){
 	/* Read the PIO to delay ISR exit. This is done to prevent a 
 	   spurious interrupt in systems with high processor -> pio 
 	   latency and fast interrupts. */
-	IORD_ALTERA_AVALON_PIO_EDGE_CAP(UART_TX_BASE);
+	//IORD_ALTERA_AVALON_PIO_EDGE_CAP(UART_TX_BASE);
 	
 }
 
@@ -445,7 +445,7 @@ static void ParsedLoopElapsedCallback(void* isr_context) {
 	/* Read the PIO to delay ISR exit. This is done to prevent a 
 	   spurious interrupt in systems with high processor -> pio 
 	   latency and fast interrupts. */
-	IORD_ALTERA_AVALON_PIO_EDGE_CAP(PARSEDLOOP_IRQ_BASE);
+	//IORD_ALTERA_AVALON_PIO_EDGE_CAP(PARSEDLOOP_IRQ_BASE);
 }
 
 static void IRQRegister(void) {

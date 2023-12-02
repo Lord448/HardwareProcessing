@@ -243,8 +243,8 @@ module NIOS2_nios2_gen2_0_cpu_register_bank_a_module (
   output  [ 31: 0] q;
   input            clock;
   input   [ 31: 0] data;
-  input   [  4: 0] rdaddress;
-  input   [  4: 0] wraddress;
+  input   [  6: 0] rdaddress;
+  input   [  6: 0] wraddress;
   input            wren;
 
 
@@ -266,8 +266,8 @@ wire    [ 31: 0] ram_q;
   defparam the_altsyncram.address_reg_b = "CLOCK0",
            the_altsyncram.init_file = lpm_file,
            the_altsyncram.maximum_depth = 0,
-           the_altsyncram.numwords_a = 32,
-           the_altsyncram.numwords_b = 32,
+           the_altsyncram.numwords_a = 128,
+           the_altsyncram.numwords_b = 128,
            the_altsyncram.operation_mode = "DUAL_PORT",
            the_altsyncram.outdata_reg_b = "UNREGISTERED",
            the_altsyncram.ram_block_type = "AUTO",
@@ -275,8 +275,8 @@ wire    [ 31: 0] ram_q;
            the_altsyncram.read_during_write_mode_mixed_ports = "OLD_DATA",
            the_altsyncram.width_a = 32,
            the_altsyncram.width_b = 32,
-           the_altsyncram.widthad_a = 5,
-           the_altsyncram.widthad_b = 5;
+           the_altsyncram.widthad_a = 7,
+           the_altsyncram.widthad_b = 7;
 
 
 endmodule
@@ -309,8 +309,8 @@ module NIOS2_nios2_gen2_0_cpu_register_bank_b_module (
   output  [ 31: 0] q;
   input            clock;
   input   [ 31: 0] data;
-  input   [  4: 0] rdaddress;
-  input   [  4: 0] wraddress;
+  input   [  6: 0] rdaddress;
+  input   [  6: 0] wraddress;
   input            wren;
 
 
@@ -332,8 +332,8 @@ wire    [ 31: 0] ram_q;
   defparam the_altsyncram.address_reg_b = "CLOCK0",
            the_altsyncram.init_file = lpm_file,
            the_altsyncram.maximum_depth = 0,
-           the_altsyncram.numwords_a = 32,
-           the_altsyncram.numwords_b = 32,
+           the_altsyncram.numwords_a = 128,
+           the_altsyncram.numwords_b = 128,
            the_altsyncram.operation_mode = "DUAL_PORT",
            the_altsyncram.outdata_reg_b = "UNREGISTERED",
            the_altsyncram.ram_block_type = "AUTO",
@@ -341,8 +341,8 @@ wire    [ 31: 0] ram_q;
            the_altsyncram.read_during_write_mode_mixed_ports = "OLD_DATA",
            the_altsyncram.width_a = 32,
            the_altsyncram.width_b = 32,
-           the_altsyncram.widthad_a = 5,
-           the_altsyncram.widthad_b = 5;
+           the_altsyncram.widthad_a = 7,
+           the_altsyncram.widthad_b = 7;
 
 
 endmodule
@@ -2885,7 +2885,7 @@ defparam NIOS2_nios2_gen2_0_cpu_ociram_sp_ram.lpm_file = "NIOS2_nios2_gen2_0_cpu
     (MonAReg[4 : 2] == 3'd4)? 32'h20000b0c :
     (MonAReg[4 : 2] == 3'd5)? 32'h00004000 :
     (MonAReg[4 : 2] == 3'd6)? 32'h00000000 :
-    32'h00000000;
+    32'h00000003;
 
 
 endmodule
@@ -3652,6 +3652,8 @@ reg              A_ctrl_mul_lsw;
 wire             A_ctrl_mul_lsw_nxt;
 reg              A_ctrl_rd_ctl_reg;
 wire             A_ctrl_rd_ctl_reg_nxt;
+reg              A_ctrl_rdprs;
+wire             A_ctrl_rdprs_nxt;
 reg              A_ctrl_retaddr;
 wire             A_ctrl_retaddr_nxt;
 reg              A_ctrl_rot;
@@ -3798,11 +3800,12 @@ wire             A_dc_xfer_wr_offset_starting;
 reg              A_dc_xfer_wr_starting;
 wire    [  4: 0] A_dst_regnum;
 reg     [  4: 0] A_dst_regnum_from_M;
+wire    [  1: 0] A_dst_regset;
 wire             A_dtcm_ld;
 wire             A_dtcm_st;
 wire             A_en;
 reg              A_en_d1;
-wire             A_eret_src;
+wire    [ 17: 0] A_eret_src;
 wire             A_exc_active_no_break;
 wire             A_exc_active_no_break_no_crst;
 wire             A_exc_active_no_crst;
@@ -4053,14 +4056,19 @@ wire             A_wr_dst_reg;
 reg              A_wr_dst_reg_from_M;
 wire             A_wrctl_bstatus;
 wire             A_wrctl_cdsr;
+wire    [  1: 0] A_wrctl_data_bstatus_reg_crs;
 wire             A_wrctl_data_bstatus_reg_pie;
+wire    [  1: 0] A_wrctl_data_bstatus_reg_prs;
 wire    [ 31: 0] A_wrctl_data_cdsr_reg_status;
+wire    [  1: 0] A_wrctl_data_estatus_reg_crs;
 wire             A_wrctl_data_estatus_reg_pie;
+wire    [  1: 0] A_wrctl_data_estatus_reg_prs;
 wire             A_wrctl_data_ienable_reg_irq0;
 wire             A_wrctl_data_ienable_reg_irq1;
 wire             A_wrctl_data_ienable_reg_irq2;
 wire             A_wrctl_data_ienable_reg_irq3;
 wire             A_wrctl_data_status_reg_pie;
+wire    [  1: 0] A_wrctl_data_status_reg_prs;
 wire             A_wrctl_estatus;
 wire             A_wrctl_ienable;
 wire             A_wrctl_status;
@@ -4474,6 +4482,8 @@ wire             E_ctrl_mem_dc_tag_rd;
 reg              E_ctrl_mul_lsw;
 wire             E_ctrl_mul_lsw_nxt;
 wire             E_ctrl_rd_ctl_reg;
+reg              E_ctrl_rdprs;
+wire             E_ctrl_rdprs_nxt;
 reg              E_ctrl_retaddr;
 wire             E_ctrl_retaddr_nxt;
 reg              E_ctrl_rot;
@@ -4932,8 +4942,9 @@ wire    [ 13: 0] F_pc_plus_one;
 wire    [  3: 0] F_pc_tag_field;
 wire    [ 15: 0] F_pcb;
 wire    [ 15: 0] F_pcb_nxt;
-wire    [  4: 0] F_rf_rd_addr_a;
-wire    [  4: 0] F_rf_rd_addr_b;
+wire    [  1: 0] F_regset_rf;
+wire    [  6: 0] F_rf_rd_addr_a;
+wire    [  6: 0] F_rf_rd_addr_b;
 wire             F_sel_instruction_master;
 wire             F_sel_itcm;
 wire             F_stall;
@@ -5093,6 +5104,8 @@ reg              M_ctrl_mul_lsw;
 wire             M_ctrl_mul_lsw_nxt;
 reg              M_ctrl_rd_ctl_reg;
 wire             M_ctrl_rd_ctl_reg_nxt;
+reg              M_ctrl_rdprs;
+wire             M_ctrl_rdprs_nxt;
 reg              M_ctrl_retaddr;
 wire             M_ctrl_retaddr_nxt;
 reg              M_ctrl_rot;
@@ -5416,10 +5429,18 @@ wire    [ 15: 0] W_badaddr_reg_baddr_nxt;
 wire             W_badaddr_reg_baddr_wr_en;
 reg     [ 15: 0] W_br_taken_baddr;
 wire    [ 31: 0] W_bstatus_reg;
+reg     [  1: 0] W_bstatus_reg_crs;
+wire    [  1: 0] W_bstatus_reg_crs_inst_nxt;
+wire    [  1: 0] W_bstatus_reg_crs_nxt;
+wire             W_bstatus_reg_crs_wr_en;
 reg              W_bstatus_reg_pie;
 wire             W_bstatus_reg_pie_inst_nxt;
 wire             W_bstatus_reg_pie_nxt;
 wire             W_bstatus_reg_pie_wr_en;
+reg     [  1: 0] W_bstatus_reg_prs;
+wire    [  1: 0] W_bstatus_reg_prs_inst_nxt;
+wire    [  1: 0] W_bstatus_reg_prs_nxt;
+wire             W_bstatus_reg_prs_wr_en;
 wire    [ 31: 0] W_cdsr_reg;
 reg     [ 31: 0] W_cdsr_reg_status;
 wire    [ 31: 0] W_cdsr_reg_status_nxt;
@@ -5543,6 +5564,8 @@ reg              W_ctrl_mul_lsw;
 wire             W_ctrl_mul_lsw_nxt;
 reg              W_ctrl_rd_ctl_reg;
 wire             W_ctrl_rd_ctl_reg_nxt;
+reg              W_ctrl_rdprs;
+wire             W_ctrl_rdprs_nxt;
 reg              W_ctrl_retaddr;
 wire             W_ctrl_retaddr_nxt;
 reg              W_ctrl_rot;
@@ -5595,12 +5618,21 @@ reg              W_dc_valid_st_cache_hit;
 reg              W_debug_mode;
 wire             W_debug_mode_nxt;
 reg     [  4: 0] W_dst_regnum;
+reg     [  1: 0] W_dst_regset;
 wire             W_en;
 wire    [ 31: 0] W_estatus_reg;
+reg     [  1: 0] W_estatus_reg_crs;
+wire    [  1: 0] W_estatus_reg_crs_inst_nxt;
+wire    [  1: 0] W_estatus_reg_crs_nxt;
+wire             W_estatus_reg_crs_wr_en;
 reg              W_estatus_reg_pie;
 wire             W_estatus_reg_pie_inst_nxt;
 wire             W_estatus_reg_pie_nxt;
 wire             W_estatus_reg_pie_wr_en;
+reg     [  1: 0] W_estatus_reg_prs;
+wire    [  1: 0] W_estatus_reg_prs_inst_nxt;
+wire    [  1: 0] W_estatus_reg_prs_nxt;
+wire             W_estatus_reg_prs_wr_en;
 reg              W_exc_break_inst_pri15;
 wire             W_exc_break_inst_pri15_nxt;
 reg              W_exc_crst_active;
@@ -5803,12 +5835,18 @@ wire             W_op_xorhi;
 wire             W_op_xori;
 reg     [ 15: 0] W_pcb /* synthesis ALTERA_IP_DEBUG_VISIBLE = 1 */;
 wire    [ 31: 0] W_status_reg;
-wire             W_status_reg_crs;
+reg     [  1: 0] W_status_reg_crs;
+wire    [  1: 0] W_status_reg_crs_inst_nxt;
+wire    [  1: 0] W_status_reg_crs_nxt;
+wire             W_status_reg_crs_wr_en;
 reg              W_status_reg_pie;
 wire             W_status_reg_pie_inst_nxt;
 wire             W_status_reg_pie_nxt;
 wire             W_status_reg_pie_wr_en;
-wire             W_status_reg_prs;
+reg     [  1: 0] W_status_reg_prs;
+wire    [  1: 0] W_status_reg_prs_inst_nxt;
+wire    [  1: 0] W_status_reg_prs_nxt;
+wire             W_status_reg_prs_wr_en;
 reg              W_up_ex_mon_state;
 reg              W_valid;
 reg              W_valid_from_M;
@@ -5913,11 +5951,11 @@ wire             oci_async_hbreak_req;
 wire    [ 31: 0] oci_ienable;
 wire             oci_single_step_mode;
 wire             oci_tb_hbreak_req;
-wire    [  4: 0] rf_a_rd_port_addr;
+wire    [  6: 0] rf_a_rd_port_addr;
 wire    [ 31: 0] rf_a_rd_port_data;
-wire    [  4: 0] rf_b_rd_port_addr;
+wire    [  6: 0] rf_b_rd_port_addr;
 wire    [ 31: 0] rf_b_rd_port_data;
-wire    [  4: 0] rf_wr_port_addr;
+wire    [  6: 0] rf_wr_port_addr;
 wire    [ 31: 0] rf_wr_port_data;
 wire             rf_wr_port_en;
 wire             test_has_ended;
@@ -5954,6 +5992,7 @@ reg              wait_for_one_post_bret_inst;
       .W_badaddr_reg                        (W_badaddr_reg),
       .W_bstatus_reg                        (W_bstatus_reg),
       .W_dst_regnum                         (W_dst_regnum),
+      .W_dst_regset                         (W_dst_regset),
       .W_estatus_reg                        (W_estatus_reg),
       .W_exception_reg                      (W_exception_reg),
       .W_iw                                 (W_iw),
@@ -7407,7 +7446,7 @@ defparam NIOS2_nios2_gen2_0_cpu_bht.lpm_file = "NIOS2_nios2_gen2_0_cpu_bht_ram.h
   assign D_en = ~D_stall;
   assign D_dep_stall = D_data_depend & D_issue;
   assign D_valid = D_issue & ~D_data_depend & ~D_rdprs_stall & ~M_pipe_flush;
-  assign D_issue_rdprs = 0;
+  assign D_issue_rdprs = D_issue & D_ctrl_rdprs;
   assign D_rdprs_stall_unfiltered = D_issue_rdprs & ~D_rdprs_stall_done;
   assign D_rdprs_stall_done_nxt = M_pipe_flush        ? 0 :
     D_rdprs_stall_done  ? E_stall :
@@ -8037,6 +8076,10 @@ defparam NIOS2_nios2_gen2_0_cpu_bht.lpm_file = "NIOS2_nios2_gen2_0_cpu_bht_ram.h
   assign A_exc_active_no_crst = A_exc_any_active & ~A_exc_crst;
   assign A_exc_active_no_break_no_crst = A_exc_any_active & ~(A_exc_break | A_exc_crst);
   assign A_exc_wr_ea_ba = A_exc_active_no_crst;
+  assign A_dst_regset = W_exc_wr_sstatus ? W_status_reg_crs : A_exc_any ? 0 :
+    (A_valid & A_op_wrprs) ? W_status_reg_prs : 
+    W_status_reg_crs;
+
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
@@ -8125,6 +8168,15 @@ defparam NIOS2_nios2_gen2_0_cpu_bht.lpm_file = "NIOS2_nios2_gen2_0_cpu_bht_ram.h
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
+          W_dst_regset <= 0;
+      else 
+        W_dst_regset <= A_dst_regset;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
           W_debug_mode <= 0;
       else 
         W_debug_mode <= W_debug_mode_nxt;
@@ -8144,8 +8196,9 @@ defparam NIOS2_nios2_gen2_0_cpu_bht.lpm_file = "NIOS2_nios2_gen2_0_cpu_bht_ram.h
   assign W_mem_waddr_phy = W_mem_baddr[15 : 2];
   assign F_iw_a_rf = D_en ? F_iw_a : D_iw_a;
   assign F_iw_b_rf = D_en ? F_iw_b : D_iw_b;
-  assign F_rf_rd_addr_a = F_iw_a_rf;
-  assign F_rf_rd_addr_b = F_iw_b_rf;
+  assign F_regset_rf = (D_ctrl_rdprs & D_stall) ? W_status_reg_prs : W_status_reg_crs;
+  assign F_rf_rd_addr_a = { F_regset_rf, F_iw_a_rf };
+  assign F_rf_rd_addr_b = { F_regset_rf, F_iw_b_rf };
   assign E_src1_corrupt = 0;
   assign E_src2_corrupt = 0;
   always @(posedge clk or negedge reset_n)
@@ -8166,7 +8219,7 @@ defparam NIOS2_nios2_gen2_0_cpu_bht.lpm_file = "NIOS2_nios2_gen2_0_cpu_bht_ram.h
     end
 
 
-  assign rf_wr_port_addr = A_dst_regnum;
+  assign rf_wr_port_addr = { A_dst_regset, A_dst_regnum };
   assign rf_a_rd_port_addr = F_rf_rd_addr_a;
   assign rf_b_rd_port_addr = F_rf_rd_addr_b;
   assign rf_wr_port_data = A_wr_data_filtered;
@@ -9752,9 +9805,6 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
   assign A_inst_result_aligned = {A_data_ram_ld_byte3_data, A_data_ram_ld_byte2_data, 
     A_data_ram_ld_byte1_data, A_data_ram_ld_byte0_data};
 
-  assign W_status_reg_crs = 1'b0;
-  assign W_status_reg_prs = 1'b0;
-  assign D_ctrl_rdprs = 1'b0;
   altera_nios2_gen2_rtl_module the_nios2_rtl
     (
       .A_cancel (A_cancel),
@@ -9838,17 +9888,34 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
       .reset_n (reset_n)
     );
 
-  defparam the_nios2_rtl.SHADOW_PRESENT = 0,
-           the_nios2_rtl.SHADOW_REGISTER_SET_SIZE = 1;
+  defparam the_nios2_rtl.SHADOW_PRESENT = 1,
+           the_nios2_rtl.SHADOW_REGISTER_SET_SIZE = 2;
 
   //custom_instruction_master, which is an e_custom_instruction_master
   assign dummy_ci_port = 1'b0;
   assign E_src1_eq_src2 = E_logic_result == 0;
-  assign A_eret_src = W_estatus_reg[0];
-  assign W_status_reg_pie_inst_nxt = A_op_eret         ? A_eret_src :
+  assign A_eret_src = (W_status_reg_crs == 0) ? 
+    W_estatus_reg[17 : 0] : 
+    A_src2[17 : 0];
+
+  assign W_status_reg_pie_inst_nxt = A_op_eret         ? A_eret_src[0] :
     A_op_bret         ? W_bstatus_reg[0] :
     A_wrctl_status    ? A_wrctl_data_status_reg_pie :
     W_status_reg_pie;
+
+  assign W_status_reg_crs_inst_nxt = A_op_eret      ? 
+    A_eret_src[11 : 10] :
+    A_op_bret      ? 
+    W_bstatus_reg[11 : 10] :
+    W_status_reg_crs;
+
+  assign W_status_reg_prs_inst_nxt = A_op_eret      ? 
+    A_eret_src[17 : 16] :
+    A_op_bret      ? 
+    W_bstatus_reg[17 : 16] :
+    A_wrctl_status ? 
+    A_wrctl_data_status_reg_prs :
+    W_status_reg_prs;
 
   assign W_estatus_reg_pie_inst_nxt = A_wrctl_estatus ? A_wrctl_data_estatus_reg_pie:
     W_estatus_reg_pie;
@@ -9856,14 +9923,31 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
   assign W_bstatus_reg_pie_inst_nxt = A_wrctl_bstatus ? A_wrctl_data_bstatus_reg_pie:
     W_bstatus_reg_pie;
 
+  assign W_estatus_reg_crs_inst_nxt = A_wrctl_estatus ? A_wrctl_data_estatus_reg_crs:
+    W_estatus_reg_crs;
+
+  assign W_bstatus_reg_crs_inst_nxt = A_wrctl_bstatus ? A_wrctl_data_bstatus_reg_crs:
+    W_bstatus_reg_crs;
+
+  assign W_estatus_reg_prs_inst_nxt = A_wrctl_estatus ? A_wrctl_data_estatus_reg_prs:
+    W_estatus_reg_prs;
+
+  assign W_bstatus_reg_prs_inst_nxt = A_wrctl_bstatus ? A_wrctl_data_bstatus_reg_prs:
+    W_bstatus_reg_prs;
+
   assign A_wrctl_status = A_ctrl_wrctl_inst & (A_iw_control_regnum == 0);
   assign A_wrctl_estatus = A_ctrl_wrctl_inst & (A_iw_control_regnum == 1);
   assign A_wrctl_bstatus = A_ctrl_wrctl_inst & (A_iw_control_regnum == 2);
   assign A_wrctl_ienable = A_ctrl_wrctl_inst & (A_iw_control_regnum == 3);
   assign A_wrctl_cdsr = A_ctrl_wrctl_inst & (A_iw_control_regnum == 31);
   assign A_wrctl_data_status_reg_pie = A_inst_result[0];
+  assign A_wrctl_data_status_reg_prs = A_inst_result[17 : 16];
   assign A_wrctl_data_estatus_reg_pie = A_inst_result[0];
+  assign A_wrctl_data_estatus_reg_crs = A_inst_result[11 : 10];
+  assign A_wrctl_data_estatus_reg_prs = A_inst_result[17 : 16];
   assign A_wrctl_data_bstatus_reg_pie = A_inst_result[0];
+  assign A_wrctl_data_bstatus_reg_crs = A_inst_result[11 : 10];
+  assign A_wrctl_data_bstatus_reg_prs = A_inst_result[17 : 16];
   assign A_wrctl_data_ienable_reg_irq0 = A_inst_result[0];
   assign A_wrctl_data_ienable_reg_irq1 = A_inst_result[1];
   assign A_wrctl_data_ienable_reg_irq2 = A_inst_result[2];
@@ -9883,6 +9967,36 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     end
 
 
+  assign W_status_reg_crs_nxt = A_exc_any_active  ? 0 :
+    A_valid           ? W_status_reg_crs_inst_nxt : 
+    W_status_reg_crs;
+
+  assign W_status_reg_crs_wr_en = W_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_status_reg_crs <= 0;
+      else if (W_status_reg_crs_wr_en)
+          W_status_reg_crs <= W_status_reg_crs_nxt;
+    end
+
+
+  assign W_status_reg_prs_nxt = A_exc_crst_active ?    0 :
+    ((A_exc_active_no_break & ~W_exc_handler_mode) |
+    A_exc_break_active) ? W_status_reg_crs :
+    A_valid              ? W_status_reg_prs_inst_nxt : 
+    W_status_reg_prs;
+
+  assign W_status_reg_prs_wr_en = W_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_status_reg_prs <= 0;
+      else if (W_status_reg_prs_wr_en)
+          W_status_reg_prs <= W_status_reg_prs_nxt;
+    end
+
+
   assign W_estatus_reg_pie_nxt = A_exc_crst_active ? 0 :
     (A_exc_active_no_break & ~A_exc_shadow &
     ~W_exc_handler_mode) ? W_status_reg_pie :
@@ -9899,6 +10013,38 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     end
 
 
+  assign W_estatus_reg_crs_nxt = A_exc_crst_active ? 0 :
+    (A_exc_active_no_break & ~A_exc_shadow &
+    ~W_exc_handler_mode) ? W_status_reg_crs :
+    A_valid           ? W_estatus_reg_crs_inst_nxt : 
+    W_estatus_reg_crs;
+
+  assign W_estatus_reg_crs_wr_en = W_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_estatus_reg_crs <= 0;
+      else if (W_estatus_reg_crs_wr_en)
+          W_estatus_reg_crs <= W_estatus_reg_crs_nxt;
+    end
+
+
+  assign W_estatus_reg_prs_nxt = A_exc_crst_active ? 0 :
+    (A_exc_active_no_break & ~A_exc_shadow &
+    ~W_exc_handler_mode) ? W_status_reg_prs :
+    A_valid           ? W_estatus_reg_prs_inst_nxt : 
+    W_estatus_reg_prs;
+
+  assign W_estatus_reg_prs_wr_en = W_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_estatus_reg_prs <= 0;
+      else if (W_estatus_reg_prs_wr_en)
+          W_estatus_reg_prs <= W_estatus_reg_prs_nxt;
+    end
+
+
   assign W_bstatus_reg_pie_nxt = A_exc_break_active ? W_status_reg_pie :
     A_valid            ? W_bstatus_reg_pie_inst_nxt :
     W_bstatus_reg_pie;
@@ -9910,6 +10056,34 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
           W_bstatus_reg_pie <= 0;
       else if (W_bstatus_reg_pie_wr_en)
           W_bstatus_reg_pie <= W_bstatus_reg_pie_nxt;
+    end
+
+
+  assign W_bstatus_reg_crs_nxt = A_exc_break_active ? W_status_reg_crs :
+    A_valid            ? W_bstatus_reg_crs_inst_nxt :
+    W_bstatus_reg_crs;
+
+  assign W_bstatus_reg_crs_wr_en = W_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_bstatus_reg_crs <= 0;
+      else if (W_bstatus_reg_crs_wr_en)
+          W_bstatus_reg_crs <= W_bstatus_reg_crs_nxt;
+    end
+
+
+  assign W_bstatus_reg_prs_nxt = A_exc_break_active ? W_status_reg_prs :
+    A_valid            ? W_bstatus_reg_prs_inst_nxt :
+    W_bstatus_reg_prs;
+
+  assign W_bstatus_reg_prs_wr_en = W_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_bstatus_reg_prs <= 0;
+      else if (W_bstatus_reg_prs_wr_en)
+          W_bstatus_reg_prs <= W_bstatus_reg_prs_nxt;
     end
 
 
@@ -10053,9 +10227,9 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     end
 
 
-  assign W_status_reg = { 31'd0, W_status_reg_pie };
-  assign W_estatus_reg = { 31'd0, W_estatus_reg_pie };
-  assign W_bstatus_reg = { 31'd0, W_bstatus_reg_pie };
+  assign W_status_reg = { 14'd0, W_status_reg_prs, 4'd0, W_status_reg_crs, 9'd0, W_status_reg_pie };
+  assign W_estatus_reg = { 14'd0, W_estatus_reg_prs, 4'd0, W_estatus_reg_crs, 9'd0, W_estatus_reg_pie };
+  assign W_bstatus_reg = { 14'd0, W_bstatus_reg_prs, 4'd0, W_bstatus_reg_crs, 9'd0, W_bstatus_reg_pie };
   assign W_ienable_reg = { 28'd0, W_ienable_reg_irq3, W_ienable_reg_irq2, W_ienable_reg_irq1, W_ienable_reg_irq0 };
   assign W_ipending_reg = { 28'd0, W_ipending_reg_irq3, W_ipending_reg_irq2, W_ipending_reg_irq1, W_ipending_reg_irq0 };
   assign W_cpuid_reg = { 31'd0, 1'd0 };
@@ -10271,9 +10445,7 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     D_op_opx_rsv56|
     D_op_opx_rsv60|
     D_op_opx_rsv63|
-    D_op_rdprs|
-    D_op_stc|
-    D_op_wrprs;
+    D_op_stc;
 
   assign E_ctrl_illegal_nxt = D_ctrl_illegal;
   always @(posedge clk or negedge reset_n)
@@ -10438,7 +10610,15 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     end
 
 
-  assign D_ctrl_supervisor_only = D_op_initi|D_op_initd|D_op_eret|D_op_bret|D_op_wrctl|D_op_rdctl;
+  assign D_ctrl_supervisor_only = D_op_initi|
+    D_op_initd|
+    D_op_eret|
+    D_op_bret|
+    D_op_wrctl|
+    D_op_rdctl|
+    D_op_rdprs|
+    D_op_wrprs;
+
   assign E_ctrl_supervisor_only_nxt = D_ctrl_supervisor_only;
   always @(posedge clk or negedge reset_n)
     begin
@@ -10746,9 +10926,7 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     F_op_opx_rsv56|
     F_op_opx_rsv60|
     F_op_opx_rsv63|
-    F_op_rdprs|
-    F_op_stc|
-    F_op_wrprs;
+    F_op_stc;
 
   assign D_ctrl_implicit_dst_eretaddr_nxt = F_ctrl_implicit_dst_eretaddr;
   always @(posedge clk or negedge reset_n)
@@ -10845,9 +11023,7 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     D_op_opx_rsv56|
     D_op_opx_rsv60|
     D_op_opx_rsv63|
-    D_op_rdprs|
-    D_op_stc|
-    D_op_wrprs;
+    D_op_stc;
 
   assign E_ctrl_exception_nxt = D_ctrl_exception;
   always @(posedge clk or negedge reset_n)
@@ -11101,9 +11277,7 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     D_op_opx_rsv56|
     D_op_opx_rsv60|
     D_op_opx_rsv63|
-    D_op_rdprs|
     D_op_stc|
-    D_op_wrprs|
     D_op_break;
 
   assign E_ctrl_retaddr_nxt = D_ctrl_retaddr;
@@ -13832,6 +14006,47 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     end
 
 
+  assign D_ctrl_rdprs = D_op_rdprs|D_op_op_rsv57;
+  assign E_ctrl_rdprs_nxt = D_ctrl_rdprs;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          E_ctrl_rdprs <= 0;
+      else if (E_en)
+          E_ctrl_rdprs <= E_ctrl_rdprs_nxt;
+    end
+
+
+  assign M_ctrl_rdprs_nxt = E_ctrl_rdprs;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ctrl_rdprs <= 0;
+      else if (M_en)
+          M_ctrl_rdprs <= M_ctrl_rdprs_nxt;
+    end
+
+
+  assign A_ctrl_rdprs_nxt = M_ctrl_rdprs;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_ctrl_rdprs <= 0;
+      else if (A_en)
+          A_ctrl_rdprs <= A_ctrl_rdprs_nxt;
+    end
+
+
+  assign W_ctrl_rdprs_nxt = A_ctrl_rdprs;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_ctrl_rdprs <= 0;
+      else if (W_en)
+          W_ctrl_rdprs <= W_ctrl_rdprs_nxt;
+    end
+
+
   assign D_ctrl_bmx = 1'b0;
   assign E_ctrl_bmx_nxt = D_ctrl_bmx;
   always @(posedge clk or negedge reset_n)
@@ -13925,7 +14140,6 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     D_op_opx_rsv56|
     D_op_opx_rsv60|
     D_op_opx_rsv63|
-    D_op_rdprs|
     D_op_stc|
     D_op_break;
 
@@ -14375,6 +14589,7 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     (F_op_stwio)? 56'h2020737477696f :
     (F_op_bltu)? 56'h202020626c7475 :
     (F_op_ldwio)? 56'h20206c6477696f :
+    (F_op_rdprs)? 56'h20207264707273 :
     (F_op_flushd)? 56'h20666c75736864 :
     (F_op_xorhi)? 56'h2020786f726869 :
     (F_op_eret)? 56'h20202065726574 :
@@ -14393,6 +14608,7 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     (F_op_cmplt)? 56'h2020636d706c74 :
     (F_op_slli)? 56'h202020736c6c69 :
     (F_op_sll)? 56'h20202020736c6c :
+    (F_op_wrprs)? 56'h20207772707273 :
     (F_op_or)? 56'h20202020206f72 :
     (F_op_mulxsu)? 56'h206d756c787375 :
     (F_op_cmpne)? 56'h2020636d706e65 :
@@ -14462,6 +14678,7 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     (D_op_stwio)? 56'h2020737477696f :
     (D_op_bltu)? 56'h202020626c7475 :
     (D_op_ldwio)? 56'h20206c6477696f :
+    (D_op_rdprs)? 56'h20207264707273 :
     (D_op_flushd)? 56'h20666c75736864 :
     (D_op_xorhi)? 56'h2020786f726869 :
     (D_op_eret)? 56'h20202065726574 :
@@ -14480,6 +14697,7 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     (D_op_cmplt)? 56'h2020636d706c74 :
     (D_op_slli)? 56'h202020736c6c69 :
     (D_op_sll)? 56'h20202020736c6c :
+    (D_op_wrprs)? 56'h20207772707273 :
     (D_op_or)? 56'h20202020206f72 :
     (D_op_mulxsu)? 56'h206d756c787375 :
     (D_op_cmpne)? 56'h2020636d706e65 :
@@ -14549,6 +14767,7 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     (E_op_stwio)? 56'h2020737477696f :
     (E_op_bltu)? 56'h202020626c7475 :
     (E_op_ldwio)? 56'h20206c6477696f :
+    (E_op_rdprs)? 56'h20207264707273 :
     (E_op_flushd)? 56'h20666c75736864 :
     (E_op_xorhi)? 56'h2020786f726869 :
     (E_op_eret)? 56'h20202065726574 :
@@ -14567,6 +14786,7 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     (E_op_cmplt)? 56'h2020636d706c74 :
     (E_op_slli)? 56'h202020736c6c69 :
     (E_op_sll)? 56'h20202020736c6c :
+    (E_op_wrprs)? 56'h20207772707273 :
     (E_op_or)? 56'h20202020206f72 :
     (E_op_mulxsu)? 56'h206d756c787375 :
     (E_op_cmpne)? 56'h2020636d706e65 :
@@ -14636,6 +14856,7 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     (M_op_stwio)? 56'h2020737477696f :
     (M_op_bltu)? 56'h202020626c7475 :
     (M_op_ldwio)? 56'h20206c6477696f :
+    (M_op_rdprs)? 56'h20207264707273 :
     (M_op_flushd)? 56'h20666c75736864 :
     (M_op_xorhi)? 56'h2020786f726869 :
     (M_op_eret)? 56'h20202065726574 :
@@ -14654,6 +14875,7 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     (M_op_cmplt)? 56'h2020636d706c74 :
     (M_op_slli)? 56'h202020736c6c69 :
     (M_op_sll)? 56'h20202020736c6c :
+    (M_op_wrprs)? 56'h20207772707273 :
     (M_op_or)? 56'h20202020206f72 :
     (M_op_mulxsu)? 56'h206d756c787375 :
     (M_op_cmpne)? 56'h2020636d706e65 :
@@ -14723,6 +14945,7 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     (A_op_stwio)? 56'h2020737477696f :
     (A_op_bltu)? 56'h202020626c7475 :
     (A_op_ldwio)? 56'h20206c6477696f :
+    (A_op_rdprs)? 56'h20207264707273 :
     (A_op_flushd)? 56'h20666c75736864 :
     (A_op_xorhi)? 56'h2020786f726869 :
     (A_op_eret)? 56'h20202065726574 :
@@ -14741,6 +14964,7 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     (A_op_cmplt)? 56'h2020636d706c74 :
     (A_op_slli)? 56'h202020736c6c69 :
     (A_op_sll)? 56'h20202020736c6c :
+    (A_op_wrprs)? 56'h20207772707273 :
     (A_op_or)? 56'h20202020206f72 :
     (A_op_mulxsu)? 56'h206d756c787375 :
     (A_op_cmpne)? 56'h2020636d706e65 :
@@ -14810,6 +15034,7 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     (W_op_stwio)? 56'h2020737477696f :
     (W_op_bltu)? 56'h202020626c7475 :
     (W_op_ldwio)? 56'h20206c6477696f :
+    (W_op_rdprs)? 56'h20207264707273 :
     (W_op_flushd)? 56'h20666c75736864 :
     (W_op_xorhi)? 56'h2020786f726869 :
     (W_op_eret)? 56'h20202065726574 :
@@ -14828,6 +15053,7 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     (W_op_cmplt)? 56'h2020636d706c74 :
     (W_op_slli)? 56'h202020736c6c69 :
     (W_op_sll)? 56'h20202020736c6c :
+    (W_op_wrprs)? 56'h20207772707273 :
     (W_op_or)? 56'h20202020206f72 :
     (W_op_mulxsu)? 56'h206d756c787375 :
     (W_op_cmpne)? 56'h2020636d706e65 :
