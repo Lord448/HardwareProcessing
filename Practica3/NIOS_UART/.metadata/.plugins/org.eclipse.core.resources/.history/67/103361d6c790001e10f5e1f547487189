@@ -143,19 +143,19 @@ volatile alt_u32 *UARTStatus = (alt_u32*) UART_RX_STATUS_REG_BASE; //Status of t
 volatile alt_u32 *StartTimer = (alt_u32*) START_TIMER_BASE; //When high let the parsed loop timer run
 
 //Structure for RX ISR Handling
-struct UARTRead {
+volatile struct UARTRead {
 	bool DataRX;
 	bool EndOfWordRX;
 	bool EnableReception;
 	alt_u8 RXCounts;
 	alt_u32** spRXDataReg;
 	alt_u32 WordRX;
-}volatile UARTRead = {
+}UARTRead = {
 	.DataRX = false,
 	.EndOfWordRX = false,
 	.EnableReception = false,
 	.RXCounts = 0,
-	.spRXDataReg = (alt_u32**) &RXDataReg,
+	.spRXDataReg = (volatile alt_u32**) &RXDataReg,
 	.WordRX = 0
 };
 

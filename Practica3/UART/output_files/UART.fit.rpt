@@ -1,5 +1,5 @@
 Fitter report for UART
-Fri Dec  1 17:16:46 2023
+Fri Dec  1 20:58:51 2023
 Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 
 
@@ -72,7 +72,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Fitter Summary                                                                      ;
 +------------------------------------+------------------------------------------------+
-; Fitter Status                      ; Successful - Fri Dec  1 17:16:46 2023          ;
+; Fitter Status                      ; Successful - Fri Dec  1 20:58:51 2023          ;
 ; Quartus Prime Version              ; 22.1std.2 Build 922 07/20/2023 SC Lite Edition ;
 ; Revision Name                      ; UART                                           ;
 ; Top-level Entity Name              ; UART_PR                                        ;
@@ -164,14 +164,14 @@ https://fpgasoftware.intel.com/eula.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   2.5%      ;
+;     Processor 2            ;   2.6%      ;
 ;     Processor 3            ;   2.5%      ;
 ;     Processor 4            ;   2.5%      ;
 ;     Processor 5            ;   2.5%      ;
 ;     Processor 6            ;   2.5%      ;
 ;     Processor 7            ;   2.5%      ;
 ;     Processor 8            ;   2.5%      ;
-;     Processors 9-16        ;   2.3%      ;
+;     Processors 9-16        ;   2.4%      ;
 +----------------------------+-------------+
 
 
@@ -2209,7 +2209,7 @@ Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were
     Info (170201): Optimizations that may affect the design's routability were skipped
     Info (170200): Optimizations that may affect the design's timing were skipped
 Info (170194): Fitter routing operations ending: elapsed time is 00:00:02
-Info (11888): Total time spent on timing analysis during the Fitter is 0.45 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 0.44 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
@@ -2217,8 +2217,8 @@ Info (334004): Delay annotation completed successfully
 Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:02
 Info (144001): Generated suppressed messages file /home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica3/UART/output_files/UART.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 10 warnings
-    Info: Peak virtual memory: 2039 megabytes
-    Info: Processing ended: Fri Dec  1 17:16:47 2023
+    Info: Peak virtual memory: 2051 megabytes
+    Info: Processing ended: Fri Dec  1 20:58:52 2023
     Info: Elapsed time: 00:00:14
     Info: Total CPU time (on all processors): 00:00:27
 
