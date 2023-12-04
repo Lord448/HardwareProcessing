@@ -261,7 +261,8 @@ static void vTaskUARTSend(void)
 {
 	enum stages{
 		Waiting32BitsSel,
-		SendState
+		SendState,
+		WaitingClear
 	}volatile static stages = Waiting32BitsSel;
 
 	volatile static alt_u8 ByteCounter = 0;
@@ -290,7 +291,7 @@ static void vTaskUARTSend(void)
 				WordTX |= (alt_u32) *TXDataSel<<(8*ByteCounter);
 #endif
 				ByteCounter++;
-				if(ByteCounter >= 3)
+				if(ByteCounter > 3)
 				{
 					ByteCounter = 0;
 				}
@@ -305,15 +306,21 @@ static void vTaskUARTSend(void)
 			return;
 		break;
 		case SendState:
-			if(UARTSend((alt_u8)WordTX&(0xFF<<ByteCounter))) {
+			if(UARTSend((alt_u8)WordTX&(0xFF<<(8*ByteCounter)))) {
 				ByteCounter++;
-				if(ByteCounter >= 3)
+				if(ByteCounter > 3)
 				{
-					stages = Waiting32BitsSel;
+					stages = WaitingClear;
 					ByteCounter = 0;
+					PortReadTX = None;
 				}
 			}
 			return;
+		break;
+		case WaitingClear:
+			if(PortReadTX == SendTX) {
+				stages = SendState;
+			}
 		break;
 	}
 }
@@ -383,7 +390,7 @@ static void vTaskRXDetection(void)
 //----------------------------------------------------
 //			 	      FUNCTIONS
 //----------------------------------------------------
-static bool UARTSend(alt_u8 DataTX)
+static bool UARTSend(volatile alt_u8 DataTX)
 {
 	//TODO Readjust to 1ms ParsedLoop
 	volatile static alt_u8 delayCount = 0;
