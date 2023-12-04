@@ -72,27 +72,19 @@
 					"strict" : false
 				},
 				{
-					"name" : "i_Control_Port[2]",
-					"strict" : false
-				},
-				{
-					"name" : "i_TX_Data[2]",
-					"strict" : false
-				},
-				{
-					"name" : "i_Control_Port[1]",
-					"strict" : false
-				},
-				{
-					"name" : "i_TX_Data[1]",
-					"strict" : false
-				},
-				{
 					"name" : "i_Control_Port[0]",
 					"strict" : false
 				},
 				{
 					"name" : "i_TX_Data[0]",
+					"strict" : false
+				},
+				{
+					"name" : "i_TX_Data[7]",
+					"strict" : false
+				},
+				{
+					"name" : "i_TX_Data[6]",
 					"strict" : false
 				},
 				{
@@ -112,11 +104,19 @@
 					"strict" : false
 				},
 				{
-					"name" : "i_TX_Data[7]",
+					"name" : "i_Control_Port[2]",
 					"strict" : false
 				},
 				{
-					"name" : "i_TX_Data[6]",
+					"name" : "i_TX_Data[2]",
+					"strict" : false
+				},
+				{
+					"name" : "i_Control_Port[1]",
+					"strict" : false
+				},
+				{
+					"name" : "i_TX_Data[1]",
 					"strict" : false
 				},
 				{

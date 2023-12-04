@@ -5,7 +5,8 @@
 		.parsedloop_irq_external_connection_export     (<connected-to-parsedloop_irq_external_connection_export>),     //     parsedloop_irq_external_connection.export
 		.reset_reset_n                                 (<connected-to-reset_reset_n>),                                 //                                  reset.reset_n
 		.start_timer_external_connection_export        (<connected-to-start_timer_external_connection_export>),        //        start_timer_external_connection.export
-		.status_leds_pio_external_connection_export    (<connected-to-status_leds_pio_external_connection_export>),    //    status_leds_pio_external_connection.export
+		.status_leds_pio_external_connection_in_port   (<connected-to-status_leds_pio_external_connection_in_port>),   //    status_leds_pio_external_connection.in_port
+		.status_leds_pio_external_connection_out_port  (<connected-to-status_leds_pio_external_connection_out_port>),  //                                       .out_port
 		.uart_rx_data_reg_external_connection_export   (<connected-to-uart_rx_data_reg_external_connection_export>),   //   uart_rx_data_reg_external_connection.export
 		.uart_rx_external_connection_export            (<connected-to-uart_rx_external_connection_export>),            //            uart_rx_external_connection.export
 		.uart_rx_pi_external_connection_export         (<connected-to-uart_rx_pi_external_connection_export>),         //         uart_rx_pi_external_connection.export

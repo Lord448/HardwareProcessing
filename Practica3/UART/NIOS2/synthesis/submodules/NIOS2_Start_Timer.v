@@ -35,7 +35,7 @@ module NIOS2_Start_Timer (
 
   output           out_port;
   output  [ 31: 0] readdata;
-  input   [  2: 0] address;
+  input   [  1: 0] address;
   input            chipselect;
   input            clk;
   input            reset_n;
@@ -48,18 +48,15 @@ reg              data_out;
 wire             out_port;
 wire             read_mux_out;
 wire    [ 31: 0] readdata;
-wire             wr_strobe;
   assign clk_en = 1;
   //s1, which is an e_avalon_slave
   assign read_mux_out = {1 {(address == 0)}} & data_out;
-  assign wr_strobe = chipselect && ~write_n;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
           data_out <= 0;
-      else if (clk_en)
-          if (wr_strobe)
-              data_out <= (address == 5)? data_out & ~writedata : (address == 4)? data_out | writedata : (address == 0)? writedata : data_out;
+      else if (chipselect && ~write_n && (address == 0))
+          data_out <= writedata;
     end
 
 

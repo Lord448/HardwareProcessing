@@ -24,7 +24,8 @@ module NIOS2_nios2_gen2_0 (
 		input  wire [31:0] i_readdata,                          //                          .readdata
 		input  wire        i_waitrequest,                       //                          .waitrequest
 		input  wire        i_readdatavalid,                     //                          .readdatavalid
-		input  wire [31:0] irq,                                 //                       irq.irq
+		input  wire        eic_port_valid,                      //   interrupt_controller_in.valid
+		input  wire [44:0] eic_port_data,                       //                          .data
 		output wire        debug_reset_request,                 //       debug_reset_request.reset
 		input  wire [8:0]  debug_mem_slave_address,             //           debug_mem_slave.address
 		input  wire [3:0]  debug_mem_slave_byteenable,          //                          .byteenable
@@ -55,7 +56,8 @@ module NIOS2_nios2_gen2_0 (
 		.i_readdata                          (i_readdata),                          //                          .readdata
 		.i_waitrequest                       (i_waitrequest),                       //                          .waitrequest
 		.i_readdatavalid                     (i_readdatavalid),                     //                          .readdatavalid
-		.irq                                 (irq),                                 //                       irq.irq
+		.eic_port_valid                      (eic_port_valid),                      //   interrupt_controller_in.valid
+		.eic_port_data                       (eic_port_data),                       //                          .data
 		.debug_reset_request                 (debug_reset_request),                 //       debug_reset_request.reset
 		.debug_mem_slave_address             (debug_mem_slave_address),             //           debug_mem_slave.address
 		.debug_mem_slave_byteenable          (debug_mem_slave_byteenable),          //                          .byteenable

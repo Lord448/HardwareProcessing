@@ -243,8 +243,8 @@ module NIOS2_nios2_gen2_0_cpu_register_bank_a_module (
   output  [ 31: 0] q;
   input            clock;
   input   [ 31: 0] data;
-  input   [  6: 0] rdaddress;
-  input   [  6: 0] wraddress;
+  input   [  9: 0] rdaddress;
+  input   [  9: 0] wraddress;
   input            wren;
 
 
@@ -266,8 +266,8 @@ wire    [ 31: 0] ram_q;
   defparam the_altsyncram.address_reg_b = "CLOCK0",
            the_altsyncram.init_file = lpm_file,
            the_altsyncram.maximum_depth = 0,
-           the_altsyncram.numwords_a = 128,
-           the_altsyncram.numwords_b = 128,
+           the_altsyncram.numwords_a = 544,
+           the_altsyncram.numwords_b = 544,
            the_altsyncram.operation_mode = "DUAL_PORT",
            the_altsyncram.outdata_reg_b = "UNREGISTERED",
            the_altsyncram.ram_block_type = "AUTO",
@@ -275,8 +275,8 @@ wire    [ 31: 0] ram_q;
            the_altsyncram.read_during_write_mode_mixed_ports = "OLD_DATA",
            the_altsyncram.width_a = 32,
            the_altsyncram.width_b = 32,
-           the_altsyncram.widthad_a = 7,
-           the_altsyncram.widthad_b = 7;
+           the_altsyncram.widthad_a = 10,
+           the_altsyncram.widthad_b = 10;
 
 
 endmodule
@@ -309,8 +309,8 @@ module NIOS2_nios2_gen2_0_cpu_register_bank_b_module (
   output  [ 31: 0] q;
   input            clock;
   input   [ 31: 0] data;
-  input   [  6: 0] rdaddress;
-  input   [  6: 0] wraddress;
+  input   [  9: 0] rdaddress;
+  input   [  9: 0] wraddress;
   input            wren;
 
 
@@ -332,8 +332,8 @@ wire    [ 31: 0] ram_q;
   defparam the_altsyncram.address_reg_b = "CLOCK0",
            the_altsyncram.init_file = lpm_file,
            the_altsyncram.maximum_depth = 0,
-           the_altsyncram.numwords_a = 128,
-           the_altsyncram.numwords_b = 128,
+           the_altsyncram.numwords_a = 544,
+           the_altsyncram.numwords_b = 544,
            the_altsyncram.operation_mode = "DUAL_PORT",
            the_altsyncram.outdata_reg_b = "UNREGISTERED",
            the_altsyncram.ram_block_type = "AUTO",
@@ -341,8 +341,8 @@ wire    [ 31: 0] ram_q;
            the_altsyncram.read_during_write_mode_mixed_ports = "OLD_DATA",
            the_altsyncram.width_a = 32,
            the_altsyncram.width_b = 32,
-           the_altsyncram.widthad_a = 7,
-           the_altsyncram.widthad_b = 7;
+           the_altsyncram.widthad_a = 10,
+           the_altsyncram.widthad_b = 10;
 
 
 endmodule
@@ -1464,10 +1464,12 @@ endmodule
 module NIOS2_nios2_gen2_0_cpu_nios2_oci_itrace (
                                                  // inputs:
                                                   A_cmp_result,
+                                                  A_eic_rha,
                                                   A_en,
                                                   A_exc_active_no_break_no_crst,
                                                   A_exc_active_no_crst,
                                                   A_exc_addr,
+                                                  A_exc_ext_intr,
                                                   A_op_beq,
                                                   A_op_bge,
                                                   A_op_bgeu,
@@ -1506,10 +1508,12 @@ module NIOS2_nios2_gen2_0_cpu_nios2_oci_itrace (
   output  [ 15: 0] trc_ctrl;
   output           trc_on;
   input            A_cmp_result;
+  input   [ 31: 0] A_eic_rha;
   input            A_en;
   input            A_exc_active_no_break_no_crst;
   input            A_exc_active_no_crst;
   input   [ 31: 0] A_exc_addr;
+  input            A_exc_ext_intr;
   input            A_op_beq;
   input            A_op_bge;
   input            A_op_bgeu;
@@ -1579,11 +1583,11 @@ reg              trc_on /* synthesis ALTERA_ATTRIBUTE = "SUPPRESS_DA_RULE_INTERN
   assign instr_retired = A_valid & A_en;
   assign advanced_exc_occured = A_exc_active_no_crst;
   assign is_exception_no_break = A_exc_active_no_break_no_crst;
-  assign is_external_interrupt = 1'b0;
+  assign is_external_interrupt = A_exc_ext_intr;
   assign is_fast_tlb_miss_exception = 1'b0;
   assign curr_pid = 0;
   assign exc_addr = A_exc_addr;
-  assign eic_addr = 0;
+  assign eic_addr = A_eic_rha;
   assign sync_code = trc_ctrl[3 : 2];
   assign sync_interval = { sync_code[1] & sync_code[0], 1'b0, sync_code[1] & ~sync_code[0], 1'b0, ~sync_code[1] & sync_code[0], 2'b00 };
   assign sync_timer_reached_zero = sync_timer == 0;
@@ -2635,9 +2639,9 @@ wire             write_strobe;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          oci_ienable <= 32'b00000000000000000000000000001111;
+          oci_ienable <= 32'b1;
       else if (take_action_oci_intr_mask_reg)
-          oci_ienable <= writedata | ~(32'b00000000000000000000000000001111);
+          oci_ienable <= writedata | ~(32'b1);
     end
 
 
@@ -2885,7 +2889,7 @@ defparam NIOS2_nios2_gen2_0_cpu_ociram_sp_ram.lpm_file = "NIOS2_nios2_gen2_0_cpu
     (MonAReg[4 : 2] == 3'd4)? 32'h20000b0c :
     (MonAReg[4 : 2] == 3'd5)? 32'h00004000 :
     (MonAReg[4 : 2] == 3'd6)? 32'h00000000 :
-    32'h00000003;
+    32'h00000050;
 
 
 endmodule
@@ -2904,10 +2908,12 @@ module NIOS2_nios2_gen2_0_cpu_nios2_oci (
                                            A_cmp_result,
                                            A_ctrl_ld,
                                            A_ctrl_st,
+                                           A_eic_rha,
                                            A_en,
                                            A_exc_active_no_break_no_crst,
                                            A_exc_active_no_crst,
                                            A_exc_addr,
+                                           A_exc_ext_intr,
                                            A_ld_data,
                                            A_mem_baddr,
                                            A_op_beq,
@@ -2967,10 +2973,12 @@ module NIOS2_nios2_gen2_0_cpu_nios2_oci (
   input            A_cmp_result;
   input            A_ctrl_ld;
   input            A_ctrl_st;
+  input   [ 31: 0] A_eic_rha;
   input            A_en;
   input            A_exc_active_no_break_no_crst;
   input            A_exc_active_no_crst;
   input   [ 31: 0] A_exc_addr;
+  input            A_exc_ext_intr;
   input   [ 31: 0] A_ld_data;
   input   [ 15: 0] A_mem_baddr;
   input            A_op_beq;
@@ -3201,10 +3209,12 @@ wire             xbrk_wrap_traceoff;
   NIOS2_nios2_gen2_0_cpu_nios2_oci_itrace the_NIOS2_nios2_gen2_0_cpu_nios2_oci_itrace
     (
       .A_cmp_result                  (A_cmp_result),
+      .A_eic_rha                     (A_eic_rha),
       .A_en                          (A_en),
       .A_exc_active_no_break_no_crst (A_exc_active_no_break_no_crst),
       .A_exc_active_no_crst          (A_exc_active_no_crst),
       .A_exc_addr                    (A_exc_addr),
+      .A_exc_ext_intr                (A_exc_ext_intr),
       .A_op_beq                      (A_op_beq),
       .A_op_bge                      (A_op_bge),
       .A_op_bgeu                     (A_op_bgeu),
@@ -3456,14 +3466,20 @@ module NIOS2_nios2_gen2_0_cpu (
                                  debug_mem_slave_read,
                                  debug_mem_slave_write,
                                  debug_mem_slave_writedata,
+                                 eic_port_data,
+                                 eic_port_valid,
                                  i_readdata,
                                  i_readdatavalid,
                                  i_waitrequest,
-                                 irq,
                                  reset_n,
                                  reset_req,
 
                                 // outputs:
+                                 W_tb_eic_rha,
+                                 W_tb_eic_ril,
+                                 W_tb_eic_rnmi,
+                                 W_tb_eic_rrs,
+                                 W_tb_sstatus_reg,
                                  d_address,
                                  d_byteenable,
                                  d_read,
@@ -3479,6 +3495,11 @@ module NIOS2_nios2_gen2_0_cpu (
                               )
 ;
 
+  output  [ 31: 0] W_tb_eic_rha;
+  output  [  5: 0] W_tb_eic_ril;
+  output           W_tb_eic_rnmi;
+  output  [  5: 0] W_tb_eic_rrs;
+  output  [ 31: 0] W_tb_sstatus_reg;
   output  [ 15: 0] d_address;
   output  [  3: 0] d_byteenable;
   output           d_read;
@@ -3501,10 +3522,11 @@ module NIOS2_nios2_gen2_0_cpu (
   input            debug_mem_slave_read;
   input            debug_mem_slave_write;
   input   [ 31: 0] debug_mem_slave_writedata;
+  input   [ 44: 0] eic_port_data;
+  input            eic_port_valid;
   input   [ 31: 0] i_readdata;
   input            i_readdatavalid;
   input            i_waitrequest;
-  input   [ 31: 0] irq;
   input            reset_n;
   input            reset_req;
 
@@ -3800,12 +3822,17 @@ wire             A_dc_xfer_wr_offset_starting;
 reg              A_dc_xfer_wr_starting;
 wire    [  4: 0] A_dst_regnum;
 reg     [  4: 0] A_dst_regnum_from_M;
-wire    [  1: 0] A_dst_regset;
+wire    [  4: 0] A_dst_regset;
 wire             A_dtcm_ld;
 wire             A_dtcm_st;
+reg     [ 15: 0] A_eic_rha;
+reg     [  5: 0] A_eic_ril;
+reg              A_eic_rnmi;
+reg     [  4: 0] A_eic_rrs;
+reg              A_eic_rrs_non_zero;
 wire             A_en;
 reg              A_en_d1;
-wire    [ 17: 0] A_eret_src;
+wire    [ 23: 0] A_eret_src;
 wire             A_exc_active_no_break;
 wire             A_exc_active_no_break_no_crst;
 wire             A_exc_active_no_crst;
@@ -3821,6 +3848,8 @@ reg              A_exc_crst;
 wire             A_exc_crst_active;
 reg              A_exc_ext_intr;
 wire             A_exc_ext_intr_active;
+reg              A_exc_ext_intr_pri4;
+wire             A_exc_ext_intr_pri4_nxt;
 reg              A_exc_hbreak_pri1;
 wire             A_exc_hbreak_pri1_nxt;
 wire    [ 15: 0] A_exc_highest_pri_baddr;
@@ -3829,8 +3858,6 @@ wire    [ 31: 0] A_exc_highest_pri_exc_id;
 reg              A_exc_illegal_inst_pri15;
 wire             A_exc_illegal_inst_pri15_nxt;
 wire             A_exc_inst_fetch;
-reg              A_exc_norm_intr_pri5;
-wire             A_exc_norm_intr_pri5_nxt;
 wire             A_exc_record_baddr;
 wire             A_exc_shadow;
 wire             A_exc_shadow_active;
@@ -4056,21 +4083,27 @@ wire             A_wr_dst_reg;
 reg              A_wr_dst_reg_from_M;
 wire             A_wrctl_bstatus;
 wire             A_wrctl_cdsr;
-wire    [  1: 0] A_wrctl_data_bstatus_reg_crs;
+wire    [  4: 0] A_wrctl_data_bstatus_reg_crs;
+wire             A_wrctl_data_bstatus_reg_ih;
+wire    [  5: 0] A_wrctl_data_bstatus_reg_il;
+wire             A_wrctl_data_bstatus_reg_nmi;
 wire             A_wrctl_data_bstatus_reg_pie;
-wire    [  1: 0] A_wrctl_data_bstatus_reg_prs;
+wire    [  4: 0] A_wrctl_data_bstatus_reg_prs;
+wire             A_wrctl_data_bstatus_reg_rsie;
 wire    [ 31: 0] A_wrctl_data_cdsr_reg_status;
-wire    [  1: 0] A_wrctl_data_estatus_reg_crs;
+wire    [  4: 0] A_wrctl_data_estatus_reg_crs;
+wire             A_wrctl_data_estatus_reg_ih;
+wire    [  5: 0] A_wrctl_data_estatus_reg_il;
+wire             A_wrctl_data_estatus_reg_nmi;
 wire             A_wrctl_data_estatus_reg_pie;
-wire    [  1: 0] A_wrctl_data_estatus_reg_prs;
-wire             A_wrctl_data_ienable_reg_irq0;
-wire             A_wrctl_data_ienable_reg_irq1;
-wire             A_wrctl_data_ienable_reg_irq2;
-wire             A_wrctl_data_ienable_reg_irq3;
+wire    [  4: 0] A_wrctl_data_estatus_reg_prs;
+wire             A_wrctl_data_estatus_reg_rsie;
+wire             A_wrctl_data_status_reg_ih;
+wire    [  5: 0] A_wrctl_data_status_reg_il;
 wire             A_wrctl_data_status_reg_pie;
-wire    [  1: 0] A_wrctl_data_status_reg_prs;
+wire    [  4: 0] A_wrctl_data_status_reg_prs;
+wire             A_wrctl_data_status_reg_rsie;
 wire             A_wrctl_estatus;
-wire             A_wrctl_ienable;
 wire             A_wrctl_status;
 reg     [  1: 0] D_bht_data;
 reg     [  7: 0] D_bht_ptr;
@@ -4942,9 +4975,9 @@ wire    [ 13: 0] F_pc_plus_one;
 wire    [  3: 0] F_pc_tag_field;
 wire    [ 15: 0] F_pcb;
 wire    [ 15: 0] F_pcb_nxt;
-wire    [  1: 0] F_regset_rf;
-wire    [  6: 0] F_rf_rd_addr_a;
-wire    [  6: 0] F_rf_rd_addr_b;
+wire    [  4: 0] F_regset_rf;
+wire    [  9: 0] F_rf_rd_addr_a;
+wire    [  9: 0] F_rf_rd_addr_b;
 wire             F_sel_instruction_master;
 wire             F_sel_itcm;
 wire             F_stall;
@@ -5182,6 +5215,10 @@ reg     [  4: 0] M_dst_regnum;
 wire             M_dtcm_ld;
 wire             M_dtcm_st;
 wire             M_dtcm_st_non32;
+reg     [ 15: 0] M_eic_rha;
+reg     [  5: 0] M_eic_ril;
+reg              M_eic_rnmi;
+reg     [  4: 0] M_eic_rrs;
 wire             M_en;
 wire             M_exc_allowed;
 wire             M_exc_any;
@@ -5190,16 +5227,17 @@ reg              M_exc_break_inst_pri15;
 wire             M_exc_break_inst_pri15_nxt;
 wire             M_exc_crst;
 wire             M_exc_ext_intr;
+wire             M_exc_ext_intr_pri4;
 wire             M_exc_hbreak_pri1;
 wire             M_exc_higher_priority_than_tlb_data;
 reg              M_exc_illegal_inst_pri15;
 wire             M_exc_illegal_inst_pri15_nxt;
 wire             M_exc_inst_fetch;
-wire             M_exc_norm_intr_pri5;
 reg              M_exc_trap_inst_pri15;
 wire             M_exc_trap_inst_pri15_nxt;
 reg              M_exc_unimp_inst_pri15;
 wire             M_exc_unimp_inst_pri15_nxt;
+reg              M_ext_intr_req;
 wire    [ 31: 0] M_fwd_reg_data;
 wire             M_hbreak_req;
 wire             M_ignore_exc;
@@ -5244,7 +5282,6 @@ wire    [ 31: 0] M_mul_cell_p2;
 wire    [ 31: 0] M_mul_cell_p3;
 wire    [ 16: 0] M_mul_s1;
 wire             M_non_flushing_wrctl;
-reg              M_norm_intr_req;
 reg              M_oci_sync_hbreak_req;
 wire             M_op_add;
 wire             M_op_addi;
@@ -5429,22 +5466,39 @@ wire    [ 15: 0] W_badaddr_reg_baddr_nxt;
 wire             W_badaddr_reg_baddr_wr_en;
 reg     [ 15: 0] W_br_taken_baddr;
 wire    [ 31: 0] W_bstatus_reg;
-reg     [  1: 0] W_bstatus_reg_crs;
-wire    [  1: 0] W_bstatus_reg_crs_inst_nxt;
-wire    [  1: 0] W_bstatus_reg_crs_nxt;
+reg     [  4: 0] W_bstatus_reg_crs;
+wire    [  4: 0] W_bstatus_reg_crs_inst_nxt;
+wire    [  4: 0] W_bstatus_reg_crs_nxt;
 wire             W_bstatus_reg_crs_wr_en;
+reg              W_bstatus_reg_ih;
+wire             W_bstatus_reg_ih_inst_nxt;
+wire             W_bstatus_reg_ih_nxt;
+wire             W_bstatus_reg_ih_wr_en;
+reg     [  5: 0] W_bstatus_reg_il;
+wire    [  5: 0] W_bstatus_reg_il_inst_nxt;
+wire    [  5: 0] W_bstatus_reg_il_nxt;
+wire             W_bstatus_reg_il_wr_en;
+reg              W_bstatus_reg_nmi;
+wire             W_bstatus_reg_nmi_inst_nxt;
+wire             W_bstatus_reg_nmi_nxt;
+wire             W_bstatus_reg_nmi_wr_en;
 reg              W_bstatus_reg_pie;
 wire             W_bstatus_reg_pie_inst_nxt;
 wire             W_bstatus_reg_pie_nxt;
 wire             W_bstatus_reg_pie_wr_en;
-reg     [  1: 0] W_bstatus_reg_prs;
-wire    [  1: 0] W_bstatus_reg_prs_inst_nxt;
-wire    [  1: 0] W_bstatus_reg_prs_nxt;
+reg     [  4: 0] W_bstatus_reg_prs;
+wire    [  4: 0] W_bstatus_reg_prs_inst_nxt;
+wire    [  4: 0] W_bstatus_reg_prs_nxt;
 wire             W_bstatus_reg_prs_wr_en;
+reg              W_bstatus_reg_rsie;
+wire             W_bstatus_reg_rsie_inst_nxt;
+wire             W_bstatus_reg_rsie_nxt;
+wire             W_bstatus_reg_rsie_wr_en;
 wire    [ 31: 0] W_cdsr_reg;
 reg     [ 31: 0] W_cdsr_reg_status;
 wire    [ 31: 0] W_cdsr_reg_status_nxt;
 wire             W_cdsr_reg_status_wr_en;
+wire    [ 31: 0] W_config_reg;
 wire    [ 31: 0] W_cpuid_reg;
 reg              W_ctrl_a_not_src;
 wire             W_ctrl_a_not_src_nxt;
@@ -5618,31 +5672,47 @@ reg              W_dc_valid_st_cache_hit;
 reg              W_debug_mode;
 wire             W_debug_mode_nxt;
 reg     [  4: 0] W_dst_regnum;
-reg     [  1: 0] W_dst_regset;
+reg     [  4: 0] W_dst_regset;
 wire             W_en;
 wire    [ 31: 0] W_estatus_reg;
-reg     [  1: 0] W_estatus_reg_crs;
-wire    [  1: 0] W_estatus_reg_crs_inst_nxt;
-wire    [  1: 0] W_estatus_reg_crs_nxt;
+reg     [  4: 0] W_estatus_reg_crs;
+wire    [  4: 0] W_estatus_reg_crs_inst_nxt;
+wire    [  4: 0] W_estatus_reg_crs_nxt;
 wire             W_estatus_reg_crs_wr_en;
+reg              W_estatus_reg_ih;
+wire             W_estatus_reg_ih_inst_nxt;
+wire             W_estatus_reg_ih_nxt;
+wire             W_estatus_reg_ih_wr_en;
+reg     [  5: 0] W_estatus_reg_il;
+wire    [  5: 0] W_estatus_reg_il_inst_nxt;
+wire    [  5: 0] W_estatus_reg_il_nxt;
+wire             W_estatus_reg_il_wr_en;
+reg              W_estatus_reg_nmi;
+wire             W_estatus_reg_nmi_inst_nxt;
+wire             W_estatus_reg_nmi_nxt;
+wire             W_estatus_reg_nmi_wr_en;
 reg              W_estatus_reg_pie;
 wire             W_estatus_reg_pie_inst_nxt;
 wire             W_estatus_reg_pie_nxt;
 wire             W_estatus_reg_pie_wr_en;
-reg     [  1: 0] W_estatus_reg_prs;
-wire    [  1: 0] W_estatus_reg_prs_inst_nxt;
-wire    [  1: 0] W_estatus_reg_prs_nxt;
+reg     [  4: 0] W_estatus_reg_prs;
+wire    [  4: 0] W_estatus_reg_prs_inst_nxt;
+wire    [  4: 0] W_estatus_reg_prs_nxt;
 wire             W_estatus_reg_prs_wr_en;
+reg              W_estatus_reg_rsie;
+wire             W_estatus_reg_rsie_inst_nxt;
+wire             W_estatus_reg_rsie_nxt;
+wire             W_estatus_reg_rsie_wr_en;
 reg              W_exc_break_inst_pri15;
 wire             W_exc_break_inst_pri15_nxt;
 reg              W_exc_crst_active;
+reg              W_exc_ext_intr_pri4;
+wire             W_exc_ext_intr_pri4_nxt;
 wire             W_exc_handler_mode;
 reg              W_exc_hbreak_pri1;
 wire             W_exc_hbreak_pri1_nxt;
 reg              W_exc_illegal_inst_pri15;
 wire             W_exc_illegal_inst_pri15_nxt;
-reg              W_exc_norm_intr_pri5;
-wire             W_exc_norm_intr_pri5_nxt;
 reg              W_exc_trap_inst_pri15;
 wire             W_exc_trap_inst_pri15_nxt;
 reg              W_exc_unimp_inst_pri15;
@@ -5653,32 +5723,8 @@ reg     [  4: 0] W_exception_reg_cause;
 wire    [  4: 0] W_exception_reg_cause_nxt;
 wire             W_exception_reg_cause_wr_en;
 wire    [ 31: 0] W_ienable_reg;
-reg              W_ienable_reg_irq0;
-wire             W_ienable_reg_irq0_nxt;
-wire             W_ienable_reg_irq0_wr_en;
-reg              W_ienable_reg_irq1;
-wire             W_ienable_reg_irq1_nxt;
-wire             W_ienable_reg_irq1_wr_en;
-reg              W_ienable_reg_irq2;
-wire             W_ienable_reg_irq2_nxt;
-wire             W_ienable_reg_irq2_wr_en;
-reg              W_ienable_reg_irq3;
-wire             W_ienable_reg_irq3_nxt;
-wire             W_ienable_reg_irq3_wr_en;
 wire    [ 55: 0] W_inst;
 wire    [ 31: 0] W_ipending_reg;
-reg              W_ipending_reg_irq0;
-wire             W_ipending_reg_irq0_nxt;
-wire             W_ipending_reg_irq0_wr_en;
-reg              W_ipending_reg_irq1;
-wire             W_ipending_reg_irq1_nxt;
-wire             W_ipending_reg_irq1_wr_en;
-reg              W_ipending_reg_irq2;
-wire             W_ipending_reg_irq2_nxt;
-wire             W_ipending_reg_irq2_wr_en;
-reg              W_ipending_reg_irq3;
-wire             W_ipending_reg_irq3_nxt;
-wire             W_ipending_reg_irq3_wr_en;
 wire             W_is_opx_inst;
 reg     [ 31: 0] W_iw;
 wire    [  4: 0] W_iw_a;
@@ -5834,19 +5880,42 @@ wire             W_op_xor;
 wire             W_op_xorhi;
 wire             W_op_xori;
 reg     [ 15: 0] W_pcb /* synthesis ALTERA_IP_DEBUG_VISIBLE = 1 */;
+wire    [ 31: 0] W_sstatus_reg_nxt;
+wire             W_sstatus_reg_srs_nxt;
 wire    [ 31: 0] W_status_reg;
-reg     [  1: 0] W_status_reg_crs;
-wire    [  1: 0] W_status_reg_crs_inst_nxt;
-wire    [  1: 0] W_status_reg_crs_nxt;
+reg     [  4: 0] W_status_reg_crs;
+wire    [  4: 0] W_status_reg_crs_inst_nxt;
+wire    [  4: 0] W_status_reg_crs_nxt;
 wire             W_status_reg_crs_wr_en;
+reg              W_status_reg_ih;
+wire             W_status_reg_ih_inst_nxt;
+wire             W_status_reg_ih_nxt;
+wire             W_status_reg_ih_wr_en;
+reg     [  5: 0] W_status_reg_il;
+wire    [  5: 0] W_status_reg_il_inst_nxt;
+wire    [  5: 0] W_status_reg_il_nxt;
+wire             W_status_reg_il_wr_en;
+reg              W_status_reg_nmi;
+wire             W_status_reg_nmi_inst_nxt;
+wire             W_status_reg_nmi_nxt;
+wire             W_status_reg_nmi_wr_en;
 reg              W_status_reg_pie;
 wire             W_status_reg_pie_inst_nxt;
 wire             W_status_reg_pie_nxt;
 wire             W_status_reg_pie_wr_en;
-reg     [  1: 0] W_status_reg_prs;
-wire    [  1: 0] W_status_reg_prs_inst_nxt;
-wire    [  1: 0] W_status_reg_prs_nxt;
+reg     [  4: 0] W_status_reg_prs;
+wire    [  4: 0] W_status_reg_prs_inst_nxt;
+wire    [  4: 0] W_status_reg_prs_nxt;
 wire             W_status_reg_prs_wr_en;
+reg              W_status_reg_rsie;
+wire             W_status_reg_rsie_inst_nxt;
+wire             W_status_reg_rsie_nxt;
+wire             W_status_reg_rsie_wr_en;
+wire    [ 31: 0] W_tb_eic_rha;
+wire    [  5: 0] W_tb_eic_ril;
+wire             W_tb_eic_rnmi;
+wire    [  5: 0] W_tb_eic_rrs;
+wire    [ 31: 0] W_tb_sstatus_reg;
 reg              W_up_ex_mon_state;
 reg              W_valid;
 reg              W_valid_from_M;
@@ -5906,6 +5975,15 @@ wire             debug_mem_slave_reset;
 wire             debug_mem_slave_waitrequest;
 wire             debug_reset_request;
 wire             dummy_ci_port;
+wire    [ 31: 0] eic_port_data_rha;
+wire    [  5: 0] eic_port_data_ril;
+wire             eic_port_data_rnmi;
+wire    [  5: 0] eic_port_data_rrs;
+reg     [ 15: 0] eic_rha;
+reg     [  5: 0] eic_ril;
+reg              eic_rnmi;
+reg     [  4: 0] eic_rrs;
+wire             ext_intr_req;
 wire             hbreak_enabled;
 wire             hbreak_req;
 wire    [ 15: 0] i_address;
@@ -5946,16 +6024,18 @@ wire    [ 11: 0] ic_tag_wrdata;
 wire             ic_tag_wren;
 reg              latched_oci_tb_hbreak_req;
 wire             latched_oci_tb_hbreak_req_next;
-wire             norm_intr_req;
+wire             mi_req;
+wire             nmi_req;
 wire             oci_async_hbreak_req;
 wire    [ 31: 0] oci_ienable;
+wire    [ 31: 0] oci_ienable_dummy_sink;
 wire             oci_single_step_mode;
 wire             oci_tb_hbreak_req;
-wire    [  6: 0] rf_a_rd_port_addr;
+wire    [  9: 0] rf_a_rd_port_addr;
 wire    [ 31: 0] rf_a_rd_port_data;
-wire    [  6: 0] rf_b_rd_port_addr;
+wire    [  9: 0] rf_b_rd_port_addr;
 wire    [ 31: 0] rf_b_rd_port_data;
-wire    [  6: 0] rf_wr_port_addr;
+wire    [  9: 0] rf_wr_port_addr;
 wire    [ 31: 0] rf_wr_port_data;
 wire             rf_wr_port_en;
 wire             test_has_ended;
@@ -5969,10 +6049,10 @@ reg              wait_for_one_post_bret_inst;
       .A_exc_active_no_break_no_crst        (A_exc_active_no_break_no_crst),
       .A_exc_allowed                        (A_exc_allowed),
       .A_exc_any_active                     (A_exc_any_active),
+      .A_exc_ext_intr_pri4                  (A_exc_ext_intr_pri4),
       .A_exc_hbreak_pri1                    (A_exc_hbreak_pri1),
       .A_exc_highest_pri_exc_id             (A_exc_highest_pri_exc_id),
       .A_exc_inst_fetch                     (A_exc_inst_fetch),
-      .A_exc_norm_intr_pri5                 (A_exc_norm_intr_pri5),
       .A_st_data                            (A_st_data),
       .A_valid                              (A_valid),
       .A_wr_data_filtered                   (A_wr_data_filtered),
@@ -5986,6 +6066,7 @@ reg              wait_for_one_post_bret_inst;
       .M_bht_wr_data_unfiltered             (M_bht_wr_data_unfiltered),
       .M_bht_wr_en_filtered                 (M_bht_wr_en_filtered),
       .M_bht_wr_en_unfiltered               (M_bht_wr_en_unfiltered),
+      .M_en                                 (M_en),
       .M_mem_baddr                          (M_mem_baddr),
       .M_target_pcb                         (M_target_pcb),
       .M_valid                              (M_valid),
@@ -5993,13 +6074,20 @@ reg              wait_for_one_post_bret_inst;
       .W_bstatus_reg                        (W_bstatus_reg),
       .W_dst_regnum                         (W_dst_regnum),
       .W_dst_regset                         (W_dst_regset),
+      .W_en                                 (W_en),
       .W_estatus_reg                        (W_estatus_reg),
       .W_exception_reg                      (W_exception_reg),
       .W_iw                                 (W_iw),
       .W_iw_op                              (W_iw_op),
       .W_iw_opx                             (W_iw_opx),
       .W_pcb                                (W_pcb),
+      .W_sstatus_reg_nxt                    (W_sstatus_reg_nxt),
       .W_status_reg                         (W_status_reg),
+      .W_tb_eic_rha                         (W_tb_eic_rha),
+      .W_tb_eic_ril                         (W_tb_eic_ril),
+      .W_tb_eic_rnmi                        (W_tb_eic_rnmi),
+      .W_tb_eic_rrs                         (W_tb_eic_rrs),
+      .W_tb_sstatus_reg                     (W_tb_sstatus_reg),
       .W_valid                              (W_valid),
       .W_vinst                              (W_vinst),
       .W_wr_dst_reg                         (W_wr_dst_reg),
@@ -6009,6 +6097,12 @@ reg              wait_for_one_post_bret_inst;
       .d_read                               (d_read),
       .d_readdatavalid                      (d_readdatavalid),
       .d_write                              (d_write),
+      .eic_port_data                        (eic_port_data),
+      .eic_port_data_rha                    (eic_port_data_rha),
+      .eic_port_data_ril                    (eic_port_data_ril),
+      .eic_port_data_rnmi                   (eic_port_data_rnmi),
+      .eic_port_data_rrs                    (eic_port_data_rrs),
+      .eic_port_valid                       (eic_port_valid),
       .i_address                            (i_address),
       .i_read                               (i_read),
       .i_readdatavalid                      (i_readdatavalid),
@@ -7784,7 +7878,7 @@ defparam NIOS2_nios2_gen2_0_cpu_bht.lpm_file = "NIOS2_nios2_gen2_0_cpu_bht_ram.h
   assign M_ld_align_byte1_fill = M_ctrl_ld8 & ~M_exc_any;
   assign M_ld_align_byte2_byte3_fill = M_ctrl_ld8_ld16 & ~M_exc_any;
   assign M_exc_crst = 0;
-  assign M_exc_ext_intr = 0;
+  assign M_exc_ext_intr = A_exc_ext_intr_pri4_nxt;
   assign M_exc_break = A_exc_hbreak_pri1_nxt | A_exc_break_inst_pri15_nxt;
   assign M_ignore_exc = A_pipe_flush | A_refetch_required | (M_udtlb_refetch & ~M_exc_higher_priority_than_tlb_data);
   assign M_exc_allowed = M_valid_from_E & ~M_ignore_exc;
@@ -7797,6 +7891,7 @@ defparam NIOS2_nios2_gen2_0_cpu_bht.lpm_file = "NIOS2_nios2_gen2_0_cpu_bht_ram.h
 
   assign A_pipe_flush_waddr_nxt = (A_refetch_required)? A_pc :
     (M_exc_break)? 8712 :
+    (M_exc_ext_intr)? M_eic_rha[15 : 2] :
     (M_exc_any)? 4104 :
     (M_refetch)? M_pc :
     (M_ctrl_jmp_indirect)? M_target_pcb[15 : 2] :
@@ -8031,10 +8126,12 @@ defparam NIOS2_nios2_gen2_0_cpu_bht.lpm_file = "NIOS2_nios2_gen2_0_cpu_bht_ram.h
 
 
   assign A_pipe_flush_baddr = {A_pipe_flush_waddr, 2'b00};
-  assign A_slow_inst_result_en = (A_dc_fill_miss_offset_is_next | A_ctrl_ld_bypass) &
-    d_readdatavalid_d1;
+  assign A_slow_inst_result_en = A_exc_wr_sstatus|((A_dc_fill_miss_offset_is_next | A_ctrl_ld_bypass) &
+    d_readdatavalid_d1);
 
-  assign A_slow_inst_result_nxt = A_slow_ld_data_aligned_nxt;
+  assign A_slow_inst_result_nxt = (A_exc_wr_sstatus)? W_sstatus_reg_nxt :
+    A_slow_ld_data_aligned_nxt;
+
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
@@ -8044,7 +8141,7 @@ defparam NIOS2_nios2_gen2_0_cpu_bht.lpm_file = "NIOS2_nios2_gen2_0_cpu_bht_ram.h
     end
 
 
-  assign A_slow_inst_sel_nxt = A_en ? 0 : A_ctrl_ld_bypass|A_dc_want_fill;
+  assign A_slow_inst_sel_nxt = A_en ? 0 : A_exc_wr_sstatus|A_ctrl_ld_bypass|A_dc_want_fill;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
@@ -8056,7 +8153,8 @@ defparam NIOS2_nios2_gen2_0_cpu_bht.lpm_file = "NIOS2_nios2_gen2_0_cpu_bht_ram.h
 
   assign A_exc_addr = A_inst_result;
   assign A_shift_rot_bmx_result = A_shift_rot_result;
-  assign A_wr_data_unfiltered = (A_exc_any)? A_inst_result_aligned :
+  assign A_wr_data_unfiltered = (W_exc_wr_sstatus)? A_slow_inst_result :
+    (A_exc_any)? A_inst_result_aligned :
     (A_ctrl_mul_lsw)? A_mul_result :
     (A_ctrl_shift_rot)? A_shift_rot_bmx_result :
     ((~A_slow_inst_sel | A_ctrl_st_ex))? A_inst_result_aligned :
@@ -8070,13 +8168,13 @@ defparam NIOS2_nios2_gen2_0_cpu_bht.lpm_file = "NIOS2_nios2_gen2_0_cpu_bht_ram.h
   assign A_exc_break_active = A_exc_break & A_exc_allowed;
   assign A_exc_crst_active = A_exc_crst & A_exc_allowed;
   assign A_exc_ext_intr_active = A_exc_ext_intr & A_exc_allowed;
-  assign A_exc_shadow = 0;
+  assign A_exc_shadow = A_exc_ext_intr & A_eic_rrs_non_zero;
   assign A_exc_shadow_active = A_exc_shadow & A_exc_allowed;
   assign A_exc_active_no_break = A_exc_any_active & ~A_exc_break;
   assign A_exc_active_no_crst = A_exc_any_active & ~A_exc_crst;
   assign A_exc_active_no_break_no_crst = A_exc_any_active & ~(A_exc_break | A_exc_crst);
   assign A_exc_wr_ea_ba = A_exc_active_no_crst;
-  assign A_dst_regset = W_exc_wr_sstatus ? W_status_reg_crs : A_exc_any ? 0 :
+  assign A_dst_regset = W_exc_wr_sstatus ? W_status_reg_crs : A_exc_ext_intr_active ? A_eic_rrs : A_exc_any ? 0 :
     (A_valid & A_op_wrprs) ? W_status_reg_prs : 
     W_status_reg_crs;
 
@@ -8472,13 +8570,137 @@ defparam NIOS2_nios2_gen2_0_cpu_register_bank_b.lpm_file = "NIOS2_nios2_gen2_0_c
     end
 
 
-  assign norm_intr_req = W_status_reg_pie & (W_ipending_reg != 0);
+  //interrupt_controller_in, which is an e_atlantic_slave
+  assign eic_port_data_ril = eic_port_data[5 : 0];
+  assign eic_port_data_rnmi = eic_port_data[6];
+  assign eic_port_data_rha = eic_port_data[44 : 13];
+  assign eic_port_data_rrs = eic_port_data[12 : 7];
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          M_norm_intr_req <= 0;
+          eic_ril <= 0;
+      else if (eic_port_valid)
+          eic_ril <= eic_port_data_ril;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          eic_rnmi <= 0;
+      else if (eic_port_valid)
+          eic_rnmi <= eic_port_data_rnmi;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          eic_rha <= 0;
+      else if (eic_port_valid)
+          eic_rha <= eic_port_data_rha;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          eic_rrs <= 0;
+      else if (eic_port_valid)
+          eic_rrs <= eic_port_data_rrs;
+    end
+
+
+  assign nmi_req = eic_rnmi & (eic_ril != 0) & ~W_status_reg_nmi;
+  assign mi_req = ~eic_rnmi & (eic_ril > W_status_reg_il) & W_status_reg_pie & ((eic_rrs != W_status_reg_crs) | W_status_reg_rsie);
+  assign ext_intr_req = (nmi_req | mi_req) & oci_ienable[0];
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_ext_intr_req <= 0;
       else if (M_en)
-          M_norm_intr_req <= norm_intr_req;
+          M_ext_intr_req <= ext_intr_req;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_eic_ril <= 0;
+      else if (M_en)
+          M_eic_ril <= eic_ril;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_eic_rnmi <= 0;
+      else if (M_en)
+          M_eic_rnmi <= eic_rnmi;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_eic_rha <= 0;
+      else if (M_en)
+          M_eic_rha <= eic_rha;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_eic_ril <= 0;
+      else if (A_en)
+          A_eic_ril <= M_eic_ril;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_eic_rnmi <= 0;
+      else if (A_en)
+          A_eic_rnmi <= M_eic_rnmi;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_eic_rha <= 0;
+      else if (A_en)
+          A_eic_rha <= M_eic_rha;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_eic_rrs <= 0;
+      else if (M_en)
+          M_eic_rrs <= eic_rrs;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_eic_rrs <= 0;
+      else if (A_en)
+          A_eic_rrs <= M_eic_rrs;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_eic_rrs_non_zero <= 0;
+      else if (A_en)
+          A_eic_rrs_non_zero <= M_eic_rrs != 0;
     end
 
 
@@ -9889,39 +10111,84 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     );
 
   defparam the_nios2_rtl.SHADOW_PRESENT = 1,
-           the_nios2_rtl.SHADOW_REGISTER_SET_SIZE = 2;
+           the_nios2_rtl.SHADOW_REGISTER_SET_SIZE = 5;
 
   //custom_instruction_master, which is an e_custom_instruction_master
   assign dummy_ci_port = 1'b0;
   assign E_src1_eq_src2 = E_logic_result == 0;
   assign A_eret_src = (W_status_reg_crs == 0) ? 
-    W_estatus_reg[17 : 0] : 
-    A_src2[17 : 0];
+    W_estatus_reg[23 : 0] : 
+    A_src2[23 : 0];
 
   assign W_status_reg_pie_inst_nxt = A_op_eret         ? A_eret_src[0] :
     A_op_bret         ? W_bstatus_reg[0] :
     A_wrctl_status    ? A_wrctl_data_status_reg_pie :
     W_status_reg_pie;
 
+  assign W_status_reg_ih_inst_nxt = A_op_eret      ? A_eret_src[3] :
+    A_op_bret      ? W_bstatus_reg[3] :
+    A_wrctl_status ? A_wrctl_data_status_reg_ih :
+    W_status_reg_ih;
+
+  assign W_status_reg_il_inst_nxt = A_op_eret ? 
+    A_eret_src[9 : 4] :
+    A_op_bret ? 
+    W_bstatus_reg[9 : 4] :
+    A_wrctl_status ? A_wrctl_data_status_reg_il :
+    W_status_reg_il;
+
   assign W_status_reg_crs_inst_nxt = A_op_eret      ? 
-    A_eret_src[11 : 10] :
+    A_eret_src[14 : 10] :
     A_op_bret      ? 
-    W_bstatus_reg[11 : 10] :
+    W_bstatus_reg[14 : 10] :
     W_status_reg_crs;
 
   assign W_status_reg_prs_inst_nxt = A_op_eret      ? 
-    A_eret_src[17 : 16] :
+    A_eret_src[20 : 16] :
     A_op_bret      ? 
-    W_bstatus_reg[17 : 16] :
+    W_bstatus_reg[20 : 16] :
     A_wrctl_status ? 
     A_wrctl_data_status_reg_prs :
     W_status_reg_prs;
+
+  assign W_status_reg_nmi_inst_nxt = (A_op_eret & ~A_eret_src[22]) ? 0 :
+    A_op_bret ? W_bstatus_reg[22] :
+    W_status_reg_nmi;
+
+  assign W_status_reg_rsie_inst_nxt = A_op_eret ? A_eret_src[23] :
+    A_op_bret ? W_bstatus_reg[23] :
+    A_wrctl_status ? A_wrctl_data_status_reg_rsie :
+    W_status_reg_rsie;
 
   assign W_estatus_reg_pie_inst_nxt = A_wrctl_estatus ? A_wrctl_data_estatus_reg_pie:
     W_estatus_reg_pie;
 
   assign W_bstatus_reg_pie_inst_nxt = A_wrctl_bstatus ? A_wrctl_data_bstatus_reg_pie:
     W_bstatus_reg_pie;
+
+  assign W_estatus_reg_ih_inst_nxt = A_wrctl_estatus ? A_wrctl_data_estatus_reg_ih:
+    W_estatus_reg_ih;
+
+  assign W_bstatus_reg_ih_inst_nxt = A_wrctl_bstatus ? A_wrctl_data_bstatus_reg_ih:
+    W_bstatus_reg_ih;
+
+  assign W_estatus_reg_il_inst_nxt = A_wrctl_estatus ? A_wrctl_data_estatus_reg_il:
+    W_estatus_reg_il;
+
+  assign W_bstatus_reg_il_inst_nxt = A_wrctl_bstatus ? A_wrctl_data_bstatus_reg_il:
+    W_bstatus_reg_il;
+
+  assign W_estatus_reg_nmi_inst_nxt = A_wrctl_estatus ? A_wrctl_data_estatus_reg_nmi:
+    W_estatus_reg_nmi;
+
+  assign W_bstatus_reg_nmi_inst_nxt = A_wrctl_bstatus ? A_wrctl_data_bstatus_reg_nmi:
+    W_bstatus_reg_nmi;
+
+  assign W_estatus_reg_rsie_inst_nxt = A_wrctl_estatus ? A_wrctl_data_estatus_reg_rsie:
+    W_estatus_reg_rsie;
+
+  assign W_bstatus_reg_rsie_inst_nxt = A_wrctl_bstatus ? A_wrctl_data_bstatus_reg_rsie:
+    W_bstatus_reg_rsie;
 
   assign W_estatus_reg_crs_inst_nxt = A_wrctl_estatus ? A_wrctl_data_estatus_reg_crs:
     W_estatus_reg_crs;
@@ -9935,23 +10202,32 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
   assign W_bstatus_reg_prs_inst_nxt = A_wrctl_bstatus ? A_wrctl_data_bstatus_reg_prs:
     W_bstatus_reg_prs;
 
+  assign W_sstatus_reg_srs_nxt = A_eic_rrs != W_status_reg_crs;
+  assign W_sstatus_reg_nxt = { W_sstatus_reg_srs_nxt, W_status_reg[30 : 0] };
+  assign oci_ienable_dummy_sink = oci_ienable;
   assign A_wrctl_status = A_ctrl_wrctl_inst & (A_iw_control_regnum == 0);
   assign A_wrctl_estatus = A_ctrl_wrctl_inst & (A_iw_control_regnum == 1);
   assign A_wrctl_bstatus = A_ctrl_wrctl_inst & (A_iw_control_regnum == 2);
-  assign A_wrctl_ienable = A_ctrl_wrctl_inst & (A_iw_control_regnum == 3);
   assign A_wrctl_cdsr = A_ctrl_wrctl_inst & (A_iw_control_regnum == 31);
   assign A_wrctl_data_status_reg_pie = A_inst_result[0];
-  assign A_wrctl_data_status_reg_prs = A_inst_result[17 : 16];
+  assign A_wrctl_data_status_reg_ih = A_inst_result[3];
+  assign A_wrctl_data_status_reg_il = A_inst_result[9 : 4];
+  assign A_wrctl_data_status_reg_rsie = A_inst_result[23];
+  assign A_wrctl_data_status_reg_prs = A_inst_result[20 : 16];
   assign A_wrctl_data_estatus_reg_pie = A_inst_result[0];
-  assign A_wrctl_data_estatus_reg_crs = A_inst_result[11 : 10];
-  assign A_wrctl_data_estatus_reg_prs = A_inst_result[17 : 16];
+  assign A_wrctl_data_estatus_reg_ih = A_inst_result[3];
+  assign A_wrctl_data_estatus_reg_il = A_inst_result[9 : 4];
+  assign A_wrctl_data_estatus_reg_nmi = A_inst_result[22];
+  assign A_wrctl_data_estatus_reg_rsie = A_inst_result[23];
+  assign A_wrctl_data_estatus_reg_crs = A_inst_result[14 : 10];
+  assign A_wrctl_data_estatus_reg_prs = A_inst_result[20 : 16];
   assign A_wrctl_data_bstatus_reg_pie = A_inst_result[0];
-  assign A_wrctl_data_bstatus_reg_crs = A_inst_result[11 : 10];
-  assign A_wrctl_data_bstatus_reg_prs = A_inst_result[17 : 16];
-  assign A_wrctl_data_ienable_reg_irq0 = A_inst_result[0];
-  assign A_wrctl_data_ienable_reg_irq1 = A_inst_result[1];
-  assign A_wrctl_data_ienable_reg_irq2 = A_inst_result[2];
-  assign A_wrctl_data_ienable_reg_irq3 = A_inst_result[3];
+  assign A_wrctl_data_bstatus_reg_ih = A_inst_result[3];
+  assign A_wrctl_data_bstatus_reg_il = A_inst_result[9 : 4];
+  assign A_wrctl_data_bstatus_reg_nmi = A_inst_result[22];
+  assign A_wrctl_data_bstatus_reg_rsie = A_inst_result[23];
+  assign A_wrctl_data_bstatus_reg_crs = A_inst_result[14 : 10];
+  assign A_wrctl_data_bstatus_reg_prs = A_inst_result[20 : 16];
   assign A_wrctl_data_cdsr_reg_status = A_inst_result[31 : 0];
   assign W_status_reg_pie_nxt = A_exc_any_active  ? 1'b0 :
     A_valid           ? W_status_reg_pie_inst_nxt : 
@@ -9967,7 +10243,68 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     end
 
 
-  assign W_status_reg_crs_nxt = A_exc_any_active  ? 0 :
+  assign W_status_reg_ih_nxt = A_exc_crst_active     ? 0 :
+    A_exc_ext_intr_active ? 1 :
+    A_valid               ? W_status_reg_ih_inst_nxt : 
+    W_status_reg_ih;
+
+  assign W_status_reg_ih_wr_en = W_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_status_reg_ih <= 0;
+      else if (W_status_reg_ih_wr_en)
+          W_status_reg_ih <= W_status_reg_ih_nxt;
+    end
+
+
+  assign W_status_reg_il_nxt = A_exc_crst_active     ? 0 :
+    A_exc_ext_intr_active ? A_eic_ril :
+    A_valid               ? W_status_reg_il_inst_nxt : 
+    W_status_reg_il;
+
+  assign W_status_reg_il_wr_en = W_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_status_reg_il <= 0;
+      else if (W_status_reg_il_wr_en)
+          W_status_reg_il <= W_status_reg_il_nxt;
+    end
+
+
+  assign W_status_reg_nmi_nxt = A_exc_crst_active     ? 0 :
+    A_exc_ext_intr_active ? A_eic_rnmi :
+    A_valid               ? W_status_reg_nmi_inst_nxt : 
+    W_status_reg_nmi;
+
+  assign W_status_reg_nmi_wr_en = W_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_status_reg_nmi <= 0;
+      else if (W_status_reg_nmi_wr_en)
+          W_status_reg_nmi <= W_status_reg_nmi_nxt;
+    end
+
+
+  assign W_status_reg_rsie_nxt = A_exc_crst_active     ? 1 :
+    A_exc_ext_intr_active ? 0 :
+    A_valid               ? W_status_reg_rsie_inst_nxt : 
+    W_status_reg_rsie;
+
+  assign W_status_reg_rsie_wr_en = W_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_status_reg_rsie <= 1;
+      else if (W_status_reg_rsie_wr_en)
+          W_status_reg_rsie <= W_status_reg_rsie_nxt;
+    end
+
+
+  assign W_status_reg_crs_nxt = A_exc_ext_intr_active ? A_eic_rrs :
+    A_exc_any_active  ? 0 :
     A_valid           ? W_status_reg_crs_inst_nxt : 
     W_status_reg_crs;
 
@@ -10010,6 +10347,70 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
           W_estatus_reg_pie <= 0;
       else if (W_estatus_reg_pie_wr_en)
           W_estatus_reg_pie <= W_estatus_reg_pie_nxt;
+    end
+
+
+  assign W_estatus_reg_ih_nxt = A_exc_crst_active ? 0 :
+    (A_exc_active_no_break & ~A_exc_shadow &
+    ~W_exc_handler_mode) ? W_status_reg_ih :
+    A_valid           ? W_estatus_reg_ih_inst_nxt : 
+    W_estatus_reg_ih;
+
+  assign W_estatus_reg_ih_wr_en = W_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_estatus_reg_ih <= 0;
+      else if (W_estatus_reg_ih_wr_en)
+          W_estatus_reg_ih <= W_estatus_reg_ih_nxt;
+    end
+
+
+  assign W_estatus_reg_il_nxt = A_exc_crst_active ? 0 :
+    (A_exc_active_no_break & ~A_exc_shadow &
+    ~W_exc_handler_mode) ? W_status_reg_il :
+    A_valid           ? W_estatus_reg_il_inst_nxt : 
+    W_estatus_reg_il;
+
+  assign W_estatus_reg_il_wr_en = W_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_estatus_reg_il <= 0;
+      else if (W_estatus_reg_il_wr_en)
+          W_estatus_reg_il <= W_estatus_reg_il_nxt;
+    end
+
+
+  assign W_estatus_reg_nmi_nxt = A_exc_crst_active ? 0 :
+    (A_exc_active_no_break & ~A_exc_shadow &
+    ~W_exc_handler_mode) ? W_status_reg_nmi :
+    A_valid           ? W_estatus_reg_nmi_inst_nxt : 
+    W_estatus_reg_nmi;
+
+  assign W_estatus_reg_nmi_wr_en = W_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_estatus_reg_nmi <= 0;
+      else if (W_estatus_reg_nmi_wr_en)
+          W_estatus_reg_nmi <= W_estatus_reg_nmi_nxt;
+    end
+
+
+  assign W_estatus_reg_rsie_nxt = A_exc_crst_active ? 0 :
+    (A_exc_active_no_break & ~A_exc_shadow &
+    ~W_exc_handler_mode) ? W_status_reg_rsie :
+    A_valid           ? W_estatus_reg_rsie_inst_nxt : 
+    W_estatus_reg_rsie;
+
+  assign W_estatus_reg_rsie_wr_en = W_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_estatus_reg_rsie <= 0;
+      else if (W_estatus_reg_rsie_wr_en)
+          W_estatus_reg_rsie <= W_estatus_reg_rsie_nxt;
     end
 
 
@@ -10059,6 +10460,62 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     end
 
 
+  assign W_bstatus_reg_ih_nxt = A_exc_break_active ? W_status_reg_ih :
+    A_valid            ? W_bstatus_reg_ih_inst_nxt :
+    W_bstatus_reg_ih;
+
+  assign W_bstatus_reg_ih_wr_en = W_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_bstatus_reg_ih <= 0;
+      else if (W_bstatus_reg_ih_wr_en)
+          W_bstatus_reg_ih <= W_bstatus_reg_ih_nxt;
+    end
+
+
+  assign W_bstatus_reg_il_nxt = A_exc_break_active ? W_status_reg_il :
+    A_valid            ? W_bstatus_reg_il_inst_nxt :
+    W_bstatus_reg_il;
+
+  assign W_bstatus_reg_il_wr_en = W_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_bstatus_reg_il <= 0;
+      else if (W_bstatus_reg_il_wr_en)
+          W_bstatus_reg_il <= W_bstatus_reg_il_nxt;
+    end
+
+
+  assign W_bstatus_reg_nmi_nxt = A_exc_break_active ? W_status_reg_nmi :
+    A_valid            ? W_bstatus_reg_nmi_inst_nxt :
+    W_bstatus_reg_nmi;
+
+  assign W_bstatus_reg_nmi_wr_en = W_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_bstatus_reg_nmi <= 0;
+      else if (W_bstatus_reg_nmi_wr_en)
+          W_bstatus_reg_nmi <= W_bstatus_reg_nmi_nxt;
+    end
+
+
+  assign W_bstatus_reg_rsie_nxt = A_exc_break_active ? W_status_reg_rsie :
+    A_valid            ? W_bstatus_reg_rsie_inst_nxt :
+    W_bstatus_reg_rsie;
+
+  assign W_bstatus_reg_rsie_wr_en = W_en;
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_bstatus_reg_rsie <= 0;
+      else if (W_bstatus_reg_rsie_wr_en)
+          W_bstatus_reg_rsie <= W_bstatus_reg_rsie_nxt;
+    end
+
+
   assign W_bstatus_reg_crs_nxt = A_exc_break_active ? W_status_reg_crs :
     A_valid            ? W_bstatus_reg_crs_inst_nxt :
     W_bstatus_reg_crs;
@@ -10084,106 +10541,6 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
           W_bstatus_reg_prs <= 0;
       else if (W_bstatus_reg_prs_wr_en)
           W_bstatus_reg_prs <= W_bstatus_reg_prs_nxt;
-    end
-
-
-  assign W_ienable_reg_irq0_nxt = (A_wrctl_ienable & A_valid) ? 
-    A_wrctl_data_ienable_reg_irq0 :
-    W_ienable_reg_irq0;
-
-  assign W_ienable_reg_irq0_wr_en = W_en;
-  always @(posedge clk or negedge reset_n)
-    begin
-      if (reset_n == 0)
-          W_ienable_reg_irq0 <= 0;
-      else if (W_ienable_reg_irq0_wr_en)
-          W_ienable_reg_irq0 <= W_ienable_reg_irq0_nxt;
-    end
-
-
-  assign W_ienable_reg_irq1_nxt = (A_wrctl_ienable & A_valid) ? 
-    A_wrctl_data_ienable_reg_irq1 :
-    W_ienable_reg_irq1;
-
-  assign W_ienable_reg_irq1_wr_en = W_en;
-  always @(posedge clk or negedge reset_n)
-    begin
-      if (reset_n == 0)
-          W_ienable_reg_irq1 <= 0;
-      else if (W_ienable_reg_irq1_wr_en)
-          W_ienable_reg_irq1 <= W_ienable_reg_irq1_nxt;
-    end
-
-
-  assign W_ienable_reg_irq2_nxt = (A_wrctl_ienable & A_valid) ? 
-    A_wrctl_data_ienable_reg_irq2 :
-    W_ienable_reg_irq2;
-
-  assign W_ienable_reg_irq2_wr_en = W_en;
-  always @(posedge clk or negedge reset_n)
-    begin
-      if (reset_n == 0)
-          W_ienable_reg_irq2 <= 0;
-      else if (W_ienable_reg_irq2_wr_en)
-          W_ienable_reg_irq2 <= W_ienable_reg_irq2_nxt;
-    end
-
-
-  assign W_ienable_reg_irq3_nxt = (A_wrctl_ienable & A_valid) ? 
-    A_wrctl_data_ienable_reg_irq3 :
-    W_ienable_reg_irq3;
-
-  assign W_ienable_reg_irq3_wr_en = W_en;
-  always @(posedge clk or negedge reset_n)
-    begin
-      if (reset_n == 0)
-          W_ienable_reg_irq3 <= 0;
-      else if (W_ienable_reg_irq3_wr_en)
-          W_ienable_reg_irq3 <= W_ienable_reg_irq3_nxt;
-    end
-
-
-  assign W_ipending_reg_irq0_nxt = irq[0] & W_ienable_reg_irq0 & oci_ienable[0];
-  assign W_ipending_reg_irq0_wr_en = 1;
-  always @(posedge clk or negedge reset_n)
-    begin
-      if (reset_n == 0)
-          W_ipending_reg_irq0 <= 0;
-      else if (W_ipending_reg_irq0_wr_en)
-          W_ipending_reg_irq0 <= W_ipending_reg_irq0_nxt;
-    end
-
-
-  assign W_ipending_reg_irq1_nxt = irq[1] & W_ienable_reg_irq1 & oci_ienable[1];
-  assign W_ipending_reg_irq1_wr_en = 1;
-  always @(posedge clk or negedge reset_n)
-    begin
-      if (reset_n == 0)
-          W_ipending_reg_irq1 <= 0;
-      else if (W_ipending_reg_irq1_wr_en)
-          W_ipending_reg_irq1 <= W_ipending_reg_irq1_nxt;
-    end
-
-
-  assign W_ipending_reg_irq2_nxt = irq[2] & W_ienable_reg_irq2 & oci_ienable[2];
-  assign W_ipending_reg_irq2_wr_en = 1;
-  always @(posedge clk or negedge reset_n)
-    begin
-      if (reset_n == 0)
-          W_ipending_reg_irq2 <= 0;
-      else if (W_ipending_reg_irq2_wr_en)
-          W_ipending_reg_irq2 <= W_ipending_reg_irq2_nxt;
-    end
-
-
-  assign W_ipending_reg_irq3_nxt = irq[3] & W_ienable_reg_irq3 & oci_ienable[3];
-  assign W_ipending_reg_irq3_wr_en = 1;
-  always @(posedge clk or negedge reset_n)
-    begin
-      if (reset_n == 0)
-          W_ipending_reg_irq3 <= 0;
-      else if (W_ipending_reg_irq3_wr_en)
-          W_ipending_reg_irq3 <= W_ipending_reg_irq3_nxt;
     end
 
 
@@ -10227,14 +10584,15 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     end
 
 
-  assign W_status_reg = { 14'd0, W_status_reg_prs, 4'd0, W_status_reg_crs, 9'd0, W_status_reg_pie };
-  assign W_estatus_reg = { 14'd0, W_estatus_reg_prs, 4'd0, W_estatus_reg_crs, 9'd0, W_estatus_reg_pie };
-  assign W_bstatus_reg = { 14'd0, W_bstatus_reg_prs, 4'd0, W_bstatus_reg_crs, 9'd0, W_bstatus_reg_pie };
-  assign W_ienable_reg = { 28'd0, W_ienable_reg_irq3, W_ienable_reg_irq2, W_ienable_reg_irq1, W_ienable_reg_irq0 };
-  assign W_ipending_reg = { 28'd0, W_ipending_reg_irq3, W_ipending_reg_irq2, W_ipending_reg_irq1, W_ipending_reg_irq0 };
+  assign W_status_reg = { 8'd0, W_status_reg_rsie, W_status_reg_nmi, 1'd0, W_status_reg_prs, 1'd0, W_status_reg_crs, W_status_reg_il, W_status_reg_ih, 2'd0, W_status_reg_pie };
+  assign W_estatus_reg = { 8'd0, W_estatus_reg_rsie, W_estatus_reg_nmi, 1'd0, W_estatus_reg_prs, 1'd0, W_estatus_reg_crs, W_estatus_reg_il, W_estatus_reg_ih, 2'd0, W_estatus_reg_pie };
+  assign W_bstatus_reg = { 8'd0, W_bstatus_reg_rsie, W_bstatus_reg_nmi, 1'd0, W_bstatus_reg_prs, 1'd0, W_bstatus_reg_crs, W_bstatus_reg_il, W_bstatus_reg_ih, 2'd0, W_bstatus_reg_pie };
+  assign W_ienable_reg = { 32'd0 };
+  assign W_ipending_reg = { 32'd0 };
   assign W_cpuid_reg = { 31'd0, 1'd0 };
   assign W_exception_reg = { 25'd0, W_exception_reg_cause, 2'd0 };
   assign W_badaddr_reg = { 16'd0, W_badaddr_reg_baddr };
+  assign W_config_reg = { 32'd0 };
   assign W_cdsr_reg = { W_cdsr_reg_status };
   assign D_control_reg_rddata_muxed = (D_iw_control_regnum == 5'd0)? W_status_reg :
     (D_iw_control_regnum == 5'd1)? W_estatus_reg :
@@ -10255,6 +10613,7 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
 
   assign E_control_reg_rddata_muxed = (E_iw_control_regnum == 5'd7)? W_exception_reg :
     (E_iw_control_regnum == 5'd12)? W_badaddr_reg :
+    (E_iw_control_regnum == 5'd13)? W_config_reg :
     E_control_reg_rddata;
 
   always @(posedge clk or negedge reset_n)
@@ -10272,10 +10631,12 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
       .A_cmp_result                        (A_cmp_result),
       .A_ctrl_ld                           (A_ctrl_ld),
       .A_ctrl_st                           (A_ctrl_st),
+      .A_eic_rha                           (A_eic_rha),
       .A_en                                (A_en),
       .A_exc_active_no_break_no_crst       (A_exc_active_no_break_no_crst),
       .A_exc_active_no_crst                (A_exc_active_no_crst),
       .A_exc_addr                          (A_exc_addr),
+      .A_exc_ext_intr                      (A_exc_ext_intr),
       .A_ld_data                           (A_ld_data),
       .A_mem_baddr                         (A_mem_baddr),
       .A_op_beq                            (A_op_beq),
@@ -14369,7 +14730,7 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     end
 
 
-  assign A_exc_trap_inst_pri15_nxt = (M_exc_trap_inst_pri15) & (~(M_exc_hbreak_pri1|M_exc_norm_intr_pri5));
+  assign A_exc_trap_inst_pri15_nxt = (M_exc_trap_inst_pri15) & (~(M_exc_hbreak_pri1|M_exc_ext_intr_pri4));
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
@@ -14400,7 +14761,7 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     end
 
 
-  assign A_exc_unimp_inst_pri15_nxt = (M_exc_unimp_inst_pri15) & (~(M_exc_hbreak_pri1|M_exc_norm_intr_pri5));
+  assign A_exc_unimp_inst_pri15_nxt = (M_exc_unimp_inst_pri15) & (~(M_exc_hbreak_pri1|M_exc_ext_intr_pri4));
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
@@ -14431,7 +14792,7 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     end
 
 
-  assign A_exc_break_inst_pri15_nxt = (M_exc_break_inst_pri15) & (~(M_exc_hbreak_pri1|M_exc_norm_intr_pri5));
+  assign A_exc_break_inst_pri15_nxt = (M_exc_break_inst_pri15) & (~(M_exc_hbreak_pri1|M_exc_ext_intr_pri4));
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
@@ -14462,7 +14823,7 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     end
 
 
-  assign A_exc_illegal_inst_pri15_nxt = (M_exc_illegal_inst_pri15) & (~(M_exc_hbreak_pri1|M_exc_norm_intr_pri5));
+  assign A_exc_illegal_inst_pri15_nxt = (M_exc_illegal_inst_pri15) & (~(M_exc_hbreak_pri1|M_exc_ext_intr_pri4));
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
@@ -14504,37 +14865,36 @@ NIOS2_nios2_gen2_0_cpu_dc_victim_module NIOS2_nios2_gen2_0_cpu_dc_victim
     end
 
 
-  assign M_exc_norm_intr_pri5 = (M_norm_intr_req) & (~(M_exc_hbreak_pri1));
-  assign A_exc_norm_intr_pri5_nxt = M_exc_norm_intr_pri5;
+  assign M_exc_ext_intr_pri4 = (M_ext_intr_req) & (~(M_exc_hbreak_pri1));
+  assign A_exc_ext_intr_pri4_nxt = M_exc_ext_intr_pri4;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          A_exc_norm_intr_pri5 <= 0;
+          A_exc_ext_intr_pri4 <= 0;
       else if (A_en)
-          A_exc_norm_intr_pri5 <= A_exc_norm_intr_pri5_nxt;
+          A_exc_ext_intr_pri4 <= A_exc_ext_intr_pri4_nxt;
     end
 
 
-  assign W_exc_norm_intr_pri5_nxt = A_exc_norm_intr_pri5;
+  assign W_exc_ext_intr_pri4_nxt = A_exc_ext_intr_pri4;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          W_exc_norm_intr_pri5 <= 0;
+          W_exc_ext_intr_pri4 <= 0;
       else if (W_en)
-          W_exc_norm_intr_pri5 <= W_exc_norm_intr_pri5_nxt;
+          W_exc_ext_intr_pri4 <= W_exc_ext_intr_pri4_nxt;
     end
 
 
   assign M_exc_inst_fetch = 1'b0;
-  assign M_exc_any = M_exc_trap_inst_pri15|M_exc_unimp_inst_pri15|M_exc_break_inst_pri15|M_exc_illegal_inst_pri15|M_exc_hbreak_pri1|M_exc_norm_intr_pri5;
+  assign M_exc_any = M_exc_trap_inst_pri15|M_exc_unimp_inst_pri15|M_exc_break_inst_pri15|M_exc_illegal_inst_pri15|M_exc_hbreak_pri1|M_exc_ext_intr_pri4;
   assign A_exc_inst_fetch = 1'b0;
-  assign A_exc_highest_pri_cause_code = (A_exc_norm_intr_pri5)? 2 :
-    (A_exc_trap_inst_pri15)? 3 :
+  assign A_exc_highest_pri_cause_code = (A_exc_trap_inst_pri15)? 3 :
     (A_exc_illegal_inst_pri15)? 5 :
     4;
 
   assign A_exc_highest_pri_exc_id = (A_exc_hbreak_pri1)? 2 :
-    (A_exc_norm_intr_pri5)? 4 :
+    (A_exc_ext_intr_pri4)? 3 :
     (A_exc_trap_inst_pri15)? 5 :
     (A_exc_illegal_inst_pri15)? 7 :
     (A_exc_unimp_inst_pri15)? 6 :

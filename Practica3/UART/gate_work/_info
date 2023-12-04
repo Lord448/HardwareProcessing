@@ -1,0 +1,194 @@
+m255
+K4
+z2
+!s99 nomlopt
+!s11e vcom 2021.2 2021.04, Apr 14 2021
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica3/UART
+T_opt
+!s110 1701590958
+VT9DQf8o?Yi^[P9T1=aVgo3
+04 9 3 work tbuart_pr rtl 1
+=1-000ae431a4f1-656c37ae-749b6-1942f
+!s124 OEM10U1 
+o-quiet -auto_acc_if_foreign -work work
+tCvgOpt 0
+n@_opt
+OL;O;2021.2;73
+R0
+Ecaracteres_especiales_revc
+Z1 w1701228574
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 4
+R0
+Z4 8CARACTERES_ESPECIALES_REVC.vhd
+Z5 FCARACTERES_ESPECIALES_REVC.vhd
+l0
+L4 1
+VIPWlijJ92fJ4h<YliiTQQ0
+!s100 zLQ]_:Z3QL7]0W08<R1Vj2
+Z6 OL;C;2021.2;73
+32
+Z7 !s110 1701591135
+!i10b 1
+Z8 !s108 1701591135.000000
+Z9 !s90 COMANDOS_LCD_REVC.vhd|CARACTERES_ESPECIALES_REVC.vhd|PLL.vhd|
+!s107 PLL.vhd|CARACTERES_ESPECIALES_REVC.vhd|COMANDOS_LCD_REVC.vhd|
+!i113 0
+Z10 tExplicit 1 CvgOpt 0
+Abehavioral
+R2
+R3
+Z11 DEx4 work 26 caracteres_especiales_revc 0 22 IPWlijJ92fJ4h<YliiTQQ0
+!i122 4
+l25
+Z12 L14 117
+Z13 VD0lJI>4k?Q`X]:zC?XK?83
+Z14 !s100 kVGW0oAD:Q7eO^C5K_UZ90
+R6
+32
+R7
+!i10b 1
+R8
+R9
+Z15 !s107 PLL.vhd|CARACTERES_ESPECIALES_REVC.vhd|COMANDOS_LCD_REVC.vhd|
+!i113 0
+R10
+Pcomandos_lcd_revc
+Z16 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z17 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z18 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+R2
+R3
+!i122 4
+R1
+R0
+Z19 8COMANDOS_LCD_REVC.vhd
+Z20 FCOMANDOS_LCD_REVC.vhd
+l0
+Z21 L10 1
+V6fbUkDASZ4fnCI;RL^Cj83
+!s100 ==8dYGFBQOO9K:]68]2De3
+R6
+32
+b1
+R7
+!i10b 1
+R8
+R9
+R15
+!i113 0
+R10
+Bbody
+Z22 DPx4 work 17 comandos_lcd_revc 0 22 6fbUkDASZ4fnCI;RL^Cj83
+R16
+R17
+R18
+R2
+R3
+!i122 4
+l0
+Z23 L51 1
+Z24 VSgO5<B`:L797b<dj2DUo93
+Z25 !s100 Mnh3RbN=Gd9@@[AFo<GkS1
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R15
+!i113 0
+R10
+Eprocesador_lcd_revc
+R1
+R16
+R17
+R18
+R2
+R3
+!i122 1
+R0
+Z26 8PROCESADOR_LCD_REVC.vhd
+Z27 FPROCESADOR_LCD_REVC.vhd
+l0
+R21
+V=]Y[ll9>FI[C@M9NN`JW=3
+!s100 kTBTL=[zORM1TcD==lmZ@0
+R6
+32
+Z28 !s110 1701591105
+!i10b 1
+Z29 !s108 1701591105.000000
+Z30 !s90 PROCESADOR_LCD_REVC.vhd|
+Z31 !s107 PROCESADOR_LCD_REVC.vhd|
+!i113 0
+R10
+Abehavioral
+R16
+R17
+R18
+R2
+R3
+DEx4 work 19 procesador_lcd_revc 0 22 =]Y[ll9>FI[C@M9NN`JW=3
+!i122 1
+l54
+L29 844
+V@0SHKdH:e[6[@CB>j17PC3
+!s100 LjbVOVzLIX8Y7N:5K_EmD0
+R6
+32
+R28
+!i10b 1
+R29
+R30
+R31
+!i113 0
+R10
+Etbuart_pr
+Z32 w1701590915
+R18
+R2
+R3
+!i122 0
+R0
+Z33 8tbUART_PR.vhd
+Z34 FtbUART_PR.vhd
+l0
+L9 1
+VIcSDWHT:nF;:e:L0jE>F<2
+!s100 Azd=1g@TY6J@RXj23k3e_2
+R6
+32
+Z35 !s110 1701590939
+!i10b 1
+Z36 !s108 1701590939.000000
+Z37 !s90 tbUART_PR.vhd|
+Z38 !s107 tbUART_PR.vhd|
+!i113 0
+R10
+Artl
+R18
+R2
+R3
+DEx4 work 9 tbuart_pr 0 22 IcSDWHT:nF;:e:L0jE>F<2
+!i122 0
+l47
+L12 67
+VU<;81J_IL2_5Za6UAkCz@1
+!s100 0VX]knC2<MNAAXHXmRZdo3
+R6
+32
+R35
+!i10b 1
+R36
+R37
+R38
+!i113 0
+R10

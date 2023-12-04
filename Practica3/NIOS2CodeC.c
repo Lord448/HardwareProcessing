@@ -81,12 +81,25 @@
 #include "sys/alt_stdio.h"
 #include "sys/alt_irq.h"
 #include "sys/alt_sys_init.h"
+#include "altera_avalon_pio_regs.h"
+#include "altera_vic_irq.h"
+#include "altera_vic_regs.h"
 #include "nios2.h"
 #include "alt_types.h"
 #include "system.h"
 
+//#define NATURAL
+#define ALTERA_API
+
 #define MaskError 0x0001
 #define MaskBusy  0x0002
+
+#define MaskReadyLed 0x1
+#define MaskIncomDataLed 0x2
+
+#ifdef ALTERA_API
+#define TXDataSel IORD_ALTERA_AVALON_PIO_DATA(DIP_TX_DATA_PIO_BASE)
+#endif
 
 #ifndef NULL
   #ifdef __null
@@ -118,67 +131,79 @@ typedef enum StatusLeds {
 //----------------------------------------------------
 //			 	        TASKS
 //----------------------------------------------------
-static void vTaskControlRead(ControlPort* btnPressed); //Debouncing
-static void vTaskUARTSend(ControlPort* btnPressed);
+static void vTaskControlRead(void); //Debouncing
+static void vTaskUARTSend(void);
 static void vTaskRXDetection(void);
 //----------------------------------------------------
 //			 	      FUNCTIONS
 //----------------------------------------------------
-static void UARTSend(alt_u8 DataTX);
+static bool UARTSend(alt_u8 DataTX);
 static void StatusWrite(StatusLeds statusLeds, alt_u8 value);
 static ControlPort ControlPortRead(void);
-//----------------------------------------------------
-//			 	      	ISR
-//----------------------------------------------------
 static void IRQRegister(void);
-void (*pUART_TX_IRQ)(void* isr_context, alt_u32 id);
-void (*pParsedLoop_IRQ)(void* isr_context, alt_u32 id);
-void (*pUART_RX_IRQ)(void* isr_context, alt_u32 id);
 
-//PIO Ports definitions
-alt_u32 *TXLCDReg = UART_TX_32_PO_BASE; //Prints the data to the LCD
-alt_u32 *RXLDCaReg = UART_RX_32_PO_BASE; //Prints the data to the LCD
-alt_u8 *TXDataReg = UART_TX_DATA_REG_BASE; //UART Register to send data
-alt_u8 *RXDataReg = UART_RX_DATA_REG_BASE; //UART Register to receive data
-alt_u8 *TXDataSel = DIP_TX_DATA_PIO_BASE; //DIP to select the TX data
-alt_u8 *ControlBase = CONTROL_PIO_BASE; //Buttons to control the program -- Needs mask 4 LSB
-alt_u8 *StatusLed = STATUS_LEDS_PIO_BASE; //LEDs to report status of program -- Needs mask 4 LSB
-alt_u8 *StartTX = UART_TX_START_BASE; //When high sends a data to UART -- Needs mask of 1 LSB
-alt_u8 *UARTStatus = UART_RX_STATUS_REG_BASE; //Status of the UART RX 0 busy, 1 Error, both on Active on High -- Needs mask
+//PIO definitions
+#ifdef NATURAL
+volatile alt_u32 *TXLCDReg =  (alt_u32*) UART_TX_32_PO_BASE; //Prints the data to the LCD
+volatile alt_u32 *RXLDCaReg = (alt_u32*) UART_RX_32_PO_BASE; //Prints the data to the LCD
+volatile alt_u32 *TXDataReg = (alt_u32*) UART_TX_DATA_REG_BASE; //UART Register to send data
+volatile alt_u32 *RXDataReg = (alt_u32*) UART_RX_DATA_REG_BASE; //UART Register to receive data
+volatile alt_u32 *TXDataSel = (alt_u32*) DIP_TX_DATA_PIO_BASE; //DIP to select the TX data
+volatile alt_u32 *ControlBase = (alt_u32*) CONTROL_PIO_BASE; //Buttons to control the program -- Needs mask 4 LSB
+volatile alt_u32 *StatusLed = (alt_u32*) STATUS_LEDS_PIO_BASE; //LEDs to report status of program -- Needs mask 4 LSB
+volatile alt_u32 *StartTX = (alt_u32*) UART_TX_START_BASE; //When high sends a data to UART -- Needs mask of 1 LSB
+volatile alt_u32 *UARTStatus = (alt_u32*) UART_RX_STATUS_REG_BASE; //Status of the UART RX 0 busy, 1 Error, both on Active on High -- Needs mask
+volatile alt_u32 *StartTimer = (alt_u32*) START_TIMER_BASE; //When high let the parsed loop timer run
+#endif
+//Structure for RX ISR Handling
+struct UARTRead {
+	bool DataRX;
+	bool EndOfWordRX;
+	bool EnableReception;
+	alt_u8 RXCounts;
+#ifdef NATURAL
+	alt_u32** spRXDataReg;
+#endif
+	alt_u32 WordRX;
+}volatile UARTRead = {
+	.DataRX = false,
+	.EndOfWordRX = false,
+	.EnableReception = false,
+	.RXCounts = 0,
+#ifdef NATURAL
+	.spRXDataReg = (alt_u32**) &RXDataReg,
+#endif
+	.WordRX = 0
+};
 
-//Global isr handlers
-volatile alt_u8 UART_TX_Edge;
-volatile alt_u8 UART_RX_Edge;
-volatile alt_u8 ParsedLoop_Edge;
+//Global isr variables
+volatile bool TXIsBusy = false; //TODO
+volatile bool ParsedLoopFlag = true;
 
 //Global variables
-alt_u32 WordRX = 0;
-alt_u8 RXCounts = 0;
-ControlPort PortReadTX = None;
-bool EndOfWordRX = false;
-bool ParsedLoopFlag = true;
-bool DataRX = false;
-bool EnableReception = true;
-bool TXIsBusy = false; //TODO
-bool needToClearTX = false; //TODO
+volatile ControlPort PortReadTX = None;
+volatile bool needToClearTX = false; //TODO
 
 int main()
 {
   alt_sys_init();
   alt_irq_init(NULL);
-  //alt_putstr("Hello from Nios II!\n");
+
 #ifdef ALT_ENHANCED_INTERRUPT_API_PRESENT
   IRQRegister();
 #endif
-
-  /* Event loop never exits. */
+#ifdef ALTERA_API
+  IOWR_ALTERA_AVALON_PIO_DATA(START_TIMER_BASE, 1);
+#elif defined(NATURAL)
+  *StartTimer = 1;
+#endif
   while (1)
   {
-	  vTaskControlRead(&PortReadTX);
-	  vTaskUARTSend(&PortReadTX);
+	  vTaskControlRead();
+	  vTaskUARTSend();
 	  vTaskRXDetection();
 	  ParsedLoopFlag = true;
-	  while(ParsedLoopFlag); //Parsed Loop period = 1ms
+	  while(ParsedLoopFlag); //Parsed Loop period = 10ms
   }
   return 0;
 }
@@ -193,20 +218,16 @@ int main()
  * @param status: Notifies the button that have been pressed
  *
  */
-static void vTaskControlRead(ControlPort* btnPressed) {
+static void vTaskControlRead(void) {
 	enum stages{
 		WaitingLows,
 		WaitingHighs
-	}static stages = WaitingLows;
-	const alt_u8 DebounceDelay = 15; //In milliseconds
-	static alt_u8 Highs = 0, Lows = 0;
-	static ControlPort ControlRead = None, pastControlRead = None;
+	}volatile static stages = WaitingLows;
+	const alt_u8 DebounceDelay = 2; //In milliseconds
+	volatile static alt_u8 Highs = 0, Lows = 0;
+	volatile static ControlPort ControlRead = None, pastControlRead = None;
 
 	ControlRead = ControlPortRead();
-
-	if(ControlRead == None) {
-		return;
-	}
 
 	if(ControlRead == pastControlRead) {
 		Highs++;
@@ -217,69 +238,82 @@ static void vTaskControlRead(ControlPort* btnPressed) {
 		Lows++;
 	}
 
-	//Rising edge detection
+	//Falling edge detection
 	switch (stages) {
-		case WaitingHighs:
-			if(Highs >= DebounceDelay) {
+		case WaitingHighs: //Low State
+			if(Highs >= DebounceDelay)
+				stages = WaitingLows;
+
+		break; //High State
+		case WaitingLows:
+			if(Lows >= DebounceDelay) {
 				stages = WaitingHighs;
 				if(ControlRead == ClearRX)
 					needToClearTX = true;
 				else
-					*btnPressed = ControlRead;
+					PortReadTX = ControlRead;
 			}
-
-		break;
-		case WaitingLows:
-			if(Lows >= DebounceDelay)
-				stages = WaitingHighs;
 		break;
 	}
 }
 
-static void vTaskUARTSend(ControlPort* btnPressed)
+static void vTaskUARTSend(void)
 {
 	enum stages{
 		Waiting32BitsSel,
 		SendState
-	}static stages = Waiting32BitsSel;
+	}volatile static stages = Waiting32BitsSel;
 
-	static alt_u8 ByteCounter = 0;
-	static alt_u32 WordTX = 0;
+	volatile static alt_u8 ByteCounter = 0;
+	volatile static alt_u32 WordTX = 0;
 
-	if(*btnPressed == ClearTX)
+	if(PortReadTX == ClearTX)
 	{
 		WordTX = 0;
 		ByteCounter = 0;
 		stages = Waiting32BitsSel;
 	}
+#ifdef ALTERA_API
+	IOWR_ALTERA_AVALON_PIO_DATA(UART_TX_32_PO_BASE, WordTX);
+#elif defined(NATURAL)
 	*TXLCDReg = WordTX;
+#endif
 	switch(stages)
 	{
 		case Waiting32BitsSel:
-			if(*btnPressed == SetData)
+			if(PortReadTX == SetData)
 			{
+#ifdef ALTERA_API
+				alt_u32 DataSel = TXDataSel;
+				WordTX |= (alt_u32) DataSel<<(8*ByteCounter);
+#elif defined(NATURAL)
 				WordTX |= (alt_u32) *TXDataSel<<(8*ByteCounter);
+#endif
 				ByteCounter++;
 				if(ByteCounter >= 3)
 				{
 					ByteCounter = 0;
 				}
-				*btnPressed = None;
+				PortReadTX = None;
 			}
-			else if(*btnPressed == SendTX)
+			else if(PortReadTX == SendTX)
 			{
 				stages = SendState;
 				ByteCounter = 0;
+				PortReadTX = None;
 			}
+			return;
 		break;
 		case SendState:
-			UARTSend((alt_u8)WordTX&(0xFF<<ByteCounter));
-			ByteCounter++;
-			if(ByteCounter >= 3)
-			{
-				stages = Waiting32BitsSel;
-				ByteCounter = 0;
+			if(UARTSend((alt_u8)WordTX&(0xFF<<ByteCounter))) {
+				ByteCounter++;
+				if(ByteCounter >= 3)
+				{
+					stages = Waiting32BitsSel;
+					ByteCounter = 0;
+				}
 			}
+			return;
 		break;
 	}
 }
@@ -290,9 +324,10 @@ static void vTaskRXDetection(void)
 		WaitingRX,
 		Waiting32Bits,
 		Write32BitsPort
-	}static stages = WaitingRX;
-	const alt_u8 ReceivingTime = 2; //In Milliseconds
-	const alt_16 IncomDataTime = 500; //In Milliseconds
+	}volatile static stages = WaitingRX;
+	//TODO Readjust 1ms parsed loop
+	const alt_u8 ReceivingTime = 1; //In Milliseconds
+	const alt_16 IncomDataTime = 50; //In Milliseconds
 	static alt_u8 CountsDelay = 0;
 	static alt_16 CountIncomData = 0;
 	static bool TurnOffIncomData = false;
@@ -311,10 +346,10 @@ static void vTaskRXDetection(void)
 	switch(stages)
 	{
 		case WaitingRX:
-			EnableReception = true;
+			UARTRead.EnableReception = true;
 			CountsDelay = 0;
-			WordRX = 0;
-			if(DataRX)
+			UARTRead.WordRX = 0;
+			if(UARTRead.DataRX)
 			{
 				stages = Waiting32Bits;
 				StatusWrite(IncomingData, 1);
@@ -323,17 +358,22 @@ static void vTaskRXDetection(void)
 		break;
 		case Waiting32Bits:
 			CountsDelay++;
-			if(EndOfWordRX || CountsDelay >= ReceivingTime)
+			if(UARTRead.EndOfWordRX || CountsDelay >= ReceivingTime)
 			{
-				EnableReception = false;
+				UARTRead.EnableReception = false;
 				stages = Write32BitsPort;
 			}
 		break;
 		case Write32BitsPort:
 			if(!needToClearTX) //TODO
-				*TXLCDReg = WordRX; //Takes 3ms to get here if delay
+			//Takes 3ms to get here if delay
+#ifdef ALTERA_API			
+				IOWR_ALTERA_AVALON_PIO_DATA(UART_TX_32_PO_BASE, UARTRead.WordRX);
+#elif defined(NATURAL)
+				*TXLCDReg = UARTRead.WordRX;
+#endif
 			stages = WaitingRX;
-			DataRX = false;
+			UARTRead.DataRX = false;
 		break;
 		default:
 			return;
@@ -343,13 +383,29 @@ static void vTaskRXDetection(void)
 //----------------------------------------------------
 //			 	      FUNCTIONS
 //----------------------------------------------------
-static void UARTSend(alt_u8 DataTX)
+static bool UARTSend(alt_u8 DataTX)
 {
+	//TODO Readjust to 1ms ParsedLoop
+	volatile static alt_u8 delayCount = 0;
+#ifdef NATURAL
 	alt_u8 preStartTX = (*StartTX)&(~0x1);
 	*TXDataReg = DataTX;
 	*StartTX = (preStartTX|1);
 	for(alt_u8 i = 0; i < 10; i++); //Raw delay
 	*StartTX = (preStartTX|0);
+#elif defined(ALTERA_API)
+	//Write to the UART TX Parallel register
+	IOWR_ALTERA_AVALON_PIO_DATA(UART_TX_DATA_REG_BASE, DataTX);
+	IOWR_ALTERA_AVALON_PIO_DATA(UART_TX_START_BASE, 1);
+	delayCount++;
+	if (delayCount == 1) //10ms delay
+	{
+		IOWR_ALTERA_AVALON_PIO_DATA(UART_TX_START_BASE, 0);
+		delayCount = 0;
+		return true;
+	}
+	return false;
+#endif;
 }
 /**
  * @brief Makes the read of the register
@@ -357,86 +413,132 @@ static void UARTSend(alt_u8 DataTX)
  */
 static ControlPort ControlPortRead(void)
 {
-	alt_u8 Read = *ControlBase&0xF;
+	ControlPort result;
+#ifdef ALTERA_API
+	volatile alt_u8 Read = IORD_ALTERA_AVALON_PIO_DATA(CONTROL_PIO_BASE);
+#elif defined(NATURAL)
+	alt_u8 Read = (alt_u8) *ControlBase&0xF;
+#endif
 
 	if((Read&1)) {
-		return SetData;
+		result = SetData;
 	}
 	else if(Read&(1<<1)) {
-		return SendTX;
+		result = SendTX;
 	}
 	else if(Read&(1<<2)) {
-		return ClearTX;
+		result = ClearTX;
 	}
 	else if(Read&(1<<3)) {
-		return ClearRX;
+		result = ClearRX;
 	}
 	else
-		return None;
+		result = None;
+	return result;
 }
 
 static void StatusWrite(StatusLeds statusLeds, alt_u8 value)
 {
-	if(value > 1)
-		value = 1;
+#ifdef NATURAL
 	alt_u8 Port = *StatusLed;
-	Port &= ~statusLeds;
-	switch(statusLeds)
-	{
-		case ReadyToSend:
-			*StatusLed = Port|value;
-		break;
-		case IncomingData:
-			*StatusLed = Port|(value<<1);
-		break;
-		case TXBusy:
-			*StatusLed = Port|(value<<2);
-		break;
-	}
+	if(value == 0)
+		Port &= ~statusLeds;
+	else //Writing 1
+		Port |= statusLeds;
+#elif defined(ALTERA_API)
+	volatile alt_u8 Port = IORD_ALTERA_AVALON_PIO_DATA(STATUS_LEDS_PIO_BASE);
+	if(value == 0)
+		Port &= ~statusLeds;
+	else //Writing a 1
+		Port |= statusLeds;
+#endif
 }
 
 //----------------------------------------------------
 //			 	      	ISR
 //----------------------------------------------------
-void UART_TX_CpltCallback(void* isr_context, alt_u32 id){
-	TXIsBusy = false;
-}
+static void UART_RX_CpltCallback(void* isr_context) {
+	IOWR_ALTERA_AVALON_PIO_EDGE_CAP(UART_RX_BASE, 0);  //Reset the edge capture
 
-void UART_RX_CpltCallback(void* isr_context, alt_u32 id) {
-  	if(EnableReception) {
-		DataRX = true;
-		WordRX |= (alt_u32) *RXDataReg<<(8*RXCounts);
-		RXCounts++;
-		if(RXCounts > 3)
+	volatile struct UARTRead* pUARTRead = (volatile struct UARTRead*) isr_context;
+
+	if(pUARTRead -> EnableReception) {
+		pUARTRead -> DataRX = true;
+#ifdef NATURAL
+		pUARTRead -> WordRX |= (alt_u32) **(pUARTRead -> spRXDataReg)<<(8*(pUARTRead -> RXCounts));
+#elif defined(ALTERA_API)
+		pUARTRead -> WordRX |= (alt_u32) IORD_ALTERA_AVALON_PIO_DATA(UART_RX_DATA_REG_BASE)<<(8*(pUARTRead -> RXCounts));
+#endif
+		pUARTRead -> RXCounts += 1;
+		if(pUARTRead -> RXCounts > 3)
 		{
-			RXCounts = 0;
-			EndOfWordRX = true;
+			pUARTRead -> RXCounts = 0;
+			pUARTRead -> EndOfWordRX = true;
 		}
 	}
+
+	/* Read the PIO to delay ISR exit. This is done to prevent a 
+	   spurious interrupt in systems with high processor -> pio 
+	   latency and fast interrupts. */
+	IORD_ALTERA_AVALON_PIO_EDGE_CAP(UART_TX_BASE);
 }
 
-void ParsedLoopElapsedCallback(void* isr_context, alt_u32 id) { 
-	ParsedLoopFlag = false; 
+static void UART_TX_CpltCallback(void* isr_context){
+	IOWR_ALTERA_AVALON_PIO_EDGE_CAP(UART_TX_BASE, 0);  //Reset the edge capture
+	volatile bool* pTXIsBusy = (volatile bool*) isr_context;
+
+	*pTXIsBusy = false;
+
+	/* Read the PIO to delay ISR exit. This is done to prevent a 
+	   spurious interrupt in systems with high processor -> pio 
+	   latency and fast interrupts. */
+	IORD_ALTERA_AVALON_PIO_EDGE_CAP(UART_TX_BASE);
+	
+}
+
+static void ParsedLoopElapsedCallback(void* isr_context) {
+	IOWR_ALTERA_AVALON_PIO_EDGE_CAP(PARSEDLOOP_IRQ_BASE, 0);  //Reset the edge capture
+	volatile bool* pParsedLoopFlag = (volatile bool*) isr_context;
+
+	*pParsedLoopFlag = false;
+
+	/* Read the PIO to delay ISR exit. This is done to prevent a 
+	   spurious interrupt in systems with high processor -> pio 
+	   latency and fast interrupts. */
+	IORD_ALTERA_AVALON_PIO_EDGE_CAP(PARSEDLOOP_IRQ_BASE);
 }
 
 static void IRQRegister(void) {
-  pParsedLoop_IRQ = &ParsedLoopElapsedCallback;
-  pUART_TX_IRQ = &UART_TX_CpltCallback;
-  pUART_RX_IRQ = &UART_RX_CpltCallback;
-  alt_ic_isr_register(UART_TX_IRQ_INTERRUPT_CONTROLLER_ID,
-                      UART_TX_IRQ, 
-                      pUART_TX_IRQ, 
-                      NULL, //Only one IRQ on the peripherial
-                      NULL);
-  alt_ic_isr_register(UART_RX_IRQ_INTERRUPT_CONTROLLER_ID,
-                      UART_RX_IRQ,
-                      pUART_RX_IRQ, 
-                      NULL, //Only one IRQ on the peripherial
-                      NULL);
-  alt_ic_isr_register(PARSEDLOOP_IRQ_IRQ_INTERRUPT_CONTROLLER_ID, 
-                      PARSEDLOOP_IRQ_IRQ, 
-                      pParsedLoop_IRQ,
-                      NULL, //Only one IRQ on the peripherial
-                      NULL);
+	void* pUARTReadStruct = (void*) &UARTRead;
+	void* pTXIsBusy = (void*) &TXIsBusy;
+	void* pParsedLoopFlag = (void*) &ParsedLoopFlag;
+
+	//Enable interrupts
+    IOWR_ALTERA_AVALON_PIO_IRQ_MASK(UART_RX_BASE, 0x1);
+	IOWR_ALTERA_AVALON_PIO_IRQ_MASK(UART_TX_BASE, 0x1);
+	IOWR_ALTERA_AVALON_PIO_IRQ_MASK(PARSEDLOOP_IRQ_BASE, 0x1);
+
+	//Reseting the edge capture
+	IOWR_ALTERA_AVALON_PIO_EDGE_CAP(UART_RX_BASE, 0);
+	IOWR_ALTERA_AVALON_PIO_EDGE_CAP(UART_TX_BASE, 0);
+	IOWR_ALTERA_AVALON_PIO_EDGE_CAP(PARSEDLOOP_IRQ_BASE, 0);
+
+	
+	//Register the ISR
+	alt_ic_isr_register(UART_RX_IRQ_INTERRUPT_CONTROLLER_ID,
+						UART_RX_IRQ,
+						&UART_RX_CpltCallback,
+						pUARTReadStruct,
+						NULL);
+	alt_ic_isr_register(UART_TX_IRQ_INTERRUPT_CONTROLLER_ID,
+						UART_TX_IRQ,
+						&UART_TX_CpltCallback,
+						pTXIsBusy,
+						NULL);
+	alt_ic_isr_register(PARSEDLOOP_IRQ_IRQ_INTERRUPT_CONTROLLER_ID,
+						PARSEDLOOP_IRQ_IRQ,
+						&ParsedLoopElapsedCallback,
+						pParsedLoopFlag,
+						NULL);
 }
 

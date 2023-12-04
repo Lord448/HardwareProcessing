@@ -26,10 +26,10 @@ module NIOS2_nios2_gen2_0_cpu_test_bench (
                                             A_exc_active_no_break_no_crst,
                                             A_exc_allowed,
                                             A_exc_any_active,
+                                            A_exc_ext_intr_pri4,
                                             A_exc_hbreak_pri1,
                                             A_exc_highest_pri_exc_id,
                                             A_exc_inst_fetch,
-                                            A_exc_norm_intr_pri5,
                                             A_st_data,
                                             A_valid,
                                             A_wr_data_unfiltered,
@@ -38,6 +38,7 @@ module NIOS2_nios2_gen2_0_cpu_test_bench (
                                             M_bht_ptr_unfiltered,
                                             M_bht_wr_data_unfiltered,
                                             M_bht_wr_en_unfiltered,
+                                            M_en,
                                             M_mem_baddr,
                                             M_target_pcb,
                                             M_valid,
@@ -45,12 +46,14 @@ module NIOS2_nios2_gen2_0_cpu_test_bench (
                                             W_bstatus_reg,
                                             W_dst_regnum,
                                             W_dst_regset,
+                                            W_en,
                                             W_estatus_reg,
                                             W_exception_reg,
                                             W_iw,
                                             W_iw_op,
                                             W_iw_opx,
                                             W_pcb,
+                                            W_sstatus_reg_nxt,
                                             W_status_reg,
                                             W_valid,
                                             W_vinst,
@@ -61,6 +64,12 @@ module NIOS2_nios2_gen2_0_cpu_test_bench (
                                             d_read,
                                             d_readdatavalid,
                                             d_write,
+                                            eic_port_data,
+                                            eic_port_data_rha,
+                                            eic_port_data_ril,
+                                            eic_port_data_rnmi,
+                                            eic_port_data_rrs,
+                                            eic_port_valid,
                                             i_address,
                                             i_read,
                                             i_readdatavalid,
@@ -72,6 +81,11 @@ module NIOS2_nios2_gen2_0_cpu_test_bench (
                                             M_bht_ptr_filtered,
                                             M_bht_wr_data_filtered,
                                             M_bht_wr_en_filtered,
+                                            W_tb_eic_rha,
+                                            W_tb_eic_ril,
+                                            W_tb_eic_rnmi,
+                                            W_tb_eic_rrs,
+                                            W_tb_sstatus_reg,
                                             test_has_ended
                                          )
 ;
@@ -81,6 +95,11 @@ module NIOS2_nios2_gen2_0_cpu_test_bench (
   output  [  7: 0] M_bht_ptr_filtered;
   output  [  1: 0] M_bht_wr_data_filtered;
   output           M_bht_wr_en_filtered;
+  output  [ 31: 0] W_tb_eic_rha;
+  output  [  5: 0] W_tb_eic_ril;
+  output           W_tb_eic_rnmi;
+  output  [  5: 0] W_tb_eic_rrs;
+  output  [ 31: 0] W_tb_sstatus_reg;
   output           test_has_ended;
   input            A_cmp_result;
   input            A_ctrl_ld_non_bypass;
@@ -88,10 +107,10 @@ module NIOS2_nios2_gen2_0_cpu_test_bench (
   input            A_exc_active_no_break_no_crst;
   input            A_exc_allowed;
   input            A_exc_any_active;
+  input            A_exc_ext_intr_pri4;
   input            A_exc_hbreak_pri1;
   input   [ 31: 0] A_exc_highest_pri_exc_id;
   input            A_exc_inst_fetch;
-  input            A_exc_norm_intr_pri5;
   input   [ 31: 0] A_st_data;
   input            A_valid;
   input   [ 31: 0] A_wr_data_unfiltered;
@@ -100,19 +119,22 @@ module NIOS2_nios2_gen2_0_cpu_test_bench (
   input   [  7: 0] M_bht_ptr_unfiltered;
   input   [  1: 0] M_bht_wr_data_unfiltered;
   input            M_bht_wr_en_unfiltered;
+  input            M_en;
   input   [ 15: 0] M_mem_baddr;
   input   [ 15: 0] M_target_pcb;
   input            M_valid;
   input   [ 31: 0] W_badaddr_reg;
   input   [ 31: 0] W_bstatus_reg;
   input   [  4: 0] W_dst_regnum;
-  input   [  1: 0] W_dst_regset;
+  input   [  4: 0] W_dst_regset;
+  input            W_en;
   input   [ 31: 0] W_estatus_reg;
   input   [ 31: 0] W_exception_reg;
   input   [ 31: 0] W_iw;
   input   [  5: 0] W_iw_op;
   input   [  5: 0] W_iw_opx;
   input   [ 15: 0] W_pcb;
+  input   [ 31: 0] W_sstatus_reg_nxt;
   input   [ 31: 0] W_status_reg;
   input            W_valid;
   input   [ 71: 0] W_vinst;
@@ -123,6 +145,12 @@ module NIOS2_nios2_gen2_0_cpu_test_bench (
   input            d_read;
   input            d_readdatavalid;
   input            d_write;
+  input   [ 44: 0] eic_port_data;
+  input   [ 31: 0] eic_port_data_rha;
+  input   [  5: 0] eic_port_data_ril;
+  input            eic_port_data_rnmi;
+  input   [  5: 0] eic_port_data_rrs;
+  input            eic_port_valid;
   input   [ 15: 0] i_address;
   input            i_read;
   input            i_readdatavalid;
@@ -132,6 +160,7 @@ module NIOS2_nios2_gen2_0_cpu_test_bench (
 wire             A_iw_invalid;
 reg     [ 15: 0] A_mem_baddr;
 reg     [ 15: 0] A_target_pcb;
+reg     [ 44: 0] A_tb_eic_port_data;
 wire    [ 31: 0] A_wr_data_filtered;
 wire             A_wr_data_unfiltered_0_is_x;
 wire             A_wr_data_unfiltered_10_is_x;
@@ -181,6 +210,7 @@ wire             M_bht_wr_data_unfiltered_0_is_x;
 wire             M_bht_wr_data_unfiltered_1_is_x;
 wire             M_bht_wr_en_filtered;
 wire             M_bht_wr_en_unfiltered_is_x;
+reg     [ 44: 0] M_tb_eic_port_data;
 reg              W_cmp_result;
 reg              W_exc_any_active;
 reg     [ 31: 0] W_exc_highest_pri_exc_id;
@@ -315,6 +345,12 @@ wire             W_op_xorhi;
 wire             W_op_xori;
 reg     [ 31: 0] W_st_data;
 reg     [ 15: 0] W_target_pcb;
+reg     [ 44: 0] W_tb_eic_port_data;
+wire    [ 31: 0] W_tb_eic_rha;
+wire    [  5: 0] W_tb_eic_ril;
+wire             W_tb_eic_rnmi;
+wire    [  5: 0] W_tb_eic_rrs;
+reg     [ 31: 0] W_tb_sstatus_reg;
 reg              W_valid_crst;
 reg              W_valid_hbreak;
 reg              W_valid_intr;
@@ -525,7 +561,7 @@ wire             test_has_ended;
       if (reset_n == 0)
           W_valid_intr <= 0;
       else 
-        W_valid_intr <= A_exc_allowed & A_exc_norm_intr_pri5;
+        W_valid_intr <= A_exc_allowed & A_exc_ext_intr_pri4;
     end
 
 
@@ -544,6 +580,46 @@ wire             test_has_ended;
           W_exc_highest_pri_exc_id <= 0;
       else 
         W_exc_highest_pri_exc_id <= A_exc_highest_pri_exc_id;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          M_tb_eic_port_data <= 0;
+      else if (M_en)
+          M_tb_eic_port_data <= eic_port_data;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          A_tb_eic_port_data <= 0;
+      else if (A_en)
+          A_tb_eic_port_data <= M_tb_eic_port_data;
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_tb_eic_port_data <= 0;
+      else if (W_en)
+          W_tb_eic_port_data <= A_tb_eic_port_data;
+    end
+
+
+  assign W_tb_eic_ril = W_tb_eic_port_data[5 : 0];
+  assign W_tb_eic_rnmi = W_tb_eic_port_data[6];
+  assign W_tb_eic_rrs = W_tb_eic_port_data[12 : 7];
+  assign W_tb_eic_rha = W_tb_eic_port_data[44 : 13];
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          W_tb_sstatus_reg <= 0;
+      else if (W_en)
+          W_tb_sstatus_reg <= W_sstatus_reg_nxt;
     end
 
 
@@ -743,6 +819,73 @@ wire             test_has_ended;
           if (^(W_dst_regset) === 1'bx)
             begin
               $write("%0d ns: ERROR: NIOS2_nios2_gen2_0_cpu_test_bench/W_dst_regset is 'x'\n", $time);
+              $stop;
+            end
+    end
+
+
+  always @(posedge clk)
+    begin
+      if (reset_n)
+          if (^(eic_port_valid) === 1'bx)
+            begin
+              $write("%0d ns: ERROR: NIOS2_nios2_gen2_0_cpu_test_bench/eic_port_valid is 'x'\n", $time);
+              $stop;
+            end
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+        begin
+        end
+      else if (eic_port_valid)
+          if (^(eic_port_data_ril) === 1'bx)
+            begin
+              $write("%0d ns: ERROR: NIOS2_nios2_gen2_0_cpu_test_bench/eic_port_data_ril is 'x'\n", $time);
+              $stop;
+            end
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+        begin
+        end
+      else if (eic_port_valid & (eic_port_data_ril != 0))
+          if (^(eic_port_data_rnmi) === 1'bx)
+            begin
+              $write("%0d ns: ERROR: NIOS2_nios2_gen2_0_cpu_test_bench/eic_port_data_rnmi is 'x'\n", $time);
+              $stop;
+            end
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+        begin
+        end
+      else if (eic_port_valid & (eic_port_data_ril != 0))
+          if (^(eic_port_data_rha) === 1'bx)
+            begin
+              $write("%0d ns: ERROR: NIOS2_nios2_gen2_0_cpu_test_bench/eic_port_data_rha is 'x'\n", $time);
+              $stop;
+            end
+    end
+
+
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+        begin
+        end
+      else if (eic_port_valid & (eic_port_data_ril != 0))
+          if (^(eic_port_data_rrs) === 1'bx)
+            begin
+              $write("%0d ns: ERROR: NIOS2_nios2_gen2_0_cpu_test_bench/eic_port_data_rrs is 'x'\n", $time);
               $stop;
             end
     end

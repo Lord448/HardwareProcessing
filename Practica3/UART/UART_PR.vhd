@@ -92,7 +92,6 @@ architecture rtl of UART_PR is
 	);
 	end component;
 
-
 	component NIOS2 is
 		port (
 			clk_clk                                       : in  std_logic                     := 'X';             -- clk
@@ -100,7 +99,9 @@ architecture rtl of UART_PR is
 			dip_tx_data_pio_external_connection_export    : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- export
 			parsedloop_irq_external_connection_export     : in  std_logic                     := 'X';             -- export
 			reset_reset_n                                 : in  std_logic                     := 'X';             -- reset_n
-			status_leds_pio_external_connection_export    : out std_logic_vector(3 downto 0);                     -- export
+			start_timer_external_connection_export        : out std_logic;                                        -- export
+			status_leds_pio_external_connection_in_port   : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- in_port
+			status_leds_pio_external_connection_out_port  : out std_logic_vector(3 downto 0);                     -- out_port
 			uart_rx_data_reg_external_connection_export   : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- export
 			uart_rx_external_connection_export            : in  std_logic                     := 'X';             -- export
 			uart_rx_pi_external_connection_export         : out std_logic_vector(31 downto 0);                    -- export
@@ -108,8 +109,7 @@ architecture rtl of UART_PR is
 			uart_tx_data_reg_external_connection_export   : out std_logic_vector(7 downto 0);                     -- export
 			uart_tx_external_connection_export            : in  std_logic                     := 'X';             -- export
 			uart_tx_po_external_connection_export         : out std_logic_vector(31 downto 0);                    -- export
-			uart_tx_start_external_connection_export      : out std_logic;                                        -- export
-			start_timer_external_connection_export        : out std_logic                                         -- export
+			uart_tx_start_external_connection_export      : out std_logic                                         -- export
 		);
 	end component NIOS2;
 
@@ -139,8 +139,8 @@ architecture rtl of UART_PR is
 		);
 	end component UART;
 
-	constant PSCCountsFor1ms   : integer := 50000; -- 1ms /20ns
-	constant PSCCountsFor100us : integer := 5000; --1us / 20ns
+	--TODO Return to 1ms Parsed loop
+	constant PSCCountsFor1ms   : integer := 500000; -- 10ms /20ns
 
 	-- UART Registers
 	signal r_TX_Done  		 : std_logic;
@@ -154,7 +154,7 @@ architecture rtl of UART_PR is
 
 	-- SoftProcessor Registers
 	signal r_Parse_Count       : integer range 0 to PSCCountsFor1ms := 0;
-	signal r_Parse_Pulse_Width : integer range 0 to PSCCountsFor100us := 0;
+	signal r_Parse_Pulse_Width : integer range 0 to PSCCountsFor1ms := 0;
 	signal r_32Bit_TX          : std_logic_vector(31 downto 0);
 	signal r_32Bit_RX          : std_logic_vector(31 downto 0);
 	signal r_Control_Port      : std_logic_vector(3 downto 0);
@@ -163,12 +163,14 @@ architecture rtl of UART_PR is
 	signal r_Parsed_Loop       : std_logic;
 	signal r_PLL_CLK		   : std_logic;
 
-	
 	-- LCD Registers
 	signal r_Ascii_TX : std_logic_vector(63 downto 0);
 	signal r_Ascii_RX : std_logic_vector(63 downto 0);
 	signal r_LCD_RX   : std_logic_vector(63 downto 0);
 	signal r_LCD_TX   : std_logic_vector(63 downto 0);
+
+	--General registers
+	signal r_LedPSC   : std_logic := '1';
 
 begin
 
@@ -223,7 +225,8 @@ begin
 	r_UART_Status_Reg(1) <= r_RX_Error;
 	r_Control_Port		 <= not i_Control_Port; --Active High
 	o_Status_Leds(3)		  <= not r_Start_Timer;  --Active High
-	o_Status_Leds(2 downto 0) <= not r_Status_Leds(2 downto 0);
+	o_Status_Leds(2)		  <= not r_LedPSC;
+	o_Status_Leds(1 downto 0) <= not r_Status_Leds(1 downto 0);
 
 	PLL_inst : PLL PORT MAP (
 		areset	 => not i_Reset,
@@ -238,7 +241,8 @@ begin
 		control_pio_external_connection_export        => r_Control_Port,
 		dip_tx_data_pio_external_connection_export    => i_TX_Data,
 		parsedloop_irq_external_connection_export     => r_Parsed_Loop,
-		status_leds_pio_external_connection_export    => r_Status_Leds,
+		status_leds_pio_external_connection_in_port   => r_Status_Leds,
+		status_leds_pio_external_connection_out_port  => r_Status_Leds,
 		uart_rx_data_reg_external_connection_export   => r_RX_Data,
 		uart_rx_pi_external_connection_export         => r_32Bit_RX,
 		uart_rx_status_reg_external_connection_export => r_UART_Status_Reg,
@@ -269,18 +273,19 @@ begin
 	p_ParsedLoopTimer : process (i_CLK, r_Start_Timer) -- 50MHz - 20ns
 	-- Timer PSC @ 1ms
   	begin
-		if r_Start_Timer = '1' then 
+		if r_Start_Timer = '1' then
 			if rising_edge(i_CLK) then
-				if r_Parse_Count < PSCCountsFor1ms then  --State off 
+				if r_Parse_Count < PSCCountsFor1ms/2 then  --State off 
 					r_Parse_Count <= r_Parse_Count + 1;
 					r_Parsed_Loop <= '0';
-				else -- Pulse width of 20 ns
-					if r_Parse_Pulse_Width < PSCCountsFor100us then --State on
+				else 
+					if r_Parse_Pulse_Width < PSCCountsFor1ms/2 then --State on
 						r_Parse_Pulse_Width <= r_Parse_Pulse_Width + 1;
 						r_Parsed_Loop <= '1';
 					else
 						r_Parse_Count <= 0;
 						r_Parse_Pulse_Width <= 0;
+						r_Parsed_Loop <= '0';
 					end if;
 				end if;
 			end if;
@@ -290,6 +295,8 @@ begin
 			r_Parsed_Loop <= '0';
 		end if;	
 	end process;
+
+	r_LedPSC <= r_Parsed_Loop;
 
 	tx1 : HexToAscii port map(r_32Bit_TX(3 downto 0), r_Ascii_TX(7 downto 0));
 	tx2 : HexToAscii port map(r_32Bit_TX(7 downto 4), r_Ascii_TX(15 downto 8));

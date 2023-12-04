@@ -4,7 +4,7 @@
  * Machine generated for CPU 'nios2_gen2_0' in SOPC Builder design 'NIOS2'
  * SOPC Builder design path: ../../NIOS2.sopcinfo
  *
- * Generated: Sat Dec 02 00:16:13 CST 2023
+ * Generated: Mon Dec 04 08:43:32 CST 2023
  */
 
 /*
@@ -58,14 +58,14 @@
  * Device headers
  */
 
-#include "altera_nios2_gen2_irq.h"
+#include "altera_vic_irq.h"
 #include "altera_avalon_jtag_uart.h"
 
 /*
  * Allocate the device storage
  */
 
-ALTERA_NIOS2_GEN2_IRQ_INSTANCE ( NIOS2_GEN2_0, nios2_gen2_0);
+ALTERA_VIC_IRQ_INSTANCE ( VIC_0, vic_0);
 ALTERA_AVALON_JTAG_UART_INSTANCE ( JTAG_UART_0, jtag_uart_0);
 
 /*
@@ -78,7 +78,7 @@ ALTERA_AVALON_JTAG_UART_INSTANCE ( JTAG_UART_0, jtag_uart_0);
 
 void alt_irq_init ( const void* base )
 {
-    ALTERA_NIOS2_GEN2_IRQ_INIT ( NIOS2_GEN2_0, nios2_gen2_0);
+    ALTERA_VIC_IRQ_INIT ( VIC_0, vic_0);
     alt_irq_cpu_enable_interrupts();
 }
 

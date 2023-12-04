@@ -260,6 +260,25 @@ altera_nios2_gen2_hal_driver_ASM_LIB_SRCS := \
 	$(altera_nios2_gen2_hal_driver_SRCS_ROOT)/src/alt_log_macro.S \
 	$(altera_nios2_gen2_hal_driver_SRCS_ROOT)/src/crt0.S
 
+# altera_vic_driver sources root 
+altera_vic_driver_SRCS_ROOT := drivers
+
+# altera_vic_driver sources 
+altera_vic_driver_C_LIB_SRCS := \
+	$(altera_vic_driver_SRCS_ROOT)/src/altera_vic.c \
+	$(altera_vic_driver_SRCS_ROOT)/src/altera_vic_irq_init.c \
+	$(altera_vic_driver_SRCS_ROOT)/src/altera_vic_isr_register.c \
+	$(altera_vic_driver_SRCS_ROOT)/src/altera_vic_sw_intr.c \
+	$(altera_vic_driver_SRCS_ROOT)/src/altera_vic_set_level.c
+
+altera_vic_driver_ASM_LIB_SRCS := \
+	$(altera_vic_driver_SRCS_ROOT)/src/altera_vic_funnel_non_preemptive.S \
+	$(altera_vic_driver_SRCS_ROOT)/src/altera_vic_funnel_non_preemptive_normal.S \
+	$(altera_vic_driver_SRCS_ROOT)/src/altera_vic_funnel_non_preemptive_nmi.S \
+	$(altera_vic_driver_SRCS_ROOT)/src/altera_vic_funnel_preemptive.S \
+	$(altera_vic_driver_SRCS_ROOT)/src/altera_vic_funnel_preemptive_normal.S \
+	$(altera_vic_driver_SRCS_ROOT)/src/altera_vic_0_vector_tbl.S
+
 # hal sources root 
 hal_SRCS_ROOT := HAL
 
@@ -324,11 +343,13 @@ hal_C_LIB_SRCS := \
 COMPONENT_C_LIB_SRCS += \
 	$(altera_avalon_jtag_uart_driver_C_LIB_SRCS) \
 	$(altera_nios2_gen2_hal_driver_C_LIB_SRCS) \
+	$(altera_vic_driver_C_LIB_SRCS) \
 	$(hal_C_LIB_SRCS)
 
 # Assemble all component assembly source files 
 COMPONENT_ASM_LIB_SRCS += \
-	$(altera_nios2_gen2_hal_driver_ASM_LIB_SRCS)
+	$(altera_nios2_gen2_hal_driver_ASM_LIB_SRCS) \
+	$(altera_vic_driver_ASM_LIB_SRCS)
 
 # Assemble all component C++ source files 
 COMPONENT_CPP_LIB_SRCS += \

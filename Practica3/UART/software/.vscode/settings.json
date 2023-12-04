@@ -4,6 +4,7 @@
         "alt_irq.h": "c",
         "system.h": "c",
         "nios2.h": "c",
-        "io.h": "c"
+        "io.h": "c",
+        "altera_avalon_pio_regs.h": "c"
     }
 }
