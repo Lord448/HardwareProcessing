@@ -1,8 +1,6 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
-use IEEE.std_logic_unsigned.all;
-use IEEE.std_logic_arith.all;
 USE WORK.COMANDOS_LCD_REVC.ALL;
 
 entity UART_PR is
@@ -158,7 +156,7 @@ architecture rtl of UART_PR is
 	signal r_Parse_Count       : integer range 0 to PSCCountsFor1ms := 0;
 	signal r_Parse_Pulse_Width : integer range 0 to PSCCountsFor1ms := 0;
 	signal r_32Bit_TX          : std_logic_vector(31 downto 0);
-	signal r_32Bit_RX          : std_logic_vector(31 downto 0);
+	signal r_32Bit_RX          : unsigned(31 downto 0);
 	signal r_Control_Port      : std_logic_vector(3 downto 0);
 	signal r_Status_Leds       : std_logic_vector(3 downto 0);
 	signal r_Start_Timer	   : std_logic := '0';
@@ -172,8 +170,10 @@ architecture rtl of UART_PR is
 	signal r_LCD_TX   : std_logic_vector(63 downto 0);
 
 	--General registers
-	signal r_LedPSC   : std_logic := '1';
-
+	signal r_LedPSC        : std_logic := '1';
+	signal r_Shift_Counter : integer range 0 to 7 := 0;
+	signal r_Shift_Reg      : std_logic_vector(30 downto 0);
+	signal r_Keep_Shift    : std_logic := '0';
 begin
 
 	    -----------------------------------------------------------
@@ -246,7 +246,7 @@ begin
 		status_leds_pio_external_connection_in_port   => r_Status_Leds,
 		status_leds_pio_external_connection_out_port  => r_Status_Leds,
 		uart_rx_data_reg_external_connection_export   => r_RX_Data,
-		uart_rx_pi_external_connection_export         => r_32Bit_RX,
+		--uart_rx_pi_external_connection_export         => r_32Bit_RX,
 		uart_rx_status_reg_external_connection_export => r_UART_Status_Reg,
 		uart_tx_data_reg_external_connection_export   => r_TX_Data,
 		uart_tx_po_external_connection_export         => r_32Bit_TX,
@@ -304,6 +304,19 @@ begin
 
 	r_LedPSC <= r_Parsed_Loop;
 
+	p_ShifReg : process(i_CLK, i_Reset)
+	begin
+		if i_Reset = '0' then
+			r_32Bit_RX <= (others => '0');
+		elsif rising_edge(i_CLK) then
+			if r_RX_Done = '1' OR r_Keep_Shift = '1' then 
+				r_32Bit_RX(7 downto 0) <= unsigned(r_RX_Data);
+				r_32Bit_RX <= r_32Bit_RX sll 8;
+			end if;
+		end if;
+	end process;
+
+
 	tx1 : HexToAscii port map(r_32Bit_TX(7 downto 4), r_Ascii_TX(7 downto 0));
 	tx2 : HexToAscii port map(r_32Bit_TX(3 downto 0), r_Ascii_TX(15 downto 8));
 	tx3 : HexToAscii port map(r_32Bit_TX(15 downto 12), r_Ascii_TX(23 downto 16));
@@ -313,14 +326,15 @@ begin
 	tx7 : HexToAscii port map(r_32Bit_TX(31 downto 28), r_Ascii_TX(55 downto 48));
 	tx8 : HexToAscii port map(r_32Bit_TX(27 downto 24), r_Ascii_TX(63 downto 56));
 
-	rx1 : HexToAscii port map(r_32Bit_RX(3 downto 0), r_Ascii_RX(7 downto 0));
-	rx2 : HexToAscii port map(r_32Bit_RX(7 downto 4), r_Ascii_RX(15 downto 8));
-	rx3 : HexToAscii port map(r_32Bit_RX(11 downto 8), r_Ascii_RX(23 downto 16));
-	rx4 : HexToAscii port map(r_32Bit_RX(15 downto 12), r_Ascii_RX(31 downto 24));
-	rx5 : HexToAscii port map(r_32Bit_RX(19 downto 16), r_Ascii_RX(39 downto 32));
-	rx6 : HexToAscii port map(r_32Bit_RX(23 downto 20), r_Ascii_RX(47 downto 40));
-	rx7 : HexToAscii port map(r_32Bit_RX(27 downto 24), r_Ascii_RX(55 downto 48));
-	rx8 : HexToAscii port map(r_32Bit_RX(31 downto 28), r_Ascii_RX(63 downto 56));
+	--TODO Check if need to invert hex
+	rx1 : HexToAscii port map(std_logic_vector(r_32Bit_RX(3 downto 0)), r_Ascii_RX(7 downto 0));
+	rx2 : HexToAscii port map(std_logic_vector(r_32Bit_RX(7 downto 4)), r_Ascii_RX(15 downto 8));
+	rx3 : HexToAscii port map(std_logic_vector(r_32Bit_RX(11 downto 8)), r_Ascii_RX(23 downto 16));
+	rx4 : HexToAscii port map(std_logic_vector(r_32Bit_RX(15 downto 12)), r_Ascii_RX(31 downto 24));
+	rx5 : HexToAscii port map(std_logic_vector(r_32Bit_RX(19 downto 16)), r_Ascii_RX(39 downto 32));
+	rx6 : HexToAscii port map(std_logic_vector(r_32Bit_RX(23 downto 20)), r_Ascii_RX(47 downto 40));
+	rx7 : HexToAscii port map(std_logic_vector(r_32Bit_RX(27 downto 24)), r_Ascii_RX(55 downto 48));
+	rx8 : HexToAscii port map(std_logic_vector(r_32Bit_RX(31 downto 28)), r_Ascii_RX(63 downto 56));
 
 	-- tx1 : HexToAscii port map(r_32Bit_TX(3 downto 0), r_Ascii_TX(7 downto 0));
 	-- tx2 : HexToAscii port map(r_32Bit_TX(7 downto 4), r_Ascii_TX(15 downto 8));

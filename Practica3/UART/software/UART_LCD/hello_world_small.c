@@ -201,7 +201,7 @@ int main()
   {
 	  vTaskControlRead();
 	  vTaskUARTSend();
-	  vTaskRXDetection();
+	  //vTaskRXDetection();
 	  ParsedLoopFlag = true;
 	  while(ParsedLoopFlag); //Parsed Loop period = 1ms
   }
@@ -512,22 +512,24 @@ static void IRQRegister(void) {
 	void* pParsedLoopFlag = (void*) &ParsedLoopFlag;
 
 	//Enable interrupts
-    IOWR_ALTERA_AVALON_PIO_IRQ_MASK(UART_RX_BASE, 0x1);
+    //IOWR_ALTERA_AVALON_PIO_IRQ_MASK(UART_RX_BASE, 0x1);
 	IOWR_ALTERA_AVALON_PIO_IRQ_MASK(UART_TX_BASE, 0x1);
 	IOWR_ALTERA_AVALON_PIO_IRQ_MASK(PARSEDLOOP_IRQ_BASE, 0x1);
 
 	//Reseting the edge capture
-	IOWR_ALTERA_AVALON_PIO_EDGE_CAP(UART_RX_BASE, 0);
+	//IOWR_ALTERA_AVALON_PIO_EDGE_CAP(UART_RX_BASE, 0);
 	IOWR_ALTERA_AVALON_PIO_EDGE_CAP(UART_TX_BASE, 0);
 	IOWR_ALTERA_AVALON_PIO_EDGE_CAP(PARSEDLOOP_IRQ_BASE, 0);
 
 	
 	//Register the ISR
+	/*
 	alt_ic_isr_register(UART_RX_IRQ_INTERRUPT_CONTROLLER_ID,
 						UART_RX_IRQ,
 						&UART_RX_CpltCallback,
 						pUARTReadStruct,
 						NULL);
+						*/
 	alt_ic_isr_register(UART_TX_IRQ_INTERRUPT_CONTROLLER_ID,
 						UART_TX_IRQ,
 						&UART_TX_CpltCallback,
