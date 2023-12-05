@@ -135,12 +135,14 @@ architecture rtl of UART_PR is
 			o_RX_Data    : out std_logic_vector(7 downto 0);
 			i_TX_Start   : in  std_logic;
 			o_RX_Error   : out std_logic;
-			o_TX_Busy    : out std_logic  --1 When the peripherial is sending data, 0 when is ready to send
+			o_TX_Busy    : out std_logic;  --1 When the peripherial is sending data, 0 when is ready to send
+			i_Reset      : in  std_logic
 		);
 	end component UART;
+	
 
 	--TODO Return to 1ms Parsed loop
-	constant PSCCountsFor1ms   : integer := 500000; -- 10ms /20ns
+	constant PSCCountsFor1ms   : integer := 50000; -- 10ms /20ns
 
 	-- UART Registers
 	signal r_TX_Done  		 : std_logic;
@@ -255,6 +257,9 @@ begin
 	);
 
 	U_UART : UART
+	generic map(
+		(434)
+	)
 	port map(
 		i_CLK        => i_CLK,
 		i_Parity_Sel => "10",
@@ -266,7 +271,8 @@ begin
 		o_RX_Data    => r_RX_Data,
 		i_TX_Start   => r_TX_Start,
 		o_RX_Error   => r_RX_Error,
-		o_TX_Busy    => r_TX_Busy
+		o_TX_Busy    => r_TX_Busy,
+		i_Reset	  	 => i_Reset
 	);
 	
 
@@ -298,14 +304,14 @@ begin
 
 	r_LedPSC <= r_Parsed_Loop;
 
-	tx1 : HexToAscii port map(r_32Bit_TX(3 downto 0), r_Ascii_TX(7 downto 0));
-	tx2 : HexToAscii port map(r_32Bit_TX(7 downto 4), r_Ascii_TX(15 downto 8));
-	tx3 : HexToAscii port map(r_32Bit_TX(11 downto 8), r_Ascii_TX(23 downto 16));
-	tx4 : HexToAscii port map(r_32Bit_TX(15 downto 12), r_Ascii_TX(31 downto 24));
-	tx5 : HexToAscii port map(r_32Bit_TX(19 downto 16), r_Ascii_TX(39 downto 32));
-	tx6 : HexToAscii port map(r_32Bit_TX(23 downto 20), r_Ascii_TX(47 downto 40));
-	tx7 : HexToAscii port map(r_32Bit_TX(27 downto 24), r_Ascii_TX(55 downto 48));
-	tx8 : HexToAscii port map(r_32Bit_TX(31 downto 28), r_Ascii_TX(63 downto 56));
+	tx1 : HexToAscii port map(r_32Bit_TX(7 downto 4), r_Ascii_TX(7 downto 0));
+	tx2 : HexToAscii port map(r_32Bit_TX(3 downto 0), r_Ascii_TX(15 downto 8));
+	tx3 : HexToAscii port map(r_32Bit_TX(15 downto 12), r_Ascii_TX(23 downto 16));
+	tx4 : HexToAscii port map(r_32Bit_TX(11 downto 8), r_Ascii_TX(31 downto 24));
+	tx5 : HexToAscii port map(r_32Bit_TX(23 downto 20), r_Ascii_TX(39 downto 32));
+	tx6 : HexToAscii port map(r_32Bit_TX(19 downto 16), r_Ascii_TX(47 downto 40));
+	tx7 : HexToAscii port map(r_32Bit_TX(31 downto 28), r_Ascii_TX(55 downto 48));
+	tx8 : HexToAscii port map(r_32Bit_TX(27 downto 24), r_Ascii_TX(63 downto 56));
 
 	rx1 : HexToAscii port map(r_32Bit_RX(3 downto 0), r_Ascii_RX(7 downto 0));
 	rx2 : HexToAscii port map(r_32Bit_RX(7 downto 4), r_Ascii_RX(15 downto 8));
@@ -315,6 +321,24 @@ begin
 	rx6 : HexToAscii port map(r_32Bit_RX(23 downto 20), r_Ascii_RX(47 downto 40));
 	rx7 : HexToAscii port map(r_32Bit_RX(27 downto 24), r_Ascii_RX(55 downto 48));
 	rx8 : HexToAscii port map(r_32Bit_RX(31 downto 28), r_Ascii_RX(63 downto 56));
+
+	-- tx1 : HexToAscii port map(r_32Bit_TX(3 downto 0), r_Ascii_TX(7 downto 0));
+	-- tx2 : HexToAscii port map(r_32Bit_TX(7 downto 4), r_Ascii_TX(15 downto 8));
+	-- tx3 : HexToAscii port map(r_32Bit_TX(11 downto 8), r_Ascii_TX(23 downto 16));
+	-- tx4 : HexToAscii port map(r_32Bit_TX(15 downto 12), r_Ascii_TX(31 downto 24));
+	-- tx5 : HexToAscii port map(r_32Bit_TX(19 downto 16), r_Ascii_TX(39 downto 32));
+	-- tx6 : HexToAscii port map(r_32Bit_TX(23 downto 20), r_Ascii_TX(47 downto 40));
+	-- tx7 : HexToAscii port map(r_32Bit_TX(27 downto 24), r_Ascii_TX(55 downto 48));
+	-- tx8 : HexToAscii port map(r_32Bit_TX(31 downto 28), r_Ascii_TX(63 downto 56));
+
+	-- rx1 : HexToAscii port map(r_32Bit_RX(3 downto 0), r_Ascii_RX(7 downto 0));
+	-- rx2 : HexToAscii port map(r_32Bit_RX(7 downto 4), r_Ascii_RX(15 downto 8));
+	-- rx3 : HexToAscii port map(r_32Bit_RX(11 downto 8), r_Ascii_RX(23 downto 16));
+	-- rx4 : HexToAscii port map(r_32Bit_RX(15 downto 12), r_Ascii_RX(31 downto 24));
+	-- rx5 : HexToAscii port map(r_32Bit_RX(19 downto 16), r_Ascii_RX(39 downto 32));
+	-- rx6 : HexToAscii port map(r_32Bit_RX(23 downto 20), r_Ascii_RX(47 downto 40));
+	-- rx7 : HexToAscii port map(r_32Bit_RX(27 downto 24), r_Ascii_RX(55 downto 48));
+	-- rx8 : HexToAscii port map(r_32Bit_RX(31 downto 28), r_Ascii_RX(63 downto 56));
 
 	r_LCD_TX <= r_Ascii_TX;
 	r_LCD_RX <= r_Ascii_RX;

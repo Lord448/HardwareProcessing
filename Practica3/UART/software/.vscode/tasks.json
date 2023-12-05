@@ -1,0 +1,29 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Nios II Make",
+            "command": "make",
+            "args": ["all"],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Tarea generada por el depurador.",
+            "problemMatcher" : {
+                "base" : "$gcc",
+                "fileLocation" : [
+                    "relative",
+                    "${workspaceFolder}/UART_LCD"
+                ]
+            }
+            //"linux" : {
+            //    "options": {"shell": {"executable": "nios2_command_shell"}}
+            //}
+        }
+    ],
+    "version": "2.0.0"
+}

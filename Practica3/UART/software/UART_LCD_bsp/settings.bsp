@@ -2,9 +2,9 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Dec 4, 2023 11:34:14 AM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1701711254329</BspGeneratedUnixTimeStamp>
-        <BspGeneratedLocation>/home/lord448/Documentos/TEC/9no/Hardware/HardwareProcessing/Practica3/UART/software/UART_LCD_bsp</BspGeneratedLocation>
+        <BspGeneratedTimeStamp>Dec 4, 2023 6:42:23 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1701736943723</BspGeneratedUnixTimeStamp>
+        <BspGeneratedLocation>/home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica3/UART/software/UART_LCD_bsp</BspGeneratedLocation>
         <BspSettingsFile>./settings.bsp</BspSettingsFile>
         <SopcDesignFile>../../NIOS2.sopcinfo</SopcDesignFile>
         <SystemFileHash>e83287b2435bd7c1198464b78cd61bff8547ab4de4d3e352bd9fa3e6c55ddf48</SystemFileHash>

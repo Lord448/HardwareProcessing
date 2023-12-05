@@ -10,8 +10,8 @@ r_SM_RX.s_Cleanup_RX 0 1 0 0 0 0 1
 r_SM_RX.s_Error_RX 1 0 0 0 0 0 1 
 
 State Machine - |UART_PR|UART:U_UART|r_SM_TX
-Name r_SM_TX.s_Cleanup_TX r_SM_TX.s_Stop_Bit_TX r_SM_TX.s_Parity_Check_TX r_SM_TX.s_Data_Bits_TX r_SM_TX.s_Start_Bit_TX r_SM_TX.s_Idle_RX_TX 
-r_SM_TX.s_Idle_RX_TX 0 0 0 0 0 0 
+Name r_SM_TX.s_Cleanup_TX r_SM_TX.s_Stop_Bit_TX r_SM_TX.s_Parity_Check_TX r_SM_TX.s_Data_Bits_TX r_SM_TX.s_Start_Bit_TX r_SM_TX.s_Idle_TX 
+r_SM_TX.s_Idle_TX 0 0 0 0 0 0 
 r_SM_TX.s_Start_Bit_TX 0 0 0 0 1 1 
 r_SM_TX.s_Data_Bits_TX 0 0 0 1 0 1 
 r_SM_TX.s_Parity_Check_TX 0 0 1 0 0 1 

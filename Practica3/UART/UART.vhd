@@ -17,13 +17,14 @@ entity UART is
         o_RX_Data    : out std_logic_vector(7 downto 0);
         i_TX_Start   : in  std_logic;
         o_RX_Error   : out std_logic;
-        o_TX_Busy    : out std_logic  --1 When the peripherial is sending data, 0 when is ready to send
+        o_TX_Busy    : out std_logic;  --1 When the peripherial is sending data, 0 when is ready to send
+        i_Reset      : in  std_logic
     );
 end entity UART;
 
 architecture rtl of UART is
 
-    type t_SM_TX is (s_Idle_RX_TX, s_Start_Bit_TX, s_Data_Bits_TX, 
+    type t_SM_TX is (s_Idle_TX, s_Start_Bit_TX, s_Data_Bits_TX, 
                      s_Parity_Check_TX, s_Stop_Bit_TX, s_Cleanup_TX);
 
     type t_SM_RX is (s_Idle_RX, s_Start_Bits_RX, s_Data_Bits_RX,
@@ -32,7 +33,7 @@ architecture rtl of UART is
     type t_Parity is (t_Even, t_Odd, t_None);
 
     signal r_Parity             : t_Parity;
-    signal r_SM_TX              : t_SM_TX := s_Idle_RX_TX;
+    signal r_SM_TX              : t_SM_TX := s_Idle_TX;
     signal r_SM_RX              : t_SM_RX := s_Idle_RX;
 
     --Registers for TX
@@ -64,11 +65,19 @@ begin
     --                    UART TX  
     -------------------------------------------------------
 
-    p_UART_TX: process(i_CLK)
+    p_UART_TX: process(i_CLK, i_Reset)
     begin
-        if rising_edge(i_CLK) then
+        if i_Reset = '0' then 
+            r_SM_TX <= s_Idle_TX;
+            r_TX_Done <= '0';
+            o_TX_Busy <= '0';
+            o_TX_Serial <= '1';
+            r_TX_Bit_Index <= 0;
+            r_TX_CLK_Count <= 0;
+            r_TX_Data <= (others => '0');
+        elsif rising_edge(i_CLK) then
             case r_SM_TX is
-                when s_Idle_RX_TX => 
+                when s_Idle_TX => 
                     o_TX_Busy <= '0';
                     o_TX_Serial <= '1';
                     r_TX_Done   <= '0';
@@ -79,7 +88,7 @@ begin
                         r_TX_Data <= i_TX_Data;
                         r_SM_TX <= s_Start_Bit_TX;
                     else
-                        r_SM_TX <= s_Idle_RX_TX;
+                        r_SM_TX <= s_Idle_TX;
                     end if;
 
                 when s_Start_Bit_TX =>
@@ -151,10 +160,10 @@ begin
                 when s_Cleanup_TX =>
                     o_TX_Busy <= '0';
                     r_TX_Done   <= '1';
-                    r_SM_TX   <= s_Idle_RX_TX;
+                    r_SM_TX   <= s_Idle_TX;
 
                 when others =>
-                    r_SM_TX <= s_Idle_RX_TX;
+                    r_SM_TX <= s_Idle_TX;
             end case;
         end if;
     end process p_UART_TX;

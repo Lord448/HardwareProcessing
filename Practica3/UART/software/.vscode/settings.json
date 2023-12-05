@@ -6,5 +6,11 @@
         "nios2.h": "c",
         "io.h": "c",
         "altera_avalon_pio_regs.h": "c"
-    }
+    },
+    "makefile.additionalCompilerNames": [
+        "nios2-elf-gcc",
+        "nios2-elf-ar",
+        "nios2-elf-g++",
+        "nios2-elf-nm"
+    ]
 }

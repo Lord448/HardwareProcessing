@@ -137,7 +137,7 @@ static void vTaskRXDetection(void);
 //----------------------------------------------------
 //			 	      FUNCTIONS
 //----------------------------------------------------
-static bool UARTSend(alt_u8 DataTX);
+static void UARTSend(alt_u8 DataTX);
 static void StatusWrite(StatusLeds statusLeds, alt_u8 value);
 static ControlPort ControlPortRead(void);
 static void IRQRegister(void);
@@ -182,7 +182,7 @@ volatile bool ParsedLoopFlag = true;
 
 //Global variables
 volatile ControlPort PortReadTX = None;
-volatile bool needToClearTX = false; //TODO
+volatile bool needToClearTX = false;
 
 int main()
 {
@@ -203,7 +203,7 @@ int main()
 	  vTaskUARTSend();
 	  vTaskRXDetection();
 	  ParsedLoopFlag = true;
-	  while(ParsedLoopFlag); //Parsed Loop period = 10ms
+	  while(ParsedLoopFlag); //Parsed Loop period = 1ms
   }
   return 0;
 }
@@ -223,7 +223,7 @@ static void vTaskControlRead(void) {
 		WaitingLows,
 		WaitingHighs
 	}volatile static stages = WaitingLows;
-	const alt_u8 DebounceDelay = 2; //In milliseconds
+	const alt_u8 DebounceDelay = 15; //In milliseconds
 	volatile static alt_u8 Highs = 0, Lows = 0;
 	volatile static ControlPort ControlRead = None, pastControlRead = None;
 
@@ -306,25 +306,26 @@ static void vTaskUARTSend(void)
 			return;
 		break;
 		case SendState:
-			if(UARTSend((alt_u8)WordTX&(0xFF<<(8*ByteCounter)))) {
-				ByteCounter++;
-				if(ByteCounter > 3)
-				{
-					stages = WaitingClear;
-					ByteCounter = 0;
-					PortReadTX = None;
-				}
+			volatile alt_u8 SendInfo = (alt_u8) (WordTX>>(8*ByteCounter));
+			UARTSend(SendInfo); //Sending one byte
+			ByteCounter++; //1ms interframe space
+			if(ByteCounter > 3)
+			{
+				stages = WaitingClear;
+				ByteCounter = 0;
+				PortReadTX = None;
 			}
 			return;
 		break;
 		case WaitingClear:
-			if(PortReadTX == SendTX) {
+			if(PortReadTX == SendTX) { //TODO Fix multiple sendings
 				stages = SendState;
 			}
 		break;
 	}
 }
 
+//TODO Make it work
 static void vTaskRXDetection(void)
 {
 	enum stages {
@@ -332,7 +333,6 @@ static void vTaskRXDetection(void)
 		Waiting32Bits,
 		Write32BitsPort
 	}volatile static stages = WaitingRX;
-	//TODO Readjust 1ms parsed loop
 	const alt_u8 ReceivingTime = 1; //In Milliseconds
 	const alt_16 IncomDataTime = 50; //In Milliseconds
 	static alt_u8 CountsDelay = 0;
@@ -390,10 +390,8 @@ static void vTaskRXDetection(void)
 //----------------------------------------------------
 //			 	      FUNCTIONS
 //----------------------------------------------------
-static bool UARTSend(volatile alt_u8 DataTX)
+static void UARTSend(alt_u8 DataTX)
 {
-	//TODO Readjust to 1ms ParsedLoop
-	volatile static alt_u8 delayCount = 0;
 #ifdef NATURAL
 	alt_u8 preStartTX = (*StartTX)&(~0x1);
 	*TXDataReg = DataTX;
@@ -404,15 +402,8 @@ static bool UARTSend(volatile alt_u8 DataTX)
 	//Write to the UART TX Parallel register
 	IOWR_ALTERA_AVALON_PIO_DATA(UART_TX_DATA_REG_BASE, DataTX);
 	IOWR_ALTERA_AVALON_PIO_DATA(UART_TX_START_BASE, 1);
-	delayCount++;
-	if (delayCount == 1) //10ms delay
-	{
-		IOWR_ALTERA_AVALON_PIO_DATA(UART_TX_START_BASE, 0);
-		delayCount = 0;
-		return true;
-	}
-	return false;
-#endif;
+	IOWR_ALTERA_AVALON_PIO_DATA(UART_TX_START_BASE, 0);
+#endif
 }
 /**
  * @brief Makes the read of the register

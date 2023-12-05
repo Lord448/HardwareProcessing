@@ -1,0 +1,35 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Nios II GDB Debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/UART_LCD/UART_LCD.elf",
+            "args": [""],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}/UART_LCD",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "text": "file '/home/lord448/Documentos/TEC/9no/Hardware/Repo/Practica3/UART/software/UART_LCD/UART_LCD.elf'"
+                },
+                {
+                    "text": "target remote localhost:2342"
+                },
+                {
+                    "text": "load"
+                }
+            ],
+            "preLaunchTask": "Nios II Make",
+            "miDebuggerPath": "/opt/intelFPGA_lite/22.1.2/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/nios2-elf-gdb"
+        }
+    ]
+}

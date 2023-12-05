@@ -1,5 +1,5 @@
 Assembler report for UART
-Mon Dec  4 08:40:54 2023
+Mon Dec  4 23:45:47 2023
 Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 
 
@@ -39,7 +39,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Mon Dec  4 08:40:54 2023 ;
+; Assembler Status      ; Successful - Mon Dec  4 23:45:47 2023 ;
 ; Revision Name         ; UART                                  ;
 ; Top-level Entity Name ; UART_PR                               ;
 ; Family                ; Cyclone IV E                          ;
@@ -79,8 +79,8 @@ https://fpgasoftware.intel.com/eula.
 +----------------+--------------------------------+
 ; Option         ; Setting                        ;
 +----------------+--------------------------------+
-; JTAG usercode  ; 0x0042D5E3                     ;
-; Checksum       ; 0x0042D5E3                     ;
+; JTAG usercode  ; 0x00434791                     ;
+; Checksum       ; 0x00434791                     ;
 +----------------+--------------------------------+
 
 
@@ -90,15 +90,15 @@ https://fpgasoftware.intel.com/eula.
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
     Info: Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
-    Info: Processing started: Mon Dec  4 08:40:53 2023
+    Info: Processing started: Mon Dec  4 23:45:46 2023
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off UART -c UART
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info (115017): Design contains a time-limited core -- only a single, time-limited programming file can be generated
 Warning (210042): Can't convert time-limited SOF into POF, HEX File, TTF, or RBF
 Info: Quartus Prime Assembler was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 391 megabytes
-    Info: Processing ended: Mon Dec  4 08:40:54 2023
+    Info: Peak virtual memory: 387 megabytes
+    Info: Processing ended: Mon Dec  4 23:45:47 2023
     Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:02
 
