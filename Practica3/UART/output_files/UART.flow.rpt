@@ -1,5 +1,5 @@
 Flow report for UART
-Tue Dec  5 10:31:48 2023
+Thu Dec  7 23:04:27 2023
 Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 
 
@@ -41,15 +41,15 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Flow Summary                                                                        ;
 +------------------------------------+------------------------------------------------+
-; Flow Status                        ; Successful - Tue Dec  5 10:31:44 2023          ;
+; Flow Status                        ; Successful - Thu Dec  7 23:04:23 2023          ;
 ; Quartus Prime Version              ; 22.1std.2 Build 922 07/20/2023 SC Lite Edition ;
 ; Revision Name                      ; UART                                           ;
 ; Top-level Entity Name              ; UART_PR                                        ;
 ; Family                             ; Cyclone IV E                                   ;
 ; Device                             ; EP4CE6E22C8                                    ;
 ; Timing Models                      ; Final                                          ;
-; Total logic elements               ; 5,614 / 6,272 ( 90 % )                         ;
-;     Total combinational functions  ; 5,077 / 6,272 ( 81 % )                         ;
+; Total logic elements               ; 5,649 / 6,272 ( 90 % )                         ;
+;     Total combinational functions  ; 5,114 / 6,272 ( 82 % )                         ;
 ;     Dedicated logic registers      ; 3,113 / 6,272 ( 50 % )                         ;
 ; Total registers                    ; 3113                                           ;
 ; Total pins                         ; 31 / 92 ( 34 % )                               ;
@@ -65,7 +65,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 12/05/2023 10:30:37 ;
+; Start date & time ; 12/07/2023 23:03:09 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; UART                ;
 +-------------------+---------------------+
@@ -76,7 +76,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------+---------------------------------------------------------+---------------+-------------+-----------------------------------+
 ; Assignment Name                     ; Value                                                   ; Default Value ; Entity Name ; Section Id                        ;
 +-------------------------------------+---------------------------------------------------------+---------------+-------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID               ; 57715611127863.170179383720939                          ; --            ; --          ; --                                ;
+; COMPILER_SIGNATURE_ID               ; 57715611127863.170201178961779                          ; --            ; --          ; --                                ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                                     ; --            ; --          ; eda_board_design_timing           ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                                     ; --            ; --          ; eda_board_design_boundary_scan    ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                                     ; --            ; --          ; eda_board_design_signal_integrity ;
@@ -100,7 +100,7 @@ https://fpgasoftware.intel.com/eula.
 ; PROJECT_OUTPUT_DIRECTORY            ; output_files                                            ; --            ; --          ; --                                ;
 ; SLD_FILE                            ; NIOS2/synthesis/NIOS2.regmap                            ; --            ; --          ; --                                ;
 ; SLD_FILE                            ; NIOS2/synthesis/NIOS2.debuginfo                         ; --            ; --          ; --                                ;
-; SLD_INFO                            ; QSYS_NAME NIOS2 HAS_SOPCINFO 1 GENERATION_ID 1701699422 ; --            ; NIOS2       ; --                                ;
+; SLD_INFO                            ; QSYS_NAME NIOS2 HAS_SOPCINFO 1 GENERATION_ID 1702010720 ; --            ; NIOS2       ; --                                ;
 ; SOPCINFO_FILE                       ; NIOS2/synthesis/../../NIOS2.sopcinfo                    ; --            ; --          ; --                                ;
 ; SYNTHESIS_ONLY_QIP                  ; On                                                      ; --            ; --          ; --                                ;
 ; TOP_LEVEL_ENTITY                    ; UART_PR                                                 ; UART          ; --          ; --                                ;
@@ -112,11 +112,11 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:42     ; 1.0                     ; 720 MB              ; 00:01:04                           ;
-; Fitter               ; 00:00:16     ; 1.4                     ; 2041 MB             ; 00:00:27                           ;
-; Assembler            ; 00:00:02     ; 1.0                     ; 391 MB              ; 00:00:02                           ;
-; Timing Analyzer      ; 00:00:03     ; 2.0                     ; 669 MB              ; 00:00:04                           ;
-; Total                ; 00:01:03     ; --                      ; --                  ; 00:01:37                           ;
+; Analysis & Synthesis ; 00:00:46     ; 1.0                     ; 730 MB              ; 00:01:09                           ;
+; Fitter               ; 00:00:18     ; 1.4                     ; 2057 MB             ; 00:00:28                           ;
+; Assembler            ; 00:00:02     ; 1.0                     ; 395 MB              ; 00:00:02                           ;
+; Timing Analyzer      ; 00:00:03     ; 2.0                     ; 666 MB              ; 00:00:04                           ;
+; Total                ; 00:01:09     ; --                      ; --                  ; 00:01:43                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

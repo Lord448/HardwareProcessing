@@ -2,7 +2,7 @@
   <sld_infos>
     <sld_info hpath="NIOS2:U_SoftProcessor" name="U_SoftProcessor">
       <assignment_values>
-        <assignment_value text="QSYS_NAME NIOS2 HAS_SOPCINFO 1 GENERATION_ID 1701699422"/>
+        <assignment_value text="QSYS_NAME NIOS2 HAS_SOPCINFO 1 GENERATION_ID 1702010720"/>
       </assignment_values>
     </sld_info>
     <sld_info hpath="sld_hub:auto_hub|alt_sld_fab:\instrumentation_fabric_with_node_gen:instrumentation_fabric" library="alt_sld_fab" name="instrumentation_fabric">

@@ -12,10 +12,6 @@
 					"strict" : false
 				},
 				{
-					"name" : "o_Status_Leds[2]",
-					"strict" : false
-				},
-				{
 					"name" : "o_Status_Leds[3]",
 					"strict" : false
 				},

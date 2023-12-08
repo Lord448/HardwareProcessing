@@ -2,7 +2,7 @@ GDBServer
 
 make all
 nios2-download -g ${FILE}.elf #If want just to run, otherwise skip
-nios2-gdb-server --tcpport 2342 --tcppersist #Only if want  to debug
+nios2-gdb-server --tcpport 2342 --tcppersist #Only if want to debug
 
 #If the server ends with a non zero value
 pkill -9 -f nios2-gdb-server
@@ -13,3 +13,10 @@ nios2-elf-gdb ${FILE}.elf
 #Inside GDB shell
 target remote localhost:2342
 load
+
+Update BSP File
+nios2-bsp-update-settings --settings UART_LCD_bsp/settings.bsp 
+
+Run GDB From script file
+nios2-elf-gdb -x GDBRun.txt --args UART_LCD.elf 
+

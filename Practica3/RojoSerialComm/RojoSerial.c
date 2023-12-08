@@ -108,6 +108,13 @@ SerialConfigs serialConfigs = {
     .canonical = false
 };
 
+typedef enum DataFormat{
+    ascii,
+    dec,
+    hex,
+    bin
+}DataFormat;
+
 //Threads
 static void *ReceiveDataThread(void *vargp);
 //Prototypes
@@ -120,6 +127,7 @@ static void fillEOS(int startchar, char *str, int strlen);
 static void performReading(int fd, char *port);
 static void DataReceivedCallback(char *buffer, char *port);
 void printfColor(shellColors color, char *format, ...);
+void shellPrint(char *str);
 
 //Globals 
 char *optarg;
@@ -134,6 +142,7 @@ int main(int argc, char *argv[])
     bool configExists = true;
     bool savePort = false;
     bool dataSend = false;
+    bool waitRespone = false;
     char *shellargs[] = {NULL, NULL};
     char *command = NULL;
     char *serialCommand = NULL;
@@ -142,6 +151,8 @@ int main(int argc, char *argv[])
     ssize_t n_bytes = 0;
     size_t command_len = 0;
     pthread_t thread_id;
+    DataFormat TXFormat = ascii;
+    DataFormat RXFormat = ascii;
     
     /***
      * ---------------------------------------------------------------------
@@ -257,18 +268,18 @@ int main(int argc, char *argv[])
 
     fclose(config);
 
-    /***
+    /*** 
      * --------------------------------------------------------------------------
      *                          Parsing arguments with getopt
      * --------------------------------------------------------------------------
     */
-    while((opt = getopt(argc, argv, ":p:b:s")) != -1) { 
+    while((opt = getopt(argc, argv, ":p:B:s:h:d:b")) != -1) { 
         switch (opt)
         {
             case 'p':
                 strcpy(serialConfigs.port, optarg);
                 printf("Selected port: %s\n", optarg);
-            case 'b':
+            case 'B':
                 switch(atoi(optarg))
                 {
                     case 115200:
@@ -282,26 +293,41 @@ int main(int argc, char *argv[])
                 printf("Port will be saved in configs\n");
                 savePort = true;
             break;
+            case 'h':
+                printf("Selected Hex mode\n");
+                TXFormat = hex;
+            break;
+            case 'd':
+                printf("Selected Decimal mode\n");
+                TXFormat = dec;
+            break;
+            case 'b':
+                printf("Selected Binary mode\n");
+                TXFormat = bin;
+            break;
         }
     }
     if(savePort) {
         //Read the file and rewrite it
-        int ch;
-        char *newport;
+        char ch;
+        char *newport = (char *)malloc(strlen(serialConfigs.port));
+        fpos_t cursor;
 
-        config = fopen("/data/RojoSerialGeneral.config", "r+");
+        config = fopen("data/RojoSerialGeneral.config", "r+");
         if(config == NULL) {
             printf("Couldn't read the config file to write the port\n");
         }
         else {
-            while(ch == fgetc(config) != EOF) {
+            fgetpos(config, &cursor);
+            while((ch = fgetc(config)) != EOF) {
                 if(ch == 'P') {
-                    fseek(config, 6, SEEK_CUR);
-                    sprintf(newport, "%s \n", serialConfigs.port);
-                    fputs(newport, config);
+                    fsetpos(config, &cursor);
+                    fprintf(config, "Port: %s \n", serialConfigs.port);
                     break;
                 }
             }
+            free(newport);
+            fclose(config);
         }
     }
 
@@ -336,14 +362,16 @@ int main(int argc, char *argv[])
     {
         const int waitTrys = 2;
         //Add wait only if tx
-        for(int i = 0; i < waitTrys; i++) { //Waiting for 1 second
-            shellPrint("Waiting for response");
-            if(sem_trywait(&sem) == 0)
-                break;
-            if(i == waitTrys) {
-                shellPrint("No response");
+        if(waitRespone) {
+            for(int i = 0; i < waitTrys; i++) { //Waiting for 1 second
+                shellPrint("Waiting for response");
+                if(sem_trywait(&sem) == 0)
+                    break;
+                if(i == waitTrys) {
+                    shellPrint("No response");
+                }
+                usleep(500*100); //500 milliseconds
             }
-            usleep(500*100); //500 milliseconds
         }
         printf("\033[1;36mRojoSerial>>\033[0m ");
         n_bytes = getline(&command, &command_len, stdin);
@@ -380,16 +408,7 @@ int main(int argc, char *argv[])
 
         //Parsing commands
         if(hasAnArgument) {
-            if(strcmp(serialCommand, "port") == 0) { //Changing port
-                //Changing port
-                //Open a new connection
-            }
-            else if(strcmp(serialCommand, "send") == 0) { //Send data to a port
-                //sendData(fd, serialArgument);
-                printf("Sending to %s: %s\n", serialConfigs.port, serialCommand);
-                sendData(fd, serialCommand);
-            }
-            else {
+            if(!parseSerialArguments(serialCommand)) { //If the command is not from the program standards
                 if(fork() == 0)
                 {
                     execve(*shellargs, shellargs, NULL);
@@ -401,11 +420,72 @@ int main(int argc, char *argv[])
         }
         else { //Is a standard data to send
             memset(serialData, '\0', command_len+1);
-            for(int i = 0; i < command_len; i++)
-                serialData[i] = command[i];
-            printf("\033[1;31mRojoSerial>>\033[0m ");
-            printf("Sending to %s: %s\n", serialConfigs.port, serialData);
-            sendData(fd, serialData);
+            switch (TXFormat) {
+                case ascii:
+                    for(int i = 0; i < command_len; i++)
+                        serialData[i] = command[i];
+                    printf("\033[1;31mRojoSerial>>\033[0m ");
+                    printf("Sending to %s: %s\n", serialConfigs.port, serialData);
+                    sendData(fd, serialData);
+                break;
+                case dec:
+                bool allCorrect = true;
+                    for(int i = 0; i < command_len; i++) {
+                        //Check if is data valid
+                        if(command[i] >= 0x30 && command[i] <= 0x39) {
+                            serialData[i] = atoi(command[i]);
+                        }
+                        else{
+                            printf("%c: Is not a valid data for decimal format \n", command[i]);
+                            allCorrect = false;
+                            break;
+                        }
+                    }
+                    if(allCorrect) {
+                        printf("\033[1;31mRojoSerial>>\033[0m ");
+                        printf("Sending to %s: %s\n", serialConfigs.port, command);
+                        sendData(fd, serialData);
+                    }
+                break;
+                case hex:
+                    for(int i = 0; i < command_len; i++) {
+                        //Check if is data valid
+                        bool dataCheck = command[i] >= 0x30 && command[i] <= 0x39  //0 - 9
+                                      || command[i] >= 0x41 && command[i] <= 0x46; //0xA - 0xF
+                        if(dataCheck) {
+                            serialData[i] = (int)strtol(command[i], NULL, 16);
+                        }
+                        else{
+                            printf("%c: Is not a valid data for decimal format \n", command[i]);
+                            allCorrect = false;
+                            break;
+                        }
+                    }
+                    if(allCorrect) {
+                        printf("\033[1;31mRojoSerial>>\033[0m ");
+                        printf("Sending to %s: %s\n", serialConfigs.port, command);
+                        sendData(fd, serialData);
+                    }
+                break;
+                case bin:
+                    for(int i = 0; i < command_len; i++) {
+                        //Check if is data valid
+                        if(command[i] == 0x30 || command[i] == 0x31) {
+                            serialData[i] = atoi(command[i]);
+                        }
+                        else{
+                            printf("%c: Is not a valid data for decimal format \n", command[i]);
+                            allCorrect = false;
+                            break;
+                        }
+                    }
+                    if(allCorrect) {
+                        printf("\033[1;31mRojoSerial>>\033[0m ");
+                        printf("Sending to %s: %s\n", serialConfigs.port, command);
+                        sendData(fd, serialData);
+                    }
+                break;
+            }
         }
         free(serialArgument);
         free(serialCommand);
@@ -432,6 +512,28 @@ static void *ReceiveDataThread(void *vargp) {
  *                           Functions
  * ----------------------------------------------------------------
 */
+//TODO
+static bool parseSerialArguments(char *serialCommand) {
+    if(strcmp(serialCommand, "port") == 0) { //Changing port
+        //Changing port
+        //Open a new connection
+        return true;
+    }
+    else if(strcmp(serialCommand, "send") == 0) { //Send data to a port
+        //sendData(fd, serialArgument);
+        printf("Sending to %s: %s\n", serialConfigs.port, serialCommand);
+        //sendData(fd, serialCommand);
+        return true;
+    }
+    else if(strcmp(serialCommand, "format") == 0) { //Change the format of transmission
+        return true;
+    }
+    else if(strcmp(serialCommand, "save") == 0) { //Save the configs to the file
+        return true;
+    }
+    else
+        return false;
+}
 
 /**
  * @brief Prints the string and finalize the program

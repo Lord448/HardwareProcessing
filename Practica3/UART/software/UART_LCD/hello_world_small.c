@@ -87,6 +87,7 @@
 #include "nios2.h"
 #include "alt_types.h"
 #include "system.h"
+#include <stdbool.h>
 
 //#define NATURAL
 #define ALTERA_API
@@ -108,11 +109,6 @@
     #define NULL 0
   #endif
 #endif
-
-typedef enum bool {
-	false,
-	true
-}bool;
 
 typedef enum ControlPort {
 	None,
@@ -156,23 +152,20 @@ volatile alt_u32 *UARTStatus = (alt_u32*) UART_RX_STATUS_REG_BASE; //Status of t
 volatile alt_u32 *StartTimer = (alt_u32*) START_TIMER_BASE; //When high let the parsed loop timer run
 #endif
 //Structure for RX ISR Handling
-struct UARTRead {
+volatile struct UARTRead {
 	bool DataRX;
 	bool EndOfWordRX;
 	bool EnableReception;
-	alt_u8 RXCounts;
-#ifdef NATURAL
-	alt_u32** spRXDataReg;
-#endif
+	bool needToClearRX;
 	alt_u32 WordRX;
-}volatile UARTRead = {
+	alt_u8 RXCounts;
+	
+}UARTRead = {
 	.DataRX = false,
 	.EndOfWordRX = false,
-	.EnableReception = false,
+	.EnableReception = true,
+	.needToClearRX = false,
 	.RXCounts = 0,
-#ifdef NATURAL
-	.spRXDataReg = (alt_u32**) &RXDataReg,
-#endif
 	.WordRX = 0
 };
 
@@ -181,8 +174,7 @@ volatile bool TXIsBusy = false; //TODO
 volatile bool ParsedLoopFlag = true;
 
 //Global variables
-volatile ControlPort PortReadTX = None;
-volatile bool needToClearTX = false;
+volatile ControlPort PortRead = None;
 
 int main()
 {
@@ -201,7 +193,7 @@ int main()
   {
 	  vTaskControlRead();
 	  vTaskUARTSend();
-	  //vTaskRXDetection();
+	  vTaskRXDetection();
 	  ParsedLoopFlag = true;
 	  while(ParsedLoopFlag); //Parsed Loop period = 1ms
   }
@@ -248,10 +240,7 @@ static void vTaskControlRead(void) {
 		case WaitingLows:
 			if(Lows >= DebounceDelay) {
 				stages = WaitingHighs;
-				if(ControlRead == ClearRX)
-					needToClearTX = true;
-				else
-					PortReadTX = ControlRead;
+				PortRead = ControlRead;
 			}
 		break;
 	}
@@ -268,7 +257,7 @@ static void vTaskUARTSend(void)
 	volatile static alt_u8 ByteCounter = 0;
 	volatile static alt_u32 WordTX = 0;
 
-	if(PortReadTX == ClearTX)
+	if(PortRead == ClearTX)
 	{
 		WordTX = 0;
 		ByteCounter = 0;
@@ -282,7 +271,7 @@ static void vTaskUARTSend(void)
 	switch(stages)
 	{
 		case Waiting32BitsSel:
-			if(PortReadTX == SetData)
+			if(PortRead == SetData)
 			{
 #ifdef ALTERA_API
 				alt_u32 DataSel = TXDataSel;
@@ -295,13 +284,13 @@ static void vTaskUARTSend(void)
 				{
 					ByteCounter = 0;
 				}
-				PortReadTX = None;
+				PortRead = None;
 			}
-			else if(PortReadTX == SendTX)
+			else if(PortRead == SendTX)
 			{
 				stages = SendState;
 				ByteCounter = 0;
-				PortReadTX = None;
+				PortRead = None;
 			}
 			return;
 		break;
@@ -313,19 +302,24 @@ static void vTaskUARTSend(void)
 			{
 				stages = WaitingClear;
 				ByteCounter = 0;
-				PortReadTX = None;
+				PortRead = None;
 			}
 			return;
 		break;
 		case WaitingClear:
-			if(PortReadTX == SendTX) { //TODO Fix multiple sendings
+			if(PortRead == SendTX) {
 				stages = SendState;
+				PortRead = None;
+			}
+			else if(PortRead == SetData) {
+				stages = Waiting32BitsSel;
+				WordTX = 0; 
+				ByteCounter = 0;
 			}
 		break;
 	}
 }
 
-//TODO Make it work
 static void vTaskRXDetection(void)
 {
 	enum stages {
@@ -333,13 +327,14 @@ static void vTaskRXDetection(void)
 		Waiting32Bits,
 		Write32BitsPort
 	}volatile static stages = WaitingRX;
-	const alt_u8 ReceivingTime = 1; //In Milliseconds
-	const alt_16 IncomDataTime = 50; //In Milliseconds
-	static alt_u8 CountsDelay = 0;
-	static alt_16 CountIncomData = 0;
-	static bool TurnOffIncomData = false;
 
-	if(TurnOffIncomData)
+	const alt_16 IncomDataTime = 50; //In Milliseconds
+	volatile alt_u8 ReceivingTime = 15; //In Milliseconds
+	volatile static alt_u8 CountsDelay = 0;
+	volatile static alt_16 CountIncomData = 0;
+	volatile static bool TurnOffIncomData = false;
+
+	if(TurnOffIncomData) //Incoming data Led delay
 	{
 		if(CountIncomData >= IncomDataTime)
 		{
@@ -350,37 +345,55 @@ static void vTaskRXDetection(void)
 		CountIncomData++;
 	}
 
+	if(PortRead == ClearRX || UARTRead.needToClearRX)
+	{
+		if(PortRead == ClearRX) {
+			PortRead = None;
+		}
+		UARTRead.DataRX = false;
+		UARTRead.EnableReception = true;
+		UARTRead.EndOfWordRX = false;
+		UARTRead.needToClearRX = false;
+		UARTRead.WordRX = 0;
+		UARTRead.RXCounts = 0;
+		IOWR_ALTERA_AVALON_PIO_DATA(UART_RX_32_PO_BASE, UARTRead.WordRX);
+		stages = WaitingRX;
+	}
+
 	switch(stages)
 	{
 		case WaitingRX:
-			UARTRead.EnableReception = true;
-			CountsDelay = 0;
-			UARTRead.WordRX = 0;
 			if(UARTRead.DataRX)
 			{
 				stages = Waiting32Bits;
 				StatusWrite(IncomingData, 1);
+				UARTRead.DataRX = false;
 				TurnOffIncomData = true;
 			}
 		break;
 		case Waiting32Bits:
 			CountsDelay++;
-			if(UARTRead.EndOfWordRX || CountsDelay >= ReceivingTime)
+			//Giving 15 milliseconds to get a full 32 Byte data
+			if(UARTRead.EndOfWordRX || CountsDelay > ReceivingTime)
 			{
 				UARTRead.EnableReception = false;
 				stages = Write32BitsPort;
 			}
 		break;
 		case Write32BitsPort:
-			if(!needToClearTX) //TODO
-			//Takes 3ms to get here if delay
 #ifdef ALTERA_API			
-				IOWR_ALTERA_AVALON_PIO_DATA(UART_TX_32_PO_BASE, UARTRead.WordRX);
+			IOWR_ALTERA_AVALON_PIO_DATA(UART_RX_32_PO_BASE, UARTRead.WordRX);
 #elif defined(NATURAL)
-				*TXLCDReg = UARTRead.WordRX;
+			*TXLCDReg = UARTRead.WordRX;
 #endif
 			stages = WaitingRX;
 			UARTRead.DataRX = false;
+			UARTRead.EnableReception = true;
+			UARTRead.EndOfWordRX = false;
+			UARTRead.needToClearRX = false;
+			UARTRead.WordRX = 0;
+			UARTRead.RXCounts = 0;
+			CountsDelay = 0;
 		break;
 		default:
 			return;
@@ -411,28 +424,26 @@ static void UARTSend(alt_u8 DataTX)
  */
 static ControlPort ControlPortRead(void)
 {
-	ControlPort result;
 #ifdef ALTERA_API
 	volatile alt_u8 Read = IORD_ALTERA_AVALON_PIO_DATA(CONTROL_PIO_BASE);
 #elif defined(NATURAL)
 	alt_u8 Read = (alt_u8) *ControlBase&0xF;
 #endif
 
-	if((Read&1)) {
-		result = SetData;
+	if(Read&SetData) {
+		return SetData;
 	}
-	else if(Read&(1<<1)) {
-		result = SendTX;
+	else if(Read&SendTX) {
+		return SendTX;
 	}
-	else if(Read&(1<<2)) {
-		result = ClearTX;
+	else if(Read&ClearTX) {
+		return ClearTX;
 	}
-	else if(Read&(1<<3)) {
-		result = ClearRX;
+	else if(Read&ClearRX) {
+		return ClearRX;
 	}
 	else
-		result = None;
-	return result;
+		return None;
 }
 
 static void StatusWrite(StatusLeds statusLeds, alt_u8 value)
@@ -449,6 +460,7 @@ static void StatusWrite(StatusLeds statusLeds, alt_u8 value)
 		Port &= ~statusLeds;
 	else //Writing a 1
 		Port |= statusLeds;
+	IOWR_ALTERA_AVALON_PIO_DATA(STATUS_LEDS_PIO_BASE, Port);
 #endif
 }
 
@@ -460,12 +472,17 @@ static void UART_RX_CpltCallback(void* isr_context) {
 
 	volatile struct UARTRead* pUARTRead = (volatile struct UARTRead*) isr_context;
 
-	if(pUARTRead -> EnableReception) {
+	volatile alt_u32 RXRead = IORD_ALTERA_AVALON_PIO_DATA(UART_RX_DATA_REG_BASE);
+
+	if(RXRead == 'c' || RXRead == 'C') { //0x43 0x63
+		pUARTRead -> needToClearRX = true;
+	}
+	else if(pUARTRead -> EnableReception) {
 		pUARTRead -> DataRX = true;
 #ifdef NATURAL
 		pUARTRead -> WordRX |= (alt_u32) **(pUARTRead -> spRXDataReg)<<(8*(pUARTRead -> RXCounts));
 #elif defined(ALTERA_API)
-		pUARTRead -> WordRX |= (alt_u32) IORD_ALTERA_AVALON_PIO_DATA(UART_RX_DATA_REG_BASE)<<(8*(pUARTRead -> RXCounts));
+		pUARTRead -> WordRX |= (alt_u32) RXRead<<(8*(pUARTRead -> RXCounts));
 #endif
 		pUARTRead -> RXCounts += 1;
 		if(pUARTRead -> RXCounts > 3)
@@ -512,24 +529,22 @@ static void IRQRegister(void) {
 	void* pParsedLoopFlag = (void*) &ParsedLoopFlag;
 
 	//Enable interrupts
-    //IOWR_ALTERA_AVALON_PIO_IRQ_MASK(UART_RX_BASE, 0x1);
+    IOWR_ALTERA_AVALON_PIO_IRQ_MASK(UART_RX_BASE, 0x1);
 	IOWR_ALTERA_AVALON_PIO_IRQ_MASK(UART_TX_BASE, 0x1);
 	IOWR_ALTERA_AVALON_PIO_IRQ_MASK(PARSEDLOOP_IRQ_BASE, 0x1);
 
 	//Reseting the edge capture
-	//IOWR_ALTERA_AVALON_PIO_EDGE_CAP(UART_RX_BASE, 0);
+	IOWR_ALTERA_AVALON_PIO_EDGE_CAP(UART_RX_BASE, 0);
 	IOWR_ALTERA_AVALON_PIO_EDGE_CAP(UART_TX_BASE, 0);
 	IOWR_ALTERA_AVALON_PIO_EDGE_CAP(PARSEDLOOP_IRQ_BASE, 0);
 
 	
 	//Register the ISR
-	/*
 	alt_ic_isr_register(UART_RX_IRQ_INTERRUPT_CONTROLLER_ID,
 						UART_RX_IRQ,
 						&UART_RX_CpltCallback,
 						pUARTReadStruct,
 						NULL);
-						*/
 	alt_ic_isr_register(UART_TX_IRQ_INTERRUPT_CONTROLLER_ID,
 						UART_TX_IRQ,
 						&UART_TX_CpltCallback,

@@ -6,7 +6,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": ["-p /dev/ttyACM1"],
+            "args": ["-p /dev/ttyUSB0"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
