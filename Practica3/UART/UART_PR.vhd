@@ -84,8 +84,8 @@ architecture rtl of UART_PR is
 	component PLL
 	PORT
 	(
-		areset		: IN STD_LOGIC  := '0';
-		inclk0		: IN STD_LOGIC  := '0';
+		areset	: IN  STD_LOGIC  := '0';
+		inclk0	: IN  STD_LOGIC  := '0';
 		c0		: OUT STD_LOGIC 
 	);
 	end component;
@@ -138,9 +138,7 @@ architecture rtl of UART_PR is
 		);
 	end component UART;
 	
-
-	--TODO Return to 1ms Parsed loop
-	constant PSCCountsFor1ms   : integer := 50000; -- 10ms /20ns
+	constant PSCCountsFor1ms   : integer := 50000; -- 1ms /20ns
 
 	-- UART Registers
 	signal r_TX_Done  		 : std_logic;
@@ -162,15 +160,15 @@ architecture rtl of UART_PR is
 	signal r_Start_Timer	   : std_logic := '0';
 	signal r_Parsed_Loop       : std_logic;
 	signal r_PLL_CLK		   : std_logic;
-
+	
 	-- LCD Registers
 	signal r_Ascii_TX : std_logic_vector(63 downto 0);
 	signal r_Ascii_RX : std_logic_vector(63 downto 0);
 	signal r_LCD_RX   : std_logic_vector(63 downto 0);
 	signal r_LCD_TX   : std_logic_vector(63 downto 0);
-
 	--General registers
-	signal r_LedPSC        : std_logic := '1'; --For debug porpouses
+	signal r_LedPSC   : std_logic := '1'; --For debug porpouses
+
 begin
 
 	    -----------------------------------------------------------
